@@ -40,5 +40,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     implementation project(':base')
+    implementation project(':entity')
 
 }

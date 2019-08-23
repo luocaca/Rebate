@@ -1,5 +1,7 @@
 package com.rebate.base.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +20,16 @@ import butterknife.ButterKnife;
  * https://blog.csdn.net/qq_16318981/article/details/53926906
  */
 public abstract class BaseFragment extends Fragment {
+
+
+    public Activity mActivity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (Activity) context;
+    }
+
 
 
     @Nullable

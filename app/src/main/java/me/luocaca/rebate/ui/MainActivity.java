@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.rebate.base.fragment.BaseFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -12,9 +13,14 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.luocaca.rebate.R;
+import me.luocaca.rebate.adapter.viewpager.VpAdapter;
+import me.luocaca.rebate.ui.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,9 +50,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
+        initViewPager();
+
+
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
+    }
+
+
+    /**
+     * 初始化view pager
+     */
+    private void initViewPager() {
+
+        mViewPager.setAdapter(new VpAdapter(getSupportFragmentManager(), getInitFragment()));
+
+    }
+
+    /**
+     * 获取首页 需要初始化的  fragment
+     *
+     * @return
+     */
+    private List<BaseFragment> getInitFragment() {
+        // new HomeFragment();
+        List<BaseFragment> baseFragments = new ArrayList<>();
+        baseFragments.add(new HomeFragment());
+        baseFragments.add(new HomeFragment());
+        baseFragments.add(new HomeFragment());
+        return baseFragments;
     }
 
 }
