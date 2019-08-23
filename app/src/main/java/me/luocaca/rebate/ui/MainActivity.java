@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //            Snackbar.make(mViewPager, "hello world", Snackbar.LENGTH_LONG).show();
-            mViewPager.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
+//            mViewPager.setBackgroundColor(getResources().getColor(R.color.design_default_color_primary));
             return true;
         }
     };

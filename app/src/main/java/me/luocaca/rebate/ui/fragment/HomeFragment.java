@@ -36,19 +36,7 @@ public class HomeFragment extends BaseFragment {
 
         List list = new ArrayList<>();
 
-        SectionEntity sectionEntity = new SectionEntity<String>(true, "hellow") {
 
-        };
-        list.add(sectionEntity);  SectionEntity sectionEntity1 = new SectionEntity<String>(false, "hellow") {
-
-        };
-
-        list.add(sectionEntity);  SectionEntity sectionEntity3 = new SectionEntity<String>(false, "hellow") {
-
-        };
-        list.add(sectionEntity);
-        list.add(sectionEntity1);
-        list.add(sectionEntity3);
 
         recycleView.setAdapter(new BaseSectionQuickAdapter(R.layout.item_head, R.layout.item_icon_text, list) {
             @Override
