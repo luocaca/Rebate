@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="71dp"
+    android:layout_gravity="center"
+    android:background="@color/beijing"
+    card_view:cardCornerRadius="4dp"
+    android:layout_marginTop="-5dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/item_bg"
+    android:layout_height="71dp">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/taobao" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:textColor="#333333"
+        android:layout_marginTop="3dp"
+        android:textStyle="bold"
+        android:text="淘宝"
+        android:textSize="13sp"
+        />
+</LinearLayout>
+</androidx.cardview.widget.CardView>

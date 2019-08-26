@@ -1,29 +1,32 @@
 package me.luocaca.rebate.ui.fragment;
 
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseSectionQuickAdapter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.entity.SectionEntity;
+import com.just.rebate.entity.HomeItem;
 import com.rebate.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import me.luocaca.rebate.R;
+import me.luocaca.rebate.adapter.recycle.GridSectionAverageGapItemDecoration;
+import me.luocaca.rebate.adapter.recycle.SectionAdapter;
 
 /**
  * 首页
  */
 public class HomeFragment extends BaseFragment {
+    private List<HomeItem> mData;
 
-
-    @BindView(R.id.recycleView)
+    @BindView(R.id.rv_list)
     RecyclerView recycleView;
 
     @Override
@@ -32,26 +35,51 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initViewsAndEvents(View view) {
+        protected void initViewsAndEvents(View view) {
+        recycleView.setLayoutManager(new GridLayoutManager(mActivity,3));
+        recycleView.addItemDecoration(new GridSectionAverageGapItemDecoration(10,10,20,15));
 
-        List list = new ArrayList<>();
-
-
-
-        recycleView.setAdapter(new BaseSectionQuickAdapter(R.layout.item_head, R.layout.item_icon_text, list) {
+        List<HomeItem>homeItems=  new ArrayList<>();
+        homeItems.add(new HomeItem(true,"name1"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(true,"name1"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(true,"name1"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        homeItems.add(new HomeItem(false,"name2"));
+        mData=homeItems;
+        SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content, R.layout.def_section_head, mData) {
             @Override
-            protected void convert(@NonNull BaseViewHolder helper, Object item) {
+            protected void convert(@NonNull BaseViewHolder helper, HomeItem item) {
 
             }
+        };
 
-            @Override
-            protected void convertHead(BaseViewHolder helper, SectionEntity item) {
-
+        sectionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                HomeItem mySection = mData.get(position);
+                if (mySection.isHeader)
+                    Toast.makeText(mActivity, mySection.header, Toast.LENGTH_LONG).show();
             }
         });
-//        recycleView.addItemDecoration(new GridSectionAverageGapItemDecoration(10,10,20,15));
-        recycleView.setLayoutManager(new GridLayoutManager(mActivity, 3));
-
-
+        sectionAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                Toast.makeText(mActivity, "onItemChildClick", Toast.LENGTH_SHORT).show();
+            }
+        });
+        recycleView.setAdapter(sectionAdapter);
     }
+
 }
