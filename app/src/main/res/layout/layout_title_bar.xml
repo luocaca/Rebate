@@ -1,52 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout android:id="@+id/ly_main_actionbar"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-
-                    android:orientation="horizontal"
-                    android:contentInsetStart="0dp"
-                    android:background="@color/zonghuang"
-        >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_main_actionbar"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/zonghuang"
+    android:contentInsetStart="0dp"
+    android:orientation="horizontal">
 
 
-
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/img_back"
-            android:gravity="center_vertical"
-            android:text="我要返利"
-            android:textColor="@color/white_text_color"
-            android:textSize="12sp"
-            />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_toRightOf="@+id/img_back"
+        android:gravity="center_vertical"
+        android:text="我要返利"
+        android:textColor="@color/white_text_color_fe"
+        android:textSize="18sp" />
 
     <EditText
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
+        android:layout_weight="1"
         android:background="@drawable/shape_corner"
         android:drawableLeft="@mipmap/search1"
-        android:paddingLeft="15dp"
         android:drawablePadding="5dp"
-
         android:hint="输入网址/搜索商城名称"
-        android:textSize="12sp"
-        android:textColorHint="#cccccc"/>
+        android:paddingLeft="15dp"
+        android:textColorHint="#cccccc"
+        android:textSize="12sp" />
 
 
     <ImageView
         android:id="@+id/img_back"
-        android:layout_marginRight="5dp"
         android:layout_width="22dp"
         android:layout_height="20dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="@dimen/default_margin"
         android:src="@mipmap/saoyisao" />
 
 </LinearLayout>
