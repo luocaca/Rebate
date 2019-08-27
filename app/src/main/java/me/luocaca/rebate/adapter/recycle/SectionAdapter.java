@@ -3,8 +3,6 @@ package me.luocaca.rebate.adapter.recycle;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.entity.HomeItem;
-import com.just.rebate.entity.HHH;
-import com.just.rebate.entity.HomeMultipleItem;
 
 import java.util.List;
 

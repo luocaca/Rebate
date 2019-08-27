@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:background="@drawable/shape_corner2"
+            android:background="@drawable/shape_corner"
             android:drawableLeft="@mipmap/volume3x"
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
