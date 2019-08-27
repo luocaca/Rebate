@@ -29,7 +29,6 @@ import me.luocaca.rebate.adapter.recycle.SectionAdapter;
  */
 public class HomeFragment extends BaseFragment {
     private List<HomeItem> mData;
-    private List<HomeMultipleItem> mDatas;
 
     @BindView(R.id.rv_list)
     RecyclerView recycleView;
@@ -85,12 +84,6 @@ public class HomeFragment extends BaseFragment {
 
 
 
-        /*class MyDecoration extends RecyclerView.ItemDecoration{
-            public void getItemoffsets(Rect rect,View view1,RecyclerView recyclerView,RecyclerView.State state){
-                super.getItemOffsets(rect,view1,recyclerView,state);
-                rect.set(0,0,1,getResources().getDimensionPixelOffset(R.dimen.dibufengex));
-            }
-        }*/
 
         sectionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -108,14 +101,6 @@ public class HomeFragment extends BaseFragment {
         recycleView.setAdapter(sectionAdapter);
     }
 
-    private static List<HomeMultipleItem> getSectionMultiData() {
-        List<HomeMultipleItem>homeMultipleItems=  new ArrayList<>();
-        homeMultipleItems.add(new HomeMultipleItem(true,"购物返利",true));
-        homeMultipleItems.add(new HomeMultipleItem(true, "外卖返利", true));
-        homeMultipleItems.add(new HomeMultipleItem(true, "生活返利", false));
-        return homeMultipleItems;
-
-    }
 
 
 }

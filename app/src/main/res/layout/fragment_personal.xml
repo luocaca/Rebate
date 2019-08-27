@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/beijing"
+    android:orientation="vertical"
+    tools:context=".ui.fragment.PersonalFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:orientation="horizontal"
+        android:background="@color/tianlan"
+
+        >
+
+        <LinearLayout
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="12dp">
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="用户账号"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:text="邀请码: 123456"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="12dp"
+            android:src="@mipmap/setting"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:text="1000"
+            android:layout_marginRight="12dp"
+            android:gravity="right"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:text="个人积分 >"
+            android:gravity="right"
+            android:layout_marginRight="12dp"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="-12dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:text="0.00"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:text="累计返利（元）"
+                android:layout_marginTop="2dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="13sp"
+                android:textColor="#333333"
+                />
+            
+        </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="#E5E5E5"
+            android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:text="0.00"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:text="待返利（元）"
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="13sp"
+                android:textColor="#333333"
+                />
+
+        </LinearLayout>
+        
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="常用工具"
+            android:paddingTop="16dp"
+            android:paddingBottom="12dp"
+            android:textSize="12sp"
+            android:paddingLeft="24dp"
+            android:layout_gravity="clip_vertical"
+            android:textColor="#333333"
+            android:background="@drawable/underline"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
+        tools:itemCount="13"
+        tools:listitem="@layout/item_section_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+</LinearLayout>
