@@ -38,10 +38,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:padding="5dp"
-        android:background="@color/beijing"
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_width="match_parent"
+        android:background="@color/beijing"
         android:layout_height="match_parent" />
 
 </LinearLayout>

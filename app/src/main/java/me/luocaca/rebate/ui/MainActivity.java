@@ -22,6 +22,7 @@ import me.luocaca.rebate.R;
 import me.luocaca.rebate.adapter.viewpager.VpAdapter;
 import me.luocaca.rebate.ui.fragment.HomeFragment;
 import me.luocaca.rebate.ui.fragment.PersonalFragment;
+import me.luocaca.rebate.ui.fragment.RechargeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // new HomeFragment();
         List<BaseFragment> baseFragments = new ArrayList<>();
         baseFragments.add(new HomeFragment());
-        baseFragments.add(new HomeFragment());
+        baseFragments.add(new RechargeFragment());
         baseFragments.add(new PersonalFragment());
         return baseFragments;
     }

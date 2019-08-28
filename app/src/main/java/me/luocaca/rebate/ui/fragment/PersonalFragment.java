@@ -1,17 +1,12 @@
 package me.luocaca.rebate.ui.fragment;
 
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -23,8 +18,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import me.luocaca.rebate.R;
-import me.luocaca.rebate.adapter.recycle.PersonalAdapter;
-import me.luocaca.rebate.adapter.recycle.SectionAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +46,7 @@ public class PersonalFragment extends BaseFragment {
         homeItems.add(new HomeItem(false, "name2"));
         mData = homeItems;
 
-        recyclerView.setAdapter( new BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.item_section_content, mData) {
+        recyclerView.setAdapter( new BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.item_personal_content, mData) {
             @Override
             protected void convert(@NonNull BaseViewHolder helper, HomeItem item) {
 

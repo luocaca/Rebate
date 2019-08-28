@@ -11,7 +11,7 @@
     android:paddingBottom="20dp"
     android:paddingTop="20dp"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@color/touming">
 
     <ImageView
         android:id="@+id/iv"

@@ -197,7 +197,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="4"
         tools:itemCount="13"
-        tools:listitem="@layout/item_section_content" />
+        tools:listitem="@layout/item_personal_content" />
 
 
 </LinearLayout>

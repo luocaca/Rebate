@@ -1,9 +1,6 @@
 package me.luocaca.rebate.ui.fragment;
 
-import android.graphics.Rect;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,15 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.entity.HomeItem;
-import com.just.rebate.entity.HomeMultipleItem;
 import com.rebate.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import me.luocaca.rebate.R;
-import me.luocaca.rebate.adapter.recycle.GridItemDecoration;
-import me.luocaca.rebate.adapter.recycle.GridSectionAverageGapItemDecoration;
 import me.luocaca.rebate.adapter.recycle.SectionAdapter;
 
 /**

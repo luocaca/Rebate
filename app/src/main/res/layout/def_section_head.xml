@@ -8,7 +8,8 @@
     android:paddingLeft="5dp"
     android:paddingBottom="12dp"
     android:paddingTop="12dp"
-    android:background="@drawable/underline"
+    android:orientation="vertical"
+    android:background="@drawable/shape_corner_left_top_right_top"
     android:layout_marginTop="5dp"
 
     >
@@ -17,13 +18,16 @@
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingLeft="10dp"
             android:gravity="left|center"
             android:textColor="#333333"
             android:textStyle="bold"
             android:textSize="13sp"
             android:text="生活返利"
             />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/underline" />
 
 </LinearLayout>
