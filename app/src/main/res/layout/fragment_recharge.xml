@@ -1,106 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/beijing"
+    android:orientation="vertical"
     tools:context=".ui.fragment.RechargeFragment">
 
 
-    <include layout="@layout/recharge_toolbar_layout"/>
-    
+    <include layout="@layout/recharge_toolbar_layout" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginRight="@dimen/default_margin"
         android:background="@drawable/shape_corner"
         android:orientation="horizontal">
-        
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="积分充值"
-            android:textSize="14sp"
-            android:paddingTop="@dimen/padding_content"
-            android:paddingLeft="@dimen/padding_left"
             android:layout_gravity="center"
-            android:textColor="@color/text333"/>
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingTop="@dimen/padding_content"
+            android:text="积分充值"
+            android:textColor="@color/text333"
+            android:textSize="14sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="用户账号"
-                android:textSize="@dimen/text_size_content"
                 android:gravity="right|bottom"
-                android:paddingBottom="5dp"
-                android:textColor="@color/text333"
                 android:paddingRight="@dimen/padding_right"
-                />
+                android:paddingBottom="5dp"
+                android:text="用户账号"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="1357144"
-                android:textSize="@dimen/text_size_content_ss"
                 android:gravity="right"
                 android:paddingTop="5dp"
+                android:paddingRight="@dimen/padding_right"
+                android:text="1357144"
                 android:textColor="@color/text333"
-                android:paddingRight="@dimen/padding_right"/>
+                android:textSize="@dimen/text_size_content_ss" />
 
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="138dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginRight="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"
         android:background="@drawable/shape_corner">
 
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/id_flowlayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:paddingBottom="20dp"
+            app:max_select="1"
+            app:tag_gravity="center">
+
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+
     </LinearLayout>
+
     <Button
-        android:layout_marginTop="24dp"
         android:layout_width="200dp"
         android:layout_height="37dp"
         android:layout_gravity="center"
+        android:layout_marginTop="24dp"
         android:background="@drawable/shape_corner_xl"
         android:text="确认支付"
-        android:textSize="@dimen/text_size_title_xl"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_title_xl" />
 
     <TextView
-        android:paddingLeft="@dimen/padding_left"
-        android:layout_marginTop="27dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:paddingLeft="@dimen/padding_left"
         android:text="充值说明:"
         android:textColor="@color/text999"
-        android:textSize="@dimen/text_size_content"/>
+        android:textSize="@dimen/text_size_content" />
+
     <TextView
-        android:paddingLeft="@dimen/padding_left"
-        android:layout_marginTop="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:paddingLeft="@dimen/padding_left"
         android:text="1.充值的积分仅在我要返利APP内使用"
         android:textColor="@color/text999"
-        android:textSize="@dimen/text_size_content_s"/>
+        android:textSize="@dimen/text_size_content_s" />
+
     <TextView
-        android:paddingLeft="@dimen/padding_left"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="@dimen/padding_left"
         android:text="2.充值积分后不退不换，请仔细确认后支付"
         android:textColor="@color/text999"
-        android:textSize="@dimen/text_size_content_s"/>
+        android:textSize="@dimen/text_size_content_s" />
 </LinearLayout>

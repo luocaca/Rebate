@@ -24,12 +24,13 @@ public abstract class BaseFragment extends Fragment {
 
     public Activity mActivity;
 
+    public View mView;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (Activity) context;
     }
-
 
 
     @Nullable
@@ -50,6 +51,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        mView = view;
         initViewsAndEvents(view);
     }
 
