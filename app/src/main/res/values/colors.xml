@@ -24,8 +24,9 @@
     <color name="text666">#666666</color>
     <color name="text999">#999999</color>
     <color name="color_zise">#e1c3f7</color>
+    <color name="text_color_white">#FEFEFE</color>
 
-
+    <color name="color_Grid">#CCCCCC</color>
     <color name="color_white">#ffffff</color>
 
 

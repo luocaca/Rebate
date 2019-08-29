@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/beijing"
+    tools:context=".ui.fragment.ArrivalDetailsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_white"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="9dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_gravity="center"
+            android:src="@mipmap/leftarrow"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="到账明细"
+            android:textSize="@dimen/text_size_title_xl"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:textColor="@color/text333"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="clip_vertical"
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/default_margin"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="@dimen/padding_top"
+                android:text="累计返利和奖励"
+                android:textColor="#333333"
+                android:textSize="@dimen/text_size_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="clip_vertical"
+
+                android:background="@color/color_white"
+                android:paddingLeft="@dimen/default_margin"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="@dimen/padding_top"
+                android:text="10.0元"
+                android:gravity="right"
+                android:paddingRight="@dimen/padding_right"
+                android:textColor="#333333"
+                android:textSize="@dimen/text_size_content" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@drawable/underline" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        </androidx.recyclerview.widget.RecyclerView>
+        
+        
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

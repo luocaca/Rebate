@@ -20,7 +20,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.luocaca.rebate.R;
 import me.luocaca.rebate.adapter.viewpager.VpAdapter;
+import me.luocaca.rebate.ui.fragment.ArrivalDetailsFragment;
 import me.luocaca.rebate.ui.fragment.HomeFragment;
+import me.luocaca.rebate.ui.fragment.OrderFragment;
 import me.luocaca.rebate.ui.fragment.PersonalFragment;
 import me.luocaca.rebate.ui.fragment.RechargeFragment;
 
@@ -81,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
         List<BaseFragment> baseFragments = new ArrayList<>();
         baseFragments.add(new HomeFragment());
         baseFragments.add(new RechargeFragment());
+        baseFragments.add(new ArrivalDetailsFragment());
         baseFragments.add(new PersonalFragment());
+        baseFragments.add(new OrderFragment());
         return baseFragments;
     }
 

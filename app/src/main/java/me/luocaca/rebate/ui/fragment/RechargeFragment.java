@@ -6,6 +6,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -35,12 +39,26 @@ public class RechargeFragment extends BaseLazyFragment {
     @BindView(R.id.id_flowlayout)
     TagFlowLayout tagFlowLayout;
 
+    @BindView(R.id.jiantou)
+    ImageView imageView;
+
+    @BindView(R.id.linear)
+    LinearLayout linear;
+
+    @BindView(R.id.radio_group)
+    LinearLayout linearLayout;
+
+    @BindView(R.id.radio)
+    RadioGroup radioGroup;
+
 
     /**/
     private View currentSelectView;
     private int currentSelectPosition = -1;
     private EditText et;
     private TagAdapter tagAdapter;
+    private boolean isVisible = true;
+
     /**/
 
 
@@ -52,6 +70,21 @@ public class RechargeFragment extends BaseLazyFragment {
     @Override
     protected void initViewsAndEvents(View view) {
 
+        linearLayout.setVerticalGravity(view.GONE);
+        linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isVisible) {
+                    //显示布局
+                    isVisible = false;
+                    linearLayout.setVisibility(view.VISIBLE);
+                } else {
+                    linearLayout.setVisibility(view.GONE);
+                    isVisible = true;
+                }
+            }
+        });
+        radioGroup.check(R.id.radio1);
     }
 
 
@@ -61,11 +94,10 @@ public class RechargeFragment extends BaseLazyFragment {
     private void initTagFlowLayout() {
         List list = new ArrayList();
         list.add("100");
-        list.add("204");
-        list.add("340");
-        list.add("440");
-        list.add("540");
-        list.add("640");
+        list.add("200");
+        list.add("300");
+        list.add("500");
+        list.add("1000");
         list.add("0");
 
 
@@ -117,7 +149,7 @@ public class RechargeFragment extends BaseLazyFragment {
                     return et;
                 } else {
                     TextView tv = (TextView) mView.inflate(getContext(), R.layout.tv, null);
-                    tv.setText(o.toString() + "元");
+                    tv.setText(o.toString() + "积分");
 //                              tv.setTextColor(R.drawable.pay_text_selector);
                     //getResources().getDisplayMetrics().widthPixels
                     int pad = (int) (parent.getWidth() * 0.06);

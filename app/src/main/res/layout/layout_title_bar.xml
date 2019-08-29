@@ -35,12 +35,12 @@
 
 
     <ImageView
-        android:id="@+id/img_back"
-        android:layout_width="22dp"
-        android:layout_height="20dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="@dimen/default_margin"
-        android:src="@mipmap/saoyisao" />
+    android:id="@+id/img_back"
+    android:layout_width="22dp"
+    android:layout_height="20dp"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="@dimen/default_margin"
+    android:src="@mipmap/saoyisao" />
 
 </LinearLayout>
