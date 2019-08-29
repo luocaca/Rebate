@@ -1,4 +1,4 @@
-package me.luocaca.rebate.ui.fragment;
+package com.just.rebate.ui.fragment;
 
 
 import android.graphics.Color;
@@ -8,14 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.fragment.app.Fragment;
 
-import com.rebate.base.fragment.BaseFragment;
+import com.just.rebate.R;
 import com.rebate.base.fragment.BaseLazyFragment;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
@@ -26,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import me.luocaca.rebate.R;
+
 
 /**
- * A simple {@link Fragment} subclass.
+ * 充值界面
  */
 public class RechargeFragment extends BaseLazyFragment {
 

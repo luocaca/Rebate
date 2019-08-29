@@ -1,18 +1,16 @@
-package me.luocaca.rebate.adapter.recycle;
+package com.just.rebate.adapter.recycle;
 
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.just.rebate.R;
 import com.just.rebate.entity.HomeItem;
-import com.just.rebate.entity.PersonalItem;
 
 import java.util.List;
-
-import me.luocaca.rebate.R;
 
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
-public abstract class PersonalAdapter extends BaseSectionQuickAdapter<PersonalItem, BaseViewHolder> {
+public abstract class SectionAdapter extends BaseSectionQuickAdapter<HomeItem, BaseViewHolder> {
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
@@ -21,7 +19,7 @@ public abstract class PersonalAdapter extends BaseSectionQuickAdapter<PersonalIt
      * @param layoutResId      The layout resource id of each item.
      * @param data             A new list is created out of this one to avoid mutable list
      */
-    public PersonalAdapter(int layoutResId, int sectionHeadResId, List data) {
+    public SectionAdapter(int layoutResId, int sectionHeadResId, List data) {
         super(layoutResId, sectionHeadResId, data);
     }
 

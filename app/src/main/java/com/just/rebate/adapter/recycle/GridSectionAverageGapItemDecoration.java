@@ -1,4 +1,4 @@
-package me.luocaca.rebate.adapter.recycle;
+package com.just.rebate.adapter.recycle;
 
 import android.graphics.Rect;
 import android.os.Build;

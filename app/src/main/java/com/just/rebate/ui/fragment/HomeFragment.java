@@ -1,4 +1,4 @@
-package me.luocaca.rebate.ui.fragment;
+package com.just.rebate.ui.fragment;
 
 import android.view.View;
 import android.widget.Toast;
@@ -9,14 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.just.rebate.R;
 import com.just.rebate.entity.HomeItem;
 import com.rebate.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
-import me.luocaca.rebate.R;
-import me.luocaca.rebate.adapter.recycle.SectionAdapter;
+
+import com.just.rebate.adapter.recycle.SectionAdapter;
 
 /**
  * 首页

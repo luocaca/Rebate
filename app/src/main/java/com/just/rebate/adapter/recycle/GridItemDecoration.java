@@ -1,4 +1,4 @@
-package me.luocaca.rebate.adapter.recycle;
+package com.just.rebate.adapter.recycle;
 
 import android.content.Context;
 import android.graphics.Canvas;

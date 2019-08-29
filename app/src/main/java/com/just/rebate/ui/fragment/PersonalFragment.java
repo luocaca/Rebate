@@ -1,4 +1,4 @@
-package me.luocaca.rebate.ui.fragment;
+package com.just.rebate.ui.fragment;
 
 
 import androidx.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.just.rebate.R;
 import com.just.rebate.entity.HomeItem;
 import com.rebate.base.fragment.BaseFragment;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import me.luocaca.rebate.R;
+
 
 /**
  * A simple {@link Fragment} subclass.

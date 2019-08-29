@@ -1,4 +1,4 @@
-//package me.luocaca.rebate.ui.fragment;
+//package com.just.rebate.ui.fragment;
 //
 //
 //import android.app.ProgressDialog;

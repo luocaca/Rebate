@@ -1,4 +1,4 @@
-package me.luocaca.rebate.app;
+package com.just.rebate.app;
 
 import android.app.Application;
 import android.content.Context;

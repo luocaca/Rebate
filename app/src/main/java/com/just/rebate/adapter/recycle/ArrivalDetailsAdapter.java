@@ -1,26 +1,29 @@
-package me.luocaca.rebate.adapter.recycle;
+package com.just.rebate.adapter.recycle;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.just.rebate.R;
 
-import me.luocaca.rebate.R;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArrivalDetailsAdapter extends RecyclerView.Adapter<ArrivalDetailsAdapter.ViewHolder> {
     private Context context;
     private List<String> list;
 
-    public ArrivalDetailsAdapter(Context context,List<String> list){
+    public ArrivalDetailsAdapter(Context context, List<String> list) {
         this.context = context;
-        this.list =list;
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        this.list = list;
 
     }
 
@@ -43,9 +46,10 @@ public class ArrivalDetailsAdapter extends RecyclerView.Adapter<ArrivalDetailsAd
     public int getItemCount() {
         return list.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView mtv_name ,mtv_time,mtv_rebate,mtv_detailed;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView mtv_name, mtv_time, mtv_rebate, mtv_detailed;
 
 
         public ViewHolder(View itemView) {
@@ -58,5 +62,5 @@ public class ArrivalDetailsAdapter extends RecyclerView.Adapter<ArrivalDetailsAd
         }
     }
 
- 
+
 }

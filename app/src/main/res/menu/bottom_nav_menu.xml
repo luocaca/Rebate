@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_invite" />
     <item
-        android:id="@+id/title_mime"
+        android:id="@+id/navigation_mime"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_mime" />
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#E5E5E5"
-    tools:context=".ui.MainActivity">
+    tools:context="com.just.rebate.ui.MainActivity">
 
 
     <include layout="@layout/toolbar_layout" />

@@ -1,27 +1,20 @@
-package me.luocaca.rebate.ui.fragment;
+package com.just.rebate.ui.fragment;
 
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.just.rebate.R;
 import com.rebate.base.fragment.BaseFragment;
 
-import me.luocaca.rebate.R;
-
 /**
- * A simple {@link Fragment} subclass.
+ * 订单  fragment
  */
 public class OrderFragment extends BaseFragment {
 
 
     @Override
     protected int bindFragmentLayoutId() {
-        return 0;
+        return R.layout.fragment_order;
     }
 
     @Override

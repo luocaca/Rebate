@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/beijing"
-    tools:context=".ui.fragment.ArrivalDetailsFragment">
+    tools:context="com.just.rebate.ui.fragment.ArrivalDetailsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

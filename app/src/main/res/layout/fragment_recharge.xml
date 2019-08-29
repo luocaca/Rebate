@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/beijing"
     android:orientation="vertical"
-    tools:context=".ui.fragment.RechargeFragment">
+    tools:context="com.just.rebate.ui.fragment.RechargeFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

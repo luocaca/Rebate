@@ -1,7 +1,5 @@
-package me.luocaca.rebate.data;
+package com.just.rebate.data;
 
-
-import android.widget.TextView;
 
 public class DataServer {
       public  String name;
