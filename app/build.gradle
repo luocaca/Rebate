@@ -43,5 +43,6 @@ dependencies {
     implementation project(':base')
     implementation project(':entity')
     implementation project(':wedget')
+    implementation project(':http')
 
 }

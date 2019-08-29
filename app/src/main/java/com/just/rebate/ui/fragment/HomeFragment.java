@@ -15,9 +15,13 @@ import com.rebate.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
+import okhttp3.Call;
 
 import com.just.rebate.adapter.recycle.SectionAdapter;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 /**
  * 首页
@@ -34,32 +38,29 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-        protected void initViewsAndEvents(View view) {
-        recycleView.setLayoutManager(new GridLayoutManager(mActivity,3));
+    protected void initViewsAndEvents(View view) {
+        recycleView.setLayoutManager(new GridLayoutManager(mActivity, 3));
 //        recycleView.addItemDecoration(new GridSectionAverageGapItemDecoration(10,10,20,15));
-        List<HomeItem>homeItems=  new ArrayList<>();
-        homeItems.add(new HomeItem(true,"购物返利"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(true,"外卖返利"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(true,"生活返利"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        homeItems.add(new HomeItem(false,"name2"));
-        mData=homeItems;
-        
-     
-
+        List<HomeItem> homeItems = new ArrayList<>();
+        homeItems.add(new HomeItem(true, "购物返利"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(true, "外卖返利"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(true, "生活返利"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        homeItems.add(new HomeItem(false, "name2"));
+        mData = homeItems;
 
 
         SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content, R.layout.def_section_head, mData) {
@@ -71,13 +72,11 @@ public class HomeFragment extends BaseFragment {
             @Override
             protected void convertHead(BaseViewHolder helper, HomeItem item) {
                 super.convertHead(helper, item);
-             
+
 //                View view1=layoutInflater.inflate(R.layout.def_section_head,null);
-                  helper.setText(R.id.header, "购物返利");
+                helper.setText(R.id.header, "购物返利");
             }
         };
-
-
 
 
         sectionAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -94,8 +93,40 @@ public class HomeFragment extends BaseFragment {
             }
         });
         recycleView.setAdapter(sectionAdapter);
+
+
+        requestDataOnline();
+
     }
 
+
+    /**
+     * 网络请求数据
+     */
+    public void requestDataOnline() {
+
+        OkHttpUtils
+                .get()
+                .url("https://www.luocaca.cn/")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+
+                        Toast.makeText(mActivity, "error", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
+    }
 
 
 }

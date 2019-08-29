@@ -32,7 +32,8 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    api 'com.zhy:okhttputils:2.6.2'
 
-
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
 
 }
