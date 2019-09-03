@@ -66,4 +66,9 @@ public class PersonalFragment extends BaseFragment {
 
     }
 
+    @Override
+    protected void initData() {
+
+    }
+
 }

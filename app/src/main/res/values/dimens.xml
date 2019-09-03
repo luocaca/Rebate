@@ -7,6 +7,7 @@
     <dimen name="default_corner">6dp</dimen>
     <dimen name="default_corner_x">10dp</dimen>
     <dimen name="default_corner_xl">20dp</dimen>
+    <dimen name="default_corner_ss">4dp</dimen>
     <dimen name="dibufengex">1dp</dimen>
     <dimen name="padding_left">12dp</dimen>
     <dimen name="padding_right">12dp</dimen>

@@ -7,44 +7,49 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.just.rebate.R;
+import com.just.rebate.data.DataServer;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArrivalDetailsAdapter extends RecyclerView.Adapter<ArrivalDetailsAdapter.ViewHolder> {
     private Context context;
-    private List<String> list;
-
-    public ArrivalDetailsAdapter(Context context, List<String> list) {
-        this.context = context;
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        this.list = list;
+    private List<DataServer> mDataServer;
+    public ArrivalDetailsAdapter(List<DataServer> mDataServer){
+        this.mDataServer=mDataServer;
 
     }
+
+
+
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_arrival_details, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_arrival_details, parent, false);
         return new ViewHolder(view);
+
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.mtv_name.setText("京东购物");
-        holder.mtv_time.setText("2019-07-31");
-        holder.mtv_rebate.setText("返利 2.62元");
-        holder.mtv_detailed.setText("+2.62元");
+        holder.mtv_name.setText(mDataServer.get(position).getName());
+        holder.mtv_time.setText(mDataServer.get(position).getTime());
+        holder.mtv_rebate.setText(mDataServer.get(position).getRebate());
+        holder.mtv_detailed.setText(mDataServer.get(position).getDetailed());
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mDataServer==null ? 0:mDataServer.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

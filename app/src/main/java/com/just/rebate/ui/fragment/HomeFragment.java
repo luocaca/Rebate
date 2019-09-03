@@ -86,16 +86,21 @@ public class HomeFragment extends BaseFragment {
                     Toast.makeText(mActivity, mySection.header, Toast.LENGTH_LONG).show();
             }
         });
-        sectionAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        /*sectionAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 Toast.makeText(mActivity, "onItemChildClick", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
         recycleView.setAdapter(sectionAdapter);
 
 
         requestDataOnline();
+
+    }
+
+    @Override
+    protected void initData() {
 
     }
 
@@ -114,13 +119,13 @@ public class HomeFragment extends BaseFragment {
                     public void onError(Call call, Exception e, int id) {
 
 
-                        Toast.makeText(mActivity, "error", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mActivity, "error", Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
 
                     }
                 });

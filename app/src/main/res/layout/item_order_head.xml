@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/shape_corner_left_top_right_top">
+        <TextView
+            android:id="@+id/order_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="淘宝"
+            android:textSize="@dimen/text_size_title"
+            android:paddingLeft="@dimen/padding_left"
+            android:textColor="@color/text333"
+            android:gravity="center"
+            android:paddingTop="@dimen/padding_left"
+            android:paddingBottom="@dimen/padding_left"
+            />
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="2019-07-31"
+            android:textSize="@dimen/text_size_content_ss"
+            android:textColor="@color/text999"
+            android:gravity="center|left"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:gravity="right|center"
+            android:layout_weight="1"
+            android:text="预估返利2.62元"
+            android:textColor="@color/text_color_Pink"
+            android:paddingRight="@dimen/padding_right"
+            android:textSize="@dimen/text_size_title"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/underline" />
+    <LinearLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:paddingTop="20dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/yuanquan"
+            android:paddingBottom="20dp"/>
+        <TextView
+            android:id="@+id/order_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="米拉服饰"
+            android:textSize="@dimen/text_size_title"
+            android:textColor="@color/text333"/>
+    </LinearLayout>
+
+</LinearLayout>

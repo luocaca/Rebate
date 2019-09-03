@@ -8,10 +8,7 @@ import com.just.rebate.ui.fragment.InviteFragment;
 import com.rebate.base.fragment.BaseFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
-
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import com.just.rebate.adapter.viewpager.VpAdapter;
-import com.just.rebate.ui.fragment.ArrivalDetailsFragment;
 import com.just.rebate.ui.fragment.HomeFragment;
 import com.just.rebate.ui.fragment.OrderFragment;
 import com.just.rebate.ui.fragment.PersonalFragment;
-import com.just.rebate.ui.fragment.RechargeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -122,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         baseFragments.add(new OrderFragment());//订单
 //        baseFragments.add(new RechargeFragment());//充值界面
         baseFragments.add(new InviteFragment());//邀请界面
-//        baseFragments.add(new ArrivalDetailsFragment());
         baseFragments.add(new PersonalFragment());//个人中心
         return baseFragments;
     }

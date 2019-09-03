@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/shape_corner_left_top_right_top">
+        <TextView
+            android:id="@+id/arrival_account_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="淘宝"
+            android:textSize="@dimen/text_size_title"
+            android:paddingLeft="@dimen/padding_left"
+            android:textColor="@color/text333"
+            android:gravity="center"
+            android:paddingTop="@dimen/padding_left"
+            android:paddingBottom="@dimen/padding_left"
+            />
+        <TextView
+            android:id="@+id/arrival_account_time"
+            android:layout_width="match_parent"
+            android:gravity="right|center"
+            android:layout_weight="1"
+            android:text="预估返利2.62元"
+            android:textColor="@color/text_color_Pink"
+            android:paddingRight="@dimen/padding_right"
+            android:textSize="@dimen/text_size_title"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

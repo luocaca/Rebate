@@ -53,10 +53,15 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.bind(this, view);
         mView = view;
         initViewsAndEvents(view);
+        initData();
+
     }
+
+
 
     protected abstract void initViewsAndEvents(View view);//初始化控件，如果使用butterknife就不需要写findViewById；
 
+    protected abstract void initData();
 
     /**
      * 封装跳转

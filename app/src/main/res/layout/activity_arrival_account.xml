@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/beijing"
-    tools:context="com.just.rebate.ui.fragment.OrderFragment">
+    tools:context="com.just.rebate.ui.activity.ArrivalAccountActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +78,6 @@
                 android:paddingTop="@dimen/padding_top"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/Arrival_account"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:paddingTop="@dimen/padding_top"
@@ -143,7 +142,7 @@
         </LinearLayout>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list4"
+        android:id="@+id/rv_list5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:paddingTop="20dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/yuanquan"
+                android:paddingBottom="20dp"/>
+            <ImageView
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_width="64dp"
+                android:background="@color/beijing"
+                android:layout_height="64dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/default_margin"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="@dimen/padding_right"
+                    android:text="破洞牛仔裤宽松九分裤2019夏季新款韩版薄款哈伦裤"
+                    android:textSize="@dimen/text_size_content"/>
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_corner_ss_grad"
+                    android:text="灰色破洞；29【80-100斤】"
+                    android:drawableRight="@mipmap/bottomarrow"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￥148.00"
+                        android:layout_marginTop="22dp"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/text_size_title"/>
+                    <TextView
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_size_title"
+                        android:text="-"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingRight="15dp"
+                        android:background="@drawable/textview_border_top_bottom_left_"
+                        android:layout_height="wrap_content" />
+                    <TextView
+
+                        android:layout_marginTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_size_title"
+                        android:text="1"
+                        android:background="@drawable/textview_border"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingRight="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_marginTop="20dp"
+                        android:layout_width="wrap_content"
+                        android:textSize="@dimen/text_size_title"
+                        android:text="+"
+                        android:background="@drawable/textview_border_top_bottom_right_"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingRight="15dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>

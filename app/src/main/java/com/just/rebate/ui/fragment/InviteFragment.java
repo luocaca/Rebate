@@ -21,6 +21,11 @@ public class InviteFragment extends BaseLazyFragment {
 
     }
 
+    @Override
+    protected void initData() {
+
+    }
+
 
     @Override
     protected void onFirstUserVisible() {

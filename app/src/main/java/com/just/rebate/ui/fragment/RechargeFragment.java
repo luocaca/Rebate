@@ -85,6 +85,11 @@ public class RechargeFragment extends BaseLazyFragment {
         radioGroup.check(R.id.radio1);
     }
 
+    @Override
+    protected void initData() {
+
+    }
+
 
     /**
      * 初始化 选择框
