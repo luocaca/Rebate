@@ -3,7 +3,7 @@
     android:id="@+id/ly_main_actionbar"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="@color/zonghuang"
+    android:background="@drawable/shape_color"
     android:contentInsetStart="0dp"
     android:orientation="horizontal">
 
@@ -25,7 +25,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
-        android:background="@drawable/shape_corner_xl"
+        android:background="@drawable/shape_corner_xx"
         android:drawableLeft="@mipmap/search1"
         android:drawablePadding="5dp"
         android:hint="输入网址/搜索商城名称"

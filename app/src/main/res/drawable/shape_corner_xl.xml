@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/color_zise" />
+
     <corners
         android:bottomLeftRadius="@dimen/default_corner_xl"
         android:bottomRightRadius="@dimen/default_corner_xl"
         android:topLeftRadius="@dimen/default_corner_xl"
         android:topRightRadius="@dimen/default_corner_xl" />
+
+
+    <gradient
+        android:startColor="#a1a2f1"
+        android:endColor="#e1c3f7"
+        android:centerColor="#a1a2f1"
+        android:angle="315"
+        android:centerX="0.7"
+        android:centerY="0.7"
+
+
+    />
+
+
+
 </shape>

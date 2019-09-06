@@ -1,5 +1,6 @@
 package com.just.rebate.ui.fragment;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.just.rebate.R;
 import com.just.rebate.entity.HomeItem;
 import com.rebate.base.fragment.BaseFragment;
@@ -61,6 +63,11 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem(false, "name2"));
         homeItems.add(new HomeItem(false, "name2"));
         mData = homeItems;
+
+
+
+
+
 
 
         SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content, R.layout.def_section_head, mData) {

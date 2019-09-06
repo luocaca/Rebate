@@ -1,6 +1,8 @@
 package com.just.rebate.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.just.rebate.R;
@@ -8,6 +10,9 @@ import com.just.rebate.ui.fragment.InviteFragment;
 import com.rebate.base.fragment.BaseFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
@@ -33,28 +38,56 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-
+        refreshItemIcon();
         switch (item.getItemId()) {
             case R.id.navigation_home://首页
                 mViewPager.setCurrentItem(0);
-                break;
-
+                item.setIcon(R.mipmap.home1);
+                return true;
             case R.id.navigation_order://订单
                 mViewPager.setCurrentItem(1);
-
-                break;
+                item.setIcon(R.mipmap.dingdan1);
+                return true;
             case R.id.navigation_invite://邀请
                 mViewPager.setCurrentItem(2);
-
-                break;
+                item.setIcon(R.mipmap.yaoqing1);
+                return true;
             case R.id.navigation_mime://我的
                 mViewPager.setCurrentItem(3);
-
-                break;
+                item.setIcon(R.mipmap.wode1);
+                return true;
         }
 
         return true;
     };
+    /*protected void onResume(){
+        int id = getIntent().getIntExtra("id",1);
+        if (id ==2){
+            Fragment fragment =new Fragment();
+            FragmentManager fragmentManager=getSupportFragmentManager();
+            FragmentTransaction transaction=fragmentManager.beginTransaction();
+            transaction.replace(R.id.view_pager,fragment);
+            transaction.commit();
+            mViewPager.setCurrentItem(1);
+            Intent intent=new Intent();
+            intent.setClass(MainActivity.this,OrderFragment.class);
+            intent.putExtra("id",1);
+        }
+        super.onResume();
+    }*/
+
+
+
+    public void refreshItemIcon() {
+        MenuItem item0 = navView.getMenu().findItem(R.id.navigation_home);
+        item0.setIcon(R.mipmap.home);
+        MenuItem item1 = navView.getMenu().findItem(R.id.navigation_order);
+        item1.setIcon(R.mipmap.dingdan);
+        MenuItem item2 = navView.getMenu().findItem(R.id.navigation_invite);
+        item2.setIcon(R.mipmap.yaoqing);
+        MenuItem item3 = navView.getMenu().findItem(R.id.navigation_mime);
+        item3.setIcon(R.mipmap.wode);
+    }
 
 
     @Override
@@ -68,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navView.setItemIconTintList(null);
+        navView.setSelectedItemId(R.id.navigation_home);
 
 
     }

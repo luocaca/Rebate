@@ -44,5 +44,6 @@ dependencies {
     implementation project(':entity')
     implementation project(':wedget')
     implementation project(':http')
+    implementation 'com.fang:dashview:v1.0.0'
 
 }

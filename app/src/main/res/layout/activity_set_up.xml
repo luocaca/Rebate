@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beijing"
+    android:orientation="vertical"
+    tools:context=".ui.activity.SetUpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/leftarrow" />
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:gravity="center"
+            android:text="设置"
+            android:textColor="@color/text333"
+            android:textSize="@dimen/text_size_title_xl" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_marginRight="@dimen/default_margin"
+        android:background="@drawable/shape_corner_x"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="密码管理"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:background="@drawable/underline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="支付管理"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_marginRight="@dimen/default_margin"
+        android:background="@drawable/shape_corner_x"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="授权管理"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:background="@drawable/underline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="通知栏自动提醒设置"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:background="@drawable/underline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="365dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="隐私"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_marginRight="@dimen/default_margin"
+        android:background="@drawable/shape_corner_x"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="切换账号"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:background="@drawable/underline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="安全退出"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/rightarrow" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

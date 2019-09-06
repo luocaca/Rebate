@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
 import com.just.rebate.entity.HomeItem;
+import com.just.rebate.ui.activity.SetUpActivity;
 import com.rebate.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
@@ -28,6 +31,9 @@ public class PersonalFragment extends BaseFragment {
 
     @BindView(R.id.rv_list2)
     RecyclerView recyclerView;
+
+    @BindView(R.id.set_up)
+    ImageView imageView;
 
     @Override
     protected int bindFragmentLayoutId() {
@@ -46,6 +52,14 @@ public class PersonalFragment extends BaseFragment {
         homeItems.add(new HomeItem(false, "name2"));
         homeItems.add(new HomeItem(false, "name2"));
         mData = homeItems;
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), SetUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recyclerView.setAdapter( new BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.item_personal_content, mData) {
             @Override

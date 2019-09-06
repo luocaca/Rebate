@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/beijing"
+    tools:context=".ui.activity.PaySuccessActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@drawable/shape_color"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:src="@mipmap/retun1" />
+
+            <EditText
+                android:layout_width="235dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="18dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_corner_x"
+                android:drawableLeft="@mipmap/search2"
+                android:hint="输入订单号"
+                android:padding="8dp"
+                android:textColorHint="@color/color_Grid"
+                android:textSize="@dimen/text_size_content_s" />
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="22dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="@dimen/default_margin"
+                android:src="@mipmap/chat2" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="-30dp"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginBottom="@dimen/default_margin_top"
+        android:background="@drawable/shape_corner"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ArrivalAccount_to_Order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="3.5dp"
+                android:src="@mipmap/zuijxiadan" />
+
+            <ImageView
+                android:id="@+id/arrivaldatails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="3.5dp"
+                android:src="@mipmap/genzong" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="3.5dp"
+                android:src="@mipmap/zuijin" />
+
+            <ImageView
+                android:id="@+id/ArrivalAccount_to_Ivalid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="3.5dp"
+                android:src="@mipmap/wuxiao" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3.5dp"
+                android:paddingBottom="@dimen/padding_top"
+                android:text="最近下单"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3.5dp"
+                android:paddingBottom="@dimen/padding_top"
+                android:text="跟踪处理"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3.5dp"
+                android:paddingBottom="@dimen/padding_top"
+                android:text="最近到账"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="3.5dp"
+                android:paddingBottom="@dimen/padding_top"
+                android:text="无效订单"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="45dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/buttonsymbol"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="支付成功"
+        android:layout_marginTop="@dimen/default_margin"
+        android:textSize="@dimen/text_size_title_xl"
+        android:textColor="@color/text333"
+        />
+
+
+
+</LinearLayout>

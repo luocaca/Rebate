@@ -1,13 +1,22 @@
 package com.just.rebate.ui.fragment;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
@@ -18,6 +27,9 @@ import com.just.rebate.entity.OrderItem;
 import com.just.rebate.ui.MainActivity;
 import com.just.rebate.ui.activity.ArrivalAccountActivity;
 import com.just.rebate.ui.activity.ArrivalDetailsActivity;
+import com.just.rebate.ui.activity.InvalidActivity;
+import com.just.rebate.ui.activity.PaymentActivity;
+import com.just.rebate.ui.activity.TrackingProcessingActivity;
 import com.rebate.base.fragment.BaseFragment;
 
 import java.util.ArrayList;
@@ -30,6 +42,8 @@ import butterknife.BindView;
  */
 public class OrderFragment extends BaseFragment {
     private List<OrderItem> mDatas;
+    private Context context;
+    private Button mBtn1,mBtn2;
 
 
     @BindView(R.id.rv_list4)
@@ -40,6 +54,15 @@ public class OrderFragment extends BaseFragment {
 
     @BindView(R.id.Arrival_account)
     ImageView mArrival_account;
+
+    @BindView(R.id.invalid)
+    ImageView mInvalid;
+
+    @BindView(R.id.Order_to_Payment)
+    TextView mTextOrder_to_Payment;
+
+
+
 
 
     @Override
@@ -58,10 +81,30 @@ public class OrderFragment extends BaseFragment {
         orderItems.add(new OrderItem(false, "name2"));
         mDatas=orderItems;
 
+
+        mTextOrder_to_Payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getActivity(), PaymentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),ArrivalDetailsActivity.class);
+                Intent intent=new Intent(getActivity(), TrackingProcessingActivity.class);
                 getActivity().startActivity(intent);
             }
         });
@@ -72,6 +115,14 @@ public class OrderFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+        mInvalid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), InvalidActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -101,5 +152,6 @@ public class OrderFragment extends BaseFragment {
     protected void initData() {
 
     }
+
 
 }
