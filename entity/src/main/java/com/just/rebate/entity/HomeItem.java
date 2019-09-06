@@ -1,5 +1,6 @@
 package com.just.rebate.entity;
 
+
 import com.chad.library.adapter.base.entity.SectionEntity;
 
 /**
@@ -7,9 +8,17 @@ import com.chad.library.adapter.base.entity.SectionEntity;
  */
 public class HomeItem extends SectionEntity {
 
-    public String itemName;
-    public String logoUrl;
-    public String tag ;
+    private String itemName;
+    private String logoUrl;
+    private String tag;
+
+
+    public HomeItem(String itemName, String logoUrl, String tag, boolean isHead) {
+        super(isHead, itemName);
+        this.itemName = itemName;
+        this.logoUrl = logoUrl;
+        this.tag = tag;
+    }
 
     public String getItemName() {
         return itemName;
@@ -36,11 +45,9 @@ public class HomeItem extends SectionEntity {
     }
 
 
-
-    public HomeItem(boolean isHeader, String header) {
-        super(isHeader, header);
+    public boolean isHead() {
+        return super.isHeader;
     }
-
 
 
 }

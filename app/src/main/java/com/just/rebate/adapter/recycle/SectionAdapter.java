@@ -24,7 +24,7 @@ public abstract class SectionAdapter extends BaseSectionQuickAdapter<HomeItem, B
     }
 
     protected void convertHead(BaseViewHolder helper, final HomeItem item) {
-        helper.setText(R.id.header, item.itemName);
+        helper.setText(R.id.header, item.getItemName());
         /*
         helper.setVisible(R.id.more, item.isMore());
         helper.addOnClickListener(R.id.more);
@@ -33,7 +33,6 @@ public abstract class SectionAdapter extends BaseSectionQuickAdapter<HomeItem, B
 
 
     protected void conver( BaseViewHolder helper, HomeItem item) {
-        HomeItem homeItem = (HomeItem) item.t;
         switch (helper.getLayoutPosition() % 12) {
             case 1:
                 helper.setImageResource(R.id.iv, R.mipmap.taobao);
@@ -75,6 +74,6 @@ public abstract class SectionAdapter extends BaseSectionQuickAdapter<HomeItem, B
                 break;
 
         }
-        helper.setText(R.id.tv, homeItem.getItemName());
+
     }
 }

@@ -44,13 +44,7 @@ public class PersonalFragment extends BaseFragment {
     protected void initViewsAndEvents(View view) {
         recyclerView.setLayoutManager(new GridLayoutManager(mActivity, 4));
         List<HomeItem> homeItems = new ArrayList<>();
-        homeItems.add(new HomeItem(true, "购物返利"));
-        homeItems.add(new HomeItem(false, "name2"));
-        homeItems.add(new HomeItem(false, "name2"));
-        homeItems.add(new HomeItem(false, "name2"));
-        homeItems.add(new HomeItem(false, "name2"));
-        homeItems.add(new HomeItem(false, "name2"));
-        homeItems.add(new HomeItem(false, "name2"));
+
         mData = homeItems;
 
         imageView.setOnClickListener(new View.OnClickListener() {

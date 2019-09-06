@@ -20,8 +20,8 @@ public class MyApplication extends Application {
         super.onCreate();
 
 
-        System.setProperty("http.proxyHost", "192.168.1.171");
-        System.setProperty("http.proxyPort", "8888");
+//        System.setProperty("http.proxyHost", "192.168.1.171");
+//        System.setProperty("http.proxyPort", "8888");
 
 
     }
