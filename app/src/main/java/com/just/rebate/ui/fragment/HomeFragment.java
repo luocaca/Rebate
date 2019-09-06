@@ -117,6 +117,8 @@ public class HomeFragment extends BaseFragment {
      */
     public void requestDataOnline() {
 
+
+
         OkHttpUtils
                 .get()
                 .url("https://www.luocaca.cn/")

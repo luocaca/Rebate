@@ -18,6 +18,12 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
+        System.setProperty("http.proxyHost", "192.168.1.171");
+        System.setProperty("http.proxyPort", "8888");
+
+
     }
 
 
