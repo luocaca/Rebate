@@ -53,7 +53,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.it.sms.FileProvider"
+            android:authorities="com.just.rebate.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

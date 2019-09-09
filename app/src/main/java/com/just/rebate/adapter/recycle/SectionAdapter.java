@@ -1,16 +1,25 @@
 package com.just.rebate.adapter.recycle;
 
+import android.content.Context;
+import android.widget.ImageView;
+
+import androidx.fragment.app.FragmentManager;
+
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
 import com.just.rebate.entity.HomeItem;
+import com.just.rebate.ui.MainActivity;
 
+import java.net.URL;
 import java.util.List;
 
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
 public abstract class SectionAdapter extends BaseSectionQuickAdapter<HomeItem, BaseViewHolder> {
+   private Context context;
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
@@ -25,11 +34,15 @@ public abstract class SectionAdapter extends BaseSectionQuickAdapter<HomeItem, B
 
     protected void convertHead(BaseViewHolder helper, final HomeItem item) {
         helper.setText(R.id.header, item.getItemName());
+
         /*
         helper.setVisible(R.id.more, item.isMore());
+
         helper.addOnClickListener(R.id.more);
         */
     }
+
+
 
 
     protected void conver( BaseViewHolder helper, HomeItem item) {

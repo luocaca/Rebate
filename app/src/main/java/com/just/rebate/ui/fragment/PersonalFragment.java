@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
@@ -58,6 +59,7 @@ public class PersonalFragment extends BaseFragment {
         recyclerView.setAdapter( new BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.item_personal_content, mData) {
             @Override
             protected void convert(@NonNull BaseViewHolder helper, HomeItem item) {
+
 
             }
         });

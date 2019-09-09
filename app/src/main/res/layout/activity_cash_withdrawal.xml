@@ -101,7 +101,7 @@
                 android:textColor="@color/text333"
                 android:textSize="@dimen/text_size_content" />
 
-            <com.just.rebate.ui.activity.MyEditText
+            <com.just.rebate.wedget.MyEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="0123456789."

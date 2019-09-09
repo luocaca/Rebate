@@ -1,4 +1,4 @@
-package com.just.rebate.ui.activity;
+package com.just.rebate.wedget;
 
 import android.content.Context;
 import android.graphics.Canvas;

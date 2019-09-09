@@ -35,6 +35,7 @@ dependencies {
 
 
     api 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
 
 }
