@@ -95,19 +95,17 @@ public class HomeFragment extends BaseFragment {
         recycleView.setAdapter(sectionAdapter);
 
 
-
-
         requestDataOnline();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh(){
+            public void onRefresh() {
 
                 swipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         requestDataOnline();
                     }
-                },3000);
+                }, 3000);
                 swipeRefreshLayout.setRefreshing(false);
             }
 
@@ -128,6 +126,11 @@ public class HomeFragment extends BaseFragment {
     public void requestDataOnline() {
 
 
+
+
+
+        //                .url("http://192.168.1.171:8080/download/personaljson.txt")
+
         OkHttpUtils
                 .get()
                 .url("http://192.168.1.171:8080/download/homejson.txt")
@@ -138,13 +141,13 @@ public class HomeFragment extends BaseFragment {
                         ///Log.e("TAG", "日志");
 
 
-                        Toast.makeText(mActivity, "error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                       Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
 
 
                         Type t = new TypeToken<List<HomeItem>>() {

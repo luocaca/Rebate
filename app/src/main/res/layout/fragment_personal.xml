@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beijing"
+
     android:orientation="vertical"
     tools:context="com.just.rebate.ui.fragment.PersonalFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="165dp"
         android:background="@drawable/shape_color"
         android:orientation="horizontal"
-
         >
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:src="@mipmap/toux">
 
         </ImageView>
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -55,6 +55,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
+
             android:orientation="vertical">
 
             <ImageView
@@ -62,7 +63,7 @@
                 android:layout_width="19dp"
                 android:layout_height="19dp"
                 android:layout_gravity="right"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/setting" />
 

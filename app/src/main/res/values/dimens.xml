@@ -21,6 +21,7 @@
     <dimen name="text_size_content">13sp</dimen>
     <dimen name="text_size_content_s">12sp</dimen>
     <dimen name="text_size_content_ss">10sp</dimen>
+    <dimen name="default_radius">6dp</dimen>
 
 
 </resources>
