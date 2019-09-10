@@ -15,8 +15,9 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:layout_gravity="center"
         android:src="@mipmap/taobao" />
 
@@ -27,8 +28,7 @@
         android:layout_gravity="center|bottom"
         android:textColor="@color/text666"
         android:layout_marginTop="7dp"
-
         android:text="淘宝"
-        android:textSize="13sp"
+        android:textSize="@dimen/text_size_content"
         />
 </LinearLayout>

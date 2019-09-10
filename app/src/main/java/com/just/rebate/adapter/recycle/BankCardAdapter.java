@@ -16,17 +16,17 @@ import com.just.rebate.data.detailed_DataServer;
 
 import java.util.List;
 
+/**
+ * 银行卡
+ */
 public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHolder> {
     private Context context;
     private List<Bank_Card_DataServer> mDataServer;
-    public BankCardAdapter(List<Bank_Card_DataServer> mDataServer){
-        this.mDataServer=mDataServer;
+
+    public BankCardAdapter(List<Bank_Card_DataServer> mDataServer) {
+        this.mDataServer = mDataServer;
 
     }
-
-
-
-
 
 
     @Override
@@ -44,26 +44,24 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
         holder.mIv_pic.setImageResource(mDataServer.get(position).getPic());
 
 
-
     }
 
     @Override
     public int getItemCount() {
-        return mDataServer==null ? 0:mDataServer.size();
+        return mDataServer == null ? 0 : mDataServer.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mtv_text,mtv_number;
+        private TextView mtv_text, mtv_number;
         private ImageView mIv_pic;
-
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             mtv_text = itemView.findViewById(R.id.Text);
-            mtv_number=itemView.findViewById(R.id.card_number);
-            mIv_pic=itemView.findViewById(R.id.pic);
+            mtv_number = itemView.findViewById(R.id.card_number);
+            mIv_pic = itemView.findViewById(R.id.pic);
 
 
         }

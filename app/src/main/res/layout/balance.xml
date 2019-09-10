@@ -4,15 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/beijing"
+    android:orientation="vertical"
     tools:context=".ui.activity.BalaceActivity">
+
+
+    <!--<com.just.rebate.wedget.MyTitleBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:background="@drawable/shape_color"-->
+        <!--android:paddingTop="30dp"-->
+        <!--app:leftImgId="@mipmap/leftarrow"-->
+        <!--app:leftText="13246546"-->
+        <!--app:leftTextColor="@color/white_text_color"-->
+        <!--app:rightText="454"-->
+        <!--app:rightTextColor="@color/white_text_color"-->
+        <!--app:titleText="标题">-->
+
+
+    <!--</com.just.rebate.wedget.MyTitleBar>-->
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@android:color/white"
-        android:orientation="horizontal">
+        android:background="@drawable/shape_color"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -20,19 +38,20 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="15dp"
-            android:src="@mipmap/leftarrow" />
+            android:src="@mipmap/leftarrow"
+            android:tint="@color/color_white" />
 
         <TextView
-            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:text="提现"
-            android:textColor="@color/text333"
+            android:textColor="@color/color_white"
             android:textSize="@dimen/text_size_title_xl" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="170dp"
         android:layout_height="170dp"
@@ -42,43 +61,43 @@
         android:orientation="vertical">
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:text="￥0.00"
-        android:textSize="35dp"
-        android:textColor="@color/text333"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:text="￥0.00"
+            android:textColor="@color/text333"
+            android:textSize="35dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="累计返利"
             android:layout_marginTop="@dimen/default_margin_top"
-            android:textSize="@dimen/text_size_content"
-            android:textColor="@color/text333"/>
+            android:text="累计返利"
+            android:textColor="@color/text333"
+            android:textSize="@dimen/text_size_content" />
 
     </LinearLayout>
+
     <Button
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="85dp"
+        android:background="@drawable/shape_corner_xl"
         android:text="提现"
-        android:textColor="@android:color/white"
-        android:background="@drawable/shape_corner_xl"/>
+        android:textColor="@android:color/white" />
+
     <Button
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/shape_corner_grad_line_xl"
+
         android:text="兑换"
-
-        android:textColor="@color/tianlan"
-        android:background="@drawable/shape_corner_grad_line_xl"/>
-
-
-
+        android:textColor="@color/tianlan" />
 
 
 </LinearLayout>

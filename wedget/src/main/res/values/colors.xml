@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //黑白
+    <color name="colorText1">#333333</color>//用于用于重要级文字信息、内页标题信息
+    <color name="colorText2">#666666</color>//用于普通级文字信息
+    <color name="colorText3">#999999</color>//用于辅助、次要的文字信息
+    <color name="colorText4">#dadada</color>//用于表达默认提示文字颜色
+    <color name="colorLine">#e6e6e6</color>//用于分割线
+    <color name="colorGrayBG">#f9f9f9</color>//页面底色
+    <color name="colorWhite">#FFFFFF</color>//白色
+    <color name="colorWhite1">#DADDEE</color>//亮白色
+
+
+</resources>

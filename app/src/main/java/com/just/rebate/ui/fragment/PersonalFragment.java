@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,7 +20,11 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
 import com.just.rebate.entity.PersonalItem;
 import com.just.rebate.entity.Personal_local_Item;
+import com.just.rebate.ui.MainActivity;
+import com.just.rebate.ui.activity.BalaceActivity;
+import com.just.rebate.ui.activity.BankCardActivity;
 import com.just.rebate.ui.activity.SetUpActivity;
+import com.just.rebate.ui.activity.help.HelpCenterActivity;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -37,8 +42,8 @@ import okhttp3.Call;
  */
 public class PersonalFragment extends BaseFragment {
     private List<Personal_local_Item> mData;
-    private int[] Image={
-            R.mipmap.chat3,R.mipmap.wallet2,R.mipmap.chongzhi1,R.mipmap.mingxi,R.mipmap.bankcard,R.mipmap.info2
+    private int[] Image = {
+            R.mipmap.chat3, R.mipmap.wallet2, R.mipmap.chongzhi1, R.mipmap.mingxi, R.mipmap.bankcard, R.mipmap.info2
     };
 
     @BindView(R.id.rv_list2)
@@ -73,54 +78,55 @@ public class PersonalFragment extends BaseFragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), SetUpActivity.class);
+                Intent intent = new Intent(getActivity(), SetUpActivity.class);
                 startActivity(intent);
             }
         });
 
 
         list = new ArrayList<>();
-        Personal_local_Item p1= new Personal_local_Item();
-        p1.ItemNameid=Image[0];
-        p1.ItemName="客服";
+        Personal_local_Item p1 = new Personal_local_Item();
+        p1.ItemNameid = Image[0];
+        p1.ItemName = "客服";
+        p1.activityClass = BalaceActivity.class;
         list.add(p1);
-        Personal_local_Item p2= new Personal_local_Item();
-        p2.ItemNameid=Image[1];
-        p2.ItemName="提现";
+        Personal_local_Item p2 = new Personal_local_Item();
+        p2.ItemNameid = Image[1];
+        p2.ItemName = "提现";
+        p2.activityClass = BalaceActivity.class;
         list.add(p2);
-        Personal_local_Item p3= new Personal_local_Item();
-        p3.ItemNameid=Image[2];
-        p3.ItemName="充值";
+        Personal_local_Item p3 = new Personal_local_Item();
+        p3.ItemNameid = Image[2];
+        p3.ItemName = "充值";
         list.add(p3);
-        Personal_local_Item p4= new Personal_local_Item();
-        p4.ItemNameid=Image[3];
-        p4.ItemName="到账明细";
+        Personal_local_Item p4 = new Personal_local_Item();
+        p4.ItemNameid = Image[3];
+        p4.ItemName = "到账明细";
         list.add(p4);
-        Personal_local_Item p5= new Personal_local_Item();
-        p5.ItemNameid=Image[4];
-        p5.ItemName="银行卡";
+        Personal_local_Item p5 = new Personal_local_Item();
+        p5.ItemNameid = Image[4];
+        p5.ItemName = "银行卡";
+        p5.activityClass = BankCardActivity.class;
+
         list.add(p5);
-        Personal_local_Item p6= new Personal_local_Item();
-        p6.ItemNameid=Image[5];
-        p6.ItemName="帮助";
+        Personal_local_Item p6 = new Personal_local_Item();
+        p6.ItemNameid = Image[5];
+        p6.ItemName = "帮助";
+        p6.activityClass = HelpCenterActivity.class;
         list.add(p6);
 
 
-        recyclerView.setAdapter( new BaseQuickAdapter<Personal_local_Item, BaseViewHolder>(R.layout.item_personal_content, list) {
+        recyclerView.setAdapter(new BaseQuickAdapter<Personal_local_Item, BaseViewHolder>(R.layout.item_personal_content, list) {
             @Override
             protected void convert(@NonNull BaseViewHolder helper, Personal_local_Item item) {
-              helper.setImageResource(R.id.iv,item.ItemNameid);
-              helper.setText(R.id.tv,item.ItemName);
-
-
-
+                helper.setImageResource(R.id.iv, item.ItemNameid);
+                helper.setText(R.id.tv, item.ItemName);
+                helper.itemView.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), item.activityClass == null ? MainActivity.class : item.activityClass)));
             }
 
 
         });
         requestDataOnline();
-
-
 
 
 //        personalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -153,16 +159,13 @@ public class PersonalFragment extends BaseFragment {
                         //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
 
 
+                        PersonalItem list = GsonUtil.getGson().fromJson(response, PersonalItem.class);
 
-                        PersonalItem list = GsonUtil.getGson().fromJson(response,PersonalItem.class );
-
-                        mTv_account.setText(list.account+"");
-                        mTv_integral.setText(list.integral+"");
-                        mTv_invitat.setText(list.invitationCode+"");
+                        mTv_account.setText(list.account + "");
+                        mTv_integral.setText(list.integral + "");
+                        mTv_invitat.setText(list.invitationCode + "");
 
                         Glide.with(getActivity()).load(list.headImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mIv_head);
-
-
 
 
                     }

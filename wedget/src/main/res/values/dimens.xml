@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_56">56dp</dimen>
+    <dimen name="dimen_45">45dp</dimen>
+    <dimen name="dimen_30">30dp</dimen>
+    <dimen name="dimen_7">7dp</dimen>
+    <dimen name="dimen_0">0dp</dimen>
+    <dimen name="hintSize">13sp</dimen>
+    <dimen name="padding_default">12dp</dimen>
+</resources>
