@@ -8,6 +8,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.Button;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -66,10 +68,22 @@ public class BankCardActivity extends BaseActivity {
     }
 
     private void initRecyclerview() {
-//        BankCardAdapter mbankCardAdapter = new BankCardAdapter(mDataServer);
+        BankCardAdapter mbankCardAdapter = new BankCardAdapter(mDataServer);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        R.layout.item_bank_card
-        recyclerView.setAdapter(new BaseQuickAdapter<Bank_Card_DataServer, BaseViewHolder>(R.layout.item_bank_card, mDataServer) {
+//        recyclerView.setAdapter(new BaseQuickAdapter<Bank_Card_DataServer, BaseViewHolder>(R.layout.item_bank_card, mDataServer) {
+//            @Override
+//            protected void convert(@NonNull BaseViewHolder helper, Bank_Card_DataServer item) {
+//                helper
+//                        .setText(R.id.bank, item.getText())
+//                        .setText(R.id.bank, item.getText())
+//                        .setText(R.id.bank, item.getText())
+//                        .setText(R.id.bank, item.getText());
+//            }
+//        });
+
+
+        BaseQuickAdapter baseQuickAdapter = new BaseQuickAdapter<Bank_Card_DataServer, BaseViewHolder>(R.layout.item_bank_card, mDataServer) {
             @Override
             protected void convert(@NonNull BaseViewHolder helper, Bank_Card_DataServer item) {
                 helper
@@ -78,11 +92,11 @@ public class BankCardActivity extends BaseActivity {
                         .setText(R.id.bank, item.getText())
                         .setText(R.id.bank, item.getText());
             }
-        });
-
+        };
+        baseQuickAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_head,null));
         // 分割线
         // recyclerView.addItemDecoration(new DetailedActivity.MyDecoration());
-//        recyclerView.setAdapter(mbankCardAdapter);
+        recyclerView.setAdapter(baseQuickAdapter);
 
 
     }
