@@ -1,28 +1,46 @@
 package com.just.rebate.entity;
 
-import com.chad.library.adapter.base.entity.SectionEntity;
+public class PersonalItem  {
+    public String  headImage ;
+    public int invitationCode ;
+    public int account ;
+    public int integral;
 
-public class PersonalItem extends SectionEntity {
-    public String  itemName ;
-    public int iteResId ;
+    public PersonalItem(String headImage,int invitationCode,int account,int integral){
 
-    public PersonalItem(boolean isHeader, String header) {
-        super(isHeader, header);
     }
 
-    //
-
-    public String getItemName() {
-        return itemName;
-    }
-    public void setItemName(){
-        this.itemName=itemName;
+    public String getHeadImage() {
+        return headImage;
     }
 
-    public int getIteResId() {
-        return iteResId;
+    public void setHeadImage(String headImage) {
+        this.headImage = headImage;
     }
-    public void setIteResId(){
-        this.iteResId=iteResId;
+
+    public int getInvitationCode() {
+        return invitationCode;
     }
+
+    public void setInvitationCode(int invitationCode) {
+        this.invitationCode = invitationCode;
+    }
+
+    public int getAccount() {
+        return account;
+    }
+
+    public void setAccount(int account) {
+        this.account = account;
+    }
+
+    public int getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(int integral) {
+        this.integral = integral;
+    }
+
+
 }

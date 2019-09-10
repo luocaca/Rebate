@@ -17,6 +17,7 @@
         >
 
         <ImageView
+            android:id="@+id/headImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="12dp"
@@ -34,6 +35,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/account"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:text="用户账号"
@@ -41,6 +43,7 @@
                 android:textSize="@dimen/text_size_title_xl" />
 
             <TextView
+                android:id="@+id/invaitat"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
@@ -68,6 +71,7 @@
                 android:src="@mipmap/setting" />
 
             <TextView
+                android:id="@+id/integral"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="5dp"

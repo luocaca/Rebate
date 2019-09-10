@@ -1,8 +1,5 @@
 package com.just.rebate.ui.fragment;
 
-import android.os.HandlerThread;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,26 +12,21 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
+import com.just.rebate.adapter.recycle.SectionAdapter;
 import com.just.rebate.entity.HomeItem;
-import com.just.rebate.ui.activity.FailureToPayActivity;
 import com.rebate.base.fragment.BaseFragment;
+import com.rebate.commom.util.GsonUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 import butterknife.BindView;
 import okhttp3.Call;
-
-import com.just.rebate.adapter.recycle.SectionAdapter;
-import com.rebate.commom.util.GsonUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 /**
  * 首页
@@ -141,13 +133,13 @@ public class HomeFragment extends BaseFragment {
                         ///Log.e("TAG", "日志");
 
 
-                        Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
 
 
                         Type t = new TypeToken<List<HomeItem>>() {
