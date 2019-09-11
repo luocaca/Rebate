@@ -1,10 +1,5 @@
 package com.just.rebate.ui.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseViewHolder;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.just.rebate.R;
-import com.just.rebate.adapter.recycle.OrderAdapter;
 import com.just.rebate.entity.OrderItem;
 
 import java.util.ArrayList;
@@ -47,7 +44,7 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
 
-        OrderAdapter orderAdapter = new OrderAdapter(R.layout.item_order_content, R.layout.item_order_head, mDatas) {
+        /*OrderAdapter orderAdapter = new OrderAdapter(R.layout.item_order_content, R.layout.item_order_head, mDatas) {
             @Override
             protected void convert(@NonNull BaseViewHolder helper, OrderItem item) {
 
@@ -62,8 +59,9 @@ public class PaymentActivity extends AppCompatActivity {
 
             }
         };
-        recycleView.setAdapter(orderAdapter);
+        recycleView.setAdapter(orderAdapter);*/
     }
+
     private void AlertDiglog(){
         AlertDialog.Builder builder=new AlertDialog.Builder(PaymentActivity.this);
         LayoutInflater inflater=LayoutInflater.from(PaymentActivity.this);

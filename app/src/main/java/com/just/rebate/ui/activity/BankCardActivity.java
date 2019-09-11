@@ -1,25 +1,17 @@
 package com.just.rebate.ui.activity;
 
+import android.view.LayoutInflater;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.widget.Button;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.BankCardAdapter;
-import com.just.rebate.adapter.recycle.DetailsAdapter;
 import com.just.rebate.data.Bank_Card_DataServer;
-import com.just.rebate.data.detailed_DataServer;
-import com.just.rebate.entity.Personal_local_Item;
-import com.just.rebate.ui.MainActivity;
 import com.rebate.base.activity.BaseActivity;
 
 import java.util.ArrayList;
@@ -93,7 +85,7 @@ public class BankCardActivity extends BaseActivity {
                         .setText(R.id.bank, item.getText());
             }
         };
-        baseQuickAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.item_head,null));
+        baseQuickAdapter.addFooterView(LayoutInflater.from(this).inflate(R.layout.footview_layout,null));
         // 分割线
         // recyclerView.addItemDecoration(new DetailedActivity.MyDecoration());
         recyclerView.setAdapter(baseQuickAdapter);

@@ -1,35 +1,28 @@
 package com.just.rebate.ui.fragment;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
+import com.just.rebate.adapter.recycle.MultiItemEntity;
 import com.just.rebate.adapter.recycle.OrderAdapter;
-import com.just.rebate.adapter.recycle.SectionAdapter;
-import com.just.rebate.entity.HomeItem;
 import com.just.rebate.entity.OrderItem;
+import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
-import com.just.rebate.ui.MainActivity;
+import com.just.rebate.entity.order.ReturnShop;
 import com.just.rebate.ui.activity.ArrivalAccountActivity;
-import com.just.rebate.ui.activity.ArrivalDetailsActivity;
 import com.just.rebate.ui.activity.InvalidActivity;
 import com.just.rebate.ui.activity.PaymentActivity;
 import com.just.rebate.ui.activity.TrackingProcessingActivity;
@@ -52,6 +45,10 @@ public class OrderFragment extends BaseFragment {
     private List<OrderItem> mDatas;
     private Context context;
     private Button mBtn1, mBtn2;
+    private List<MultiItemEntity> list;
+    private List<ReturnPlatform> returnPlatforms;
+    private List<ReturnShop> returnShops;
+    private List<ReturnOrder> returnOrders;
 
 
     @BindView(R.id.rv_list4)
@@ -62,6 +59,29 @@ public class OrderFragment extends BaseFragment {
 
     @BindView(R.id.Arrival_account)
     ImageView mArrival_account;
+
+
+    @BindView(R.id.order_header)
+    TextView mTv_header;
+    @BindView(R.id.order_time)
+    TextView mTv_time;
+    @BindView(R.id.rich)
+    TextView mTv_rich;
+
+
+    @BindView(R.id.order_tv)
+    TextView mTv_market;
+
+
+    @BindView(R.id.order_iv)
+    TextView mTv_Image;
+    @BindView(R.id.order_name)
+    TextView mTv_name;
+    @BindView(R.id.order_price)
+    TextView mTv_price;
+
+
+
 
     @BindView(R.id.invalid)
     ImageView mInvalid;
@@ -79,12 +99,16 @@ public class OrderFragment extends BaseFragment {
     protected void initViewsAndEvents(View view) {
         recycleView.setLayoutManager(new GridLayoutManager(mActivity, 1));
         List<OrderItem> orderItems = new ArrayList<>();
-        orderItems.add(new OrderItem(true, "淘宝"));
-        orderItems.add(new OrderItem(false, "name2"));
-        orderItems.add(new OrderItem(false, "name2"));
-        orderItems.add(new OrderItem(true, "淘宝"));
-        orderItems.add(new OrderItem(false, "name2"));
+
         mDatas = orderItems;
+
+
+
+
+
+
+
+
 
 
         mTextOrder_to_Payment.setOnClickListener(new View.OnClickListener() {
@@ -119,22 +143,15 @@ public class OrderFragment extends BaseFragment {
         });
 
 
-        OrderAdapter orderAdapter = new OrderAdapter(R.layout.item_order_content, R.layout.item_order_head, mDatas) {
-            @Override
-            protected void convert(@NonNull BaseViewHolder helper, OrderItem item) {
 
-            }
+
+        OrderAdapter orderAdapter = new OrderAdapter( list) {
 
             @Override
-            protected void convertHead(BaseViewHolder helper, OrderItem item) {
-                super.convertHead(helper, item);
+            protected void convert (BaseViewHolder helper, MultiItemEntity item) {
+                super.convert(helper, item);
 //                View view1=layoutInflater.inflate(R.layout.def_section_head,null);
-                helper.setText(R.id.order_header, "淘宝");
-                helper.setText(R.id.order_tv, "米拉服饰");
-
             }
-
-
         };
         recycleView.setAdapter(orderAdapter);
 
@@ -169,6 +186,7 @@ public class OrderFragment extends BaseFragment {
                         }.getType();
 
                         List<ReturnPlatform> list = GsonUtil.getGson().fromJson(response, t);
+
 
 
                         Log.i("result", "onResponse: "+list);

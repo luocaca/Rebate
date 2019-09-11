@@ -17,6 +17,7 @@
                 android:src="@mipmap/yuanquan"
                 android:paddingBottom="20dp"/>
             <ImageView
+                android:id="@+id/order_iv"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_width="64dp"
                 android:background="@color/beijing"
@@ -28,6 +29,7 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 >
                 <TextView
+                    android:id="@+id/order_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right"
@@ -46,6 +48,7 @@
                     android:layout_marginBottom="@dimen/default_margin"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/order_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="￥148.00"

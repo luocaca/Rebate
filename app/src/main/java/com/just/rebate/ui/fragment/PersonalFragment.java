@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -164,7 +163,6 @@ public class PersonalFragment extends BaseFragment {
                         mTv_account.setText(list.account + "");
                         mTv_integral.setText(list.integral + "");
                         mTv_invitat.setText(list.invitationCode + "");
-
                         Glide.with(getActivity()).load(list.headImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mIv_head);
 
 

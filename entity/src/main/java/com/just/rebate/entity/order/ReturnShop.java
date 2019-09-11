@@ -41,7 +41,7 @@ public class ReturnShop extends BaseEntity implements IExpandable {
 
     @Override
     public List getSubItems() {
-        return null;
+        return returnOrders;
     }
 
     @Override
