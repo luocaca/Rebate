@@ -21,7 +21,20 @@ public class Personal {
     public String account;
 
 
+    /**
+     * 积分
+     */
     public String integral;
+
+    /**
+     * 累计返利
+     */
+    public String totalRebate;
+
+    /**
+     * 待返利
+     */
+    public String preRebate;
 
 
     public static void main(String... args) {
@@ -30,6 +43,8 @@ public class Personal {
         personal.invitationCode = "123456";
         personal.account = "1314520";
         personal.integral = "666";
+        personal.totalRebate = "128.56";
+        personal.preRebate = "18.60";
 
 
         Log.i(TAG, "main: " + GsonUtil.getGson().toJson(personal));

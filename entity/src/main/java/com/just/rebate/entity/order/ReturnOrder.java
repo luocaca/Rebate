@@ -3,6 +3,7 @@ package com.just.rebate.entity.order;
 import android.widget.Checkable;
 
 import com.chad.library.adapter.base.entity.IExpandable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.just.rebate.base.BaseEntity;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * 二傻专卖店
  * 三傻的店铺
  */
-public class ReturnOrder extends BaseEntity implements IExpandable, Checkable {
+public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, MultiItemEntity {
 
 
     /**
@@ -103,5 +104,10 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable {
     @Override
     public void toggle() {
 
+    }
+
+    @Override
+    public int getItemType() {
+        return 2;
     }
 }

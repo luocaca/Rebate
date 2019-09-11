@@ -1,723 +1,733 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beijing"
-    android:orientation="vertical">
 
-    <LinearLayout
+    >
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/beijing"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="165dp"
-            android:background="@drawable/shape_color"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="35dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="165dp"
+                android:background="@drawable/shape_color"
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="35dp"
                     android:gravity="center"
-                    android:text="邀请赚钱"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_title_xl" />
+                    android:orientation="horizontal">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="邀请赚钱"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_title_xl" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-68dp"
+                        android:gravity="center"
+                        android:text="明细"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_title_xl" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="-68dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="明细"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_title_xl" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:background="@drawable/shape_corner"
+                        android:drawableLeft="@mipmap/volume3x"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:paddingRight="@dimen/padding_right"
+                        android:text="手机尾号1587的用户到账12元现金"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/default_margin"
+                        android:layout_weight="1"
+
+                        android:gravity="center|right"
+                        android:text="活动规则 >"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="-30dp"
+                android:layout_marginRight="@dimen/default_margin"
+                android:background="@drawable/shape_corner"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/padding_left"
+                        android:text="预计总收益（元）"
+                        android:textSize="@dimen/text_size_title" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:gravity="center_vertical"
+                            android:text="0.00"
+                            android:textColor="@color/text_color_Pink"
+                            android:textSize="@dimen/text_size_title" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center_vertical"
+                            android:text="(0.00元即将到账)"
+                            android:textColor="@color/text_color_Pink"
+                            android:textSize="@dimen/text_size_content_s" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="230dp"
+                            android:src="@mipmap/rightarrow" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_top"
+                android:layout_marginRight="@dimen/default_margin"
+                android:background="@drawable/shape_corner"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="29dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/text_color_Pink"
+                        android:textSize="@dimen/text_size_title" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="合伙人（人）"
+                        android:textColor="@color/text666"
+                        android:textSize="@dimen/text_size_content" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#E5E5E5"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/text_color_Pink"
+                        android:textSize="@dimen/text_size_title" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="粉丝（人）"
+                        android:textColor="@color/text666"
+                        android:textSize="@dimen/text_size_content" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin_top"
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="28dp"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin_top"
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin_top"
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/default_margin_top"
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="28dp"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/fenxiang" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:minLines="2"
+                        android:paddingLeft="8dp"
+                        android:text="分享给好友邀请码"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+
+                    android:paddingTop="20dp"
+
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_weight="1"
+                    android:background="@color/beijing"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="-10dp">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="45dp"
+                            android:paddingBottom="3dp"
+                            app:dashOrientation="1"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="24dp"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/download" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="8dp"
+                        android:text="好友下载我要返利app"
+                        android:textColor="#333333"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="55dp"
+                android:layout_marginRight="@dimen/default_margin"
+                android:background="@drawable/textview_border_dash"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:paddingRight="@dimen/padding_right"
-                    android:layout_marginLeft="@dimen/default_margin"
-                    android:background="@drawable/shape_corner"
-                    android:drawableLeft="@mipmap/volume3x"
-                    android:gravity="center_vertical"
-                    android:drawablePadding="5dp"
-                    android:paddingLeft="@dimen/padding_left"
-                    android:text="手机尾号1587的用户到账12元现金"
-                    android:textSize="@dimen/text_size_content_ss" />
+                    android:layout_height="wrap_content"
+                    android:text="邀请码:"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/text_size_title_xl" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin"
+                    android:layout_gravity="center"
+                    android:text="  HMDWY"
+                    android:textColor="@color/zhuti"
+                    android:textSize="20sp" />
 
-                    android:gravity="center|right"
-                    android:text="活动规则 >"
-                    android:textColor="@android:color/white"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="    复制"
+                    android:textColor="@color/text_color_Pink"
                     android:textSize="@dimen/text_size_content_s" />
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="-30dp"
-            android:layout_marginRight="@dimen/default_margin"
-            android:background="@drawable/shape_corner"
-            android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/padding_left"
-                    android:text="预计总收益（元）"
-                    android:textSize="@dimen/text_size_title" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/default_margin"
-                        android:gravity="center_vertical"
-                        android:text="0.00"
-                        android:textColor="@color/text_color_Pink"
-                        android:textSize="@dimen/text_size_title" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:gravity="center_vertical"
-                        android:text="(0.00元即将到账)"
-                        android:textColor="@color/text_color_Pink"
-                        android:textSize="@dimen/text_size_content_s" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="230dp"
-                        android:src="@mipmap/rightarrow" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin_top"
-            android:layout_marginRight="@dimen/default_margin"
-            android:background="@drawable/shape_corner"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="29dp"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/text_color_Pink"
-                    android:textSize="@dimen/text_size_title" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:gravity="center"
-                    android:text="合伙人（人）"
-                    android:textColor="@color/text666"
-                    android:textSize="@dimen/text_size_content" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:background="#E5E5E5"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/text_color_Pink"
-                    android:textSize="@dimen/text_size_title" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="28dp"
-                    android:gravity="center"
-                    android:text="粉丝（人）"
-                    android:textColor="@color/text666"
-                    android:textSize="@dimen/text_size_content" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:orientation="horizontal">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin_top"
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="28dp"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-                </LinearLayout>
+                android:layout_marginRight="@dimen/default_margin"
+                android:background="@drawable/shape_corner_xl"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingLeft="8dp"
-                    android:layout_marginTop="5dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/default_margin_top"
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:paddingLeft="8dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/default_margin_top"
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:paddingLeft="8dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/default_margin_top"
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:paddingLeft="8dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-
+                    android:text="分享给好友，赚10元"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_title_xl" />
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:orientation="horizontal">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="28dp"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/fenxiang" />
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:minLines="2"
-                    android:paddingLeft="8dp"
-                    android:text="分享给好友邀请码"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:paddingLeft="8dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-
-                android:paddingTop="20dp"
-
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:paddingLeft="8dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-
-                android:layout_weight="1"
-                android:background="@color/beijing"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="-10dp">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="wrap_content"
-                        android:layout_height="45dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="45dp"
-                        android:paddingBottom="3dp"
-                        app:dashOrientation="1"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal">
-
-                    <com.fang.dashview.DashView
-                        android:layout_width="25dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="3dp"
-                        app:dashWidth="1dp"
-                        app:lineColor="#F79DAC"
-                        app:lineWidth="1dp" />
-
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="24dp"
-                        android:background="@drawable/shape_oval"
-                        android:padding="8dp"
-                        android:src="@mipmap/download" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginTop="5dp"
-                    android:text="好友下载我要返利app"
-                    android:textColor="#333333"
-                    android:textSize="9sp"
-                    android:paddingLeft="8dp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="55dp"
-            android:layout_marginRight="@dimen/default_margin"
-            android:background="@drawable/textview_border_dash"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="邀请码:"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_title_xl" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="  HMDWY"
-                android:textColor="@color/zhuti"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="    复制"
-                android:textColor="@color/text_color_Pink"
-                android:textSize="@dimen/text_size_content_s" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin_top"
-            android:layout_marginRight="@dimen/default_margin"
-            android:background="@drawable/shape_corner_xl"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="分享给好友，赚10元"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_title_xl" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

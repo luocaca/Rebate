@@ -50,6 +50,7 @@
         </activity>
         <activity android:name=".ui.activity.ArrivalDetailsActivity" />
         <activity android:name=".ui.activity.help.HelpCenterActivity" />
+        <activity android:name=".ui.activity.web.WebViewActivity" />
 
 
         <provider

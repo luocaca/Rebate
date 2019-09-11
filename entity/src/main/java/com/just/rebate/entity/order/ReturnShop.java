@@ -1,6 +1,7 @@
 package com.just.rebate.entity.order;
 
 import com.chad.library.adapter.base.entity.IExpandable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.just.rebate.base.BaseEntity;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * 二傻专卖店
  * 三傻的店铺
  */
-public class ReturnShop extends BaseEntity implements IExpandable {
+public class ReturnShop extends BaseEntity implements IExpandable , MultiItemEntity {
 
     /**
      * 店铺名称
@@ -63,5 +64,10 @@ public class ReturnShop extends BaseEntity implements IExpandable {
 
     public void setReturnOrders(List<ReturnOrder> returnOrders) {
         this.returnOrders = returnOrders;
+    }
+
+    @Override
+    public int getItemType() {
+        return 1;
     }
 }

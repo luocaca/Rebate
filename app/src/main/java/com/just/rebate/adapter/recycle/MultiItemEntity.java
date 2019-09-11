@@ -5,9 +5,9 @@ import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
 
 public class MultiItemEntity implements com.chad.library.adapter.base.entity.MultiItemEntity {
-    public static final int FIRST_TYPE = 1;
-    public static final int SECOND_TYPE = 2;
-    public static final int NORMAL_TYPE = 3;
+    public static final int FIRST_TYPE = 0;
+    public static final int SECOND_TYPE = 1;
+    public static final int NORMAL_TYPE =2;
 
     private int itemType;
     private ReturnPlatform returnPlatform;

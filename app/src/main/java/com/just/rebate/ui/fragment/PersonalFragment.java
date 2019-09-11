@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,8 +18,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
-import com.just.rebate.entity.PersonalItem;
 import com.just.rebate.entity.Personal_local_Item;
+import com.just.rebate.entity.personal.Personal;
 import com.just.rebate.ui.MainActivity;
 import com.just.rebate.ui.activity.BalaceActivity;
 import com.just.rebate.ui.activity.BankCardActivity;
@@ -57,8 +58,18 @@ public class PersonalFragment extends BaseFragment {
     @BindView(R.id.invaitat)
     TextView mTv_invitat;
 
+    @BindView(R.id.totalRebate)
+    TextView totalRebate;
+
+    @BindView(R.id.preRebate)
+    TextView preRebate;
+
     @BindView(R.id.headImage)
     ImageView mIv_head;
+
+
+
+
 
     @BindView(R.id.set_up)
     ImageView imageView;
@@ -147,10 +158,7 @@ public class PersonalFragment extends BaseFragment {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         ///Log.e("TAG", "日志");
-
-
-                        //Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -158,12 +166,17 @@ public class PersonalFragment extends BaseFragment {
                         //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
 
 
-                        PersonalItem list = GsonUtil.getGson().fromJson(response, PersonalItem.class);
+                        Personal personal = GsonUtil.getGson().fromJson(response, Personal.class);
 
-                        mTv_account.setText(list.account + "");
-                        mTv_integral.setText(list.integral + "");
-                        mTv_invitat.setText(list.invitationCode + "");
-                        Glide.with(getActivity()).load(list.headImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mIv_head);
+                        mTv_account.setText(personal.account + "");
+                        mTv_integral.setText(personal.integral + "");
+                        mTv_invitat.setText(personal.invitationCode + "");
+
+                        totalRebate.setText(personal.totalRebate);
+                        preRebate.setText(personal.preRebate);
+
+
+                        Glide.with(getActivity()).load(personal.headImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mIv_head);
 
 
                     }

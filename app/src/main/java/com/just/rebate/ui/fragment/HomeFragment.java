@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.SectionAdapter;
 import com.just.rebate.entity.HomeItem;
+import com.just.rebate.ui.activity.web.WebViewActivity;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -59,6 +60,11 @@ public class HomeFragment extends BaseFragment {
             protected void convert(@NonNull BaseViewHolder helper, HomeItem item) {
                 helper.setText(R.id.tv, item.getItemName());
                 Glide.with(getActivity()).load(item.getLogoUrl()).into((ImageView) helper.getView(R.id.iv));
+
+                helper.itemView.setOnClickListener(v -> {
+                    WebViewActivity.start(mContext);
+                });
+
 
             }
 
@@ -116,9 +122,6 @@ public class HomeFragment extends BaseFragment {
      * 网络请求数据
      */
     public void requestDataOnline() {
-
-
-
 
 
         //                .url("http://192.168.1.171:8080/download/personaljson.txt")

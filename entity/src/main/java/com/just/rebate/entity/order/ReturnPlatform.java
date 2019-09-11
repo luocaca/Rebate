@@ -1,6 +1,8 @@
 package com.just.rebate.entity.order;
 
 import com.chad.library.adapter.base.entity.IExpandable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.chad.library.adapter.base.entity.SectionMultiEntity;
 import com.just.rebate.base.BaseEntity;
 
 import java.util.List;
@@ -11,8 +13,7 @@ import java.util.List;
  * 淘宝
  * 拼多多
  */
-public class ReturnPlatform extends BaseEntity implements IExpandable {
-
+public class ReturnPlatform extends BaseEntity implements IExpandable, MultiItemEntity {
 
 
 
@@ -38,13 +39,14 @@ public class ReturnPlatform extends BaseEntity implements IExpandable {
     @Override
     public boolean isExpanded() {
         //永远展开 不折叠
-        return true;
+        return false;
     }
 
     @Override
     public void setExpanded(boolean expanded) {
 
     }
+
 
     @Override
     public List getSubItems() {
@@ -87,5 +89,10 @@ public class ReturnPlatform extends BaseEntity implements IExpandable {
 
     public void setReturnShops(List<ReturnShop> returnShops) {
         this.returnShops = returnShops;
+    }
+
+    @Override
+    public int getItemType() {
+        return 0;
     }
 }

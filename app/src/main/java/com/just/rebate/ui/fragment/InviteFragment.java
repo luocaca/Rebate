@@ -1,14 +1,40 @@
 package com.just.rebate.ui.fragment;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.bumptech.glide.util.LogTime;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
+import com.just.rebate.base.BaseResponse;
+import com.just.rebate.entity.invite.InviteInfo;
+import com.just.rebate.entity.order.ReturnPlatform;
 import com.rebate.base.fragment.BaseLazyFragment;
+import com.rebate.commom.util.GsonUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import butterknife.BindView;
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 邀请 fragment
  */
-public class InviteFragment extends BaseLazyFragment {
+public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener {
+
+
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipe;
 
 
     @Override
@@ -18,7 +44,7 @@ public class InviteFragment extends BaseLazyFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
-
+        swipe.setOnRefreshListener(this::onRefresh);
     }
 
     @Override
@@ -31,7 +57,81 @@ public class InviteFragment extends BaseLazyFragment {
     protected void onFirstUserVisible() {
 
 
+        requestData();
 
+
+    }
+
+
+    private String TAG = this.getClass().getSimpleName();
+
+    /**
+     * 请求网络
+     */
+    private void requestData() {
+
+
+        OkHttpUtils
+                .get()
+                .url("http://192.168.1.171:8080/download/rebate/api/invite.txt")//邀请 信息
+                .build()
+                .execute(new Callback<BaseResponse<InviteInfo>>() {
+
+                    @Override
+                    public BaseResponse<InviteInfo> parseNetworkResponse(Response response, int id) throws Exception {
+                        String json = response.body().string();
+
+                        Log.i(TAG, "json: \n" + json);
+
+
+                        Type t = new TypeToken<BaseResponse<InviteInfo>>() {
+                        }.getType();
+
+
+                        BaseResponse<InviteInfo> baseResponse = GsonUtil.getGson().fromJson(json, t);
+                        return baseResponse;
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.i(TAG, "onError: ");
+                    }
+
+                    @Override
+                    public void onResponse(BaseResponse<InviteInfo> response, int id) {
+                        Log.i(TAG, "onResponse: ");
+                    }
+
+                    @Override
+                    public void onAfter(int id) {
+                        super.onAfter(id);
+                        swipe.setRefreshing(false);
+                    }
+                });
+
+
+        /***
+         *  .execute(new StringCallback() {
+         *                     @Override
+         *                     public void onError(Call call, Exception e, int id) {
+         *                         Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+         *                     }
+         *
+         *                     @Override
+         *                     public void onResponse(String response, int id) {
+         *
+         *                         Type t = new TypeToken<List<ReturnPlatform>>() {
+         *                         }.getType();
+         *
+         *                         List<ReturnPlatform> list = GsonUtil.getGson().fromJson(response, t);
+         *
+         *
+         *                         Log.i("result", "onResponse: " + list);
+         *
+         *
+         *                     }
+         *                 });
+         */
 
 
     }
@@ -49,5 +149,10 @@ public class InviteFragment extends BaseLazyFragment {
     @Override
     protected void destroyViewAndThing() {
 
+    }
+
+    @Override
+    public void onRefresh() {
+        requestData();
     }
 }
