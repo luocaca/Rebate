@@ -167,7 +167,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             if (islast) {
                 helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
             } else {
-                helper.itemView.setBackgroundColor(Color.WHITE);
+                helper.itemView.setBackgroundResource(R.drawable.bg_white_bottom_line);
             }
 
 
