@@ -23,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="165dp"
+                android:layout_height="150dp"
                 android:background="@drawable/shape_color"
                 android:orientation="vertical">
 
@@ -56,7 +56,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -106,7 +105,7 @@
                         android:id="@+id/Profit"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:gravity="center_vertical"
+                        android:gravity="bottom"
                         android:paddingLeft="@dimen/padding_left"
                         android:text="预计总收益（元）"
                         android:textSize="@dimen/text_size_title" />
@@ -124,7 +123,7 @@
                             android:gravity="center_vertical"
                             android:text="0.00"
                             android:textColor="@color/text_color_Pink"
-                            android:textSize="@dimen/text_size_title" />
+                            android:textSize="@dimen/text_size_title_xl" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -139,7 +138,7 @@
                             android:layout_width="10dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="right"
-                            android:layout_marginLeft="230dp"
+                            android:layout_marginLeft="175dp"
                             android:src="@mipmap/rightarrow" />
 
 
@@ -224,6 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
+                android:background="@color/default_bg"
                 android:orientation="horizontal">
 
 
@@ -233,13 +233,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/default_margin_top"
                     android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
-
                     android:paddingTop="20dp"
-
                     android:paddingBottom="20dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -252,7 +248,7 @@
                             android:layout_marginLeft="28dp"
                             android:background="@drawable/shape_oval"
                             android:padding="8dp"
-                            android:src="@mipmap/download" />
+                            android:src="@mipmap/fenxiang" />
 
                         <com.fang.dashview.DashView
                             android:layout_width="25dp"
@@ -270,11 +266,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
-                        android:text="好友下载我要返利app"
-                        android:textColor="#333333"
+                        android:paddingLeft="15dp"
+                        android:text="分享给好友邀请码"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -283,13 +279,9 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/default_margin_top"
                     android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
-
                     android:paddingTop="20dp"
-
                     android:paddingBottom="20dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -327,11 +319,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
+                        android:paddingLeft="14dp"
                         android:text="好友下载我要返利app"
-                        android:textColor="#333333"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -340,11 +332,8 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/default_margin_top"
                     android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
-
                     android:paddingTop="20dp"
-
                     android:paddingBottom="20dp">
 
                     <LinearLayout
@@ -367,7 +356,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
                             android:padding="8dp"
-                            android:src="@mipmap/download" />
+                            android:src="@mipmap/shoppingcart" />
 
                         <com.fang.dashview.DashView
                             android:layout_width="25dp"
@@ -384,11 +373,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
-                        android:text="好友下载我要返利app"
-                        android:textColor="#333333"
+                        android:paddingLeft="15dp"
+                        android:text="好友下单完成"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
@@ -397,11 +386,8 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/default_margin_top"
                     android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
-
                     android:paddingTop="20dp"
-
                     android:paddingBottom="20dp">
 
                     <LinearLayout
@@ -424,7 +410,7 @@
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
                             android:padding="8dp"
-                            android:src="@mipmap/download" />
+                            android:src="@mipmap/yen" />
 
                     </LinearLayout>
 
@@ -433,11 +419,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
-                        android:text="好友下载我要返利app"
-                        android:textColor="#333333"
+                        android:paddingLeft="13dp"
+                        android:text="好友成为合伙人赚10元"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -447,6 +433,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
+                android:background="@color/default_bg"
                 android:orientation="horizontal">
 
 
@@ -454,13 +441,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
-
                     android:paddingTop="20dp"
-
                     android:paddingBottom="20dp">
 
                     <LinearLayout
@@ -475,7 +458,7 @@
                             android:layout_marginLeft="28dp"
                             android:background="@drawable/shape_oval"
                             android:padding="8dp"
-                            android:src="@mipmap/fenxiang" />
+                            android:src="@mipmap/yen" />
 
                         <com.fang.dashview.DashView
                             android:layout_width="25dp"
@@ -493,24 +476,73 @@
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
                         android:minLines="2"
-                        android:paddingLeft="8dp"
-                        android:text="分享给好友邀请码"
-                        android:textColor="#333333"
+                        android:paddingLeft="20dp"
+                        android:text="你赚2元"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
-
                     android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_oval"
+                            android:padding="8dp"
+                            android:src="@mipmap/shoppingcart" />
+
+                        <com.fang.dashview.DashView
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            app:dashWidth="1dp"
+                            app:lineColor="#F79DAC"
+                            app:lineWidth="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|bottom"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="13dp"
+                        android:text="死党为粉丝好友赚10元"
+                        android:textColor="@color/text666"
+                        android:textSize="9sp"
+                         />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
                     android:paddingBottom="20dp">
 
                     <LinearLayout
@@ -550,80 +582,20 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
-                        android:text="好友下载我要返利app"
-                        android:textColor="#333333"
+                        android:paddingLeft="15dp"
+                        android:text="死党下载APP并下单"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                         />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:layout_weight="1"
-                    android:background="@color/beijing"
-                    android:orientation="vertical"
-
-                    android:paddingTop="20dp"
-
-                    android:paddingBottom="20dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:orientation="horizontal">
-
-                        <com.fang.dashview.DashView
-                            android:layout_width="25dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="3dp"
-                            app:dashWidth="1dp"
-                            app:lineColor="#F79DAC"
-                            app:lineWidth="1dp" />
-
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/shape_oval"
-                            android:padding="8dp"
-                            android:src="@mipmap/download" />
-
-                        <com.fang.dashview.DashView
-                            android:layout_width="25dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="3dp"
-                            app:dashWidth="1dp"
-                            app:lineColor="#F79DAC"
-                            app:lineWidth="1dp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|bottom"
-                        android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
-                        android:text="好友下载我要返利app"
-                        android:textColor="#333333"
-                        android:textSize="9sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-
-                    android:layout_weight="1"
-                    android:background="@color/beijing"
                     android:orientation="vertical"
                     android:paddingBottom="20dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
@@ -663,7 +635,7 @@
                             android:layout_marginRight="24dp"
                             android:background="@drawable/shape_oval"
                             android:padding="8dp"
-                            android:src="@mipmap/download" />
+                            android:src="@mipmap/fenxiang" />
 
                     </LinearLayout>
 
@@ -672,11 +644,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
-                        android:paddingLeft="8dp"
-                        android:text="好友下载我要返利app"
-                        android:textColor="#333333"
+                        android:paddingLeft="15dp"
+                        android:text="好友分享给死党"
+                        android:textColor="@color/text666"
                         android:textSize="9sp"
-                        android:textStyle="bold" />
+                        />
                 </LinearLayout>
             </LinearLayout>
 

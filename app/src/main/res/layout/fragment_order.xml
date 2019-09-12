@@ -10,14 +10,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="120dp"
         android:background="@drawable/shape_color"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
+            android:layout_height="25dp"
+            android:layout_marginTop="32dp"
             android:orientation="horizontal">
 
             <TextView
@@ -37,14 +37,14 @@
                 android:background="@drawable/shape_corner_x"
                 android:drawableLeft="@mipmap/search2"
                 android:hint="输入订单号"
-                android:padding="8dp"
+                android:padding="5dp"
                 android:textColorHint="@color/color_Grid"
                 android:textSize="@dimen/text_size_content_s" />
 
             <ImageView
                 android:id="@+id/img_back"
                 android:layout_width="22dp"
-                android:layout_height="20dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="@dimen/default_margin"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-45dp"
         android:layout_marginRight="@dimen/default_margin"
         android:layout_marginBottom="@dimen/default_margin_top"
         android:background="@drawable/shape_corner"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
+                android:paddingTop="7dp"
                 android:paddingBottom="3.5dp"
                 android:src="@mipmap/zuijxiadan" />
 
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
+                android:paddingTop="7dp"
                 android:paddingBottom="3.5dp"
                 android:src="@mipmap/genzong" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
+                android:paddingTop="7dp"
                 android:paddingBottom="3.5dp"
                 android:src="@mipmap/zuijin" />
 
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
+                android:paddingTop="7dp"
                 android:paddingBottom="3.5dp"
                 android:src="@mipmap/wuxiao" />
 
@@ -117,9 +117,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="最近下单"
-                android:textColor="@color/text333"
+                android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />
 
             <TextView
@@ -128,9 +128,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="跟踪处理"
-                android:textColor="@color/text333"
+                android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />
 
             <TextView
@@ -139,9 +139,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="最近到账"
-                android:textColor="@color/text333"
+                android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />
 
             <TextView
@@ -150,9 +150,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="无效订单"
-                android:textColor="@color/text333"
+                android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />
 
         </LinearLayout>
@@ -188,7 +188,7 @@
         android:background="@android:color/white"
         android:orientation="horizontal">
 
-        <RadioButton
+        <com.just.rebate.wedget.MyCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -200,9 +200,8 @@
 
         <TextView
             android:id="@+id/Order_to_Payment"
-            android:layout_width="0dp"
+            android:layout_width="110dp"
             android:layout_height="32dp"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/default_margin"
             android:background="@drawable/shape_corner_xl"

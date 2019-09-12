@@ -33,8 +33,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="@dimen/padding_right"
+                    android:textColor="@color/text999"
                     android:text="破洞牛仔裤宽松九分裤2019夏季新款韩版薄款哈伦裤"
-                    android:textSize="@dimen/text_size_content"/>
+                    android:textSize="@dimen/text_size_content_s"/>
                 <TextView
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
@@ -57,7 +58,7 @@
                         android:textSize="@dimen/text_size_title"/>
                     <TextView
                         android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="23dp"
                         android:layout_width="wrap_content"
                         android:textSize="@dimen/text_size_title"
                         android:text="-"
@@ -66,10 +67,10 @@
                         android:paddingBottom="2dp"
                         android:paddingRight="15dp"
                         android:background="@drawable/textview_border_top_bottom_left_"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="20dp" />
                     <TextView
 
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="23dp"
                         android:layout_width="wrap_content"
                         android:textSize="@dimen/text_size_title"
                         android:text="1"
@@ -78,10 +79,10 @@
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:paddingRight="15dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="20dp" />
 
                     <TextView
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="23dp"
                         android:layout_width="wrap_content"
                         android:textSize="@dimen/text_size_title"
                         android:text="+"
@@ -90,7 +91,7 @@
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:paddingRight="15dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="20dp" />
 
                 </LinearLayout>
             </LinearLayout>
