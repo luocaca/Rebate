@@ -22,8 +22,8 @@
             android:gravity="center|left"
             android:paddingLeft="@dimen/padding_left"
             android:text="米拉服饰"
-            android:textSize="@dimen/text_size_title"
-            android:textColor="@color/text333"/>
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"/>
     </LinearLayout>
 
 

@@ -20,6 +20,7 @@
                 android:id="@+id/order_iv"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_width="64dp"
+                android:scaleType="centerCrop"
                 android:background="@color/beijing"
                 android:layout_height="64dp" />
             <LinearLayout
@@ -31,17 +32,19 @@
                 <TextView
                     android:id="@+id/order_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
                     android:paddingRight="@dimen/padding_right"
-                    android:textColor="@color/text999"
+                    android:textColor="@color/text666"
                     android:text="破洞牛仔裤宽松九分裤2019夏季新款韩版薄款哈伦裤"
-                    android:textSize="@dimen/text_size_content_s"/>
+                    android:textSize="@dimen/text_size_content"/>
                 <TextView
-                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_corner_ss_grad"
                     android:text="灰色破洞；29【80-100斤】"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="@dimen/text_size_content"
                     android:drawableRight="@mipmap/bottomarrow"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,22 +66,20 @@
                         android:textSize="@dimen/text_size_title"
                         android:text="-"
                         android:paddingLeft="15dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
+                        android:gravity="center_vertical"
                         android:paddingRight="15dp"
                         android:background="@drawable/textview_border_top_bottom_left_"
                         android:layout_height="20dp" />
-                    <TextView
 
+                    <TextView
                         android:layout_marginTop="23dp"
                         android:layout_width="wrap_content"
                         android:textSize="@dimen/text_size_title"
                         android:text="1"
-                        android:background="@drawable/textview_border"
                         android:paddingLeft="15dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
+                        android:gravity="center_vertical"
                         android:paddingRight="15dp"
+                        android:background="@drawable/textview_border"
                         android:layout_height="20dp" />
 
                     <TextView
@@ -86,14 +87,18 @@
                         android:layout_width="wrap_content"
                         android:textSize="@dimen/text_size_title"
                         android:text="+"
-                        android:background="@drawable/textview_border_top_bottom_right_"
                         android:paddingLeft="15dp"
-                        android:paddingTop="2dp"
-                        android:paddingBottom="2dp"
+                        android:gravity="center_vertical"
                         android:paddingRight="15dp"
+                        android:background="@drawable/textview_border_top_bottom_right_"
                         android:layout_height="20dp" />
 
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="-15dp"
+        android:background="@drawable/underline"/>
 </LinearLayout>

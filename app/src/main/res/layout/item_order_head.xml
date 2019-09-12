@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="@drawable/shape_corner_left_top_right_top">
@@ -19,8 +19,8 @@
             android:paddingLeft="@dimen/padding_left"
             android:textColor="@color/text333"
             android:gravity="center"
-            android:paddingTop="@dimen/padding_left"
-            android:paddingBottom="@dimen/padding_left"
+            android:paddingTop="8dp"
+            android:paddingBottom="10dp"
             />
         <TextView
             android:id="@+id/order_time"
@@ -39,7 +39,7 @@
             android:gravity="right|center"
             android:layout_weight="1"
             android:text="预估返利2.62元"
-            android:textColor="@color/text_color_Pink"
+            android:textColor="@color/color_yanzhengma"
             android:paddingRight="@dimen/padding_right"
             android:textSize="@dimen/text_size_title"
             android:layout_height="match_parent" />

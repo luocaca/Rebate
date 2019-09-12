@@ -105,6 +105,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 doConvert(mActivity, helper, item);
             }
         };
+
         recycleView.setAdapter(orderAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -120,6 +121,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             }
         });
     }
+
 
 
     /**
@@ -185,6 +187,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
 
     }
+
 
 
 }
