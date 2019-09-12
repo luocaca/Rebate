@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingBottom="20dp"
-    android:paddingTop="20dp"
+    android:background="@color/default_bg"
     android:orientation="vertical"
-    android:background="@android:color/white">
+  >
 
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_gravity="center"
-        android:src="@mipmap/taobao" />
-
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:textColor="@color/text666"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        android:text="淘宝"
-        android:textSize="13sp"
-        />
-</LinearLayout>
+        android:layout_gravity="center"
+        android:background="@drawable/shape_corner_left_bottom"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="20dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/taobao" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginTop="8dp"
+            android:text="淘宝"
+            android:textColor="@color/text666"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -5,13 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@android:color/transparent"
-
     android:orientation="vertical">
 
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="8dp"
         android:background="@color/default_bg" />
 
 
@@ -29,10 +28,14 @@
             android:padding="10dp"
             android:text="生活返利"
             android:textColor="#333333"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textSize="13sp" />
 
     </FrameLayout>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine" />
 
 </LinearLayout>

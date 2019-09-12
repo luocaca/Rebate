@@ -1,6 +1,5 @@
 package me.luocaca.rebate;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
@@ -13,7 +12,6 @@ import com.just.rebate.entity.order.ReturnShop;
 import com.rebate.commom.util.GsonUtil;
 
 import java.lang.reflect.Type;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,7 +21,7 @@ import java.util.Map;
 /**
  *
  */
-public class TestGson {
+public class TestGson1 {
 
 
     private static final String TAG = "TestGson";

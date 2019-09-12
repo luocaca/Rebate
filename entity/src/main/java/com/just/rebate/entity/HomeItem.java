@@ -13,6 +13,9 @@ public class HomeItem extends SectionEntity {
     private String tag;
 
 
+    public int bgId;
+
+
     public HomeItem(String itemName, String logoUrl, String tag, boolean isHead) {
         super(isHead, itemName);
         this.itemName = itemName;
