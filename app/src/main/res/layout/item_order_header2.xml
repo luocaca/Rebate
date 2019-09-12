@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/topline"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/default_bg" />
+
     <LinearLayout
-        android:background="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="12dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
             android:paddingTop="20dp"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/yuanquan"
-            android:paddingBottom="20dp"/>
+            android:paddingBottom="20dp"
+            android:src="@mipmap/yuanquan" />
+
         <TextView
             android:id="@+id/order_tv"
             android:layout_width="match_parent"
@@ -22,8 +31,8 @@
             android:gravity="center|left"
             android:paddingLeft="@dimen/padding_left"
             android:text="米拉服饰"
-            android:textSize="@dimen/text_size_content"
-            android:textColor="@color/text666"/>
+            android:textColor="@color/text666"
+            android:textSize="@dimen/text_size_content" />
     </LinearLayout>
 
 

@@ -22,11 +22,13 @@
         android:layout_height="50dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@android:color/white"
+        android:background="@drawable/shape_color"
+        app:itemIconTint="@color/nav_selector"
+        app:itemTextColor="@color/nav_selector"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

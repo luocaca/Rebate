@@ -6,11 +6,14 @@ import android.util.Log;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.base.BaseResponse;
+import com.just.rebate.entity.HomeItem;
 import com.just.rebate.entity.invite.InviteInfo;
 import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
 import com.rebate.commom.util.GsonUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.security.PublicKey;
@@ -19,6 +22,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  *
@@ -40,9 +45,34 @@ public class TestGson {
         //9
 
 
-        插砖算法(getData(), 0);
+        OkHttpUtils
+                .get()
+                .url("http://192.168.1.171:8080/download/homejson.txt")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        ///Log.e("TAG", "日志");
 
 
+                        //Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
+
+
+                        Type t = new TypeToken<List<HomeItem>>() {
+                        }.getType();
+
+                        List<HomeItem> list = GsonUtil.getGson().fromJson(response, t);
+
+
+
+                    }
+                });
 
 //        getInviteInfo();
 
@@ -52,7 +82,12 @@ public class TestGson {
     }
 
 
-    private static void 插砖算法(List<String> sourceList, int groupId) {
+    private static List<String> 插砖算法(List<String> sourceList) {
+        return 插砖算法(sourceList, 0);
+    }
+
+
+    private static List<String> 插砖算法(List<String> sourceList, int groupId) {
 
 
         List<Group> groups = 获取最新的组(sourceList);
@@ -74,15 +109,13 @@ public class TestGson {
         }
 
 
-        if (groupId < groups.size()-1) {
-            插砖算法(newlist, ++groupId);
+        if (groupId < groups.size() - 1) {
+
+            return 插砖算法(newlist,++groupId);
+        } else {
+            System.out.println(Arrays.asList(newlist));
+            return newlist;
         }
-
-
-//        }
-
-
-        System.out.println(Arrays.asList(newlist));
 
 
     }

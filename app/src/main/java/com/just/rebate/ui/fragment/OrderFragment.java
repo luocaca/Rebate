@@ -3,6 +3,7 @@ package com.just.rebate.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -102,7 +103,8 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             @Override
             protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
                 Log.i(TAG, "convert: " + item);
-                doConvert(mActivity, helper, item);
+                doConvert(mActivity, helper, item, getData());
+
             }
         };
 
@@ -116,36 +118,83 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                     public void run() {
                         requestData();
                     }
-                },3000);
+                }, 3000);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
 
-
     /**
      * @param mActivity
      * @param helper
      * @param item
+     * @param data
      */
-    public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item) {
+    public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
 
-        if (item instanceof  ReturnPlatform) {
+        if (item instanceof ReturnPlatform) {
             //do conevrt 0
-            helper.setText(R.id.order_header,((ReturnPlatform) item).getPlatformName());
-            helper.setText(R.id.order_time,((ReturnPlatform) item).getOrderTime());
-            helper.setText(R.id.rich,((ReturnPlatform) item).getEstimatedRebate());
-        }else if (item instanceof ReturnShop){
+            helper.setText(R.id.order_header, ((ReturnPlatform) item).getPlatformName());
+            helper.setText(R.id.order_time, ((ReturnPlatform) item).getOrderTime());
+            helper.setText(R.id.rich, ((ReturnPlatform) item).getEstimatedRebate());
+        } else if (item instanceof ReturnShop) {
             //do conevert 1
-            helper.setText(R.id.order_tv,((ReturnShop) item).getShopName());
-        }else if(item instanceof ReturnOrder){
+            helper.setText(R.id.order_tv, ((ReturnShop) item).getShopName());
+
+            boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
+            helper.setVisible(R.id.topline, !isFirstShop);
+
+            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
+
+//            if (isFirstShop) {
+//                helper.getView(R.id.topline).setBackgroundColor(Color.RED);
+//
+//            } else {
+//                helper.getView(R.id.topline).setBackgroundColor(Color.YELLOW);
+//
+//            }
+
+        } else if (item instanceof ReturnOrder) {
             //do conevert 2
             Glide.with(mActivity).load(((ReturnOrder) item).getCoverUrl()).into((ImageView) helper.getView(R.id.order_iv));
-            helper.setText(R.id.order_name,((ReturnOrder) item).getOrderName());
-            helper.setText(R.id.order_price,((ReturnOrder) item).getCommodityPrice());
+            helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
+            helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
+
+
+            boolean islast = isLastOrder(mActivity, helper, item, helper, data);
+
+            if (islast) {
+                helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
+            } else {
+                helper.itemView.setBackgroundColor(Color.WHITE);
+            }
+
+
         }
 
+    }
+
+    private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
+        try {
+            Object obj = data.get(helper.getAdapterPosition() + 1);
+            if (obj instanceof ReturnPlatform || obj instanceof ReturnShop) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
+        Object obj = data.get(helper.getAdapterPosition() - 1);
+        if (obj instanceof ReturnPlatform) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -187,7 +236,6 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
 
     }
-
 
 
 }

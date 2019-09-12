@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/ly_main_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/default_toolbar_height"
         android:background="@drawable/shape_color"
         android:contentInsetStart="0dp"
         android:orientation="horizontal">
@@ -26,19 +26,20 @@
             android:paddingTop="40dp"
             android:text="我要返利"
             android:textColor="@color/white_text_color_fe"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="-5dp"
+            android:layout_marginTop="-2dp"
             android:layout_weight="1"
             android:background="@drawable/shape_corner_xx"
             android:drawableLeft="@mipmap/search1"
             android:drawablePadding="5dp"
             android:hint="输入网址/搜索商城名称"
             android:paddingLeft="15dp"
+            android:singleLine="true"
             android:textColorHint="#cccccc"
             android:textSize="12sp" />
 
@@ -83,6 +84,7 @@
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="2dp"
         android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent">
 
         <androidx.recyclerview.widget.RecyclerView

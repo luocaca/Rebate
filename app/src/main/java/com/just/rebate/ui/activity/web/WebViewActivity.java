@@ -8,6 +8,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -54,6 +55,13 @@ public class WebViewActivity extends BaseActivity {
 
         web.getSettings().setJavaScriptEnabled(true);
 
+
+        web.getSettings().setAppCacheEnabled(true);
+        web.getSettings().setDatabaseEnabled(true);
+        web.getSettings().setDomStorageEnabled(true);//开启DOM缓存，关闭的话H5自身的一些操作是无效的
+        web.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+
+
         web.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -69,11 +77,19 @@ public class WebViewActivity extends BaseActivity {
 //                    }
 
                     Log.i("scheme", "shouldOverrideUrlLoading: " + request.getUrl().getScheme());
+                    Log.i("scheme", "shouldOverrideUrlLoading: " + request.getUrl());
 
                     if (request.getUrl().getHost().equals("http") || request.getUrl().getScheme().equals("https")) {
 
 
-                        view.loadUrl(request.getUrl().toString());
+                        if (request.getUrl().toString().startsWith("https://s.click.taobao.com/t?e")) {
+                            return false;
+                        } else {
+                            view.loadUrl(request.getUrl().toString());
+
+                            return true;
+                        }
+
 
                     } else {
 

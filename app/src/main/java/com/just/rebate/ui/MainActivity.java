@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        navView.setItemIconTintList(null);
+//        navView.setItemIconTintList(null);
         navView.setSelectedItemId(R.id.navigation_home);
 
 
