@@ -32,7 +32,7 @@
     <color name="color_white">#ffffff</color>
     <color name="color_yanzhengma">#FF7791</color>
 
-    <color name="default_bg">#EFEFF4</color>
+    <color name="default_bg">#f1f1f1</color>
 
 
 </resources>

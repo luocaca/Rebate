@@ -10,18 +10,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.OrderAdapter;
-import com.just.rebate.entity.OrderItem;
+import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
+import com.just.rebate.entity.order.ReturnShop;
 import com.just.rebate.ui.activity.ArrivalAccountActivity;
 import com.just.rebate.ui.activity.InvalidActivity;
 import com.just.rebate.ui.activity.PaymentActivity;
@@ -56,6 +58,9 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
     @BindView(R.id.invalid)
     ImageView mInvalid;
+
+    @BindView(R.id.order_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.Order_to_Payment)
     TextView mTextOrder_to_Payment;
@@ -101,7 +106,21 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             }
         };
         recycleView.setAdapter(orderAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        requestData();
+                    }
+                },3000);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
+
 
     /**
      * @param mActivity
@@ -110,8 +129,20 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
      */
     public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item) {
 
-
-
+        if (item instanceof  ReturnPlatform) {
+            //do conevrt 0
+            helper.setText(R.id.order_header,((ReturnPlatform) item).getPlatformName());
+            helper.setText(R.id.order_time,((ReturnPlatform) item).getOrderTime());
+            helper.setText(R.id.rich,((ReturnPlatform) item).getEstimatedRebate());
+        }else if (item instanceof ReturnShop){
+            //do conevert 1
+            helper.setText(R.id.order_tv,((ReturnShop) item).getShopName());
+        }else if(item instanceof ReturnOrder){
+            //do conevert 2
+            Glide.with(mActivity).load(((ReturnOrder) item).getCoverUrl()).into((ImageView) helper.getView(R.id.order_iv));
+            helper.setText(R.id.order_name,((ReturnOrder) item).getOrderName());
+            helper.setText(R.id.order_price,((ReturnOrder) item).getCommodityPrice());
+        }
 
     }
 
@@ -142,6 +173,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) recycleView.getAdapter();
 
+                        adapter.getData().clear();
                         adapter.addData(list);
                         adapter.expandAll();
                         adapter.notifyDataSetChanged();

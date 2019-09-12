@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beijing"
+    android:background="@color/default_bg"
 
     android:orientation="vertical"
     tools:context="com.just.rebate.ui.fragment.PersonalFragment">
@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="-15dp"
         android:layout_marginRight="@dimen/default_margin"
         android:background="@drawable/shape_corner"
         android:orientation="horizontal">
@@ -114,7 +114,7 @@
                 android:id="@+id/totalRebate"
                 android:layout_width="match_parent"
                 android:layout_height="29dp"
-                android:gravity="center"
+                android:gravity="center|bottom"
                 android:text="0.00"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_title" />
@@ -123,7 +123,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:text="累计返利（元）"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />
@@ -148,7 +148,7 @@
                 android:id="@+id/preRebate"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
-                android:gravity="center"
+                android:gravity="center|bottom"
                 android:text="0.00"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_title" />
@@ -156,7 +156,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:text="待返利（元）"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />

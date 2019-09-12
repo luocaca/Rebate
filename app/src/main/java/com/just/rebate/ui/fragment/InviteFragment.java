@@ -2,29 +2,23 @@ package com.just.rebate.ui.fragment;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.bumptech.glide.util.LogTime;
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.base.BaseResponse;
 import com.just.rebate.entity.invite.InviteInfo;
-import com.just.rebate.entity.order.ReturnPlatform;
 import com.rebate.base.fragment.BaseLazyFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 import butterknife.BindView;
 import okhttp3.Call;
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -35,6 +29,24 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
 
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
+
+    @BindView(R.id.Profit)
+    TextView profit;
+
+    @BindView(R.id.money)
+    TextView money;
+
+    @BindView(R.id.Partner)
+    TextView partner;
+
+    @BindView(R.id.Fans)
+    TextView fans;
+
+    @BindView(R.id.Code)
+    TextView code;
+
+    @BindView(R.id.Invitation)
+    TextView invitation;
 
 
     @Override
@@ -89,6 +101,7 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
 
 
                         BaseResponse<InviteInfo> baseResponse = GsonUtil.getGson().fromJson(json, t);
+
                         return baseResponse;
                     }
 
@@ -100,6 +113,17 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                     @Override
                     public void onResponse(BaseResponse<InviteInfo> response, int id) {
                         Log.i(TAG, "onResponse: ");
+                        profit.setText(response.getData().totalProfit);
+                        money.setText(response.getData().timelyProfit);
+                        partner.setText(response.getData().numberOfPartners);
+                        fans.setText(response.getData().numberOfFans);
+                        code.setText(response.getData().inviteCode);
+                        invitation.setText(response.getData().shareEarn);
+
+
+
+
+
                     }
 
                     @Override
