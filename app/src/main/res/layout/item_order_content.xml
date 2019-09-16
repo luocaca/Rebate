@@ -15,13 +15,13 @@
         >
 
         <ImageView
-            android:layout_width="32dp"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/default_margin"
             android:adjustViewBounds="true"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:src="@mipmap/yuanquan" />
+            android:src="@mipmap/butto" />
 
         <ImageView
             android:id="@+id/order_iv"
