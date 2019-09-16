@@ -6,210 +6,238 @@
     android:layout_height="match_parent"
     android:background="@color/beijing"
     android:orientation="vertical"
-    tools:context="com.just.rebate.ui.fragment.RechargeFragment">
+    tools:context="com.just.rebate.ui.activity.RechargeActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/beijing"
-        android:orientation="vertical"
-        >
-
-
-    <include layout="@layout/recharge_toolbar_layout" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin_top"
-        android:layout_marginRight="@dimen/default_margin"
-        android:background="@drawable/shape_corner"
-        android:orientation="horizontal">
-
-        <TextView
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingTop="@dimen/padding_content"
-            android:text="积分充值"
-            android:textColor="@color/text333"
-            android:textSize="14sp" />
+            android:layout_height="75dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="15dp"
+                android:src="@mipmap/leftarrow" />
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:gravity="center"
+                android:text="设置"
+                android:textColor="@color/text333"
+                android:textSize="@dimen/text_size_title_xl" />
+        </LinearLayout>
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:layout_marginRight="@dimen/default_margin"
+            android:background="@drawable/shape_corner"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_content"
+                android:text="积分充值"
+                android:textColor="@color/text333"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|bottom"
+                    android:paddingRight="@dimen/padding_right"
+                    android:paddingBottom="5dp"
+                    android:text="用户账号"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingTop="5dp"
+                    android:paddingRight="@dimen/padding_right"
+                    android:text="1357144"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/text_size_content_ss" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:layout_marginRight="@dimen/default_margin"
+            android:background="@drawable/shape_corner"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right|bottom"
-                android:paddingRight="@dimen/padding_right"
-                android:paddingBottom="5dp"
-                android:text="用户账号"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"
+                android:text="充值金额"
                 android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingTop="5dp"
-                android:paddingRight="@dimen/padding_right"
-                android:text="1357144"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content_ss" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin_top"
-        android:layout_marginRight="@dimen/default_margin"
-        android:orientation="vertical"
-        android:background="@drawable/shape_corner">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="充值金额"
-            android:textSize="@dimen/text_size_content_s"
-            android:textColor="@color/text333"
-            android:paddingTop="@dimen/padding_top"
-            android:paddingLeft="@dimen/padding_left"/>
+                android:textSize="@dimen/text_size_content_s" />
 
 
-        <com.zhy.view.flowlayout.TagFlowLayout
-            android:layout_marginTop="@dimen/default_margin_top"
-            android:id="@+id/id_flowlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="7dp"
-            android:paddingBottom="20dp"
-            app:max_select="1"
-            app:tag_gravity="center">
-        </com.zhy.view.flowlayout.TagFlowLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_top"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/padding_left">
-            <LinearLayout
-                android:id="@+id/linear"
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/id_flowlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="银行卡支付:99.7元（可省0.3元）"
-                    android:textSize="@dimen/text_size_content_s"
-                    android:textColor="@color/text333"
-                    android:paddingLeft="@dimen/padding_left"
-                    android:layout_gravity="center"/>
+                android:layout_marginTop="@dimen/default_margin_top"
+                android:paddingTop="7dp"
+                android:paddingBottom="20dp"
+                app:max_select="1"
+                app:tag_gravity="center"></com.zhy.view.flowlayout.TagFlowLayout>
 
-                <ImageView
-                    android:id="@+id/jiantou"
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/bottomarrow" />
-
-            </LinearLayout>
             <LinearLayout
-                android:id="@+id/radio_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_top">
-                <RadioGroup
-                    android:id="@+id/radio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                android:layout_marginTop="@dimen/default_margin_top"
+                android:layout_marginBottom="@dimen/padding_left"
+                android:orientation="vertical">
 
-                    <RadioButton
-                        android:id="@+id/radio1"
+                <LinearLayout
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/padding_left"
                         android:text="银行卡支付:99.7元（可省0.3元）"
                         android:textColor="@color/text333"
                         android:textSize="@dimen/text_size_content_s" />
-                    <RadioButton
-                        android:id="@+id/radio2"
-                        android:layout_marginTop="@dimen/default_margin_top"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/text333"
-                        android:textSize="@dimen/text_size_content_s"
-                        android:text="支付宝支付:100元"
-                        android:layout_marginLeft="@dimen/default_margin"
-                        />
-                    <RadioButton
-                        android:id="@+id/radio3"
-                        android:layout_marginTop="@dimen/default_margin_top"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="微信支付:100元"
-                        android:textColor="@color/text333"
-                        android:textSize="@dimen/text_size_content_s"
-                        android:layout_marginLeft="@dimen/default_margin"
-                        />
 
-                </RadioGroup>
+                    <ImageView
+                        android:id="@+id/jiantou"
+                        android:layout_width="11dp"
+                        android:layout_height="11dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/bottomarrow" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_top">
+
+                    <RadioGroup
+                        android:id="@+id/radio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radio1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:text="银行卡支付:99.7元（可省0.3元）"
+                            android:textColor="@color/text333"
+                            android:textSize="@dimen/text_size_content_s" />
+
+                        <RadioButton
+                            android:id="@+id/radio2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:layout_marginTop="@dimen/default_margin_top"
+                            android:text="支付宝支付:100元"
+                            android:textColor="@color/text333"
+                            android:textSize="@dimen/text_size_content_s" />
+
+                        <RadioButton
+                            android:id="@+id/radio3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/default_margin"
+                            android:layout_marginTop="@dimen/default_margin_top"
+                            android:text="微信支付:100元"
+                            android:textColor="@color/text333"
+                            android:textSize="@dimen/text_size_content_s" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
 
             </LinearLayout>
 
+
         </LinearLayout>
 
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/shape_corner_xl"
+            android:text="确认支付"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_title_xl" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="充值说明:"
+            android:textColor="@color/text999"
+            android:textSize="@dimen/text_size_content" />
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="37dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/shape_corner_xl"
-        android:text="确认支付"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size_title_xl" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="1.充值的积分仅在我要返利APP内使用"
+            android:textColor="@color/text999"
+            android:textSize="@dimen/text_size_content_s" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:paddingLeft="@dimen/padding_left"
-        android:text="充值说明:"
-        android:textColor="@color/text999"
-        android:textSize="@dimen/text_size_content" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:paddingLeft="@dimen/padding_left"
-        android:text="1.充值的积分仅在我要返利APP内使用"
-        android:textColor="@color/text999"
-        android:textSize="@dimen/text_size_content_s" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="@dimen/padding_left"
-        android:text="2.充值积分后不退不换，请仔细确认后支付"
-        android:textColor="@color/text999"
-        android:textSize="@dimen/text_size_content_s" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="2.充值积分后不退不换，请仔细确认后支付"
+            android:textColor="@color/text999"
+            android:textSize="@dimen/text_size_content_s" />
     </LinearLayout>
 </ScrollView>

@@ -1,18 +1,17 @@
 package com.just.rebate.ui.activity;
 
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Rect;
-import android.os.Bundle;
-import android.view.View;
-
 import com.just.rebate.R;
-import com.just.rebate.adapter.recycle.ArrivalDetailsAdapter;
 import com.just.rebate.adapter.recycle.DetailsAdapter;
-import com.just.rebate.data.DataServer;
 import com.just.rebate.data.detailed_DataServer;
 
 import java.util.ArrayList;
@@ -25,6 +24,9 @@ public class DetailedActivity extends AppCompatActivity {
     @BindView(R.id.rv_list7)
     RecyclerView mrecyclerView;
 
+    @BindView(R.id.back_Detaile)
+    ImageView mIv_back;
+
     private List<detailed_DataServer> mDataServer=new ArrayList<>();
 
     @Override
@@ -33,8 +35,17 @@ public class DetailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailed);
         initRecyclerview();
         initData();
+        initonClick();
     }
 
+    private void initonClick() {
+        mIv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();onBackPressed();
+            }
+        });
+    }
 
 
     private void initRecyclerview() {

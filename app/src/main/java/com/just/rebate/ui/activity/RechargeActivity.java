@@ -1,5 +1,4 @@
-package com.just.rebate.ui.fragment;
-
+package com.just.rebate.ui.activity;
 
 import android.graphics.Color;
 import android.text.TextUtils;
@@ -11,10 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import com.just.rebate.R;
-import com.rebate.base.fragment.BaseLazyFragment;
+import com.rebate.base.activity.BaseActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -25,14 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-
-/**
- * 充值界面
- */
-public class RechargeFragment extends BaseLazyFragment {
-
-//    @BindView(R.id.recharge_toolbar)
-//    Toolbar toolbar;
+public class RechargeActivity extends BaseActivity {
 
     @BindView(R.id.id_flowlayout)
     TagFlowLayout tagFlowLayout;
@@ -50,25 +40,28 @@ public class RechargeFragment extends BaseLazyFragment {
     RadioGroup radioGroup;
 
 
-    /**/
     private View currentSelectView;
     private int currentSelectPosition = -1;
     private EditText et;
     private TagAdapter tagAdapter;
     private boolean isVisible = true;
 
-    /**/
-
 
     @Override
-    protected int bindFragmentLayoutId() {
-        return R.layout.fragment_recharge;
+    protected void requestData() {
+        
     }
 
     @Override
-    protected void initViewsAndEvents(View view) {
+    protected void initView() {
+        initViewsAndEvents();
+        initTagFlowLayout();
+    }
 
-        linearLayout.setVerticalGravity(view.GONE);
+
+    protected void initViewsAndEvents() {
+
+        //linearLayout.setVerticalGravity();
         linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,15 +79,12 @@ public class RechargeFragment extends BaseLazyFragment {
     }
 
     @Override
-    protected void initData() {
-
+    public int bindLayoutId() {
+        return R.layout.fragment_recharge;
     }
 
 
-    /**
-     * 初始化 选择框
-     */
-    private void initTagFlowLayout() {
+    private void initTagFlowLayout(){
         List list = new ArrayList();
         list.add("100");
         list.add("200");
@@ -112,7 +102,7 @@ public class RechargeFragment extends BaseLazyFragment {
 
 
                 if (TextUtils.equals(o.toString(), "0")) {
-                    et = (EditText) mView.inflate(getContext(), R.layout.et, null);
+                    et = (EditText) View.inflate(RechargeActivity.this, R.layout.et, null);
                     //getResources().getDisplayMetrics().widthPixels
                     int pad = (int) (parent.getWidth() * 0.06);
                     et.setWidth((parent.getWidth() / 4));
@@ -151,7 +141,7 @@ public class RechargeFragment extends BaseLazyFragment {
                     });
                     return et;
                 } else {
-                    TextView tv = (TextView) mView.inflate(getContext(), R.layout.tv, null);
+                    TextView tv = (TextView) View.inflate(RechargeActivity.this, R.layout.tv, null);
                     tv.setText(o.toString() + "积分");
 //                              tv.setTextColor(R.drawable.pay_text_selector);
                     //getResources().getDisplayMetrics().widthPixels
@@ -207,29 +197,7 @@ public class RechargeFragment extends BaseLazyFragment {
 
         };
 
-
         tagFlowLayout.setAdapter(tagAdapter);
-
-    }
-
-
-    @Override
-    protected void onFirstUserVisible() {
-        initTagFlowLayout();
-    }
-
-    @Override
-    protected void onUserVisible() {
-
-    }
-
-    @Override
-    protected void onUserInvisible() {
-
-    }
-
-    @Override
-    protected void destroyViewAndThing() {
 
     }
 }

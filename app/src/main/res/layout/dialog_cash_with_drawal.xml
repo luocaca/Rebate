@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/default_bg"
     android:orientation="vertical">
 
     <LinearLayout
@@ -10,13 +11,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="0dp"
+            android:background="@android:color/white"
+            android:layout_width="60dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:paddingLeft="@dimen/padding_left"
+            android:layout_gravity="center_vertical"
             android:src="@mipmap/retun1" />
 
         <TextView
+            android:paddingLeft="-30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -28,6 +32,7 @@
     </LinearLayout>
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/bg_white_linear_line"
@@ -38,18 +43,14 @@
 
 
 
-        <com.just.rebate.wedget.PwdEditText
+        <com.just.rebate.wedget.webview.PwdEditText
             android:id="@+id/pwdEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
             android:inputType="numberPassword" />
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:background="#E5E5E5" />
 
     </LinearLayout>
     <LinearLayout

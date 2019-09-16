@@ -32,7 +32,9 @@
         <activity android:name=".ui.activity.ArrivalAccountActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SignActivity" />
+        <activity android:name=".ui.activity.RechargeActivity"/>
         <activity android:name=".ui.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

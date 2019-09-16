@@ -5,17 +5,21 @@ package com.just.rebate.ui.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.just.rebate.data.DataServer;
+
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.ArrivalDetailsAdapter;
+import com.just.rebate.data.DataServer;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 
 
@@ -24,6 +28,9 @@ public class ArrivalDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_list3)
     RecyclerView mrecyclerView;
+
+    @BindView(R.id.back_ArrivalDetails)
+    ImageView mIv_back;
     private List<DataServer> mDataServer=new ArrayList<>();
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +39,17 @@ public class ArrivalDetailsActivity extends AppCompatActivity {
 
         initRecyclerview();
         initData();
+        initonClick();
 
+    }
+
+    private void initonClick() {
+        mIv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();onBackPressed();
+            }
+        });
     }
 
 

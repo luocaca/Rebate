@@ -7,7 +7,7 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="75dp"
         android:orientation="horizontal"
         android:background="@android:color/white">
         <ImageView
@@ -16,14 +16,15 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_gravity="center"
             android:src="@mipmap/leftarrow"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="用户登录"
-            android:textSize="@dimen/text_size_title_xl"
-            android:gravity="center"
             android:layout_marginLeft="-21dp"
-            android:textColor="@color/text333"/>
+            android:gravity="center"
+            android:text="用户登录"
+            android:textColor="@color/text333"
+            android:textSize="@dimen/text_size_title_xl" />
 
     </LinearLayout>
     <View
