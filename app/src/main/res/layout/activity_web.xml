@@ -23,7 +23,6 @@
                 android:layout_height="65dp"
                 android:background="@drawable/shape_color"
                 android:paddingTop="25dp"
-
                 app:leftImgId="@mipmap/arrow_white"
                 app:titleSize="15"
                 app:titleText="浏览器" />
@@ -36,24 +35,17 @@
         android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.core.widget.NestedScrollView
+        <com.just.rebate.wedget.webview.NestedScrollWebView
+            android:id="@+id/web"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="match_parent" />
 
-            <WebView
-                android:id="@+id/web"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-        </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
