@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class PaymentActivity extends AppCompatActivity {
     private List<OrderItem> mDatas;
     private RecyclerView recycleView;
     private TextView mAlertDiglog;
+    private ImageView mIv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,14 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDiglog();
+            }
+        });
+
+        mIv_back=findViewById(R.id.back_order);
+        mIv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();onBackPressed();
             }
         });
 

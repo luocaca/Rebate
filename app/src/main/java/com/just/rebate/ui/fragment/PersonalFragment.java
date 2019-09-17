@@ -23,10 +23,12 @@ import com.just.rebate.entity.personal.Personal;
 import com.just.rebate.ui.MainActivity;
 import com.just.rebate.ui.activity.BalaceActivity;
 import com.just.rebate.ui.activity.BankCardActivity;
+import com.just.rebate.ui.activity.ChatActivity;
+import com.just.rebate.ui.activity.IntegralActivity;
 import com.just.rebate.ui.activity.OrderDetailsActivity;
 import com.just.rebate.ui.activity.RechargeActivity;
+import com.just.rebate.ui.activity.RuleActivity;
 import com.just.rebate.ui.activity.SetUpActivity;
-import com.just.rebate.ui.activity.help.HelpCenterActivity;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -56,6 +58,9 @@ public class PersonalFragment extends BaseFragment {
 
     @BindView(R.id.integral)
     TextView mTv_integral;
+
+    @BindView(R.id.moeny_integral)
+    TextView mTv_moeny_integral;
 
     @BindView(R.id.invaitat)
     TextView mTv_invitat;
@@ -94,13 +99,20 @@ public class PersonalFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+        mTv_moeny_integral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getActivity(), IntegralActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         list = new ArrayList<>();
         Personal_local_Item p1 = new Personal_local_Item();
         p1.ItemNameid = Image[0];
         p1.ItemName = "客服";
-        p1.activityClass = BalaceActivity.class;
+        p1.activityClass = ChatActivity.class;
         list.add(p1);
         Personal_local_Item p2 = new Personal_local_Item();
         p2.ItemNameid = Image[1];
@@ -126,7 +138,7 @@ public class PersonalFragment extends BaseFragment {
         Personal_local_Item p6 = new Personal_local_Item();
         p6.ItemNameid = Image[5];
         p6.ItemName = "帮助";
-        p6.activityClass = HelpCenterActivity.class;
+        p6.activityClass = RuleActivity.class;
         list.add(p6);
 
 

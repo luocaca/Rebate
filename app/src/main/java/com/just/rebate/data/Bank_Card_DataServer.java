@@ -10,11 +10,6 @@ public class Bank_Card_DataServer {
 
       }
 
-        public Bank_Card_DataServer(String text, String number, int pic){
-            this.text = text;
-            this.number = number;
-            this.pic = pic;
-    }
 
     public String getText() {
         return text;

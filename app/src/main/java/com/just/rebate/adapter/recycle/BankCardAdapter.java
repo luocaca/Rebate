@@ -27,7 +27,6 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
 
     public BankCardAdapter(List<Bank_Card_DataServer> mDataServer) {
         this.mDataServer = mDataServer;
-
     }
 
 
