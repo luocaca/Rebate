@@ -1,6 +1,7 @@
 package com.just.rebate.ui.activity;
 
 import android.graphics.Color;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -49,13 +50,15 @@ public class RechargeActivity extends BaseActivity {
 
     @Override
     protected void requestData() {
-        
+
     }
 
     @Override
     protected void initView() {
         initViewsAndEvents();
+
         initTagFlowLayout();
+
     }
 
 
@@ -84,8 +87,10 @@ public class RechargeActivity extends BaseActivity {
     }
 
 
-    private void initTagFlowLayout(){
-        List list = new ArrayList();
+    private void initTagFlowLayout() {
+
+
+        List<String> list = new ArrayList();
         list.add("100");
         list.add("200");
         list.add("300");
@@ -94,110 +99,78 @@ public class RechargeActivity extends BaseActivity {
         list.add("0");
 
 
-        //set adapter
-
-        tagAdapter = new TagAdapter(list) {
+        tagFlowLayout.post(new Runnable() {
             @Override
-            public View getView(FlowLayout parent, int position, Object o) {
+            public void run() {
 
+                //set adapter
 
-                if (TextUtils.equals(o.toString(), "0")) {
-                    et = (EditText) View.inflate(RechargeActivity.this, R.layout.et, null);
-                    //getResources().getDisplayMetrics().widthPixels
-                    int pad = (int) (parent.getWidth() * 0.06);
-                    et.setWidth((parent.getWidth() / 4));
+                tagAdapter = new TagAdapter(list) {
+                    @Override
+                    public View getView(FlowLayout parent, int position, Object o) {
 
-                    et.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                                        ToastUtils.showToastLong("被点击了");
-                            currentSelectPosition = position;
-                            tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
-                            et.setBackground(getResources().getDrawable(R.drawable.tv_un_nomarl));
-                            et.setTextColor(Color.WHITE);
-                            et.setHintTextColor(Color.WHITE);
-
-                        }
-                    });
-                    et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                        @Override
-                        public void onFocusChange(View v, boolean hasFocus) {
-                            if (hasFocus) {
-
-                                try {
-                                    currentSelectPosition = position;
-                                    et.setBackground(getResources().getDrawable(R.drawable.tv_un_nomarl));
-                                    tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
-
-                                    et.setTextColor(Color.WHITE);
-                                    et.setHintTextColor(Color.WHITE);
-
-                                } catch (Exception e) {
-
-                                }
-
-                            }
-                        }
-                    });
-                    return et;
-                } else {
-                    TextView tv = (TextView) View.inflate(RechargeActivity.this, R.layout.tv, null);
-                    tv.setText(o.toString() + "积分");
+                        TextView tv = (TextView) View.inflate(RechargeActivity.this, R.layout.tv, null);
+                        tv.setText(o.toString() + "积分");
 //                              tv.setTextColor(R.drawable.pay_text_selector);
-                    //getResources().getDisplayMetrics().widthPixels
-                    int pad = (int) (parent.getWidth() * 0.06);
-                    tv.setWidth((parent.getWidth() / 4));
-                    return tv;
-                }
+                        //getResources().getDisplayMetrics().widthPixels
 
-            }
+                        tv.setWidth((parent.getWidth() / 4));
+                        return tv;
 
-
-            @Override
-            public void onSelected(int position, View view) {
-                super.onSelected(position, view);
-                Log.i("onSelected", "position: " + position);
-                if (et != null) {
-                    et.setBackground(getResources().getDrawable(R.drawable.tv_nomarl));
-                    et.setTextColor(getResources().getColor(R.color.text999));
-                    et.setHintTextColor(getResources().getColor(R.color.text999));
-                }
+                    }
 
 
-                currentSelectView = view;
-                currentSelectPosition = position;
+                    @Override
+                    public void onSelected(int position, View view) {
+                        super.onSelected(position, view);
+                        Log.i("onSelected", "position: " + position);
+                        if (et != null) {
+                            et.setBackground(getResources().getDrawable(R.drawable.tv_nomarl));
+                            et.setTextColor(getResources().getColor(R.color.text999));
+                            et.setHintTextColor(getResources().getColor(R.color.text999));
+                        }
 
 
-                if (view instanceof TextView) {
-                    view.setSelected(true);
-                }
+                        currentSelectView = view;
+                        currentSelectPosition = position;
 
 
-            }
+                        if (view instanceof TextView) {
+                            view.setSelected(true);
+                        }
 
-            @Override
-            public void unSelected(int position, View view) {
-                super.unSelected(position, view);
-                Log.i("unSelected", "position: " + position);
+
+                    }
+
+                    @Override
+                    public void unSelected(int position, View view) {
+                        super.unSelected(position, view);
+                        Log.i("unSelected", "position: " + position);
 //                          view.setSelected(false);
 //                          view.setBackground(getResources().getDrawable(R.drawable.tv_nomarl));
 
-                if (view instanceof TagView) {
-                    TagView tagView = ((TagView) view);
-                    tagView.setChecked(false);
-                }
+                        if (view instanceof TagView) {
+                            TagView tagView = ((TagView) view);
+                            tagView.setChecked(false);
+                        }
 
 
-                if (view instanceof TextView) {
-                    view.setSelected(false);
-                }
+                        if (view instanceof TextView) {
+                            view.setSelected(false);
+                        }
 
 
+                    }
+
+                };
+
+                tagFlowLayout.setAdapter(tagAdapter);
+
+
+                tagAdapter.notifyDataChanged();
             }
+        });
 
-        };
-
-        tagFlowLayout.setAdapter(tagAdapter);
 
     }
 }

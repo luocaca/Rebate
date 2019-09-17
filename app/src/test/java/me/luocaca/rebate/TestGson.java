@@ -1,12 +1,10 @@
 package me.luocaca.rebate;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.base.BaseResponse;
-import com.just.rebate.entity.HomeItem;
 import com.just.rebate.entity.invite.InviteInfo;
 import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
@@ -15,15 +13,27 @@ import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.security.PublicKey;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.security.GeneralSecurityException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
+
 import okhttp3.Call;
+import okhttp3.OkHttpClient;
 
 /**
  *
@@ -45,9 +55,87 @@ public class TestGson {
         //9
 
 
+//        OkHttpClient client = new OkHttpClient();
+//
+//        Request request = new Request.Builder()
+//                .url("https://app.zhuanzhuan.com/zzx/transfer/getInfosByUserId?pageNumber=1&uidB=47699264619540&requestmark=1568613847021&pageSize=100")
+//                .post(null)
+//                .addHeader("User-Agent", "PostmanRuntime/7.15.0")
+//                .addHeader("Accept", "*/*")
+//                .addHeader("Cache-Control", "no-cache")
+//                .addHeader("Postman-Token", "da295d55-2826-424e-aed6-bc89eb8e0c99,e240d7ef-cae3-4ad6-af08-24d9d2c420a6")
+//                .addHeader("Host", "app.zhuanzhuan.com")
+//                .addHeader("cookie", "id58=c5/nR11/JicbG/N+Gl8DAg==")
+//                .addHeader("accept-encoding", "gzip, deflate")
+//                .addHeader("content-length", "")
+//                .addHeader("Connection", "keep-alive")
+//                .addHeader("cache-control", "no-cache")
+//                .build();
+//
+//        Response response = client.newCall(request).execute();
+
+
+//        pageNumber	1
+//        uidB	51055811882972416
+//        requestmark	1568615438980
+//        pageSize	20
+
+
+        //用户id
+//        String uid = "206529519643942144";// 53 键商品的人
+        //        String uid = "40169788368402";// 53 键商品的人
+        String uid = "51055811882972416";//卖相机的
+//        String uid = "1568613847021";//莆田鞋
+//        String uid = "209445543402026752";// 67
+//        String uid = "206529519643942144";// 67
+//        String uid = "41978307012752000";// 自己的账号哦
+
+        System.out.println("start");
+        requestListRecycle(1, uid);
+
+
+        System.out.println("step5");
+//        getInviteInfo();
+
+
+//        getPlatformJson();
+
+    }
+
+
+    public static void requestListRecycle(int fromPage, String userId) {
+
+        int nextPage = fromPage + 1;
+
+
+        System.out.println("step1");
+
+
+        System.setProperty("http.proxyHost", "127.0.0.1");
+        System.setProperty("http.proxyPort", "8888");
+
+//        OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
+//设置代理,需要替换
+//         Proxy proxy = new Proxy(java.net.Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888));
+//        client = OkHttpUtils.getInstance().getOkHttpClient().newBuilder().proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888))).build();
+//        client.newCall(new re).enqueue();
+
+
+        setMyClinet(OkHttpUtils.getInstance());
+
         OkHttpUtils
-                .get()
-                .url("http://192.168.1.171:8080/download/homejson.txt")
+                .post()
+                .url("https://app.zhuanzhuan.com/zzx/transfer/getInfosByUserId?pageNumber=" + fromPage + "&uidB=" + userId + "&pageSize=20")
+//                .addHeader("User-Agent", "PostmanRuntime/7.15.0")
+//                .addHeader("Accept", "*/*")
+//                .addHeader("Cache-Control", "no-cache")
+//                .addHeader("Postman-Token", "da295d55-2826-424e-aed6-bc89eb8e0c99,e240d7ef-cae3-4ad6-af08-24d9d2c420a6")
+//                .addHeader("Host", "app.zhuanzhuan.com")
+//                .addHeader("cookie", "id58=c5/nR11/JicbG/N+Gl8DAg==")
+//                .addHeader("accept-encoding", "gzip, deflate")
+//                .addHeader("content-length", "")
+//                .addHeader("Connection", "keep-alive")
+//                .addHeader("cache-control", "no-cache")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -56,6 +144,9 @@ public class TestGson {
 
 
                         //Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        System.out.println(e.getMessage());
+
+                        System.out.println("step2");
 
                     }
 
@@ -63,23 +154,97 @@ public class TestGson {
                     public void onResponse(String response, int id) {
                         //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
 
+                        System.out.println(response);
 
-                        Type t = new TypeToken<List<HomeItem>>() {
-                        }.getType();
 
-                        List<HomeItem> list = GsonUtil.getGson().fromJson(response, t);
+                        zzdataddd zzdataddd = GsonUtil.getGson().fromJson(response, zzdataddd.class);
 
+
+                        System.out.println(zzdataddd);
+
+                        System.out.println(zzdataddd.getRespData().getInfosArray().size());
+
+                        if (zzdataddd.getRespData().getInfosArray().size() == 20) {
+                            requestListRecycle(nextPage, userId);
+
+                            System.out.println("step3");
+                        } else {
+                            //执行结束
+                            System.out.println("step4");
+                        }
 
 
                     }
                 });
+    }
 
-//        getInviteInfo();
+
+    /**
+     * OkHttpUtils
+     * {
+     * public static final long DEFAULT_MILLISECONDS = 10_000L;
+     * private volatile static OkHttpUtils mInstance;
+     * private OkHttpClient mOkHttpClient;
+     *
+     * @param instance
+     */
+    public static void setMyClinet(OkHttpUtils instance) {
+        SSLSocketFactory sslSocketFactory = null;
+
+        X509TrustManager trustManager = new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+            }
+
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        };
+        try {
+            SSLContext sslContext;
+            sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, new X509TrustManager[]{trustManager}, null);
+            sslSocketFactory = sslContext.getSocketFactory();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
 
 
-//        getPlatformJson();
+        try {
+            Field field = instance.getClass().getDeclaredField("mOkHttpClient");
+
+
+            field.setAccessible(true);
+
+            OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient().newBuilder()
+                    .sslSocketFactory(sslSocketFactory, trustManager)
+                    .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888))).build();
+//            client.sslSocketFactory(sslSocketFactory, trustManager);
+//            OkHttpClient OkHttpClient = (okhttp3.OkHttpClient) field.get(instance);
+//设置代理,需要替换
+            field.set(instance, client);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //mOkHttpClient
+
 
     }
+
+    HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
+        @Override
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
+    };
 
 
     private static List<String> 插砖算法(List<String> sourceList) {
@@ -111,7 +276,7 @@ public class TestGson {
 
         if (groupId < groups.size() - 1) {
 
-            return 插砖算法(newlist,++groupId);
+            return 插砖算法(newlist, ++groupId);
         } else {
             System.out.println(Arrays.asList(newlist));
             return newlist;
