@@ -21,13 +21,12 @@ import com.just.rebate.R;
 import com.just.rebate.entity.Personal_local_Item;
 import com.just.rebate.entity.personal.Personal;
 import com.just.rebate.ui.MainActivity;
+import com.just.rebate.ui.activity.ArrivalDetailsActivity;
 import com.just.rebate.ui.activity.BalaceActivity;
 import com.just.rebate.ui.activity.BankCardActivity;
 import com.just.rebate.ui.activity.ChatActivity;
 import com.just.rebate.ui.activity.IntegralActivity;
-import com.just.rebate.ui.activity.OrderDetailsActivity;
 import com.just.rebate.ui.activity.RechargeActivity;
-import com.just.rebate.ui.activity.RuleActivity;
 import com.just.rebate.ui.activity.SetUpActivity;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
@@ -127,7 +126,7 @@ public class PersonalFragment extends BaseFragment {
         Personal_local_Item p4 = new Personal_local_Item();
         p4.ItemNameid = Image[3];
         p4.ItemName = "到账明细";
-        p4.activityClass = OrderDetailsActivity.class;
+        p4.activityClass = ArrivalDetailsActivity.class;
         list.add(p4);
         Personal_local_Item p5 = new Personal_local_Item();
         p5.ItemNameid = Image[4];
@@ -138,7 +137,7 @@ public class PersonalFragment extends BaseFragment {
         Personal_local_Item p6 = new Personal_local_Item();
         p6.ItemNameid = Image[5];
         p6.ItemName = "帮助";
-        p6.activityClass = RuleActivity.class;
+        //p6.activityClass = RuleActivity.class;
         list.add(p6);
 
 

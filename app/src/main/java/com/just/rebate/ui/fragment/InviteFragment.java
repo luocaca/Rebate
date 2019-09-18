@@ -1,8 +1,13 @@
 package com.just.rebate.ui.fragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -10,6 +15,8 @@ import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.base.BaseResponse;
 import com.just.rebate.entity.invite.InviteInfo;
+import com.just.rebate.ui.activity.DetailedActivity;
+import com.just.rebate.ui.activity.RuleActivity;
 import com.rebate.base.fragment.BaseLazyFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -48,6 +55,15 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
     @BindView(R.id.Invitation)
     TextView invitation;
 
+    @BindView(R.id.Details)
+    TextView mText;
+
+    @BindView(R.id.Rule)
+    TextView mTextRule;
+
+    @BindView(R.id.copy)
+    TextView mTv_copy;
+
 
     @Override
     protected int bindFragmentLayoutId() {
@@ -57,6 +73,33 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
     @Override
     protected void initViewsAndEvents(View view) {
         swipe.setOnRefreshListener(this::onRefresh);
+        mText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), DetailedActivity.class);
+                startActivity(intent);
+            }
+        });
+        mTextRule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), RuleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //实现点击复制功能
+        mTv_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "复制成功", Toast.LENGTH_SHORT).show();
+                ClipboardManager clipboardManager= (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                clipboardManager.setPrimaryClip(ClipData.newPlainText(null,"你好你好"));
+                if (clipboardManager.hasPrimaryClip()){
+                    clipboardManager.getPrimaryClip().getItemAt(0).getText();
+                }
+            }
+        });
     }
 
     @Override
@@ -113,12 +156,15 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                     @Override
                     public void onResponse(BaseResponse<InviteInfo> response, int id) {
                         Log.i(TAG, "onResponse: ");
+                        String string1,string2;
+                        string1="分享给好友，赚"+response.getData().shareEarn+"元";
+                        string2=response.getData().inviteCode;
                         profit.setText(response.getData().totalProfit);
                         money.setText(response.getData().timelyProfit);
                         partner.setText(response.getData().numberOfPartners);
                         fans.setText(response.getData().numberOfFans);
                         code.setText(response.getData().inviteCode);
-                        invitation.setText(response.getData().shareEarn);
+                        invitation.setText(string1);
 
 
 

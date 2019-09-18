@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/default_bg"
     android:background="@color/beijing"
     android:orientation="vertical"
     tools:context=".ui.activity.DetailedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@android:color/white"
+        android:layout_height="75dp"
+        android:background="@drawable/shape_color"
         android:orientation="horizontal">
 
         <ImageView
@@ -21,22 +22,24 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="15dp"
-            android:src="@mipmap/leftarrow" />
+            android:src="@mipmap/leftarrow"
+            android:tint="@color/color_white" />
 
         <TextView
-            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:text="明细"
-            android:textColor="@color/text333"
-            android:textSize="@dimen/text_size_title_xl" />
+            android:textColor="@color/white_text_color"
+            android:textSize="@dimen/text_size_title" />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list7"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginBottom="100dp">
 

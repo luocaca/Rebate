@@ -10,8 +10,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@android:color/white"
+        android:layout_height="75dp"
+        android:background="@drawable/shape_color"
         android:orientation="horizontal">
 
         <ImageView
@@ -21,6 +21,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="15dp"
+            android:tint="@android:color/white"
             android:src="@mipmap/leftarrow" />
 
         <TextView
@@ -30,7 +31,7 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:gravity="center"
             android:text="可用积分"
-            android:textColor="@color/text333"
+            android:textColor="@color/text_color_white"
             android:textSize="@dimen/text_size_title_xl" />
     </LinearLayout>
 

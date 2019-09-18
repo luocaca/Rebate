@@ -9,13 +9,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.ArrivalDetailsAdapter;
 import com.just.rebate.data.DataServer;
+import com.rebate.base.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import butterknife.BindView;
 
 
 
-public class ArrivalDetailsActivity extends AppCompatActivity {
+public class ArrivalDetailsActivity extends BaseActivity {
 
     @BindView(R.id.rv_list3)
     RecyclerView mrecyclerView;
@@ -35,12 +35,24 @@ public class ArrivalDetailsActivity extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_arrival_details);
 
+    }
+    @Override
+    protected void requestData() {
+
+    }
+
+    @Override
+    protected void initView() {
         initRecyclerview();
         initData();
         initonClick();
 
+    }
+
+    @Override
+    public int bindLayoutId() {
+        return R.layout.fragment_arrival_details;
     }
 
     private void initonClick() {
@@ -59,6 +71,7 @@ public class ArrivalDetailsActivity extends AppCompatActivity {
         mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mrecyclerView.addItemDecoration(new MyDecoration());
         mrecyclerView.setAdapter(mArrivalDetailsAdapter);
+
 }
 
     private void initData() {

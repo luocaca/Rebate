@@ -6,20 +6,20 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.DetailsAdapter;
 import com.just.rebate.data.detailed_DataServer;
+import com.rebate.base.activity.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class DetailedActivity extends AppCompatActivity {
+public class DetailedActivity extends BaseActivity {
 
     @BindView(R.id.rv_list7)
     RecyclerView mrecyclerView;
@@ -32,10 +32,24 @@ public class DetailedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed);
+    }
+
+    @Override
+    protected void requestData() {
+
+    }
+
+    @Override
+    protected void initView() {
+        initonClick();
         initRecyclerview();
         initData();
-        initonClick();
+
+    }
+
+    @Override
+    public int bindLayoutId() {
+        return R.layout.activity_detailed;
     }
 
     private void initonClick() {

@@ -1,5 +1,9 @@
 package com.just.rebate.ui.activity;
 
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +22,9 @@ public class ChatActivity extends BaseActivity {
     @BindView(R.id.rv_list9)
     RecyclerView recyclerView;
 
+    @BindView(R.id.back_Chat)
+    ImageView mIv_back;
+
     List<Chat_Msg_DataServer> msg = new ArrayList<>();
 
     @Override
@@ -29,9 +36,18 @@ public class ChatActivity extends BaseActivity {
     protected void initView() {
         initData();
         initRecyclerview();
+        initonClick();
 
     }
 
+    private void initonClick() {
+        mIv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();onBackPressed();
+            }
+        });
+    }
 
 
     @Override
@@ -42,6 +58,8 @@ public class ChatActivity extends BaseActivity {
     private void initRecyclerview() {
         ChatAdapter chatAdapter=new ChatAdapter(msg);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //键盘不遮挡EditText
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         recyclerView.setAdapter(chatAdapter);
 
     }
@@ -65,7 +83,7 @@ public class ChatActivity extends BaseActivity {
         Chat_Msg_DataServer chat_msg_dataServer3=new Chat_Msg_DataServer();
         chat_msg_dataServer3.setType(0);
         chat_msg_dataServer3.setContent("我是你爸爸");
-        chat_msg_dataServer.setImage(R.mipmap.toux);
+        chat_msg_dataServer3.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer3);
         Chat_Msg_DataServer chat_msg_dataServer4=new Chat_Msg_DataServer();
         chat_msg_dataServer4.setType(1);

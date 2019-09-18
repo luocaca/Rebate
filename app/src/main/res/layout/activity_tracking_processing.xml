@@ -20,9 +20,11 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/back_trck"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:tint="@color/color_white"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:src="@mipmap/retun1" />
 
@@ -67,7 +69,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/ArrivalAccount_to_Order"
+                android:id="@+id/Track_to_Order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -76,7 +78,7 @@
                 android:src="@mipmap/zuijxiadan" />
 
             <ImageView
-                android:id="@+id/arrivaldatails"
+                android:id="@+id/Track_to_arrivaldatails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -85,6 +87,7 @@
                 android:src="@mipmap/genzong" />
 
             <ImageView
+                android:id="@+id/Track_to_ArrivalAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,7 +96,7 @@
                 android:src="@mipmap/zuijin" />
 
             <ImageView
-                android:id="@+id/ArrivalAccount_to_Ivalid"
+                android:id="@+id/Track_to_Ivalid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

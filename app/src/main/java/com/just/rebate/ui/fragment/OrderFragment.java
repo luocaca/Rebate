@@ -3,7 +3,6 @@ package com.just.rebate.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -147,13 +146,6 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
             helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
-//            if (isFirstShop) {
-//                helper.getView(R.id.topline).setBackgroundColor(Color.RED);
-//
-//            } else {
-//                helper.getView(R.id.topline).setBackgroundColor(Color.YELLOW);
-//
-//            }
 
         } else if (item instanceof ReturnOrder) {
             //do conevert 2
@@ -229,7 +221,6 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                         adapter.expandAll();
                         adapter.notifyDataSetChanged();
                         Log.i("result", "onResponse: " + list);
-
 
                     }
                 });

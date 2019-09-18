@@ -2,8 +2,9 @@ package com.just.rebate.adapter.recycle;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.just.rebate.R;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.just.rebate.R;
+import com.just.rebate.entity.OrderItem;
 
 import java.util.List;
 
@@ -25,16 +26,12 @@ public abstract class OrderAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
         addItemType(2, R.layout.item_order_content);
     }
 
-        /* protected void convertHead(BaseViewHolder helper, final OrderItem item) {
+    protected void convertHead(BaseViewHolder helper, final OrderItem item) {
         helper.setText(R.id.order_header, item.itemName);
-        helper.setText(R.id.order_tv,item.itemName_tv);
-
-        helper.setVisible(R.id.more, item.isMore());
-        helper.addOnClickListener(R.id.more);
+        helper.setText(R.id.order_tv, item.itemName_tv);
 
 
-    } */
-
+    }
 
 
 }

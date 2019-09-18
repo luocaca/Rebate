@@ -61,7 +61,7 @@ public abstract class TrackingProcessingAdapter extends BaseSectionQuickAdapter<
 
     protected void convert(BaseViewHolder helper, TrackingProcessingItem item) {
         TrackingProcessingItem trackingProcessingItem = (TrackingProcessingItem) item.t;
-        helper.addOnClickListener(R.id.order_details);
+
 
 
 
