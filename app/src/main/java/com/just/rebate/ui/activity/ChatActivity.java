@@ -57,6 +57,21 @@ public class ChatActivity extends BaseActivity {
         chat_msg_dataServer1.setContent("你好");
         chat_msg_dataServer1.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer1);
+        Chat_Msg_DataServer chat_msg_dataServer2=new Chat_Msg_DataServer();
+        chat_msg_dataServer2.setType(1);
+        chat_msg_dataServer2.setContent("哪位？");
+        chat_msg_dataServer2.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer2);
+        Chat_Msg_DataServer chat_msg_dataServer3=new Chat_Msg_DataServer();
+        chat_msg_dataServer3.setType(0);
+        chat_msg_dataServer3.setContent("我是你爸爸");
+        chat_msg_dataServer.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer3);
+        Chat_Msg_DataServer chat_msg_dataServer4=new Chat_Msg_DataServer();
+        chat_msg_dataServer4.setType(1);
+        chat_msg_dataServer4.setContent("狗屎");
+        chat_msg_dataServer4.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer4);
 
     }
 }

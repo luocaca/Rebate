@@ -1,7 +1,6 @@
 package com.just.rebate.ui.activity;
 
 import android.graphics.Color;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -109,13 +108,55 @@ public class RechargeActivity extends BaseActivity {
                     @Override
                     public View getView(FlowLayout parent, int position, Object o) {
 
-                        TextView tv = (TextView) View.inflate(RechargeActivity.this, R.layout.tv, null);
-                        tv.setText(o.toString() + "积分");
-//                              tv.setTextColor(R.drawable.pay_text_selector);
-                        //getResources().getDisplayMetrics().widthPixels
 
-                        tv.setWidth((parent.getWidth() / 4));
-                        return tv;
+                        if (TextUtils.equals(o.toString(), "0")) {
+                            et = (EditText) View.inflate(RechargeActivity.this, R.layout.et, null);
+                            //getResources().getDisplayMetrics().widthPixels
+                            int pad = (int) (parent.getWidth() * 0.06);
+                            et.setWidth((parent.getWidth() / 4));
+
+                            et.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+//                                        ToastUtils.showToastLong("被点击了");
+                                    currentSelectPosition = position;
+                                    tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
+                                    et.setBackground(getResources().getDrawable(R.drawable.tv_un_nomarl));
+                                    et.setTextColor(Color.WHITE);
+                                    et.setHintTextColor(Color.WHITE);
+
+                                }
+                            });
+                            et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                                @Override
+                                public void onFocusChange(View v, boolean hasFocus) {
+                                    if (hasFocus) {
+
+                                        try {
+                                            currentSelectPosition = position;
+                                            et.setBackground(getResources().getDrawable(R.drawable.tv_un_nomarl));
+                                            tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
+
+                                            et.setTextColor(Color.WHITE);
+                                            et.setHintTextColor(Color.WHITE);
+
+                                        } catch (Exception e) {
+
+                                        }
+
+                                    }
+                                }
+                            });
+                            return et;
+                        } else {
+                            TextView tv = (TextView) View.inflate(RechargeActivity.this, R.layout.tv, null);
+                            tv.setText(o.toString() + "元");
+//                              tv.setTextColor(R.drawable.pay_text_selector);
+                            //getResources().getDisplayMetrics().widthPixels
+                            int pad = (int) (parent.getWidth() * 0.06);
+                            tv.setWidth((parent.getWidth() / 4));
+                            return tv;
+                        }
 
                     }
 
@@ -163,10 +204,7 @@ public class RechargeActivity extends BaseActivity {
                     }
 
                 };
-
                 tagFlowLayout.setAdapter(tagAdapter);
-
-
                 tagAdapter.notifyDataChanged();
             }
         });

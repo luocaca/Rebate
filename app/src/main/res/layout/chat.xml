@@ -25,7 +25,7 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="活动规则"
+            android:text="客服"
             android:textColor="@color/white_text_color"
             android:textSize="@dimen/text_size_title" />
     </LinearLayout>
