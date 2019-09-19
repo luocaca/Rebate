@@ -14,7 +14,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp">
 
-        <CheckBox
+        <com.just.rebate.wedget.MyCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical" />
@@ -29,8 +29,8 @@
 
         <ImageView
             android:id="@+id/order_iv"
-            android:layout_width="92dp"
-            android:layout_height="92dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginLeft="@dimen/default_margin"
             tools:src="@drawable/ic_launcher_background" />
 
@@ -49,18 +49,19 @@
                 android:paddingRight="@dimen/padding_right"
                 android:text="破洞牛仔裤宽松九分裤2019夏季新款韩版薄款哈伦裤"
                 android:textColor="@color/text666"
-                android:textSize="@dimen/text_size_content" />
+                android:textSize="@dimen/text_size_content_s" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:background="#9FE5E5E5"
+                android:background="@drawable/shape_corner_text_bg"
+                android:layout_marginBottom="5dp"
                 android:drawableRight="@mipmap/bottomarrow"
                 android:padding="4dp"
                 android:text="灰色破洞；29【80-100斤】"
-                android:textColor="@color/text999"
-                android:textSize="@dimen/text_size_content" />
+                android:textColor="@color/text666"
+                android:textSize="@dimen/text_size_content_s" />
 
 
 
@@ -74,46 +75,41 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
                     android:text="￥148.00"
-                    android:textColor="@color/text666"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_red"
                     android:textSize="@dimen/default_oval" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="25dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="30dp"
-
                     android:background="@drawable/textview_border_top_bottom_left_"
                     android:gravity="center_vertical"
-                    android:paddingLeft="18dp"
-                    android:paddingRight="18dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
                     android:text="-"
                     android:textSize="@dimen/text_size_content_s" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="-1dp"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
                     android:background="@drawable/textview_border"
                     android:gravity="center_vertical"
-                    android:paddingLeft="18dp"
-                    android:paddingRight="18dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
                     android:text="1"
                     android:textSize="@dimen/text_size_content_s" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="-1dp"
                     android:layout_marginRight="@dimen/default_margin"
                     android:background="@drawable/textview_border_top_bottom_right_"
                     android:gravity="center_vertical"
-                    android:paddingLeft="18dp"
-                    android:paddingRight="18dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
                     android:text="+"
                     android:textSize="@dimen/text_size_content_s" />
 

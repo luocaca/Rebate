@@ -23,24 +23,22 @@
         <!--<RadioButton-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
-        <ImageView
-            android:layout_width="20dp"
+        <com.just.rebate.wedget.MyCheckBox
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
             android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:src="@mipmap/butto" />
+            android:paddingBottom="15dp" />
 
         <TextView
             android:id="@+id/order_tv"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_white_bottom_line"
             android:gravity="center|left"
             android:paddingLeft="@dimen/padding_left"
             android:text="米拉服饰"
-            android:textColor="@color/text666"
+            android:textColor="@color/text333"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_content" />
     </LinearLayout>
 

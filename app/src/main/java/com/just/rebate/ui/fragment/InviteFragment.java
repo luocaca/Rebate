@@ -33,7 +33,6 @@ import okhttp3.Response;
  */
 public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
 
@@ -115,7 +114,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
     @Override
     protected void onFirstUserVisible() {
 
-
         requestData();
 
 
@@ -170,10 +168,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                         code.setText(response.getData().inviteCode);
                         invitation.setText(string1);
 
-
-
-
-
                     }
 
                     @Override
@@ -201,8 +195,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
          *
          *
          *                         Log.i("result", "onResponse: " + list);
-         *
-         *
          *                     }
          *                 });
          */
