@@ -4,16 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
 
     <com.just.rebate.wedget.MyCheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_gravity="center_vertical">
-    </com.just.rebate.wedget.MyCheckBox>
-    <include layout="@layout/order_content_includ"/>
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"/>
+
+    <include layout="@layout/order_content_includ" />
 
 </LinearLayout>
 

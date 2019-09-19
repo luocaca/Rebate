@@ -9,6 +9,8 @@ import com.just.rebate.entity.invite.InviteInfo;
 import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
+import com.just.rebate.entity.order.跟踪处理.TrackingProcess;
+import com.just.rebate.entity.order.跟踪处理.TrackingProcessOrder;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -45,6 +47,8 @@ public class TestGson {
 
     public static void main(String... args) {
 
+
+        最近到账json产生机器();
 
 //        GsonUtil.getGson().toJson();
 
@@ -84,22 +88,76 @@ public class TestGson {
         //用户id
 //        String uid = "206529519643942144";// 53 键商品的人
         //        String uid = "40169788368402";// 53 键商品的人
-        String uid = "51055811882972416";//卖相机的
+//        String uid = "51055811882972416";//卖相机的
 //        String uid = "1568613847021";//莆田鞋
 //        String uid = "209445543402026752";// 67
 //        String uid = "206529519643942144";// 67
 //        String uid = "41978307012752000";// 自己的账号哦
 
-        System.out.println("start");
-        requestListRecycle(1, uid);
+//        System.out.println("start");
+//        requestListRecycle(1, uid);
 
 
-        System.out.println("step5");
+//        System.out.println("step5");
 //        getInviteInfo();
 
 
 //        getPlatformJson();
 
+    }
+
+    private static void 最近到账json产生机器() {
+
+
+        BaseResponse<List<TrackingProcess>> baseResponse = new BaseResponse();
+
+
+        baseResponse.setCode(200);
+        baseResponse.setMessage("成功");
+
+
+        List<TrackingProcess> trackingProcesses = new ArrayList<>();
+        trackingProcesses.add(creteList("淘宝"));
+        trackingProcesses.add(creteList("天猫"));
+        trackingProcesses.add(creteList("拼多多"));
+        trackingProcesses.add(creteList("隔壁工厂"));
+        baseResponse.setData(trackingProcesses);
+
+
+        System.out.println(GsonUtil.getGson().toJson(baseResponse));
+
+
+    }
+
+    private static TrackingProcess creteList(String platformName) {
+
+
+        TrackingProcess trackingProcess = new TrackingProcess();
+
+        trackingProcess.setPlatformName(platformName);
+        trackingProcess.setReciverTime("2019-9-19");
+        trackingProcess.setStatus("200");
+        trackingProcess.setId("10086");
+        trackingProcess.setOrders(getOrde());
+
+
+        return trackingProcess;
+    }
+
+    private static List<TrackingProcessOrder> getOrde() {
+        List<TrackingProcessOrder> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+
+            TrackingProcessOrder trackingProcessOrder = new TrackingProcessOrder();
+            trackingProcessOrder.setCoverUrl("https://m.360buyimg.com/mobilecms/s358x358_jfs/t18142/89/748990263/172316/65e9f4fe/5aa62f0fNf9082be7.jpg!q70.dpg.webp");
+            trackingProcessOrder.setBackPrice(10 * i + "");
+            trackingProcessOrder.setOrderName("订单" + i);
+            trackingProcessOrder.setOrderNo(i * 23 + "");
+            list.add(trackingProcessOrder);
+        }
+
+
+        return list;
     }
 
 

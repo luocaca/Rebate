@@ -25,7 +25,7 @@
         <com.just.rebate.wedget.MyCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginLeft="8dp"
             android:paddingTop="@dimen/padding_default"
             android:paddingBottom="@dimen/padding_default" />
 

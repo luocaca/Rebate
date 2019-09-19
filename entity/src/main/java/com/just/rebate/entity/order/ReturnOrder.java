@@ -22,6 +22,22 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, M
      */
     private String coverUrl;
 
+    /**
+     * 商品名称
+     */
+    private String orderName;
+
+
+    /**
+     * 商品简介
+     */
+    private String orderIntroduction;
+
+    /**
+     * 商品价格
+     */
+    private String commodityPrice;
+
     public String getCoverUrl() {
         return coverUrl;
     }
@@ -54,21 +70,7 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, M
         this.commodityPrice = commodityPrice;
     }
 
-    /**
-     * 商品名称
-     */
-    private String orderName;
 
-
-    /**
-     * 商品简介
-     */
-    private String orderIntroduction;
-
-    /**
-     * 商品价格
-     */
-    private String commodityPrice;
 
 
     @Override

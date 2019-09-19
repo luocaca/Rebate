@@ -24,9 +24,9 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:tint="@color/color_white"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:src="@mipmap/retun1" />
+                android:src="@mipmap/retun1"
+                android:tint="@color/color_white" />
 
             <EditText
                 android:layout_width="235dp"
@@ -156,12 +156,12 @@
                 android:textSize="@dimen/text_size_content" />
 
         </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:background="@drawable/shape_corner_grad">
