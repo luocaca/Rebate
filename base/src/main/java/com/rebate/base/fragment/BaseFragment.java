@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.just.rebate.wedget.MyTitleBar;
+
 import butterknife.ButterKnife;
 
 /**
@@ -54,6 +56,24 @@ public abstract class BaseFragment extends Fragment {
         mView = view;
         initViewsAndEvents(view);
         initData();
+
+//         View titleView =  bindTitleView();
+//
+//         if (titleView instanceof MyTitleBar)
+//
+//         {
+//             ((MyTitleBar) titleView).setClickCallback(new MyTitleBar.ClickCallback() {
+//                 @Override
+//                 public void itemLeftonClick() {
+//                     doLeftClick();
+//                 }
+//
+//                 @Override
+//                 public void itemRightonClick() {
+//                    doRightClick();
+//                 }
+//             });
+//         }
 
     }
 

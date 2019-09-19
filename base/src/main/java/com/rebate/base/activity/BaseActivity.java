@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +34,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
         View view = bindTitleView();
+
+        if (view == null) {
+            view = bindTitleView(bindTitleViewId());
+        }
+
         if (view != null) {
             if (view instanceof MyTitleBar) {
                 ((MyTitleBar) view).setClickCallback(new MyTitleBar.ClickCallback() {
@@ -56,6 +62,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    protected int bindTitleViewId() {
+        return 0;
+    }
+
     protected void doRightClick() {
 
     }
@@ -66,6 +76,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected View bindTitleView() {
         return null;
+    }
+
+
+    protected View bindTitleView(@IdRes int viewId) {
+        return findViewById(viewId);
     }
 
     protected abstract void requestData();

@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
@@ -30,6 +34,7 @@ import com.just.rebate.ui.activity.PaymentActivity;
 import com.just.rebate.ui.activity.TrackingProcessingActivity;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
+import com.rebate.commom.util.bitmap.GlideRoundTransform;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -148,8 +153,38 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
 
         } else if (item instanceof ReturnOrder) {
+
+
+//            RequestOptions options = RequestOptions.circleCropTransform();//圆形图片  好多的图片形式都是这么设置的
+//设置图片圆角角度
+            RoundedCorners roundedCorners = new RoundedCorners(6);
+//通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).centerCrop();
+
             //do conevert 2
-            Glide.with(mActivity).load(((ReturnOrder) item).getCoverUrl()).into((ImageView) helper.getView(R.id.order_iv));
+//            Glide.with(mActivity).load(((ReturnOrder) item).getCoverUrl())
+//                    .apply(options).into((ImageView) helper.getView(R.id.order_iv));
+//            Glide.with(context).load(historys.get(position).getHeadImg()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into(holder.logo);
+
+            RequestOptions myOptions = new RequestOptions()
+//                        .transform(DrawableTransitionOptions.with(drawableCrossFadeFactory))
+                    .transform(new GlideRoundTransform(helper.itemView.getContext(), 6))
+//                      .centerCrop()
+                    ;
+
+            DrawableCrossFadeFactory drawableCrossFadeFactory = new DrawableCrossFadeFactory.Builder(100).setCrossFadeEnabled(true).build();
+//                Glide.with(ZZSearch2UpActivity.this)
+//                        .load("")
+//                        .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
+//                ;
+
+            Glide.with(helper.itemView.getContext()).load(((ReturnOrder) item).getCoverUrl()).transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into((ImageView) helper.getView(R.id.order_iv));
+//              Glide.with(helper.itemView.getContext()).load("https://pic1.zhuanstatic.com/zhuanzh/" + item.getPics()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into((ImageView) helper.getView(R.id.logo));
+
+
+
+
+
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
 

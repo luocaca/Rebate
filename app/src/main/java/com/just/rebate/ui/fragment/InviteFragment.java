@@ -65,6 +65,10 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
     TextView mTv_copy;
 
 
+
+
+
+
     @Override
     protected int bindFragmentLayoutId() {
         return R.layout.fragment_invite;
