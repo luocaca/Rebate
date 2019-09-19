@@ -16,8 +16,7 @@
         android:layout_height="wrap_content"
 
         android:orientation="horizontal"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp">
+       >
 
 
         <!--<RadioButton-->
@@ -26,14 +25,14 @@
         <com.just.rebate.wedget.MyCheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp" />
+            android:layout_marginLeft="@dimen/default_margin"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default" />
 
         <TextView
             android:id="@+id/order_tv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_white_bottom_line"
             android:gravity="center|left"
             android:paddingLeft="@dimen/padding_left"
             android:text="米拉服饰"

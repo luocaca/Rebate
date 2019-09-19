@@ -24,6 +24,7 @@ public abstract class OrderAdapter extends BaseMultiItemQuickAdapter<MultiItemEn
         addItemType(0, R.layout.item_order_head);
         addItemType(1, R.layout.item_order_header2);
         addItemType(2, R.layout.item_order_content);
+
     }
 
     protected void convertHead(BaseViewHolder helper, final OrderItem item) {

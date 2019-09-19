@@ -147,9 +147,16 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             helper.setText(R.id.order_tv, ((ReturnShop) item).getShopName());
 
             boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
-            helper.setVisible(R.id.topline, !isFirstShop);
+//            helper.setVisible(R.id.topline, isFirstShop);
+//            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
-            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
+            if(isFirstShop){
+                helper.getView(R.id.topline).setVisibility(View.VISIBLE);
+                helper.getView(R.id.topline).setBackgroundResource(R.drawable.shape_corner_left_top_right_top);
+            }else{
+                helper.getView(R.id.topline).setVisibility(View.GONE);
+            }
+
 
 
         } else if (item instanceof ReturnOrder) {
@@ -191,21 +198,20 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
             boolean islast = isLastOrder(mActivity, helper, item, helper, data);
 
+
             if (islast) {
                 helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
-            } else {
-                helper.itemView.setBackgroundResource(R.drawable.bg_white_bottom_line);
-            }
-
-
+        }
         }
 
     }
 
+
+
     private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
         try {
             Object obj = data.get(helper.getAdapterPosition() + 1);
-            if (obj instanceof ReturnPlatform || obj instanceof ReturnShop) {
+            if (obj instanceof ReturnPlatform) {
                 return true;
             } else {
                 return false;
@@ -216,11 +222,17 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
-        Object obj = data.get(helper.getAdapterPosition() - 1);
-        if (obj instanceof ReturnPlatform) {
+        try {
+            Object obj1;
+            obj1 = data.get(helper.getAdapterPosition() - 1);
+
+            if (obj1 instanceof ReturnOrder ) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
             return true;
-        } else {
-            return false;
         }
     }
 
