@@ -1,12 +1,18 @@
 package com.just.rebate.entity.order.跟踪处理;
 
+import android.widget.Checkable;
+
+import com.chad.library.adapter.base.entity.IExpandable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.just.rebate.base.BaseEntity;
+
+import java.util.List;
 
 /**
  * 跟踪订单
  * 类型
  */
-public class TrackingProcessOrder extends BaseEntity {
+public class TrackingProcessOrder extends BaseEntity implements IExpandable, Checkable,MultiItemEntity {
 
 
     /**
@@ -62,5 +68,45 @@ public class TrackingProcessOrder extends BaseEntity {
 
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
+    }
+
+    @Override
+    public int getItemType() {
+        return 2;
+    }
+
+    @Override
+    public void setChecked(boolean b) {
+
+    }
+
+    @Override
+    public boolean isChecked() {
+        return false;
+    }
+
+    @Override
+    public void toggle() {
+
+    }
+
+    @Override
+    public boolean isExpanded() {
+        return false;
+    }
+
+    @Override
+    public void setExpanded(boolean expanded) {
+
+    }
+
+    @Override
+    public List getSubItems() {
+        return null;
+    }
+
+    @Override
+    public int getLevel() {
+        return 0;
     }
 }

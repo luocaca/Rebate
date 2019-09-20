@@ -71,7 +71,7 @@
                 android:layout_gravity="center|right"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="@dimen/default_margin"
-                android:background="@drawable/shape_corner_xx"
+                android:background="@drawable/shape_corner_grad_line_xl"
                 android:text="订单详情"
                 android:gravity="center"
                 android:layout_marginBottom="10dp"

@@ -1,7 +1,5 @@
 package com.just.rebate.base;
 
-import com.google.gson.JsonElement;
-
 import java.io.Serializable;
 import java.util.Map;
 
@@ -15,6 +13,8 @@ public class BaseEntity implements Serializable {
 
 
     private Map map;
+
+
 
 
     public String getId() {

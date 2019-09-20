@@ -12,6 +12,7 @@
         android:layout_height="100dp"
         android:background="@color/white_text_color"
         android:padding="4dp"
+
         android:layout_marginLeft="2dp"
         android:src="@drawable/ic_launcher_background" />
 

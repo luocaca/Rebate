@@ -1,11 +1,9 @@
 package com.just.rebate.adapter.recycle;
 
-import android.content.Context;
-
-import com.chad.library.adapter.base.BaseSectionQuickAdapter;
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.just.rebate.R;
-import com.just.rebate.entity.ArrivalAccountItem;
 import com.just.rebate.entity.TrackingProcessingItem;
 
 import java.util.List;
@@ -13,25 +11,25 @@ import java.util.List;
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
-public abstract class TrackingProcessingAdapter extends BaseSectionQuickAdapter<TrackingProcessingItem, BaseViewHolder> {
-    private Context context;
+public abstract class TrackingProcessingAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
      *
-     * @param sectionHeadResId The section head layout id for each item
-     * @param layoutResId      The layout resource id of each item.
+
      * @param data             A new list is created out of this one to avoid mutable list
      */
-    public TrackingProcessingAdapter(int layoutResId, int sectionHeadResId, List data) {
-        super(layoutResId, sectionHeadResId, data);
+    public TrackingProcessingAdapter(List data) {
+        super(data);
+        addItemType(1, R.layout.item_tracking_processing_head);
+        addItemType(2, R.layout.item_tracking_processing_content);
     }
 
 
-    protected void convertHead(BaseViewHolder helper, final TrackingProcessingItem arrivalAccountItem) {
-        helper.setText(R.id.arrival_account_name, arrivalAccountItem.itemName_tv);
-        helper.setText(R.id.arrival_account_time, arrivalAccountItem.itemTime_tv);
+    protected void convertHead(BaseViewHolder helper, final TrackingProcessingItem trackingProcessingItem) {
+        helper.setText(R.id.Track_name, trackingProcessingItem.itemName_tv);
+        helper.setText(R.id.Track_time, trackingProcessingItem.itemTime_tv);
 
 //        helper.addOnClickListener();
 
@@ -52,19 +50,4 @@ public abstract class TrackingProcessingAdapter extends BaseSectionQuickAdapter<
         */
 
     }
-
-
-
-
-
-
-
-    protected void convert(BaseViewHolder helper, TrackingProcessingItem item) {
-        TrackingProcessingItem trackingProcessingItem = (TrackingProcessingItem) item.t;
-
-
-
-
-    }
-
 }

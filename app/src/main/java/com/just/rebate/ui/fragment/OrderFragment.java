@@ -190,8 +190,6 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
 
 
-
-
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
 

@@ -12,9 +12,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="105dp"
+        android:background="@drawable/shape_color"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:background="@drawable/shape_color"
         android:orientation="horizontal">
 
         <LinearLayout
