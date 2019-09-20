@@ -11,13 +11,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.ArrivalAccountAdapter;
 import com.just.rebate.entity.ArrivalAccountItem;
@@ -92,21 +90,6 @@ public class ArrivalAccountActivity extends AppCompatActivity {
             }
         });
         ArrivalAccountAdapter arrivalAccountAdapter = new ArrivalAccountAdapter(R.layout.item_arrival_account_merge, mDatas) {
-
-            @Override
-            protected void convert(@NonNull BaseViewHolder helper, ArrivalAccountItem item) {
-                helper.addOnClickListener(R.id.arrival_account_to_order_details);
-
-            }
-
-            @Override
-            protected void convertHead(BaseViewHolder helper, ArrivalAccountItem arrivalAccountItem) {
-                super.convertHead(helper, arrivalAccountItem);
-                helper.setText(R.id.arrival_account_name, "淘宝");
-                helper.setText(R.id.arrival_account_time, "2019-07-31接单成功");
-                helper.addOnClickListener(R.id.arrival_account_to_order_details);
-
-            }
         };
 
 

@@ -28,9 +28,9 @@ public abstract class ArrivalAccountAdapter extends BaseQuickAdapter<ArrivalAcco
 
 
     protected void convertHead(BaseViewHolder helper, final ArrivalAccountItem arrivalAccountItem) {
-        helper.setText(R.id.arrival_account_name, arrivalAccountItem.itemName_tv);
-        helper.setText(R.id.arrival_account_time, arrivalAccountItem.itemTime_tv);
-        helper.addOnClickListener(R.id.arrival_account_to_order_details);
+//        helper.setText(R.id.arrival_account_name, arrivalAccountItem.itemName_tv);
+//        helper.setText(R.id.arrival_account_time, arrivalAccountItem.itemTime_tv);
+//        helper.addOnClickListener(R.id.arrival_account_to_order_details);
 
 //        helper.addOnClickListener();
 

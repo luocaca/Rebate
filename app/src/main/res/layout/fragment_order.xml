@@ -45,7 +45,7 @@
                 android:textSize="@dimen/text_size_content_ss" />
 
             <ImageView
-                android:id="@+id/img_back"
+                android:id="@+id/Message_Notification"
                 android:layout_width="22dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"

@@ -30,6 +30,7 @@ import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
 import com.just.rebate.ui.activity.ArrivalAccountActivity;
 import com.just.rebate.ui.activity.InvalidActivity;
+import com.just.rebate.ui.activity.MessageNotificationActivity;
 import com.just.rebate.ui.activity.PaymentActivity;
 import com.just.rebate.ui.activity.TrackingProcessingActivity;
 import com.rebate.base.fragment.BaseFragment;
@@ -60,6 +61,9 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     @BindView(R.id.Arrival_account)
     ImageView mArrival_account;
 
+    @BindView(R.id.Message_Notification)
+    ImageView mTv_Message_Notification;
+
 
     @BindView(R.id.invalid)
     ImageView mInvalid;
@@ -71,7 +75,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     TextView mTextOrder_to_Payment;
 
 
-    @OnClick({R.id.Order_to_Payment, R.id.arrivaldatails, R.id.invalid, R.id.Arrival_account})
+    @OnClick({R.id.Order_to_Payment, R.id.arrivaldatails, R.id.invalid, R.id.Arrival_account,R.id.Message_Notification})
     @Override
     public void onClick(View view) {
         Intent intent;
@@ -92,6 +96,9 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 intent = new Intent(getActivity(), InvalidActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.Message_Notification:
+                intent=new Intent(getActivity(), MessageNotificationActivity.class);
+                startActivity(intent);
         }
     }
 

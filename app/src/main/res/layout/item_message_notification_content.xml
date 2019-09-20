@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_corner"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_default"
+            android:text="发货提醒"
+            android:textColor="@color/text333"
+            android:textSize="@dimen/text_size_title" />
+
+        <TextView
+            android:id="@+id/data_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingLeft="@dimen/padding_default"
+            android:text="您有一笔订单买家已支付，请您尽快发货，超过30天未发货自动取消订单并退款"
+            android:textColor="@color/text999"
+            android:textSize="@dimen/text_size_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
