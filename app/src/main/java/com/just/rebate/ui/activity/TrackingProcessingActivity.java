@@ -64,20 +64,20 @@ public class TrackingProcessingActivity extends BaseActivity {
 
     }
 
-        public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item){
+    public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item) {
 
-        if(item instanceof TrackingProcess){
+        if (item instanceof TrackingProcess) {
 
             String string1;
-            string1=((TrackingProcess) item).getReciverTime()+"接单成功";
+            string1 = ((TrackingProcess) item).getReciverTime() + "接单成功";
 //            doConvert =1
             helper.setText(R.id.Track_name, ((TrackingProcess) item).getPlatformName());
-            helper.setText(R.id.Track_time,string1);
-        }else if(item instanceof TrackingProcessOrder){
+            helper.setText(R.id.Track_time, string1);
+        } else if (item instanceof TrackingProcessOrder) {
 
-            String string2,string3;
-            string2="返利"+((TrackingProcessOrder) item).getBackPrice()+"元";
-            string3="订单编号:"+((TrackingProcessOrder) item).getOrderNo();
+            String string2, string3;
+            string2 = "返利" + ((TrackingProcessOrder) item).getBackPrice() + "元";
+            string3 = "订单编号:" + ((TrackingProcessOrder) item).getOrderNo();
 //            doConvert =2
 //            RequestOptions options = RequestOptions.circleCropTransform();//圆形图片  好多的图片形式都是这么设置的
 //设置图片圆角角度
@@ -102,10 +102,11 @@ public class TrackingProcessingActivity extends BaseActivity {
 //                        .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
 //                ;
             Glide.with(helper.itemView.getContext()).load(((TrackingProcessOrder) item).getCoverUrl()).transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into((ImageView) helper.getView(R.id.track_img));
-            helper.setText(R.id.Track_fanli,string2);
-            helper.setText(R.id.Track_dingdan,string3);
+            helper.setText(R.id.Track_fanli, string2);
+            helper.setText(R.id.Track_dingdan, string3);
         }
     }
+
     private String TAG = this.getClass().getSimpleName();
 
     @Override
@@ -126,7 +127,7 @@ public class TrackingProcessingActivity extends BaseActivity {
                         Type t = new TypeToken<BaseResponse<List<TrackingProcess>>>() {
                         }.getType();
 
-                        BaseResponse< List<TrackingProcess> >  list = GsonUtil.getGson().fromJson(response, t);
+                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGson().fromJson(response, t);
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) mrecyclerView.getAdapter();
 
@@ -141,27 +142,26 @@ public class TrackingProcessingActivity extends BaseActivity {
     }
 
 
-
-
     private void initonClick() {
         mIv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();onBackPressed();
+                finish();
+                onBackPressed();
             }
         });
 
         mIv_Account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(TrackingProcessingActivity.this,ArrivalAccountActivity.class);
+                Intent intent = new Intent(TrackingProcessingActivity.this, ArrivalAccountActivity.class);
                 startActivity(intent);
             }
         });
         mIv_inValid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(TrackingProcessingActivity.this,InvalidActivity.class);
+                Intent intent = new Intent(TrackingProcessingActivity.this, InvalidActivity.class);
                 startActivity(intent);
             }
         });
@@ -173,15 +173,20 @@ public class TrackingProcessingActivity extends BaseActivity {
 
             @Override
             protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
-                doConvert(mActivity, helper, item);
+                if (item.getItemType() == 1) {
+                } else {
+                    doConvert(mActivity, helper, item);
+                }
+
             }
         };
         trackingProcessingAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if (view==findViewById(R.id.order_details)){
-                    Intent intent1=new Intent(TrackingProcessingActivity.this,OrderDetailsActivity.class);
-                    startActivity(intent1);}else if(view==findViewById(R.id.transition_position_to_success)){
+                if (view == findViewById(R.id.order_details)) {
+                    Intent intent1 = new Intent(TrackingProcessingActivity.this, OrderDetailsActivity.class);
+                    startActivity(intent1);
+                } else if (view == findViewById(R.id.transition_position_to_success)) {
                     Intent intent2 = new Intent(TrackingProcessingActivity.this, SuccessActivity.class);
                     startActivity(intent2);
                 }

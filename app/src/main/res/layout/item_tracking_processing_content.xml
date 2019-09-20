@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@drawable/shape_corner"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-
+        android:alpha="0.6"
         android:background="@drawable/underline" />
 
     <LinearLayout
@@ -82,37 +82,50 @@
 
             <TextView
                 android:id="@+id/order_details"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
-                android:layout_marginEnd="32dp"
-
-                android:background="@drawable/shape_corner_grad_line_xl"
                 android:gravity="center"
                 android:padding="6dp"
-
-                android:text="查看订单"
+                android:text="点击领取"
                 android:textColor="@color/color_zise"
                 android:textSize="@dimen/text_size_content"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/transition_position_to_success"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/transition_position_to_success"
+                app:layout_constraintTop_toTopOf="@+id/transition_position_to_success" />
+
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="26dp"
+                android:background="@drawable/underline"
+                android:alpha="0.8"
+                app:layout_constraintBottom_toBottomOf="@+id/order_details"
+                app:layout_constraintLeft_toRightOf="@+id/transition_position_to_success"
+                app:layout_constraintRight_toLeftOf="@+id/order_details"
                 app:layout_constraintTop_toTopOf="@+id/transition_position_to_success" />
 
             <TextView
                 android:id="@+id/transition_position_to_success"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_corner_color_xx"
                 android:gravity="center"
                 android:padding="6dp"
-                android:text="点击领取"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_content"
+                android:text="查看订单"
+                android:textColor="@color/color_zise"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/order_details"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
