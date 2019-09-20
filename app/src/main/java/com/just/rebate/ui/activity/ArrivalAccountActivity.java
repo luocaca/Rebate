@@ -56,8 +56,6 @@ public class ArrivalAccountActivity extends AppCompatActivity {
         List<ArrivalAccountItem> arrivalAccountItems = new ArrayList<>();
         arrivalAccountItems.add(new ArrivalAccountItem(true, "淘宝"));
         arrivalAccountItems.add(new ArrivalAccountItem(false, "name"));
-        arrivalAccountItems.add(new ArrivalAccountItem(true, "淘宝"));
-        arrivalAccountItems.add(new ArrivalAccountItem(false, "name"));
         mDatas = arrivalAccountItems;
         mImageViewArrivalAccoount1 = findViewById(R.id.ArrivalAccount_to_Invalid);
         mImageViewArrivalAccoount1.setOnClickListener(new View.OnClickListener() {
@@ -93,11 +91,12 @@ public class ArrivalAccountActivity extends AppCompatActivity {
                 finish();onBackPressed();
             }
         });
-        ArrivalAccountAdapter arrivalAccountAdapter = new ArrivalAccountAdapter(R.layout.item_arrival_account_content, R.layout.item_arrival_account_head, mDatas) {
+        ArrivalAccountAdapter arrivalAccountAdapter = new ArrivalAccountAdapter(R.layout.item_arrival_account_merge, mDatas) {
 
             @Override
             protected void convert(@NonNull BaseViewHolder helper, ArrivalAccountItem item) {
-                helper.addOnClickListener(R.id.order_details);
+                helper.addOnClickListener(R.id.arrival_account_to_order_details);
+
             }
 
             @Override
@@ -105,6 +104,7 @@ public class ArrivalAccountActivity extends AppCompatActivity {
                 super.convertHead(helper, arrivalAccountItem);
                 helper.setText(R.id.arrival_account_name, "淘宝");
                 helper.setText(R.id.arrival_account_time, "2019-07-31接单成功");
+                helper.addOnClickListener(R.id.arrival_account_to_order_details);
 
             }
         };

@@ -57,7 +57,9 @@ public class ChatActivity extends BaseActivity {
 
     private void initRecyclerview() {
         ChatAdapter chatAdapter=new ChatAdapter(msg);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
         //键盘不遮挡EditText
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         recyclerView.setAdapter(chatAdapter);

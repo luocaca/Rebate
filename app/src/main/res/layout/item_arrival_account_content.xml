@@ -2,81 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@drawable/shape_corner_left_bottom_right_bottom"
+    android:layout_marginBottom="@dimen/default_margin"
     android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/underline"
-        android:layout_marginRight="@dimen/default_margin"
-        android:layout_marginLeft="@dimen/default_margin"/>
+        android:layout_height="1px"
+        android:alpha="0.6"
+        android:background="@drawable/underline" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_marginLeft="@dimen/default_margin"
-                android:layout_width="64dp"
-                android:layout_gravity="center"
-                android:paddingLeft="@dimen/padding_left"
-                android:background="@color/beijing"
-                android:layout_height="64dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/fanli"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="返利2.69元"
-                    android:textSize="@dimen/text_size_title"
-                    android:gravity="bottom"
-                    android:paddingBottom="5dp"
-                    android:textColor="@color/text333"
-                    android:paddingLeft="@dimen/padding_left"/>
-                <TextView
-                    android:id="@+id/dingdan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="订单编号:12345678987"
-                    android:textSize="@dimen/text_size_content"
-                    android:gravity="top"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/text666"
-                    android:paddingLeft="@dimen/padding_left"/>
 
-            </LinearLayout>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/underline"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/order_details"
-                android:layout_width="120dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center|right"
-                android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/arrival_account_img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@color/white_text_color"
+                android:src="@drawable/ic_launcher_background" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/arrival_account_fanli"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginBottom="9dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:paddingBottom="5dp"
+                    android:singleLine="true"
+                    android:text="返利2.69元"
+                    android:textColor="@color/text666" />
+
+                <TextView
+                    android:id="@+id/arrival_account_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="5dp"
+                    android:text="订单编号:12345678987"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginRight="@dimen/default_margin"
+
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:tint="@color/text999"
+                    android:alpha="0.5"
+                    android:background="@color/white_text_color"
+                    android:src="@mipmap/rightarrow" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
-                android:background="@drawable/shape_corner_grad_line_xl"
-                android:text="订单详情"
-                android:gravity="center"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/color_zise"/>
+                android:background="@drawable/underline"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 
+</LinearLayout>

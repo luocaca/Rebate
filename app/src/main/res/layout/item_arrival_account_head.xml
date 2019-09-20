@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
         android:background="@drawable/shape_corner_left_top_right_top"
         android:gravity="center"
         android:orientation="horizontal">
@@ -18,8 +17,6 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingLeft="@dimen/padding_left"
-            android:paddingTop="@dimen/padding_left"
-            android:paddingBottom="@dimen/padding_left"
             android:text="淘宝"
             android:textColor="@color/text333"
             android:textSize="@dimen/text_size_title" />
@@ -32,8 +29,8 @@
             android:gravity="right|center"
             android:paddingRight="@dimen/padding_right"
             android:text="预估返利2.62元"
-            android:textColor="@color/text_color_Pink"
-            android:textSize="@dimen/text_size_title" />
+            android:textColor="@color/color_red"
+            android:textSize="@dimen/text_size_content" />
 
     </LinearLayout>
 

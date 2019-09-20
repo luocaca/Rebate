@@ -48,6 +48,7 @@
                     android:layout_marginBottom="9dp"
                     android:layout_weight="1"
                     android:ellipsize="end"
+                    android:paddingRight="@dimen/padding_default"
                     android:paddingBottom="5dp"
                     android:singleLine="true"
                     android:text="返利2.69元"
@@ -61,6 +62,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingTop="5dp"
+                    android:paddingRight="@dimen/padding_default"
                     android:text="订单编号:12345678987"
                     android:textColor="@color/text666"
                     android:textSize="@dimen/text_size_content" />
