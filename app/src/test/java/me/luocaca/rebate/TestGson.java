@@ -124,7 +124,16 @@ public class TestGson {
         baseResponse.setData(trackingProcesses);
 
 
-        System.out.println(GsonUtil.getGson().toJson(baseResponse));
+
+        String json = GsonUtil.getGson().toJson(baseResponse);
+
+
+
+
+        System.out.println(json);
+
+
+//        GsonUtil.getGson().fromJson(json,)
 
 
     }
