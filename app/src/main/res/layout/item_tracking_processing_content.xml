@@ -30,7 +30,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="@dimen/default_margin"
                 android:background="@color/white_text_color"
                 android:src="@drawable/ic_launcher_background" />
 
@@ -47,7 +47,9 @@
                     android:layout_marginLeft="@dimen/default_margin"
                     android:layout_marginBottom="9dp"
                     android:layout_weight="1"
+                    android:ellipsize="end"
                     android:paddingBottom="5dp"
+                    android:singleLine="true"
                     android:text="返利2.69元"
                     android:textColor="@color/text666" />
 
@@ -102,8 +104,8 @@
             <View
                 android:layout_width="1px"
                 android:layout_height="26dp"
-                android:background="@drawable/underline"
                 android:alpha="0.8"
+                android:background="@drawable/underline"
                 app:layout_constraintBottom_toBottomOf="@+id/order_details"
                 app:layout_constraintLeft_toRightOf="@+id/transition_position_to_success"
                 app:layout_constraintRight_toLeftOf="@+id/order_details"

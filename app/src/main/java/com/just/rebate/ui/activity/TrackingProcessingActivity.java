@@ -34,6 +34,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -134,6 +135,21 @@ public class TrackingProcessingActivity extends BaseActivity {
                         adapter.getData().clear();
                         adapter.addData(list.getData());
                         adapter.expandAll();
+
+//                        for (Object datum : adapter.getData()) {
+//                            if (datum instanceof TrackingProcess) {
+//                                adapter.getData().remove(datum);
+//                            }
+//                        }
+                        Iterator iterator = adapter.getData().iterator();
+                        while (iterator.hasNext()) {
+                            Object integer = iterator.next();
+                            if (integer instanceof TrackingProcess) {
+                                iterator.remove();
+                            }
+                        }
+
+
                         adapter.notifyDataSetChanged();
                         Log.i("result", "onResponse: " + list.getData());
 
