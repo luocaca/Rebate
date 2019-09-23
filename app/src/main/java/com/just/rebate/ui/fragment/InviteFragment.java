@@ -64,10 +64,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
     TextView mTv_copy;
 
 
-
-
-
-
     @Override
     protected int bindFragmentLayoutId() {
         return R.layout.fragment_invite;
@@ -132,7 +128,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
 
         OkHttpUtils
                 .get()
-
                 .url("http://192.168.1.171:8080/download/rebate/api/invite.txt")//邀请 信息
                 .build()
                 .execute(new Callback<BaseResponse<InviteInfo>>() {
@@ -163,9 +158,9 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                         Log.i(TAG, "onResponse: ");
                         String string1,string2;
                         string1="分享给好友，赚"+response.getData().shareEarn+"元";
-                        string2=response.getData().inviteCode;
+                        string2="("+response.getData().timelyProfit+"元即将到账)";
                         profit.setText(response.getData().totalProfit);
-                        money.setText(response.getData().timelyProfit);
+                        money.setText(string2);
                         partner.setText(response.getData().numberOfPartners);
                         fans.setText(response.getData().numberOfFans);
                         code.setText(response.getData().inviteCode);
@@ -201,7 +196,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
          *                     }
          *                 });
          */
-
 
     }
 

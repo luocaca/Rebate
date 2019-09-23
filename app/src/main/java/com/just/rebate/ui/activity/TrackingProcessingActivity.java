@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,10 +51,10 @@ public class TrackingProcessingActivity extends BaseActivity {
     ImageView mIv_back;
 
     @BindView(R.id.Track_to_ArrivalAccount)
-    ImageView mIv_Account;
+    TextView mIv_Account;
 
     @BindView(R.id.Track_to_Ivalid)
-    ImageView mIv_inValid;
+    TextView mIv_inValid;
 
 
     private List<TrackingProcessingItem> mDatas;

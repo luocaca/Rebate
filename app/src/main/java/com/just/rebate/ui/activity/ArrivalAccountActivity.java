@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,13 +49,13 @@ public class ArrivalAccountActivity extends BaseActivity {
     RecyclerView mRecyclerview;
 
     @BindView(R.id.ArrivalAccount_to_Invalid)
-    ImageView mImageViewArrivalAccoount1;
+    TextView mImageViewArrivalAccoount1;
 
     @BindView(R.id.ArrivalAccount_to_Order)
-    ImageView mImageViewArrivalAccoount2;
+    TextView mImageViewArrivalAccoount2;
 
     @BindView(R.id.ArrivalAccount_to_Track)
-    ImageView mImageViewArrivalAccount3;
+    TextView mImageViewArrivalAccount3;
 
     @BindView(R.id.img_back)
     ImageView mIv_back;

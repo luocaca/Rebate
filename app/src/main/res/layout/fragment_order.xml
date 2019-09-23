@@ -66,48 +66,6 @@
         android:background="@drawable/shape_corner"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="7dp"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/zuijxiadan" />
-
-            <ImageView
-                android:id="@+id/arrivaldatails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="7dp"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/genzong" />
-
-            <ImageView
-                android:id="@+id/Arrival_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="7dp"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/zuijin" />
-
-            <ImageView
-                android:id="@+id/invalid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="7dp"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/wuxiao" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,10 +73,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:drawableTop="@mipmap/zuijxiadan"
+                android:drawablePadding="7dp"
                 android:paddingTop="3.5dp"
                 android:paddingBottom="7dp"
                 android:text="最近下单"
@@ -126,10 +87,14 @@
                 android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/arrivaldatails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:drawableTop="@mipmap/genzong"
+                android:drawablePadding="7dp"
                 android:paddingTop="3.5dp"
                 android:paddingBottom="7dp"
                 android:text="跟踪处理"
@@ -137,21 +102,29 @@
                 android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/Arrival_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="3.5dp"
+                android:drawableTop="@mipmap/zuijin"
+                android:drawablePadding="7dp"
                 android:paddingBottom="7dp"
                 android:text="最近到账"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/invalid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:drawablePadding="7dp"
+                android:drawableTop="@mipmap/wuxiao"
                 android:paddingTop="3.5dp"
                 android:paddingBottom="7dp"
                 android:text="无效订单"

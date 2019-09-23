@@ -56,23 +56,23 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     RecyclerView recycleView;
 
     @BindView(R.id.arrivaldatails)
-    ImageView mImageView;
+    TextView mImageView;
     //
     @BindView(R.id.Arrival_account)
-    ImageView mArrival_account;
+    TextView mArrival_account;
 
     @BindView(R.id.Message_Notification)
     ImageView mTv_Message_Notification;
 
-
     @BindView(R.id.invalid)
-    ImageView mInvalid;
+    TextView mInvalid;
 
     @BindView(R.id.order_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.Order_to_Payment)
     TextView mTextOrder_to_Payment;
+
 
 
     @OnClick({R.id.Order_to_Payment, R.id.arrivaldatails, R.id.invalid, R.id.Arrival_account,R.id.Message_Notification})
@@ -101,7 +101,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 startActivity(intent);
         }
     }
-
+//  android:id="@+id/arrivaldatails"  android:id="@+id/Arrival_account"  android:id="@+id/invalid"
     @Override
     protected int bindFragmentLayoutId() {
         return R.layout.fragment_order;
@@ -109,6 +109,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     protected void initViewsAndEvents(View view) {
+
         recycleView.setLayoutManager(new LinearLayoutManager(mActivity));
         OrderAdapter orderAdapter = new OrderAdapter(new ArrayList()) {
             @Override
@@ -152,6 +153,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
         } else if (item instanceof ReturnShop) {
             //do conevert 1
             helper.setText(R.id.order_tv, ((ReturnShop) item).getShopName());
+
 
             boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
 //            helper.setVisible(R.id.topline, isFirstShop);
@@ -202,8 +204,6 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
 
             boolean islast = isLastOrder(mActivity, helper, item, helper, data);
-
-
             if (islast) {
                 helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
         }
@@ -226,6 +226,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
         }
     }
 
+
     private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
         try {
             Object obj1;
@@ -240,6 +241,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             return true;
         }
     }
+
 
     @Override
     protected void initData() {

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
@@ -104,13 +103,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/Profit"
+
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:gravity="bottom"
                         android:paddingLeft="@dimen/padding_left"
                         android:text="预计总收益（元）"
-                        android:textSize="@dimen/text_size_content" />
+                        android:textSize="@dimen/text_size_title_xl" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -118,7 +117,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/money"
+                            android:id="@+id/Profit"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/default_margin"
@@ -128,6 +127,7 @@
                             android:textSize="@dimen/text_size_title_xl" />
 
                         <TextView
+                            android:id="@+id/money"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="5dp"
@@ -485,7 +485,7 @@
                         android:layout_gravity="center|bottom"
                         android:layout_marginTop="5dp"
                         android:minLines="2"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="17dp"
                         android:text="你赚2元"
                         android:textColor="@color/text666"
                         android:textSize="9sp"
@@ -682,7 +682,7 @@
                     android:layout_height="wrap_content"
                     android:text="邀请码:"
                     android:textColor="@color/text333"
-                    android:textSize="@dimen/text_size_title_xl" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/Code"
@@ -691,7 +691,7 @@
                     android:layout_gravity="center"
                     android:text="  HMDWY"
                     android:textColor="@color/zhuti"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/text_size_title_xl" />
 
                 <TextView
                     android:id="@+id/copy"
@@ -721,7 +721,7 @@
                     android:layout_height="wrap_content"
                     android:text="分享给好友，赚10元"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_title_xl" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
