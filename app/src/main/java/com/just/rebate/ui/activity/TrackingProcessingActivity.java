@@ -102,6 +102,9 @@ public class TrackingProcessingActivity extends BaseActivity {
             Glide.with(helper.itemView.getContext()).load(((TrackingProcessOrder) item).getCoverUrl()).transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into((ImageView) helper.getView(R.id.track_img));
             helper.setText(R.id.Track_fanli, string2);
             helper.setText(R.id.Track_dingdan, string3);
+
+            helper.addOnClickListener(R.id.transition_position_to_success);
+            helper.addOnClickListener(R.id.order_details);
         }
     }
 
@@ -203,7 +206,7 @@ public class TrackingProcessingActivity extends BaseActivity {
         mIv_inValid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TrackingProcessingActivity.this, InvalidActivity.class);
+                Intent intent = new Intent(TrackingProcessingActivity.this, InvalidOrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -219,18 +222,16 @@ public class TrackingProcessingActivity extends BaseActivity {
                 } else {
                     doConvert(mActivity, helper, item);
                 }
-
-
             }
         };
         trackingProcessingAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view == findViewById(R.id.order_details)) {
-                    Intent intent1 = new Intent(TrackingProcessingActivity.this, OrderDetailsActivity.class);
+                    Intent intent1=new Intent(TrackingProcessingActivity.this,SuccessActivity.class);
                     startActivity(intent1);
                 } else if (view == findViewById(R.id.transition_position_to_success)) {
-                    Intent intent2 = new Intent(TrackingProcessingActivity.this, SuccessActivity.class);
+                    Intent intent2 = new Intent(TrackingProcessingActivity.this,OrderDetailsActivity .class);
                     startActivity(intent2);
                 }
             }

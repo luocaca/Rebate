@@ -15,6 +15,7 @@ public class SuccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
+        mIv_back=findViewById(R.id.img_back);
         mIv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -24,7 +24,6 @@ public abstract class TrackingProcessingAdapter extends BaseMultiItemQuickAdapte
         super(data);
 //        addItemType(1, R.layout.item_tracking_processing_head);
 //        addItemType(2, R.layout.item_tracking_processing_content);
-
         addItemType(1, R.layout.item_tracking_processing_merge);
         addItemType(2, R.layout.item_tracking_processing_merge);
 

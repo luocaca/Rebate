@@ -2,28 +2,31 @@ package com.just.rebate.adapter.recycle;
 
 import android.content.Context;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
 import com.just.rebate.entity.ArrivalAccountItem;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
 
 /**
  * https://github.com/CymChad/BaseRecyclerViewAdapterHelper
  */
-public abstract class ArrivalAccountAdapter extends BaseQuickAdapter<ArrivalAccountItem, BaseViewHolder> {
+public abstract class ArrivalAccountAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
     private Context context;
 
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
      *
-     * @param layoutResId      The layout resource id of each item.
+     *
      * @param data             A new list is created out of this one to avoid mutable list
      */
-    public ArrivalAccountAdapter(int layoutResId, List data) {
-        super(layoutResId, data);
+    public ArrivalAccountAdapter( List data) {
+        super(data);
+        addItemType(1, R.layout.item_arrival_account_merge);
+        addItemType(2, R.layout.item_arrival_account_merge);
     }
 
 

@@ -56,6 +56,7 @@
         <activity android:name=".ui.activity.ArrivalDetailsActivity" />
         <activity android:name=".ui.activity.web.WebViewActivity" />
         <activity android:name=".ui.activity.MessageNotificationActivity" />
+        <activity android:name=".ui.activity.InvalidOrderActivity" />
 
 
         <provider

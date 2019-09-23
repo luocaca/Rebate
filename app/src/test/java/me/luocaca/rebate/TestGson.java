@@ -11,7 +11,6 @@ import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
 import com.just.rebate.entity.order.跟踪处理.TrackingProcess;
 import com.just.rebate.entity.order.跟踪处理.TrackingProcessOrder;
-import com.just.rebate.ui.activity.web.web_util.LogUtil;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -26,10 +25,8 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -38,12 +35,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  *

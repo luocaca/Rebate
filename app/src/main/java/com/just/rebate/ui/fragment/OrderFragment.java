@@ -29,7 +29,7 @@ import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
 import com.just.rebate.ui.activity.ArrivalAccountActivity;
-import com.just.rebate.ui.activity.InvalidActivity;
+import com.just.rebate.ui.activity.InvalidOrderActivity;
 import com.just.rebate.ui.activity.MessageNotificationActivity;
 import com.just.rebate.ui.activity.PaymentActivity;
 import com.just.rebate.ui.activity.TrackingProcessingActivity;
@@ -93,7 +93,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.invalid:
-                intent = new Intent(getActivity(), InvalidActivity.class);
+                intent = new Intent(getActivity(), InvalidOrderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.Message_Notification:
