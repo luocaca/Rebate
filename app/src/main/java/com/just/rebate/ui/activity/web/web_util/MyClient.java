@@ -411,6 +411,11 @@ public class MyClient extends WebViewClient {
         LogUtil.d("onPageFinished\n" + "url ：\n " + url + "\ncookies ：\n " + cookie + "\n");
 
 
+
+
+
+
+//        cookieManager.setCookie(url,);
         printHead(view, url);
 
 

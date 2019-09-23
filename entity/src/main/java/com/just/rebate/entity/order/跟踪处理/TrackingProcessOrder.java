@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class TrackingProcessOrder extends BaseEntity implements IExpandable, Checkable,MultiItemEntity {
 
-    private List<TrackingProcess>trackingProcess;
+    private TrackingProcess trackingProcess;
 
     /**
      * 封面 图片地址
@@ -111,11 +111,12 @@ public class TrackingProcessOrder extends BaseEntity implements IExpandable, Che
         return 0;
     }
 
-    public List<TrackingProcess> getTrackingProcess() {
+
+    public TrackingProcess getTrackingProcess() {
         return trackingProcess;
     }
 
-    public void setTrackingProcess(List<TrackingProcess> trackingProcess) {
+    public void setTrackingProcess(TrackingProcess trackingProcess) {
         this.trackingProcess = trackingProcess;
     }
 }

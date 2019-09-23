@@ -80,7 +80,10 @@ public class WebViewActivity extends BaseActivity {
         }));
 
 
-        myClient.loadUrl("https://h5.m.taobao.com", null);
+        // .addHeader("cookie", "")
+        String cookie ="_m_h5_tk_enc=e3f7d58860b22cace169e93099afba43, ockeqeudmj=uC2m2qk%3D, munb=652569484, unb=652569484, uc3=id2=VWojfHWaPLQP&lg2=U%2BGCWk%2F75gdr5Q%3D%3D&vt3=F8dByuK3QCO2SogCkuU%3D&nk2=D9ZMJf0xxB5b5t5x, uc1=cookie15=URm48syIIVrSKA%3D%3D&cookie14=UoTaEC%2BTitGYAg%3D%3D&cookie21=Vq8l%2BKCLjA%2Bl, csg=15d38b91, lgc=luochaojunaa, ntm=0, cookie17=VWojfHWaPLQP, dnk=luochaojunaa, skt=c1802f1fe6d4bf10, tracknick=luochaojunaa, _cc_=WqG3DMC9EA%3D%3D, _l_g_=Ug%3D%3D, sg=a49, _nk_=luochaojunaa, cookie1=UIHxSZwF3e96OEm4e2lF4I5B%2BkbjfNbtkPzv2gz4sL4%3D, isg=BKSkEhzopZNTCdElm04vuboFfqBWlcnNCoVvhb7FMG8yaUQz5k2YN9rHLIco3gD_";
+
+        myClient.loadUrl("https://h5.m.taobao.com", null,cookie);
 
 //        web.getSettings().setJavaScriptEnabled(true);
 //        web.getSettings().setAppCacheEnabled(true);

@@ -69,10 +69,10 @@ public class TrackingProcessingActivity extends BaseActivity {
         if (item instanceof TrackingProcessOrder) {
 
             String string1;
-//            string1 = ((TrackingProcessOrder) item).getTrackingProcess().getReciverTime() + "接单成功";
-////            doConvert =1
-//            helper.setText(R.id.Track_name, ((TrackingProcessOrder) item).getTrackingProcess().getPlatformName());
-//            helper.setText(R.id.Track_time, string1);
+            string1 = ((TrackingProcessOrder) item).getTrackingProcess().getReciverTime() + "接单成功";
+//            doConvert =1
+            helper.setText(R.id.Track_name, ((TrackingProcessOrder) item).getTrackingProcess().getPlatformName());
+            helper.setText(R.id.Track_time, string1);
             String string2, string3;
             string2 = "返利" + ((TrackingProcessOrder) item).getBackPrice() + "元";
             string3 = "订单编号:" + ((TrackingProcessOrder) item).getOrderNo();
@@ -122,10 +122,10 @@ public class TrackingProcessingActivity extends BaseActivity {
                     @Override
                     public void onResponse(String response, int id) {
 
-                        Type t = new TypeToken<BaseResponse<List<TrackingProcessOrder>>>() {
+                        Type t = new TypeToken<BaseResponse<List<TrackingProcess>>>() {
                         }.getType();
 
-                        BaseResponse<List<TrackingProcessOrder>> list = GsonUtil.getGson().fromJson(response, t);
+                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGson().fromJson(response, t);
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) mrecyclerView.getAdapter();
 
@@ -142,6 +142,7 @@ public class TrackingProcessingActivity extends BaseActivity {
                         while (iterator.hasNext()) {
                             Object integer = iterator.next();
                             if (integer instanceof TrackingProcess) {
+                                setChilds((TrackingProcess) integer, ((TrackingProcess) integer).getSubItems());
                                 iterator.remove();
                             }
                         }
@@ -152,6 +153,34 @@ public class TrackingProcessingActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    /**
+     * 为子类设置 父类对象
+     *
+     * @param integer
+     * @param data
+     */
+    private void setChilds(TrackingProcess integer, List<TrackingProcessOrder> data) {
+        for (TrackingProcessOrder datum : data) {
+            datum.setTrackingProcess(integer);
+        }
+//        int startIndex = -1;
+//        int nextHeadIndex = -1;
+//        for (int i = 0; i < data.size(); i++) {
+//
+//            if (data.get(i).equals(integer)) {
+//                startIndex = i;
+//            }
+//            if (i > startIndex)
+//            {
+//                if (data.get(i) instanceof TrackingProcess)
+//                {
+//
+//                }
+//            }
+//
+//        }
     }
 
 
