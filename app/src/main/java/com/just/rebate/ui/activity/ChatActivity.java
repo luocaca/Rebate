@@ -92,6 +92,31 @@ public class ChatActivity extends BaseActivity {
         chat_msg_dataServer4.setContent("狗屎");
         chat_msg_dataServer4.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer4);
+        Chat_Msg_DataServer chat_msg_dataServer5=new Chat_Msg_DataServer();
+        chat_msg_dataServer5.setType(0);
+        chat_msg_dataServer5.setContent("你才是");
+        chat_msg_dataServer5.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer5);
+        Chat_Msg_DataServer chat_msg_dataServer6=new Chat_Msg_DataServer();
+        chat_msg_dataServer6.setType(1);
+        chat_msg_dataServer6.setContent("你才是");
+        chat_msg_dataServer6.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer6);
+        Chat_Msg_DataServer chat_msg_dataServer7=new Chat_Msg_DataServer();
+        chat_msg_dataServer7.setType(1);
+        chat_msg_dataServer7.setContent("狗屎");
+        chat_msg_dataServer7.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer7);
+        Chat_Msg_DataServer chat_msg_dataServer8=new Chat_Msg_DataServer();
+        chat_msg_dataServer8.setType(0);
+        chat_msg_dataServer8.setContent("狗屎");
+        chat_msg_dataServer8.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer8);
+        Chat_Msg_DataServer chat_msg_dataServer9=new Chat_Msg_DataServer();
+        chat_msg_dataServer9.setType(1);
+        chat_msg_dataServer9.setContent("狗屎");
+        chat_msg_dataServer9.setImage(R.mipmap.toux);
+        msg.add(chat_msg_dataServer9);
 
     }
 }

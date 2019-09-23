@@ -34,6 +34,11 @@ public abstract class TrackingProcessingAdapter extends BaseMultiItemQuickAdapte
     protected void convertHead(BaseViewHolder helper, final TrackingProcessingItem trackingProcessingItem) {
         helper.setText(R.id.Track_name, trackingProcessingItem.itemName_tv);
         helper.setText(R.id.Track_time, trackingProcessingItem.itemTime_tv);
+    }
+    protected void convert(BaseViewHolder helper,TrackingProcessingItem item){
+        helper.addOnClickListener(R.id.order_details);
+        helper.addOnClickListener(R.id.transition_position_to_success);
+
 
 //        helper.addOnClickListener();
 

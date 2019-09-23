@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
@@ -29,7 +30,6 @@
             android:textColor="@color/white_text_color"
             android:textSize="@dimen/text_size_title" />
     </LinearLayout>
-    
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -41,8 +41,6 @@
         android:fastScrollEnabled="false"
         android:background="@color/default_bg">
     </androidx.recyclerview.widget.RecyclerView>
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -68,7 +66,6 @@
             android:layout_marginRight="@dimen/default_margin"
             android:src="@mipmap/puls"
             android:layout_gravity="center_vertical" />
-
     </LinearLayout>
 
 </LinearLayout>

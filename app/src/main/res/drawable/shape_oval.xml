@@ -4,7 +4,7 @@
     android:useLevel="false">
 
 
-    <solid android:color="#F79DAC" />
+    <solid android:color="#FFD1E5" />
     <stroke
         android:color="@color/touming"
         android:width="1dp"/>

@@ -18,7 +18,8 @@
         <activity android:name=".ui.activity.BankCardActivity"></activity>
         <activity android:name=".ui.activity.CashWithdrawalActivity" />
         <activity android:name=".ui.activity.DetailedActivity" />
-        <activity android:name=".ui.activity.ChatActivity" />
+        <activity android:name=".ui.activity.ChatActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity android:name=".ui.activity.RuleActivity" />
         <activity android:name=".ui.activity.IntegralActivity" />
         <activity android:name=".ui.activity.BalaceActivity" />

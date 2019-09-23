@@ -62,20 +62,17 @@ public class TrackingProcessingActivity extends BaseActivity {
     protected void initView() {
         initRecyclerview();
         initonClick();
-
     }
 
     public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item) {
 
-        if (item instanceof TrackingProcess) {
+        if (item instanceof TrackingProcessOrder) {
 
             String string1;
-            string1 = ((TrackingProcess) item).getReciverTime() + "接单成功";
-//            doConvert =1
-            helper.setText(R.id.Track_name, ((TrackingProcess) item).getPlatformName());
-            helper.setText(R.id.Track_time, string1);
-        } else if (item instanceof TrackingProcessOrder) {
-
+//            string1 = ((TrackingProcessOrder) item).getTrackingProcess().getReciverTime() + "接单成功";
+////            doConvert =1
+//            helper.setText(R.id.Track_name, ((TrackingProcessOrder) item).getTrackingProcess().getPlatformName());
+//            helper.setText(R.id.Track_time, string1);
             String string2, string3;
             string2 = "返利" + ((TrackingProcessOrder) item).getBackPrice() + "元";
             string3 = "订单编号:" + ((TrackingProcessOrder) item).getOrderNo();
@@ -125,10 +122,10 @@ public class TrackingProcessingActivity extends BaseActivity {
                     @Override
                     public void onResponse(String response, int id) {
 
-                        Type t = new TypeToken<BaseResponse<List<TrackingProcess>>>() {
+                        Type t = new TypeToken<BaseResponse<List<TrackingProcessOrder>>>() {
                         }.getType();
 
-                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGson().fromJson(response, t);
+                        BaseResponse<List<TrackingProcessOrder>> list = GsonUtil.getGson().fromJson(response, t);
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) mrecyclerView.getAdapter();
 
@@ -193,6 +190,7 @@ public class TrackingProcessingActivity extends BaseActivity {
                 } else {
                     doConvert(mActivity, helper, item);
                 }
+
 
             }
         };
