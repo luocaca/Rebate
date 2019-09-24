@@ -1,5 +1,6 @@
 package com.just.rebate.ui.activity;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
@@ -75,13 +76,14 @@ public class BankCardActivity extends BaseActivity {
 //        });
 
 
-        BaseQuickAdapter baseQuickAdapter = new BaseQuickAdapter<Bank_Card_DataServer, BaseViewHolder>(R.layout.item_bank_card, mDataServer) {
+        BaseQuickAdapter baseQuickAdapter = new BaseQuickAdapter<Bank_Card_DataServer, BaseViewHolder>(R.layout.item_bank_card1, mDataServer) {
             @Override
             protected void convert(@NonNull BaseViewHolder helper, Bank_Card_DataServer item) {
                 helper
                         .setText(R.id.bank, item.getText())
                         .setText(R.id.bank, item.getText())
                         .setText(R.id.bank, item.getText())
+                        .setBackgroundColor(R.id.bank_card1,item.getBackgroundcolor())
                         .setText(R.id.bank, item.getText());
             }
         };
@@ -98,11 +100,37 @@ public class BankCardActivity extends BaseActivity {
         bank_card_dataServer.setText("中国银行");
         bank_card_dataServer.setNumber("**** **** **** 1234");
         bank_card_dataServer.setPic(R.mipmap.bank);
+        bank_card_dataServer.setBackgroundcolor(Color.parseColor("#628Ef9"));
+        mDataServer.add(bank_card_dataServer);
 
+        Bank_Card_DataServer bank_card_dataServer1 = new Bank_Card_DataServer();
+        bank_card_dataServer1.setText("中国银行");
+        bank_card_dataServer1.setNumber("**** **** **** 1234");
+        bank_card_dataServer1.setPic(R.mipmap.bank);
+        bank_card_dataServer1.setBackgroundcolor(Color.parseColor("#04856F"));
+        mDataServer.add(bank_card_dataServer1);
 
-        for (int i = 0; i < 10; i++) {
-            mDataServer.add(bank_card_dataServer);
-        }
+        Bank_Card_DataServer bank_card_dataServer2 = new Bank_Card_DataServer();
+        bank_card_dataServer2.setText("中国银行");
+        bank_card_dataServer2.setNumber("**** **** **** 1234");
+        bank_card_dataServer2.setPic(R.mipmap.bank);
+        bank_card_dataServer2.setBackgroundcolor(Color.parseColor("#000000"));
+        mDataServer.add(bank_card_dataServer2);
+
+        Bank_Card_DataServer bank_card_dataServer3 = new Bank_Card_DataServer();
+        bank_card_dataServer3.setText("中国银行");
+        bank_card_dataServer3.setNumber("**** **** **** 1234");
+        bank_card_dataServer3.setPic(R.mipmap.bank);
+        bank_card_dataServer3.setBackgroundcolor(Color.parseColor("#EBFBC82D"));
+        mDataServer.add(bank_card_dataServer3);
+
+        Bank_Card_DataServer bank_card_dataServer4 = new Bank_Card_DataServer();
+        bank_card_dataServer4.setText("中国银行");
+        bank_card_dataServer4.setNumber("**** **** **** 1234");
+        bank_card_dataServer4.setPic(R.mipmap.bank);
+        bank_card_dataServer4.setBackgroundcolor(Color.parseColor("#FF7791"));
+        mDataServer.add(bank_card_dataServer4);
+
 
     }
 }

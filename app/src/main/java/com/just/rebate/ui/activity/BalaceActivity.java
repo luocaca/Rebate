@@ -1,32 +1,37 @@
 package com.just.rebate.ui.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.just.rebate.R;
+import com.rebate.base.activity.BaseActivity;
 
-public class BalaceActivity extends AppCompatActivity {
-    private Button mBtn_Cash;
-    private ImageView mIv_back;
+import butterknife.BindView;
+
+public class BalaceActivity extends BaseActivity {
+//    private ImageView mIv_back;
+
+    @BindView(R.id.blance_to_cash)
+    Button mBtn_Cash;
+
+
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.balance);
-        mIv_back=findViewById(R.id.back_Balace);
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+    protected void requestData() {
 
-        mBtn_Cash = findViewById(R.id.blance_to_cash);
+    }
+
+    @Override
+    protected void initView() {
+        initOnClick();
+
+    }
+
+    private void initOnClick() {
         mBtn_Cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,5 +39,11 @@ public class BalaceActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public int bindLayoutId() {
+        return R.layout.balance;
     }
 }

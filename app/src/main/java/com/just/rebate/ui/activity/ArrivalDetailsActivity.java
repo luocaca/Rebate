@@ -5,7 +5,6 @@ package com.just.rebate.ui.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,8 +28,8 @@ public class ArrivalDetailsActivity extends BaseActivity {
     @BindView(R.id.rv_list3)
     RecyclerView mrecyclerView;
 
-    @BindView(R.id.back_ArrivalDetails)
-    ImageView mIv_back;
+//    @BindView(R.id.back_ArrivalDetails)
+//    ImageView mIv_back;
     private List<DataServer> mDataServer=new ArrayList<>();
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +48,9 @@ public class ArrivalDetailsActivity extends BaseActivity {
         initonClick();
 
     }
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     @Override
     public int bindLayoutId() {
@@ -56,12 +58,12 @@ public class ArrivalDetailsActivity extends BaseActivity {
     }
 
     private void initonClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+//        mIv_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();onBackPressed();
+//            }
+//        });
     }
 
 

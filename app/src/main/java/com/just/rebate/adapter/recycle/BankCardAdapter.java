@@ -33,7 +33,7 @@ public class BankCardAdapter extends RecyclerView.Adapter<BankCardAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == NORMAL_VIEW) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bank_card, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bank_card1, parent, false);
             return new ViewHolder(view, viewType);
         } else {
             View footview = LayoutInflater.from(context).inflate(R.layout.footview_layout,parent, false);
