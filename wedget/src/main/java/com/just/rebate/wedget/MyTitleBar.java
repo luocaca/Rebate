@@ -103,6 +103,18 @@ public class MyTitleBar extends RelativeLayout {
         leftView.setPadding((int) getResources().getDimension(R.dimen.dimen_0), (int) getResources().getDimension(R.dimen.dimen_7), (int) getResources().getDimension(R.dimen.dimen_7), (int) getResources().getDimension(R.dimen.dimen_7));
         leftView.setGravity(Gravity.CENTER);
 
+
+
+
+
+
+
+
+
+
+
+
+
         leftView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

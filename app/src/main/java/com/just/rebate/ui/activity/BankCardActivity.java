@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 银行卡
@@ -37,10 +36,6 @@ public class BankCardActivity extends BaseActivity {
     List<Bank_Card_DataServer> mDataServer = new ArrayList<>();
 
 
-    @OnClick(R.id.title)
-    public void doBack() {
-        finish();
-    }
 
 
     @Override
@@ -52,6 +47,11 @@ public class BankCardActivity extends BaseActivity {
     protected void initView() {
         initData();
         initRecyclerview();
+    }
+
+    @Override
+    protected int bindTitleViewId() {
+        return R.id.title;
     }
 
     @Override

@@ -17,6 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical">
 
 
@@ -39,7 +40,7 @@
                         android:gravity="center"
                         android:text="邀请赚钱"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_title_xl" />
+                        android:textSize="@dimen/text_size_title" />
 
                     <TextView
                         android:id="@+id/Details"
@@ -49,7 +50,7 @@
                         android:gravity="center"
                         android:text="明细"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_title_xl" />
+                        android:textSize="@dimen/text_size_title" />
 
                 </LinearLayout>
 
@@ -61,7 +62,7 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_marginLeft="@dimen/default_margin"
                         android:background="@drawable/shape_corner"
                         android:drawableLeft="@mipmap/volume"
@@ -69,8 +70,9 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/padding_left"
                         android:paddingRight="@dimen/padding_right"
+                        android:textColor="@color/text666"
                         android:text="手机尾号1587的用户到账12元现金"
-                        android:textSize="@dimen/text_size_content_s" />
+                        android:textSize="@dimen/text_size_content" />
 
                     <TextView
                         android:id="@+id/Rule"
@@ -82,7 +84,7 @@
                         android:gravity="center|right"
                         android:text="活动规则 >"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_content_s" />
+                        android:textSize="@dimen/text_size_content" />
 
                 </LinearLayout>
 
@@ -95,11 +97,12 @@
                 android:layout_marginTop="-30dp"
                 android:layout_marginRight="@dimen/default_margin"
                 android:background="@drawable/shape_corner"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="60dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -109,10 +112,11 @@
                         android:gravity="bottom"
                         android:paddingLeft="@dimen/padding_left"
                         android:text="预计总收益（元）"
-                        android:textSize="@dimen/text_size_title_xl" />
+                        android:textColor="@color/text666"
+                        android:textSize="@dimen/text_size_title" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_weight="1">
 
@@ -123,8 +127,8 @@
                             android:layout_marginLeft="@dimen/default_margin"
                             android:gravity="center"
                             android:text="0.00"
-                            android:textColor="@color/text_color_Pink"
-                            android:textSize="@dimen/text_size_title_xl" />
+                            android:textColor="@color/TheMeColor"
+                            android:textSize="@dimen/text_size_title" />
 
                         <TextView
                             android:id="@+id/money"
@@ -133,20 +137,19 @@
                             android:layout_marginLeft="5dp"
                             android:gravity="center_vertical"
                             android:text="(0.00元即将到账)"
-                            android:textColor="@color/text_color_Pink"
+                            android:textColor="@color/TheMeColor"
                             android:textSize="@dimen/text_size_content_s" />
 
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="right"
-                            android:layout_marginLeft="200dp"
-                            android:src="@mipmap/rightarrow" />
-
-
                     </LinearLayout>
-
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:src="@mipmap/rightarrow"
+                    android:tint="#F7A296" />
 
             </LinearLayout>
 
@@ -156,7 +159,7 @@
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin_top"
                 android:layout_marginRight="@dimen/default_margin"
-                android:background="@drawable/shape_corner"
+                android:background="@drawable/shape_corner_left_top_right_top"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -171,7 +174,7 @@
                         android:layout_height="29dp"
                         android:gravity="center|bottom"
                         android:text="0"
-                        android:textColor="@color/text_color_Pink"
+                        android:textColor="@color/TheMeColor"
                         android:textSize="@dimen/text_size_title" />
 
                     <TextView
@@ -185,7 +188,7 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="1dp"
+                    android:layout_width="1px"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:background="#E5E5E5"
@@ -204,7 +207,7 @@
                         android:layout_height="28dp"
                         android:gravity="bottom|center"
                         android:text="0"
-                        android:textColor="@color/text_color_Pink"
+                        android:textColor="@color/TheMeColor"
                         android:textSize="@dimen/text_size_title" />
 
                     <TextView
@@ -219,13 +222,19 @@
 
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginRight="@dimen/default_margin"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:background="@drawable/underline"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
-                android:background="@color/default_bg"
+                android:background="@android:color/white"
                 android:orientation="horizontal">
 
 
@@ -238,6 +247,7 @@
                     android:orientation="vertical"
                     android:paddingTop="20dp"
                     android:paddingBottom="20dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -249,7 +259,7 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="28dp"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/fenxiang" />
 
                         <com.fang.dashview.DashView
@@ -272,8 +282,7 @@
                         android:paddingLeft="15dp"
                         android:text="分享给好友邀请码"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                         />
+                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -285,6 +294,7 @@
                     android:orientation="vertical"
                     android:paddingTop="20dp"
                     android:paddingBottom="20dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -296,8 +306,8 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
 
                         <ImageView
@@ -305,7 +315,7 @@
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/download" />
 
                         <com.fang.dashview.DashView
@@ -327,8 +337,7 @@
                         android:paddingLeft="14dp"
                         android:text="好友下载我要返利app"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                         />
+                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -352,8 +361,8 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
 
                         <ImageView
@@ -361,7 +370,7 @@
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/shoppingcart" />
 
                         <com.fang.dashview.DashView
@@ -383,8 +392,7 @@
                         android:paddingLeft="15dp"
                         android:text="好友下单完成"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                         />
+                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -408,8 +416,8 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
 
                         <ImageView
@@ -417,7 +425,7 @@
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/yen" />
 
                     </LinearLayout>
@@ -430,8 +438,7 @@
                         android:paddingLeft="13dp"
                         android:text="好友成为合伙人赚10元"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                        />
+                        android:textSize="9sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -441,7 +448,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginRight="@dimen/default_margin"
-                android:background="@color/default_bg"
+                android:background="@drawable/shape_corner_left_bottom_right_bottom"
                 android:orientation="horizontal">
 
 
@@ -465,7 +472,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="28dp"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/yen" />
 
                         <com.fang.dashview.DashView
@@ -488,8 +495,7 @@
                         android:paddingLeft="17dp"
                         android:text="你赚2元"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                        />
+                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -512,8 +518,8 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
 
                         <ImageView
@@ -521,7 +527,7 @@
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/shoppingcart" />
 
                         <com.fang.dashview.DashView
@@ -530,8 +536,8 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
                     </LinearLayout>
 
@@ -543,8 +549,7 @@
                         android:paddingLeft="13dp"
                         android:text="死党为粉丝好友赚10元"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                         />
+                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -567,8 +572,8 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
 
                         <ImageView
@@ -576,7 +581,7 @@
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/download" />
 
                         <com.fang.dashview.DashView
@@ -598,8 +603,7 @@
                         android:paddingLeft="15dp"
                         android:text="死党下载APP并下单"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                         />
+                        android:textSize="9sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -609,6 +613,7 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:paddingBottom="20dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
@@ -622,8 +627,8 @@
                             android:paddingBottom="3dp"
                             app:dashOrientation="1"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
                     </LinearLayout>
 
@@ -638,8 +643,8 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="3dp"
                             app:dashWidth="1dp"
-                            app:lineHeight="2dp"
                             app:lineColor="#FFD1E5"
+                            app:lineHeight="2dp"
                             app:lineWidth="1dp" />
 
 
@@ -649,7 +654,7 @@
                             android:layout_gravity="center"
                             android:layout_marginRight="24dp"
                             android:background="@drawable/shape_oval"
-                            android:padding="8dp"
+                            android:padding="@dimen/padding_default"
                             android:src="@mipmap/fenxiang" />
 
                     </LinearLayout>
@@ -662,18 +667,37 @@
                         android:paddingLeft="15dp"
                         android:text="好友分享给死党"
                         android:textColor="@color/text666"
-                        android:textSize="9sp"
-                        />
+                        android:textSize="9sp" />
                 </LinearLayout>
             </LinearLayout>
 
+
+
+            <!--<View-->
+                <!--android:layout_marginTop="1px"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--android:layout_marginRight="@dimen/default_margin"-->
+                <!--android:layout_marginLeft="@dimen/default_margin"-->
+
+                <!--/>-->
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@drawable/shape_corner_left_top_right_top"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginRight="@dimen/default_margin">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginTop="55dp"
+                android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
-                android:background="@drawable/textview_border_dash"
+                android:background="@drawable/shape_corner_xl"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -681,8 +705,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="邀请码:"
-                    android:textColor="@color/text333"
-                    android:textSize="16sp" />
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/Code"
@@ -690,8 +714,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="  HMDWY"
-                    android:textColor="@color/zhuti"
-                    android:textSize="@dimen/text_size_title_xl" />
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_title" />
 
                 <TextView
                     android:id="@+id/copy"
@@ -699,30 +724,42 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="    复制"
-                    android:textColor="@color/text_color_Pink"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_content_s" />
+            </LinearLayout>
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
+                android:background="@drawable/shape_corner_left_bottom_right_bottom"
                 android:layout_marginLeft="@dimen/default_margin"
-                android:layout_marginTop="@dimen/default_margin_top"
-                android:layout_marginRight="@dimen/default_margin"
-                android:background="@drawable/shape_corner_xl"
-                android:gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:orientation="horizontal">
+                android:layout_marginRight="@dimen/default_margin">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:background="@drawable/shape_corner_xl"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/Invitation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="分享给好友，赚10元"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/Invitation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="分享给好友，赚10元"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

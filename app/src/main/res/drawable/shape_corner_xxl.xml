@@ -14,8 +14,8 @@
         />
 
     <gradient
-        android:startColor="@color/TheMeColor"
-        android:endColor="@color/TheMeColor"
+        android:startColor="#F7A296"
+        android:endColor="#F7A296"
         android:angle="315"
         android:centerX="0.7"
         android:centerY="0.7"/>

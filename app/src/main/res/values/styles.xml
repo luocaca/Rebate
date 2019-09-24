@@ -63,6 +63,19 @@
         <item name="android:background">@drawable/selector_item_pressed</item>
     </style>
 
+    <style name="TitleBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">65dp</item>
+
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/black_text</item>
+        <item name="android:background">@drawable/shape_color</item>
+        <item name="android:paddingTop">25dp</item>
+        <item name="leftImgId">@mipmap/arrow_white</item>
+        <item name="titleSize">15</item>
+    </style>
+
 
 
 

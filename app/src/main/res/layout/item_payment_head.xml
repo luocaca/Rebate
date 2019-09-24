@@ -39,7 +39,7 @@
             android:gravity="right|center"
             android:layout_weight="1"
             android:text="预估返利2.62元"
-            android:textColor="@color/color_red"
+            android:textColor="@color/color_yanzhengma"
             android:paddingRight="@dimen/padding_right"
             android:textSize="@dimen/text_size_title"
             android:layout_height="match_parent" />

@@ -1,30 +1,25 @@
 package com.just.rebate.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.just.rebate.R;
+import com.just.rebate.adapter.viewpager.VpAdapter;
+import com.just.rebate.ui.fragment.HomeFragment;
 import com.just.rebate.ui.fragment.InviteFragment;
+import com.just.rebate.ui.fragment.OrderFragment;
+import com.just.rebate.ui.fragment.PersonalFragment;
 import com.rebate.base.fragment.BaseFragment;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import com.just.rebate.adapter.viewpager.VpAdapter;
-import com.just.rebate.ui.fragment.HomeFragment;
-import com.just.rebate.ui.fragment.OrderFragment;
-import com.just.rebate.ui.fragment.PersonalFragment;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -101,7 +101,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 startActivity(intent);
         }
     }
-//  android:id="@+id/arrivaldatails"  android:id="@+id/Arrival_account"  android:id="@+id/invalid"
+
     @Override
     protected int bindFragmentLayoutId() {
         return R.layout.fragment_order;

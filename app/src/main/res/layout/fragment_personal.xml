@@ -80,7 +80,7 @@
                 android:gravity="right"
                 android:text="1000"
                 android:textColor="@color/color_white"
-                android:textSize="24sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/moeny_integral"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/head_background"
+    android:background="@color/white_text_color"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/payment_topline"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/default_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+       >
+
+
+        <!--<RadioButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+        <com.just.rebate.wedget.MyCheckBox
+            android:id="@+id/head_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default" />
+
+        <TextView
+            android:id="@+id/order_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:paddingLeft="@dimen/padding_left"
+            android:text="米拉服饰"
+            android:textColor="@color/text333"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_content" />
+    </LinearLayout>
+
+
+</LinearLayout>
