@@ -6,9 +6,9 @@
         android:topLeftRadius="@dimen/default_corner"
         android:topRightRadius="@dimen/default_corner" />
     <gradient
-        android:startColor="#a1a2f1"
-        android:endColor="#D4C4E9"
-        android:centerColor="#a1a2f1"
+        android:startColor="#F7A296"
+        android:endColor="#F7A296"
+        android:centerColor="#F7A296"
         android:angle="315"
         />
 </shape>
