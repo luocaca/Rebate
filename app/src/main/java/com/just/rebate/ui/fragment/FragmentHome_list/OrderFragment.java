@@ -1,4 +1,4 @@
-package com.just.rebate.ui.fragment;
+package com.just.rebate.ui.fragment.FragmentHome_list;
 
 
 import android.app.Activity;
@@ -28,12 +28,8 @@ import com.just.rebate.adapter.recycle.OrderAdapter;
 import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
-import com.just.rebate.ui.activity.ArrivalAccountActivity;
-import com.just.rebate.ui.activity.InvalidOrderActivity;
-import com.just.rebate.ui.activity.MessageNotificationActivity;
 import com.just.rebate.ui.activity.PaymentActivity;
-import com.just.rebate.ui.activity.TrackingProcessingActivity;
-import com.rebate.base.fragment.BaseFragment;
+import com.rebate.base.fragment.BaseLazyFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.rebate.commom.util.bitmap.GlideRoundTransform;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -50,22 +46,12 @@ import okhttp3.Call;
 /**
  * 订单  fragment
  */
-public class OrderFragment extends BaseFragment implements View.OnClickListener {
+public class OrderFragment extends BaseLazyFragment implements View.OnClickListener {
+    private boolean change;
 
     @BindView(R.id.rv_list4)
     RecyclerView recycleView;
 
-    @BindView(R.id.arrivaldatails)
-    TextView mImageView;
-    //
-    @BindView(R.id.Arrival_account)
-    TextView mArrival_account;
-
-    @BindView(R.id.Message_Notification)
-    ImageView mTv_Message_Notification;
-
-    @BindView(R.id.invalid)
-    TextView mInvalid;
 
     @BindView(R.id.order_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -74,7 +60,11 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     TextView mTextOrder_to_Payment;
 
 
-    @OnClick({R.id.Order_to_Payment, R.id.arrivaldatails, R.id.invalid, R.id.Arrival_account, R.id.Message_Notification})
+
+
+
+
+    @OnClick({R.id.Order_to_Payment})
     @Override
     public void onClick(View view) {
         Intent intent;
@@ -83,21 +73,24 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 intent = new Intent(getActivity(), PaymentActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.arrivaldatails:
-                intent = new Intent(getActivity(), TrackingProcessingActivity.class);
-                getActivity().startActivity(intent);
-                break;
-            case R.id.Arrival_account:
-                intent = new Intent(getActivity(), ArrivalAccountActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.invalid:
-                intent = new Intent(getActivity(), InvalidOrderActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.Message_Notification:
-                intent = new Intent(getActivity(), MessageNotificationActivity.class);
-                startActivity(intent);
+//            case R.id.checkbox_context:
+//                if (change){
+//                    mIv_CheckBox_context.setImageResource(R.drawable.checkbox_checked);
+//                }else {
+//                    mIv_CheckBox_context.setImageResource(R.drawable.checkbox_unchecked);
+//                }
+//                change = !change;
+//                break;
+//            case R.id.checkbox_head:
+//                if (change){
+//                    mIv_CheckBox_head.setImageResource(R.drawable.checkbox_checked);
+//                }else {
+//                    mIv_CheckBox_head.setImageResource(R.drawable.checkbox_unchecked);
+//                }
+//                change = !change;
+//                break;
+
+
         }
     }
 
@@ -109,30 +102,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     @Override
     protected void initViewsAndEvents(View view) {
 
-        recycleView.setLayoutManager(new LinearLayoutManager(mActivity));
-        OrderAdapter orderAdapter = new OrderAdapter(new ArrayList()) {
-            @Override
-            protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
-                Log.i(TAG, "convert: " + item);
-                doConvert(mActivity, helper, item, getData());
 
-            }
-        };
-
-        recycleView.setAdapter(orderAdapter);
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestData();
-                    }
-                }, 3000);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
     }
 
 
@@ -152,10 +122,11 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
         } else if (item instanceof ReturnShop) {
             //do conevert 1
             helper.setText(R.id.order_tv, ((ReturnShop) item).getShopName());
+            helper.addOnClickListener(R.id.checkbox_head);
 
 
             boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
-//            helper.setVisible(R.id.topline, isFirstShop);
+//            helper.setVisible(R.id.toplhine, isFirstShop);
 //            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
             if (isFirstShop) {
@@ -200,7 +171,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
 
 
-            helper.getView(R.id.checkbox).setSelected(helper.getAdapterPosition() % 3 == 0);
+//            helper.getView(R.id.checkbox).setSelected(helper.getAdapterPosition() % 3 == 0);
 
 
             boolean islast = isLastOrder(mActivity, helper, item, helper, data);
@@ -249,6 +220,14 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 
 
     public void requestData() {
+
+
+
+    }
+
+
+    @Override
+    protected void onFirstUserVisible() {
         OkHttpUtils
                 .get()
                 .url("http://192.168.1.171:8080/download/platform.txt")//平台数据列表
@@ -278,8 +257,55 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                     }
                 });
 
+        recycleView.setLayoutManager(new LinearLayoutManager(mActivity));
+        OrderAdapter orderAdapter = new OrderAdapter(new ArrayList()) {
+            @Override
+            protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
+                Log.i(TAG, "convert: " + item);
+                doConvert(mActivity, helper, item, getData());
+
+            }
+        };
+        orderAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if(view==view.findViewById(R.id.checkbox_head)){
+                    if (change){
+
+                    }
+                }
+            }
+        });
+
+        recycleView.setAdapter(orderAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        requestData();
+                    }
+                }, 3000);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 
+    @Override
+    protected void onUserVisible() {
 
+    }
+
+    @Override
+    protected void onUserInvisible() {
+
+    }
+
+    @Override
+    protected void destroyViewAndThing() {
+
+    }
 }

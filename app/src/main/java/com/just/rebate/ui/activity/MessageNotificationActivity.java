@@ -1,7 +1,6 @@
 package com.just.rebate.ui.activity;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,10 +24,6 @@ public class MessageNotificationActivity extends BaseActivity {
     @BindView(R.id.rv_list10)
     RecyclerView mRecyclerView;
 
-    @BindView(R.id.img_back)
-    ImageView mIv_back;
-
-
 
     @Override
     protected void requestData() {
@@ -48,12 +43,7 @@ public class MessageNotificationActivity extends BaseActivity {
     }
 
     private void initOnClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+
     }
 
 

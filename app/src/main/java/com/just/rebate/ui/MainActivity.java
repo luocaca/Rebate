@@ -9,9 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.just.rebate.R;
 import com.just.rebate.adapter.viewpager.VpAdapter;
+import com.just.rebate.ui.fragment.OrderFragmentHome;
 import com.just.rebate.ui.fragment.HomeFragment;
 import com.just.rebate.ui.fragment.InviteFragment;
-import com.just.rebate.ui.fragment.OrderFragment;
 import com.just.rebate.ui.fragment.PersonalFragment;
 import com.rebate.base.fragment.BaseFragment;
 
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViewPager() {
 
         mViewPager.setAdapter(new VpAdapter(getSupportFragmentManager(), getInitFragment(), navView));
+        mViewPager.setOffscreenPageLimit(8);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         // new HomeFragment();
         List<BaseFragment> baseFragments = new ArrayList<>();
         baseFragments.add(new HomeFragment());//首页
-        baseFragments.add(new OrderFragment());//订单
+        baseFragments.add(new OrderFragmentHome());//订单
 //        baseFragments.add(new RechargeFragment());//充值界面
         baseFragments.add(new InviteFragment());//邀请界面
         baseFragments.add(new PersonalFragment());//个人中心

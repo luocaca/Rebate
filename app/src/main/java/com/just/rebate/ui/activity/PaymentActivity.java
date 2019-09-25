@@ -128,20 +128,18 @@ public class PaymentActivity extends BaseActivity {
             helper.setText(R.id.rich, ((ReturnPlatform) item).getEstimatedRebate());
         } else if (item instanceof ReturnShop) {
             //do conevert 1
-            helper.setText(R.id.order_tv, ((ReturnShop) item).getShopName());
-
+            helper.setText(R.id.payment_tv, ((ReturnShop) item).getShopName());
 
             boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
-            helper.setVisible(R.id.payment_topline, isFirstShop);
-            helper.getView(R.id.payment_topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
+//            helper.setVisible(R.id.topline, isFirstShop);
+//            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
-            if(isFirstShop){
+            if (isFirstShop) {
                 helper.getView(R.id.payment_topline).setVisibility(View.VISIBLE);
                 helper.getView(R.id.payment_topline).setBackgroundResource(R.drawable.shape_corner_left_top_right_top);
-            }else{
+            } else {
                 helper.getView(R.id.payment_topline).setVisibility(View.GONE);
             }
-
 
 
         } else if (item instanceof ReturnOrder) {
@@ -188,7 +186,6 @@ public class PaymentActivity extends BaseActivity {
     }
 
 
-
     private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
         try {
             Object obj = data.get(helper.getAdapterPosition() + 1);
@@ -208,7 +205,7 @@ public class PaymentActivity extends BaseActivity {
             Object obj1;
             obj1 = data.get(helper.getAdapterPosition() - 1);
 
-            if (obj1 instanceof ReturnOrder ) {
+            if (obj1 instanceof ReturnOrder) {
                 return true;
             } else {
                 return false;

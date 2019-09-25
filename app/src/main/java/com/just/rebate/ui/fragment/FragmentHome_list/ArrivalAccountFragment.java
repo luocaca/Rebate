@@ -1,11 +1,10 @@
-package com.just.rebate.ui.activity;
+package com.just.rebate.ui.fragment.FragmentHome_list;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,7 +26,8 @@ import com.just.rebate.base.BaseResponse;
 import com.just.rebate.entity.ArrivalAccountItem;
 import com.just.rebate.entity.order.跟踪处理.TrackingProcess;
 import com.just.rebate.entity.order.跟踪处理.TrackingProcessOrder;
-import com.rebate.base.activity.BaseActivity;
+import com.just.rebate.ui.activity.OrderDetailsActivity;
+import com.rebate.base.fragment.BaseLazyFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.rebate.commom.util.bitmap.GlideRoundTransform;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -44,80 +44,35 @@ import okhttp3.Call;
 /**
  * title最近到账
  */
-public class ArrivalAccountActivity extends BaseActivity {
+public class ArrivalAccountFragment extends BaseLazyFragment {
     private List<ArrivalAccountItem> mDatas;
 
 
     @BindView(R.id.rv_list5)
     RecyclerView mRecyclerview;
 
-    @BindView(R.id.ArrivalAccount_to_Invalid)
-    TextView mImageViewArrivalAccoount1;
-
-    @BindView(R.id.ArrivalAccount_to_Order)
-    TextView mImageViewArrivalAccoount2;
-
-    @BindView(R.id.ArrivalAccount_to_Track)
-    TextView mImageViewArrivalAccount3;
-
-    @BindView(R.id.img_back)
-    ImageView mIv_back;
 
 
     @Override
-    public int bindLayoutId() {
+    protected int bindFragmentLayoutId() {
         return R.layout.activity_arrival_account;
     }
 
+    @Override
+    protected void initViewsAndEvents(View view) {
+
+
+    }
 
     @Override
-    protected void initView() {
-        initRecyclerView();
-        initData();
-        initOnClick();
+    protected void initData() {
 
-    }
+        }
 
-    private void initOnClick() {
-        mImageViewArrivalAccoount1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ArrivalAccountActivity.this, InvalidOrderActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        mImageViewArrivalAccoount2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent=new Intent(ArrivalAccountActivity.this,TrackingProcessingActivity.class);
-//                startActivity(intent);
-            }
-        });
-
-        mImageViewArrivalAccount3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ArrivalAccountActivity.this, TrackingProcessingActivity.class);
-                startActivity(intent);
-            }
-        });
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                onBackPressed();
-            }
-        });
-
-    }
-
-    private void initData() {
-
-    }
 
     private void initRecyclerView() {
-        mRecyclerview.setLayoutManager(new GridLayoutManager(this, 1));
+        mRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         ArrivalAccountAdapter arrivalAccountAdapter = new ArrivalAccountAdapter(new ArrayList()) {
 
             @Override
@@ -128,11 +83,11 @@ public class ArrivalAccountActivity extends BaseActivity {
                 }
             }
         };
-        //bug
+
         arrivalAccountAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(ArrivalAccountActivity.this, OrderDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), OrderDetailsActivity.class);
                 startActivity(intent);
             }
         });
@@ -183,8 +138,41 @@ public class ArrivalAccountActivity extends BaseActivity {
         }
     }
 
+
+    /**
+     * 为子类设置 父类对象
+     *
+     * @param integer
+     * @param data
+     */
+    private void setChilds(TrackingProcess integer, List<TrackingProcessOrder> data) {
+        for (TrackingProcessOrder datum : data) {
+            datum.setTrackingProcess(integer);
+        }
+//        int startIndex = -1;
+//        int nextHeadIndex = -1;
+//        for (int i = 0; i < data.size(); i++) {
+//
+//            if (data.get(i).equals(integer)) {
+//                startIndex = i;
+//            }
+//            if (i > startIndex)
+//            {
+//                if (data.get(i) instanceof TrackingProcess)
+//                {
+//
+//                }
+//            }
+//
+//        }
+    }
+
+
     @Override
-    protected void requestData() {
+    protected void onFirstUserVisible() {
+        initRecyclerView();
+
+
         OkHttpUtils
                 .get()
                 .url("http://192.168.1.171:8080/download/rebate/api/trac.txt")//跟踪信息
@@ -229,37 +217,23 @@ public class ArrivalAccountActivity extends BaseActivity {
 
                     }
                 });
+
     }
 
-    /**
-     * 为子类设置 父类对象
-     *
-     * @param integer
-     * @param data
-     */
-    private void setChilds(TrackingProcess integer, List<TrackingProcessOrder> data) {
-        for (TrackingProcessOrder datum : data) {
-            datum.setTrackingProcess(integer);
-        }
-//        int startIndex = -1;
-//        int nextHeadIndex = -1;
-//        for (int i = 0; i < data.size(); i++) {
-//
-//            if (data.get(i).equals(integer)) {
-//                startIndex = i;
-//            }
-//            if (i > startIndex)
-//            {
-//                if (data.get(i) instanceof TrackingProcess)
-//                {
-//
-//                }
-//            }
-//
-//        }
+    @Override
+    protected void onUserVisible() {
+
     }
 
+    @Override
+    protected void onUserInvisible() {
 
+    }
+
+    @Override
+    protected void destroyViewAndThing() {
+
+    }
 }
 
 

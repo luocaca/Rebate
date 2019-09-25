@@ -144,26 +144,7 @@ public class InvalidOrderActivity extends BaseActivity {
     }
 
     private void initOnClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
-        mInvalidOrder_to_ArrivalAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1=new Intent(InvalidOrderActivity.this,ArrivalAccountActivity.class);
-                startActivity(intent1);
-            }
-        });
-        mInvalidOrder_to_Track.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2=new Intent(InvalidOrderActivity.this,TrackingProcessingActivity.class);
-                startActivity(intent2);
-            }
-        });
+
 
     }
 

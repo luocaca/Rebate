@@ -1,15 +1,14 @@
-package com.just.rebate.ui.activity;
+package com.just.rebate.ui.fragment.FragmentHome_list;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,10 +23,11 @@ import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.TrackingProcessingAdapter;
 import com.just.rebate.base.BaseResponse;
-import com.just.rebate.entity.TrackingProcessingItem;
 import com.just.rebate.entity.order.跟踪处理.TrackingProcess;
 import com.just.rebate.entity.order.跟踪处理.TrackingProcessOrder;
-import com.rebate.base.activity.BaseActivity;
+import com.just.rebate.ui.activity.OrderDetailsActivity;
+import com.just.rebate.ui.activity.SuccessActivity;
+import com.rebate.base.fragment.BaseLazyFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.rebate.commom.util.bitmap.GlideRoundTransform;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -41,28 +41,56 @@ import java.util.List;
 import butterknife.BindView;
 import okhttp3.Call;
 
-public class TrackingProcessingActivity extends BaseActivity {
+public class TrackingProcessingFragment extends BaseLazyFragment implements View.OnClickListener {
 
+
+    private String TAG = this.getClass().getSimpleName();
 
     @BindView(R.id.rv_list6)
     RecyclerView mrecyclerView;
 
-    @BindView(R.id.back_trck)
-    ImageView mIv_back;
-
-    @BindView(R.id.Track_to_ArrivalAccount)
-    TextView mIv_Account;
-
-    @BindView(R.id.Track_to_Ivalid)
-    TextView mIv_inValid;
-
-
-    private List<TrackingProcessingItem> mDatas;
 
     @Override
-    protected void initView() {
-        initRecyclerview();
-        initonClick();
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    protected int bindFragmentLayoutId() {
+        return R.layout.activity_tracking_processing;
+    }
+
+    @Override
+    protected void initViewsAndEvents(View view) {
+
+
+    }
+
+    private void initRecyclerview() {
+        mrecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        TrackingProcessingAdapter trackingProcessingAdapter = new TrackingProcessingAdapter(new ArrayList()) {
+
+            @Override
+            protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
+                if (item.getItemType() == 1) {
+                } else {
+                    doConvert(getActivity(), helper, item);
+                }
+            }
+        };
+        trackingProcessingAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (view == view.findViewById(R.id.order_details)) {
+                    Intent intent1 = new Intent(getActivity(), SuccessActivity.class);
+                    startActivity(intent1);
+                } else if (view == view.findViewById(R.id.transition_position_to_success)) {
+                    Intent intent2 = new Intent(getActivity(), OrderDetailsActivity.class);
+                    startActivity(intent2);
+                }
+            }
+        });
+        mrecyclerView.setAdapter(trackingProcessingAdapter);
     }
 
     public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item) {
@@ -109,10 +137,42 @@ public class TrackingProcessingActivity extends BaseActivity {
         }
     }
 
-    private String TAG = this.getClass().getSimpleName();
 
     @Override
-    protected void requestData() {
+    protected void initData() {
+    }
+    /**
+     * 为子类设置 父类对象
+     *
+     * @param integer
+     * @param data
+     */
+    private void setChilds(TrackingProcess integer, List<TrackingProcessOrder> data) {
+        for (TrackingProcessOrder datum : data) {
+            datum.setTrackingProcess(integer);
+        }
+//        int startIndex = -1;
+//        int nextHeadIndex = -1;
+//        for (int i = 0; i < data.size(); i++) {
+//
+//            if (data.get(i).equals(integer)) {
+//                startIndex = i;
+//            }
+//            if (i > startIndex)
+//            {
+//                if (data.get(i) instanceof TrackingProcess)
+//                {
+//
+//                }
+//            }
+//
+//        }
+    }
+
+
+    @Override
+    protected void onFirstUserVisible() {
+        initRecyclerview();
         OkHttpUtils
                 .get()
                 .url("http://192.168.1.171:8080/download/rebate/api/trac.txt")//跟踪信息
@@ -159,92 +219,18 @@ public class TrackingProcessingActivity extends BaseActivity {
                 });
     }
 
-    /**
-     * 为子类设置 父类对象
-     *
-     * @param integer
-     * @param data
-     */
-    private void setChilds(TrackingProcess integer, List<TrackingProcessOrder> data) {
-        for (TrackingProcessOrder datum : data) {
-            datum.setTrackingProcess(integer);
-        }
-//        int startIndex = -1;
-//        int nextHeadIndex = -1;
-//        for (int i = 0; i < data.size(); i++) {
-//
-//            if (data.get(i).equals(integer)) {
-//                startIndex = i;
-//            }
-//            if (i > startIndex)
-//            {
-//                if (data.get(i) instanceof TrackingProcess)
-//                {
-//
-//                }
-//            }
-//
-//        }
-    }
+    @Override
+    protected void onUserVisible() {
 
-
-    private void initonClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                onBackPressed();
-            }
-        });
-
-        mIv_Account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TrackingProcessingActivity.this, ArrivalAccountActivity.class);
-                startActivity(intent);
-            }
-        });
-        mIv_inValid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TrackingProcessingActivity.this, InvalidOrderActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void initRecyclerview() {
-        mrecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        TrackingProcessingAdapter trackingProcessingAdapter = new TrackingProcessingAdapter(new ArrayList()) {
-
-            @Override
-            protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
-                if (item.getItemType() == 1) {
-                } else {
-                    doConvert(mActivity, helper, item);
-                }
-            }
-        };
-        trackingProcessingAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if (view == findViewById(R.id.order_details)) {
-                    Intent intent1=new Intent(TrackingProcessingActivity.this,SuccessActivity.class);
-                    startActivity(intent1);
-                } else if (view == findViewById(R.id.transition_position_to_success)) {
-                    Intent intent2 = new Intent(TrackingProcessingActivity.this,OrderDetailsActivity .class);
-                    startActivity(intent2);
-                }
-            }
-        });
-
-        mrecyclerView.setAdapter(trackingProcessingAdapter);
     }
 
     @Override
-    public int bindLayoutId() {
-        return R.layout.activity_tracking_processing;
+    protected void onUserInvisible() {
+
     }
 
+    @Override
+    protected void destroyViewAndThing() {
 
+    }
 }

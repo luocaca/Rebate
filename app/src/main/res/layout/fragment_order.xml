@@ -7,58 +7,11 @@
     android:layout_height="match_parent"
     android:background="@color/default_bg"
     android:orientation="vertical"
-    tools:context="com.just.rebate.ui.fragment.OrderFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="@drawable/shape_color"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:layout_marginTop="35dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="@dimen/padding_left"
-                android:text="全部订单"
-                android:textColor="@color/text_color_white"
-                android:textSize="15sp" />
-
-            <EditText
-                android:layout_width="235dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="18dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_corner_x"
-                android:drawableLeft="@mipmap/search2"
-                android:hint="输入订单号"
-                android:padding="5dp"
-                android:textColorHint="@color/color_Grid"
-                android:textSize="@dimen/text_size_content_ss" />
-
-            <ImageView
-                android:id="@+id/Message_Notification"
-                android:layout_width="22dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="@dimen/default_margin"
-                android:src="@mipmap/chat2" />
-
-        </LinearLayout>
-    </LinearLayout>
+    tools:context="com.just.rebate.ui.fragment.FragmentHome_list.OrderFragment">
 
 
-    <include layout="@layout/toolbar_layout" />
+
+
 
     <!--<androidx.appcompat.widget.Toolbar-->
     <!--android:layout_width="match_parent"-->
@@ -71,38 +24,6 @@
     <!--</androidx.appcompat.widget.Toolbar>-->
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:background="@color/TheMeColor"
-        app:tabIndicatorColor="@color/touming"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="#8B7574">
-
-        <!-- app:tabTextColor="#B36F6F"-->
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="最近下单" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="跟踪处理" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="最近到账" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="无效订单" />
-
-
-    </com.google.android.material.tabs.TabLayout>
 
 
     <LinearLayout
@@ -184,6 +105,9 @@
         </LinearLayout>
     </LinearLayout>
 
+
+
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/order_refresh"
         android:layout_width="match_parent"
@@ -191,6 +115,10 @@
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:layout_weight="1">
+
+
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list4"
@@ -240,10 +168,12 @@
 
     </LinearLayout>
 
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@drawable/underline" />
+
 
 
 </LinearLayout>
