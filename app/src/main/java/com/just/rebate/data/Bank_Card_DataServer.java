@@ -6,10 +6,20 @@ public class Bank_Card_DataServer {
       public  String number;
       public  int pic;
 
+
+    public int backgroundcolor;
+
       public Bank_Card_DataServer(){
 
       }
 
+    public int getBackgroundcolor() {
+        return backgroundcolor;
+    }
+
+    public void setBackgroundcolor(int backgroundcolor) {
+        this.backgroundcolor = backgroundcolor;
+    }
 
     public String getText() {
         return text;

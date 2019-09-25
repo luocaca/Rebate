@@ -46,33 +46,20 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/rv_SwipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/default_margin">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_bank_card"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="@dimen/default_margin"
-        android:background="@drawable/textview_border_dash_x"
-        android:drawableLeft="@mipmap/plus"
-        android:drawablePadding="5dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/padding_left"
-        android:text="添加银行卡"
-        android:textColor="@color/text333"
-        android:textSize="@dimen/text_size_title" />
 
 
 </LinearLayout>

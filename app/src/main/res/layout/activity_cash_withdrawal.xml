@@ -36,12 +36,7 @@
 
     <com.just.rebate.wedget.MyTitleBar
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="@drawable/shape_color"
-        android:paddingTop="25dp"
-        app:leftImgId="@mipmap/arrow_white"
-        app:titleSize="15"
+        style="@style/TitleBar"
         app:titleText="提现" />
 
 

@@ -1,21 +1,40 @@
 package com.just.rebate.ui.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.just.rebate.R;
+import com.rebate.base.activity.BaseActivity;
 
-public class SuccessActivity extends AppCompatActivity {
-    private ImageView mIv_back;
+import butterknife.BindView;
+
+public class SuccessActivity extends BaseActivity {
+
+
+
+    @BindView(R.id.img_back)
+    ImageView mIv_back;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_success);
-        mIv_back=findViewById(R.id.img_back);
+    public int bindLayoutId() {
+        return R.layout.activity_success;
+    }
+
+
+    @Override
+    protected void requestData() {
+
+    }
+
+    @Override
+    protected void initView() {
+        initOnClick();
+
+    }
+
+    private void initOnClick() {
         mIv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -23,4 +42,6 @@ public class SuccessActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

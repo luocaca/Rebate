@@ -3,7 +3,6 @@ package com.just.rebate.ui.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,8 +23,8 @@ public class DetailedActivity extends BaseActivity {
     @BindView(R.id.rv_list7)
     RecyclerView mrecyclerView;
 
-    @BindView(R.id.back_Detaile)
-    ImageView mIv_back;
+//    @BindView(R.id.back_Detaile)
+//    ImageView mIv_back;
 
     private List<detailed_DataServer> mDataServer=new ArrayList<>();
 
@@ -46,6 +45,10 @@ public class DetailedActivity extends BaseActivity {
         initData();
 
     }
+    @Override
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     @Override
     public int bindLayoutId() {
@@ -53,12 +56,12 @@ public class DetailedActivity extends BaseActivity {
     }
 
     private void initonClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+//        mIv_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();onBackPressed();
+//            }
+//        });
     }
 
 

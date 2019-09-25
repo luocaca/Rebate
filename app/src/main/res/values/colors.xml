@@ -13,10 +13,11 @@
     <color name="white_text_color_fe">#FeFeFe</color>
     <color name="gray_color">#4b4b58</color>
     <color name="hard_color">#48495f</color>
-    <color name="clickspan_color">#00ddb6</color>
+    <color name="clickspan_color">#04856F</color>
     <color name="dull_blue">#3B4BBF</color>
     <color name="baise">#CCC5C5</color>
     <color name="zonghuang">#F2601E</color>
+    <color name="jinhuang">#EBFBC82D</color>
     <color name="touming">#00000000</color>
     <color name="beijing">#F2F2F2</color>
     <color name="tianlan">#628Ef9</color>

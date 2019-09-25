@@ -1,8 +1,6 @@
 package com.just.rebate.ui.activity;
 
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,8 +20,8 @@ public class ChatActivity extends BaseActivity {
     @BindView(R.id.rv_list9)
     RecyclerView recyclerView;
 
-    @BindView(R.id.back_Chat)
-    ImageView mIv_back;
+//    @BindView(R.id.back_Chat)
+//    ImageView mIv_back;
 
     List<Chat_Msg_DataServer> msg = new ArrayList<>();
 
@@ -39,14 +37,18 @@ public class ChatActivity extends BaseActivity {
         initonClick();
 
     }
+    @Override
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     private void initonClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+//        mIv_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();onBackPressed();
+//            }
+//        });
     }
 
 

@@ -2,17 +2,11 @@ package com.just.rebate.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.just.rebate.R;
 import com.just.rebate.ui.fragment.PayFragment;
-import com.just.rebate.wedget.webview.PwdEditText;
 import com.rebate.base.activity.BaseActivity;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 
 public class CashWithdrawalActivity extends BaseActivity implements View.OnClickListener {
@@ -50,6 +44,7 @@ public class CashWithdrawalActivity extends BaseActivity implements View.OnClick
     protected void initView() {
 
     }
+
 
     @Override
     public int bindLayoutId() {

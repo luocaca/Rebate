@@ -132,8 +132,8 @@ public class PaymentActivity extends BaseActivity {
 
 
             boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
-//            helper.setVisible(R.id.topline, isFirstShop);
-//            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
+            helper.setVisible(R.id.payment_topline, isFirstShop);
+            helper.getView(R.id.payment_topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
             if(isFirstShop){
                 helper.getView(R.id.payment_topline).setVisibility(View.VISIBLE);

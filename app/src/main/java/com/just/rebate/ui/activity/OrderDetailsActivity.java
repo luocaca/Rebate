@@ -1,26 +1,26 @@
 package com.just.rebate.ui.activity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.just.rebate.R;
+import com.rebate.base.activity.BaseActivity;
 
-public class OrderDetailsActivity extends AppCompatActivity {
-    private ImageView mIv_back;
+public class OrderDetailsActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
-        mIv_back=findViewById(R.id.back_orderdetails);
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+    protected void requestData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+    @Override
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
+
+    @Override
+    public int bindLayoutId() {
+        return R.layout.activity_order_details;
     }
 }

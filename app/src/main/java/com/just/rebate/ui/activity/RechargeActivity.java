@@ -39,8 +39,8 @@ public class RechargeActivity extends BaseActivity {
     @BindView(R.id.radio)
     RadioGroup radioGroup;
 
-    @BindView(R.id.bakc_Recharge)
-    ImageView mIv_back;
+//    @BindView(R.id.bakc_Recharge)
+//    ImageView mIv_back;
 
 
     private View currentSelectView;
@@ -63,14 +63,18 @@ public class RechargeActivity extends BaseActivity {
         initonClick();
 
     }
+    @Override
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     private void initonClick() {
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();onBackPressed();
-            }
-        });
+//        mIv_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();onBackPressed();
+//            }
+//        });
 
     }
 

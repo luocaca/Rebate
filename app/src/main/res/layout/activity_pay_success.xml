@@ -21,6 +21,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/Image_back"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -50,7 +51,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,48 +61,6 @@
         android:background="@drawable/shape_corner"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/ArrivalAccount_to_Order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/zuijxiadan" />
-
-            <ImageView
-                android:id="@+id/arrivaldatails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/genzong" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/zuijin" />
-
-            <ImageView
-                android:id="@+id/ArrivalAccount_to_Ivalid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingTop="@dimen/padding_top"
-                android:paddingBottom="3.5dp"
-                android:src="@mipmap/wuxiao" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,48 +68,64 @@
             android:orientation="horizontal">
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/PaySuccess_to_Order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:drawableTop="@mipmap/zuijxiadan"
+                android:drawablePadding="7dp"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="最近下单"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content" />
+                android:textColor="@color/text666"
+                android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/PaySuccess_to_Track"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:drawableTop="@mipmap/genzong"
+                android:drawablePadding="7dp"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="跟踪处理"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content" />
+                android:textColor="@color/text666"
+                android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/PaySuccess_to_Arrival_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:drawableTop="@mipmap/zuijin"
+                android:drawablePadding="7dp"
+                android:paddingBottom="7dp"
                 android:text="最近到账"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content" />
+                android:textColor="@color/text666"
+                android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:foreground="?attr/selectableItemBackground"
+                android:id="@+id/PaySuccess_to_Invalid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:drawablePadding="7dp"
+                android:drawableTop="@mipmap/wuxiao"
                 android:paddingTop="3.5dp"
-                android:paddingBottom="@dimen/padding_top"
+                android:paddingBottom="7dp"
                 android:text="无效订单"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content" />
+                android:textColor="@color/text666"
+                android:textSize="@dimen/text_size_content_s" />
 
         </LinearLayout>
     </LinearLayout>

@@ -42,6 +42,10 @@ public class MessageNotificationActivity extends BaseActivity {
         initOnClick();
 
     }
+    @Override
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     private void initOnClick() {
         mIv_back.setOnClickListener(new View.OnClickListener() {
