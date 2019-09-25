@@ -41,6 +41,9 @@ import java.util.List;
 import butterknife.BindView;
 import okhttp3.Call;
 
+/**
+ * title最近到账
+ */
 public class ArrivalAccountActivity extends BaseActivity {
     private List<ArrivalAccountItem> mDatas;
 
@@ -61,14 +64,10 @@ public class ArrivalAccountActivity extends BaseActivity {
     ImageView mIv_back;
 
 
-
     @Override
     public int bindLayoutId() {
         return R.layout.activity_arrival_account;
     }
-
-
-
 
 
     @Override
@@ -94,19 +93,20 @@ public class ArrivalAccountActivity extends BaseActivity {
 //                Intent intent=new Intent(ArrivalAccountActivity.this,TrackingProcessingActivity.class);
 //                startActivity(intent);
             }
-      });
+        });
 
         mImageViewArrivalAccount3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ArrivalAccountActivity.this,TrackingProcessingActivity.class);
+                Intent intent = new Intent(ArrivalAccountActivity.this, TrackingProcessingActivity.class);
                 startActivity(intent);
             }
         });
         mIv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();onBackPressed();
+                finish();
+                onBackPressed();
             }
         });
 
@@ -139,6 +139,7 @@ public class ArrivalAccountActivity extends BaseActivity {
         mRecyclerview.setAdapter(arrivalAccountAdapter);
 
     }
+
     public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item) {
 
         if (item instanceof TrackingProcessOrder) {

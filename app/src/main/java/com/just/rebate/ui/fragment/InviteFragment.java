@@ -29,7 +29,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 /**
- * 邀请 fragment
+ * title邀请赚钱
  */
 public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -75,14 +75,14 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
         mText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), DetailedActivity.class);
+                Intent intent = new Intent(getActivity(), DetailedActivity.class);
                 startActivity(intent);
             }
         });
         mTextRule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), RuleActivity.class);
+                Intent intent = new Intent(getActivity(), RuleActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,9 +92,9 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "复制成功", Toast.LENGTH_SHORT).show();
-                ClipboardManager clipboardManager= (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboardManager.setPrimaryClip(ClipData.newPlainText(null,"你好你好"));
-                if (clipboardManager.hasPrimaryClip()){
+                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                clipboardManager.setPrimaryClip(ClipData.newPlainText(null, "你好你好"));
+                if (clipboardManager.hasPrimaryClip()) {
                     clipboardManager.getPrimaryClip().getItemAt(0).getText();
                 }
             }
@@ -156,9 +156,9 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                     @Override
                     public void onResponse(BaseResponse<InviteInfo> response, int id) {
                         Log.i(TAG, "onResponse: ");
-                        String string1,string2;
-                        string1="分享给好友，赚"+response.getData().shareEarn+"元";
-                        string2="("+response.getData().timelyProfit+"元即将到账)";
+                        String string1, string2;
+                        string1 = "分享给好友，赚" + response.getData().shareEarn + "元";
+                        string2 = "(" + response.getData().timelyProfit + "元即将到账)";
                         profit.setText(response.getData().totalProfit);
                         money.setText(string2);
                         partner.setText(response.getData().numberOfPartners);

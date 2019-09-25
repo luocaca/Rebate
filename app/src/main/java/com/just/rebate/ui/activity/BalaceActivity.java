@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.just.rebate.R;
 
+/**
+ * title提现
+ */
 public class BalaceActivity extends AppCompatActivity {
     private Button mBtn_Cash;
     private ImageView mIv_back;

@@ -1,7 +1,6 @@
 package com.just.rebate.ui.activity;
 
 
-
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +22,9 @@ import java.util.List;
 import butterknife.BindView;
 
 
-
+/**
+ * title到账明细
+ */
 public class ArrivalDetailsActivity extends BaseActivity {
 
     @BindView(R.id.rv_list3)
@@ -31,12 +32,13 @@ public class ArrivalDetailsActivity extends BaseActivity {
 
     @BindView(R.id.back_ArrivalDetails)
     ImageView mIv_back;
-    private List<DataServer> mDataServer=new ArrayList<>();
+    private List<DataServer> mDataServer = new ArrayList<>();
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
     @Override
     protected void requestData() {
 
@@ -59,23 +61,24 @@ public class ArrivalDetailsActivity extends BaseActivity {
         mIv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();onBackPressed();
+                finish();
+                onBackPressed();
             }
         });
     }
 
 
-    private void initRecyclerview(){
-        mrecyclerView=findViewById(R.id.rv_list3);
-        ArrivalDetailsAdapter mArrivalDetailsAdapter=new ArrivalDetailsAdapter(mDataServer);
+    private void initRecyclerview() {
+        mrecyclerView = findViewById(R.id.rv_list3);
+        ArrivalDetailsAdapter mArrivalDetailsAdapter = new ArrivalDetailsAdapter(mDataServer);
         mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mrecyclerView.addItemDecoration(new MyDecoration());
         mrecyclerView.setAdapter(mArrivalDetailsAdapter);
 
-}
+    }
 
     private void initData() {
-        DataServer dataServer=new DataServer();
+        DataServer dataServer = new DataServer();
         dataServer.setName("淘宝购物");
         dataServer.setTime("2019-7-31");
         dataServer.setRebate("返利  2.62元");
@@ -83,7 +86,7 @@ public class ArrivalDetailsActivity extends BaseActivity {
         mDataServer.add(dataServer);
 
 
-        DataServer dataServer1=new DataServer();
+        DataServer dataServer1 = new DataServer();
         dataServer1.setName("京东购物");
         dataServer1.setTime("2019-7-31");
         dataServer1.setRebate("返利  1.32元");
@@ -91,21 +94,21 @@ public class ArrivalDetailsActivity extends BaseActivity {
         mDataServer.add(dataServer1);
 
 
-        DataServer dataServer2=new DataServer();
+        DataServer dataServer2 = new DataServer();
         dataServer2.setName("美团外卖");
         dataServer2.setTime("2019-8-1");
         dataServer2.setRebate("返利  2.62元");
         dataServer2.setDetailed("+ 2.62元");
         mDataServer.add(dataServer2);
 
-        DataServer dataServer3=new DataServer();
+        DataServer dataServer3 = new DataServer();
         dataServer3.setName("淘宝购物");
         dataServer3.setTime("2019-8-2");
         dataServer3.setRebate("返利  3.29元");
         dataServer3.setDetailed("+ 3.29元");
         mDataServer.add(dataServer3);
 
-        DataServer dataServer4=new DataServer();
+        DataServer dataServer4 = new DataServer();
         dataServer4.setName("邀请好友");
         dataServer4.setTime("2019-8-2");
         dataServer4.setRebate("奖励  10.00元");
@@ -113,7 +116,7 @@ public class ArrivalDetailsActivity extends BaseActivity {
         mDataServer.add(dataServer4);
 
 
-        DataServer dataServer5=new DataServer();
+        DataServer dataServer5 = new DataServer();
         dataServer5.setName("邀请好友");
         dataServer5.setTime("2019-8-2");
         dataServer5.setRebate("奖励  10.00元");
@@ -121,21 +124,21 @@ public class ArrivalDetailsActivity extends BaseActivity {
         mDataServer.add(dataServer5);
 
 
-        DataServer dataServer6=new DataServer();
+        DataServer dataServer6 = new DataServer();
         dataServer6.setName("淘宝购物");
         dataServer6.setTime("2019-8-3");
         dataServer6.setRebate("返利  2.62元");
         dataServer6.setDetailed("+ 2.62元");
         mDataServer.add(dataServer6);
 
-        DataServer dataServer7=new DataServer();
+        DataServer dataServer7 = new DataServer();
         dataServer7.setName("邀请好友");
         dataServer7.setTime("2019-3-04");
         dataServer7.setRebate("奖励  2.00元");
         dataServer7.setDetailed("+ 2.00元");
         mDataServer.add(dataServer7);
 
-        DataServer dataServer8=new DataServer();
+        DataServer dataServer8 = new DataServer();
         dataServer8.setName("淘宝购物");
         dataServer8.setTime("2019-7-31");
         dataServer8.setRebate("返利  2.62元");

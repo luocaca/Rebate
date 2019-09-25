@@ -12,7 +12,7 @@ import java.util.List;
  * 跟踪订单
  * 类型
  */
-public class TrackingProcessOrder extends BaseEntity implements IExpandable, Checkable,MultiItemEntity {
+public class TrackingProcessOrder extends BaseEntity implements IExpandable, Checkable, MultiItemEntity {
 
     private TrackingProcess trackingProcess;
 
@@ -37,6 +37,11 @@ public class TrackingProcessOrder extends BaseEntity implements IExpandable, Che
      * 订单号
      */
     private String orderNo;
+
+    /**
+     * 订单状态
+     */
+    private String status;
 
 
     public String getCoverUrl() {
@@ -118,5 +123,13 @@ public class TrackingProcessOrder extends BaseEntity implements IExpandable, Che
 
     public void setTrackingProcess(TrackingProcess trackingProcess) {
         this.trackingProcess = trackingProcess;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

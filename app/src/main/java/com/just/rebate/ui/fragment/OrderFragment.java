@@ -74,8 +74,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
     TextView mTextOrder_to_Payment;
 
 
-
-    @OnClick({R.id.Order_to_Payment, R.id.arrivaldatails, R.id.invalid, R.id.Arrival_account,R.id.Message_Notification})
+    @OnClick({R.id.Order_to_Payment, R.id.arrivaldatails, R.id.invalid, R.id.Arrival_account, R.id.Message_Notification})
     @Override
     public void onClick(View view) {
         Intent intent;
@@ -97,7 +96,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.Message_Notification:
-                intent=new Intent(getActivity(), MessageNotificationActivity.class);
+                intent = new Intent(getActivity(), MessageNotificationActivity.class);
                 startActivity(intent);
         }
     }
@@ -159,13 +158,12 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 //            helper.setVisible(R.id.topline, isFirstShop);
 //            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
-            if(isFirstShop){
+            if (isFirstShop) {
                 helper.getView(R.id.topline).setVisibility(View.VISIBLE);
                 helper.getView(R.id.topline).setBackgroundResource(R.drawable.shape_corner_left_top_right_top);
-            }else{
+            } else {
                 helper.getView(R.id.topline).setVisibility(View.GONE);
             }
-
 
 
         } else if (item instanceof ReturnOrder) {
@@ -198,19 +196,20 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
 //              Glide.with(helper.itemView.getContext()).load("https://pic1.zhuanstatic.com/zhuanzh/" + item.getPics()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into((ImageView) helper.getView(R.id.logo));
 
 
-
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
+
+
+            helper.getView(R.id.checkbox).setSelected(helper.getAdapterPosition() % 3 == 0);
 
 
             boolean islast = isLastOrder(mActivity, helper, item, helper, data);
             if (islast) {
                 helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
-        }
+            }
         }
 
     }
-
 
 
     private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
@@ -232,7 +231,7 @@ public class OrderFragment extends BaseFragment implements View.OnClickListener 
             Object obj1;
             obj1 = data.get(helper.getAdapterPosition() - 1);
 
-            if (obj1 instanceof ReturnOrder ) {
+            if (obj1 instanceof ReturnOrder) {
                 return true;
             } else {
                 return false;

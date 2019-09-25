@@ -76,7 +76,18 @@
         <item name="titleSize">15</item>
     </style>
 
+    <style name="TitleText">
 
+        <item name="android:textSize">15sp</item>
+
+
+    </style>
+
+    <style name="checkbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_selector</item>
+        <item name="android:maxHeight">20.0dip</item>
+        <item name="android:maxWidth">20.0dip</item>
+    </style>
 
 
 </resources>
