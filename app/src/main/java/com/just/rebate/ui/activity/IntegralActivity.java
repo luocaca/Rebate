@@ -3,6 +3,11 @@ package com.just.rebate.ui.activity;
 import com.just.rebate.R;
 import com.rebate.base.activity.BaseActivity;
 
+
+/**
+ * title 可用积分
+ */
+
 public class IntegralActivity extends BaseActivity {
 
 

@@ -17,6 +17,10 @@ import java.util.List;
 
 import butterknife.BindView;
 
+/**
+ * title 消息提示
+ */
+
 public class MessageNotificationActivity extends BaseActivity {
 
     private List<MessageNotificationItem> mDatas;

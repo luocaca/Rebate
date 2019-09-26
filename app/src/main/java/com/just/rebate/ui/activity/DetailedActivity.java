@@ -18,6 +18,11 @@ import java.util.List;
 
 import butterknife.BindView;
 
+
+/**
+ * title 明细
+ */
+
 public class DetailedActivity extends BaseActivity {
 
     @BindView(R.id.rv_list7)

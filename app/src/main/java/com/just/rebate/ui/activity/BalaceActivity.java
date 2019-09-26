@@ -9,6 +9,9 @@ import com.rebate.base.activity.BaseActivity;
 
 import butterknife.BindView;
 
+/**
+ * title 提现
+ */
 public class BalaceActivity extends BaseActivity {
 //    private ImageView mIv_back;
 

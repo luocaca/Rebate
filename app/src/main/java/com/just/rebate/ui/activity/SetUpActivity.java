@@ -3,6 +3,10 @@ package com.just.rebate.ui.activity;
 import com.just.rebate.R;
 import com.rebate.base.activity.BaseActivity;
 
+/**
+ * title 设置界面
+ */
+
 public class SetUpActivity extends BaseActivity {
 
 

@@ -43,6 +43,11 @@ import java.util.List;
 import butterknife.BindView;
 import okhttp3.Call;
 
+
+/**
+ * title 支付界面
+ */
+
 public class PaymentActivity extends BaseActivity {
     private List<OrderItem> mDatas;
 

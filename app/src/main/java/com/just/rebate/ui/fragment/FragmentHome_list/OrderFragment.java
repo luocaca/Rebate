@@ -47,7 +47,6 @@ import okhttp3.Call;
  * 订单  fragment
  */
 public class OrderFragment extends BaseLazyFragment implements View.OnClickListener {
-    private boolean change;
 
     @BindView(R.id.rv_list4)
     RecyclerView recycleView;
@@ -58,10 +57,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
     @BindView(R.id.Order_to_Payment)
     TextView mTextOrder_to_Payment;
-
-
-
-
 
 
     @OnClick({R.id.Order_to_Payment})
@@ -167,6 +162,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 //              Glide.with(helper.itemView.getContext()).load("https://pic1.zhuanstatic.com/zhuanzh/" + item.getPics()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into((ImageView) helper.getView(R.id.logo));
 
 
+            helper.addOnClickListener(R.id.checkbox_context);
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
 
@@ -222,7 +218,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
     public void requestData() {
 
 
-
     }
 
 
@@ -269,10 +264,15 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         orderAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if(view==view.findViewById(R.id.checkbox_head)){
-                    if (change){
+                if (view == view.findViewById(R.id.checkbox_head)) {
+                    view.setSelected(!view.isSelected());
+                    
+//                    adapter.notifyDataSetChanged();
 
-                    }
+                }
+
+                if (view == view.findViewById(R.id.checkbox_context)) {
+                    view.setSelected(!view.isSelected());
                 }
             }
         });

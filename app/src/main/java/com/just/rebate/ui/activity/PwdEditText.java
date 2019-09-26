@@ -20,6 +20,10 @@ import java.util.ArrayList;
 
 import me.luocaca.wedget.R;
 
+/**
+ * 自定义EditText
+ */
+
 public class PwdEditText extends View {
     private ArrayList<String> result;//输入结果保存
     private int count;//密码位数

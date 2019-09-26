@@ -3,6 +3,10 @@ package com.just.rebate.ui.activity;
 import com.just.rebate.R;
 import com.rebate.base.activity.BaseActivity;
 
+/**
+ * title 订单详情
+ */
+
 public class OrderDetailsActivity extends BaseActivity {
 
     @Override

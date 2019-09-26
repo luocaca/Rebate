@@ -3,6 +3,10 @@ package com.just.rebate.ui.activity;
 import com.just.rebate.R;
 import com.rebate.base.activity.BaseActivity;
 
+/**
+ * title 规则
+ */
+
 public class RuleActivity extends BaseActivity {
 //    @BindView(R.id.back_rule)
 //    ImageView mIv_back;

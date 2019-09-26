@@ -8,6 +8,10 @@ import com.rebate.base.activity.BaseActivity;
 
 import butterknife.BindView;
 
+/**
+ * title 支付成功
+ */
+
 public class PaySuccessActivity extends BaseActivity {
 
     @BindView(R.id.Image_back)

@@ -1,6 +1,5 @@
 package com.just.rebate.ui.fragment;
 
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +26,6 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.lang.reflect.Type;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +33,7 @@ import butterknife.BindView;
 import okhttp3.Call;
 
 /**
- * 首页
+ * title 首页
  */
 public class HomeFragment extends BaseFragment {
     private List<HomeItem> mData;

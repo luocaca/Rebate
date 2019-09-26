@@ -15,6 +15,10 @@ import java.util.List;
 
 import butterknife.BindView;
 
+/**
+ * title 客服
+ */
+
 public class ChatActivity extends BaseActivity {
 
     @BindView(R.id.rv_list9)

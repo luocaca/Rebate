@@ -1,11 +1,14 @@
 package com.just.rebate.ui.activity;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.os.Handler;
-
 import com.just.rebate.R;
+
+/**
+ * title 等待界面
+ */
 
 public class WaitActivity extends AppCompatActivity {
 

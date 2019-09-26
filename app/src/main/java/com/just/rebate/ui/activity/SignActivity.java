@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.just.rebate.R;
 import com.just.rebate.ui.MainActivity;
 
+/**
+ * title 用户登录
+ */
+
 public class SignActivity extends AppCompatActivity {
     private ImageView mIv_back;
     private Button mBtn_sign;

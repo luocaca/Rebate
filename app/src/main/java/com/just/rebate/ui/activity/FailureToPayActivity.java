@@ -8,6 +8,11 @@ import com.rebate.base.activity.BaseActivity;
 
 import butterknife.BindView;
 
+
+/**
+ * title 支付失败
+ */
+
 public class FailureToPayActivity extends BaseActivity {
 
     @BindView(R.id.Iv_Back)

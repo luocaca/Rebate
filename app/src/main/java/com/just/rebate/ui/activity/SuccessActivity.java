@@ -8,6 +8,10 @@ import com.rebate.base.activity.BaseActivity;
 
 import butterknife.BindView;
 
+/**
+ * title 领取成功
+ */
+
 public class SuccessActivity extends BaseActivity {
 
 

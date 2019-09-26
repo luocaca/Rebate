@@ -5,6 +5,10 @@ import android.view.View;
 import com.just.rebate.R;
 import com.rebate.base.fragment.BaseFragment;
 
+/**
+ * 无效订单(无订单) fragment
+ */
+
 public class InvalidFragment extends BaseFragment implements View.OnClickListener{
 
 

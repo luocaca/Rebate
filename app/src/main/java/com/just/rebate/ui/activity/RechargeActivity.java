@@ -22,6 +22,10 @@ import java.util.List;
 
 import butterknife.BindView;
 
+/**
+ * title 充值界面
+ */
+
 public class RechargeActivity extends BaseActivity {
 
     @BindView(R.id.id_flowlayout)

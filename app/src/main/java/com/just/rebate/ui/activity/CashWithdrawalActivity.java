@@ -9,6 +9,11 @@ import com.rebate.base.activity.BaseActivity;
 
 import butterknife.OnClick;
 
+/**
+ * title 提现操作
+ */
+
+
 public class CashWithdrawalActivity extends BaseActivity implements View.OnClickListener {
 
 

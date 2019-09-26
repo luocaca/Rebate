@@ -10,6 +10,10 @@ import androidx.annotation.Nullable;
 
 import com.just.rebate.R;
 
+/**
+ * title 支付密码
+ */
+
 public class PwdInputMethodView extends LinearLayout implements View.OnClickListener {
     private InputReceiver inputReceiver;
 

@@ -21,6 +21,9 @@ import java.util.List;
 
 import butterknife.BindView;
 
+/**
+ * title 到账明细
+ */
 
 
 public class ArrivalDetailsActivity extends BaseActivity {

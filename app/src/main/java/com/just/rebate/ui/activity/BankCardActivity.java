@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * 银行卡
+ * title 银行卡
  */
 public class BankCardActivity extends BaseActivity {
 
