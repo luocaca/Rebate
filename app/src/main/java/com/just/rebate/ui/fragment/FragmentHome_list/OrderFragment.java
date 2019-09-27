@@ -47,6 +47,8 @@ import okhttp3.Call;
  * 订单  fragment
  */
 public class OrderFragment extends BaseLazyFragment implements View.OnClickListener {
+    private List<ReturnShop> mdata;
+    private List<ReturnOrder> mdataorderl;
 
     @BindView(R.id.rv_list4)
     RecyclerView recycleView;
@@ -120,7 +122,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
             helper.addOnClickListener(R.id.checkbox_head);
 
 
-            boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
+            boolean isFirstShop = isFirstShop(mActivity, helper, item, data);
 //            helper.setVisible(R.id.toplhine, isFirstShop);
 //            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
@@ -193,7 +195,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
     }
 
 
-    private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
+    private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
         try {
             Object obj1;
             obj1 = data.get(helper.getAdapterPosition() - 1);
@@ -265,12 +267,18 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view == view.findViewById(R.id.checkbox_head)) {
-                    view.setSelected(!view.isSelected());
-                    
-//                    adapter.notifyDataSetChanged();
+//                    view.setSelected(!view.isSelected());
+                    Object object = (ReturnShop)orderAdapter.getData().get(position + 1);
 
+//                        if (object instanceof ReturnShop){
+////                            for (int i = 0; i <orderAdapter.getData().size(); i++) {
+////                                if(orderAdapter.getData()){
+////
+////                                }
+////                        }
+//////                    adapter.notifyDataSetChanged();
+////                    }
                 }
-
                 if (view == view.findViewById(R.id.checkbox_context)) {
                     view.setSelected(!view.isSelected());
                 }
@@ -278,7 +286,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         });
 
         recycleView.setAdapter(orderAdapter);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

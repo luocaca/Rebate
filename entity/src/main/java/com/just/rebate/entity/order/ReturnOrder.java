@@ -100,7 +100,7 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, M
 
     @Override
     public boolean isChecked() {
-        return false;
+        return true;
     }
 
     @Override

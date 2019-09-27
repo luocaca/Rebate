@@ -1,5 +1,7 @@
 package com.just.rebate.entity.order;
 
+import android.widget.Checkable;
+
 import com.chad.library.adapter.base.entity.IExpandable;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.just.rebate.base.BaseEntity;
@@ -12,13 +14,15 @@ import java.util.List;
  * 二傻专卖店
  * 三傻的店铺
  */
-public class ReturnShop extends BaseEntity implements IExpandable , MultiItemEntity {
+public class ReturnShop extends BaseEntity implements IExpandable , MultiItemEntity, Checkable
+{
 
     /**
      * 店铺名称
      * 米拉服饰
      */
     private String shopName;
+
 
     /**
      * 当前店铺 代付款的订单
@@ -69,5 +73,20 @@ public class ReturnShop extends BaseEntity implements IExpandable , MultiItemEnt
     @Override
     public int getItemType() {
         return 1;
+    }
+
+    @Override
+    public void setChecked(boolean b) {
+
+    }
+
+    @Override
+    public boolean isChecked() {
+        return true;
+    }
+
+    @Override
+    public void toggle() {
+
     }
 }

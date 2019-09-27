@@ -37,8 +37,6 @@ public class BankCardActivity extends BaseActivity {
     List<Bank_Card_DataServer> mDataServer = new ArrayList<>();
 
 
-
-
     @Override
     protected void requestData() {
 

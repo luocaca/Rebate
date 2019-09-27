@@ -43,11 +43,9 @@
             android:paddingRight="@dimen/padding_right"
             android:textSize="@dimen/text_size_title"
             android:layout_height="match_parent" />
-
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@drawable/underline" />
-
 </LinearLayout>

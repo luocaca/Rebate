@@ -42,7 +42,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="85dp"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginRight="@dimen/default_margin"
@@ -68,6 +68,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
@@ -93,12 +94,14 @@
                 android:paddingLeft="@dimen/padding_left"
                 android:paddingTop="@dimen/padding_top"
                 android:text="支付管理"
+
                 android:textColor="@color/text333"
                 android:textSize="@dimen/text_size_content" />
 
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
@@ -110,7 +113,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="125dp"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginRight="@dimen/default_margin"
@@ -136,6 +139,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
@@ -168,6 +172,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
@@ -199,6 +204,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
@@ -209,7 +215,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="85dp"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin_top"
         android:layout_marginRight="@dimen/default_margin"
@@ -235,6 +241,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
@@ -266,6 +273,7 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="17dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/default_margin"
                 android:src="@mipmap/rightarrow" />
