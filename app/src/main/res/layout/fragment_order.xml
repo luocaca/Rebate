@@ -10,9 +10,6 @@
     tools:context="com.just.rebate.ui.fragment.FragmentHome_list.OrderFragment">
 
 
-
-
-
     <!--<androidx.appcompat.widget.Toolbar-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
@@ -22,8 +19,6 @@
 
 
     <!--</androidx.appcompat.widget.Toolbar>-->
-
-
 
 
     <LinearLayout
@@ -106,8 +101,6 @@
     </LinearLayout>
 
 
-
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/order_refresh"
         android:layout_width="match_parent"
@@ -115,9 +108,6 @@
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:layout_weight="1">
-
-
-
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -146,6 +136,7 @@
         android:orientation="horizontal">
 
         <com.just.rebate.wedget.MyCheckBox
+            android:id="@+id/checkbox_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -173,7 +164,6 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@drawable/underline" />
-
 
 
 </LinearLayout>

@@ -5,6 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,9 +64,13 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
     @BindView(R.id.Order_to_Payment)
     TextView mTextOrder_to_Payment;
+    @BindView(R.id.checkbox_all)
+    CheckBox checkbox_all;
 
 
-    @OnClick({R.id.Order_to_Payment})
+    boolean isCheckAll = false;
+
+    @OnClick({R.id.Order_to_Payment, R.id.checkbox_all,})
     @Override
     public void onClick(View view) {
         Intent intent;
@@ -71,6 +78,22 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
             case R.id.Order_to_Payment:
                 intent = new Intent(getActivity(), PaymentActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.checkbox_all:
+                Toast.makeText(mActivity, "" + checkbox_all.isChecked(), Toast.LENGTH_SHORT).show();
+                //全选
+                BaseQuickAdapter adapter = (BaseQuickAdapter) recycleView.getAdapter();
+                if (adapter != null) {
+                    for (Object datum : adapter.getData()) {
+                        if (datum instanceof Checkable) {
+                            ((Checkable) datum).setChecked(checkbox_all.isChecked());
+
+                        }
+                    }
+                }
+//                checkbox_all.toggle();
+                adapter.notifyDataSetChanged();
+
                 break;
 //            case R.id.checkbox_context:
 //                if (change){
@@ -118,6 +141,8 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
             helper.setText(R.id.order_header, ((ReturnPlatform) item).getPlatformName());
             helper.setText(R.id.order_time, ((ReturnPlatform) item).getOrderTime());
             helper.setText(R.id.rich, ((ReturnPlatform) item).getEstimatedRebate());
+
+
         } else if (item instanceof ReturnShop) {
             //do conevert 1
             helper.setText(R.id.order_tv, ((ReturnShop) item).getShopName());
@@ -135,6 +160,8 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
                 helper.getView(R.id.topline).setVisibility(View.GONE);
             }
 
+
+            helper.getView(R.id.checkbox_head).setSelected(((ReturnShop) item).isChecked());
 
         } else if (item instanceof ReturnOrder) {
 
@@ -167,6 +194,11 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
 
             helper.addOnClickListener(R.id.checkbox_context);
+
+
+            helper.getView(R.id.checkbox_context).setSelected(((ReturnOrder) item).isChecked());
+
+
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
 
@@ -268,35 +300,87 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         orderAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if (view == view.findViewById(R.id.checkbox_head)) {
-//                    Object object = ReturnShop.class;
-//                    if (object instanceof ReturnPlatform) {
-//                        for (int i = 0; i < orderAdapter.getData().size(); i++) {
-//                            Object shopName = ((ReturnShop) orderAdapter.getData().get(i)).getShopName();
-//                            if (((ReturnShop) orderAdapter.getData().get(i)).getSubItems() == ((ReturnShop) orderAdapter.getData().get(position)).getSubItems()) {
-//                                ((ReturnShop) orderAdapter.getData().get(i)).setChecked(((ReturnShop) orderAdapter.getData().get(i)).isChecked());
+
+
+                if (orderAdapter.getData().get(position) instanceof ReturnShop) {
+
+                    ReturnShop shop = ((ReturnShop) orderAdapter.getData().get(position));
+
+
+                    //选中时  被点击
+                    //子项全部 取消选中
+
+                    List<ReturnOrder> ddd = shop.getSubItems();
+                    for (ReturnOrder returnOrder : ddd) {
+                        returnOrder.setChecked(!shop.isChecked());
+                    }
+                    shop.toggle();
+                    adapter.notifyDataSetChanged();
+                } else if (orderAdapter.getData().get(position) instanceof ReturnOrder) {
+
+                    //商品点击
+                    ReturnOrder order = ((ReturnOrder) orderAdapter.getData().get(position));
+                    //find  parent poision
+                    order.toggle();
+                    adapter.notifyDataSetChanged();
+
+                    boolean isFind = false;
+                    int index = position;
+                    while (!isFind) {
+                        if (orderAdapter.getData().get(index) instanceof ReturnShop) {
+                            isFind = true;
+                        } else {
+                            index--;
+                        }
+                    }
+
+                    ReturnShop sho = ((ReturnShop) orderAdapter.getData().get(index));
+
+
+                    boolean isAllCheck = true;
+                    for (Object subItem : sho.getSubItems()) {
+                        if (((ReturnOrder) subItem).isChecked()) {
+
+                        } else {
+                            isAllCheck = false;
+                        }
+                    }
+
+                    sho.setChecked(isAllCheck);
+
+
+                }
+
+
+//                if (view.getId() == R.id.checkbox_head) {
+////                    Object object = ReturnShop.class;
+////                    if (object instanceof ReturnPlatform) {
+////                        for (int i = 0; i < orderAdapter.getData().size(); i++) {
+////                            Object shopName = ((ReturnShop) orderAdapter.getData().get(i)).getShopName();
+////                            if (((ReturnShop) orderAdapter.getData().get(i)).getSubItems() == ((ReturnShop) orderAdapter.getData().get(position)).getSubItems()) {
+////                                ((ReturnShop) orderAdapter.getData().get(i)).setChecked(((ReturnShop) orderAdapter.getData().get(i)).isChecked());
+////                            }
+////                        }
+////                    }
+//                    for (int i = 0; i < orderAdapter.getData().size(); i++) {
+//                        if (orderAdapter.getData().get(i) instanceof ReturnShop) {
+//                            List<ReturnOrder> ddd = ((ReturnShop) orderAdapter.getData().get(position)).getSubItems();
+//                            for (int i1 = 0; i1 < ddd.size(); i1++) {
+//                                Log.i(TAG, "type: " + (position + i1));
+////                                    ((ReturnOrder) orderAdapter.getData().get(position + i1)).setChecked(true);
+//                                ddd.get(i1).setChecked(true);
+////
 //                            }
 //                        }
 //                    }
-                    for (int i = 0; i < orderAdapter.getData().size(); i++) {
-                        if (orderAdapter.getData().get(i) instanceof ReturnShop) {
-                            List<ReturnOrder> ddd = ((ReturnShop) orderAdapter.getData().get(position)).getSubItems();
-                            for (int i1 = 0; i1 < ddd.size(); i1++) {
-                                Log.i(TAG, "type: " + (position + i1));
-//                                    ((ReturnOrder) orderAdapter.getData().get(position + i1)).setChecked(true);
-                                    ddd.get(i1).setChecked(true);
+//                    adapter.notifyDataSetChanged();
+////                    view.setSelected(!view.isSelected());
 //
-                            }
-                        }
-                    }
-                    adapter.notifyDataSetChanged();
-                    view.setSelected(!view.isSelected());
-
-                }
-                if (view == view.findViewById(R.id.checkbox_context)) {
-                    view.setSelected(!view.isSelected());
-                    Log.i(TAG, "type: " + position);
-                }
+//                }
+//                if (view == view.findViewById(R.id.checkbox_context)) {
+//                    view.setSelected(!view.isSelected());
+//                    Log.i(TAG, "type: " + position);
+//                }
             }
         });
         recycleView.setAdapter(orderAdapter);
