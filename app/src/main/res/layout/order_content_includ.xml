@@ -69,6 +69,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/delete_count"
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:gravity="center"
@@ -78,8 +79,9 @@
                 android:textSize="@dimen/text_size_content" />
 
             <TextView
-                android:layout_width="35dp"
-                android:layout_height="20dp"
+                android:id="@+id/count"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/textview_border"
                 android:gravity="center"
                 android:paddingLeft="12dp"
@@ -88,6 +90,7 @@
                 android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:id="@+id/add_count"
                 android:layout_width="30dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"

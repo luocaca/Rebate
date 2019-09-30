@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Checkable;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +45,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 /**
  * 订单  fragment
  */
 public class OrderFragment extends BaseLazyFragment implements View.OnClickListener {
     private List<ReturnShop> mdata;
     private List<ReturnOrder> mdataorderl;
+    private static int acount=1;
 
     @BindView(R.id.rv_list4)
     RecyclerView recycleView;
@@ -68,9 +66,10 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
     CheckBox checkbox_all;
 
 
+
     boolean isCheckAll = false;
 
-    @OnClick({R.id.Order_to_Payment, R.id.checkbox_all,})
+    @OnClick({R.id.Order_to_Payment, R.id.checkbox_all})
     @Override
     public void onClick(View view) {
         Intent intent;
@@ -111,8 +110,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 //                }
 //                change = !change;
 //                break;
-
-
         }
     }
 
@@ -194,13 +191,16 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
 
             helper.addOnClickListener(R.id.checkbox_context);
-
+            helper.addOnClickListener(R.id.add_count);
+            helper.addOnClickListener(R.id.delete_count);
 
             helper.getView(R.id.checkbox_context).setSelected(((ReturnOrder) item).isChecked());
 
 
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
+//            helper.setText(R.id.count,acount+"");
+
 
 
 //            helper.getView(R.id.checkbox).setSelected(helper.getAdapterPosition() % 3 == 0);
@@ -300,8 +300,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         orderAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
-
                 if (orderAdapter.getData().get(position) instanceof ReturnShop) {
 
                     ReturnShop shop = ((ReturnShop) orderAdapter.getData().get(position));
@@ -381,6 +379,16 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 //                    view.setSelected(!view.isSelected());
 //                    Log.i(TAG, "type: " + position);
 //                }
+
+                if (view.getId()==R.id.add_count){
+                    acount++;
+                }
+                if(view.getId()==R.id.delete_count){
+                    if(acount>1){
+                        acount--;
+                    }
+
+                }
             }
         });
         recycleView.setAdapter(orderAdapter);
