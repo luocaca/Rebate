@@ -43,6 +43,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 /**
  * 订单  fragment
  */
@@ -267,24 +269,36 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 if (view == view.findViewById(R.id.checkbox_head)) {
-//                    view.setSelected(!view.isSelected());
-                    Object object = (ReturnShop)orderAdapter.getData().get(position + 1);
+//                    Object object = ReturnShop.class;
+//                    if (object instanceof ReturnPlatform) {
+//                        for (int i = 0; i < orderAdapter.getData().size(); i++) {
+//                            Object shopName = ((ReturnShop) orderAdapter.getData().get(i)).getShopName();
+//                            if (((ReturnShop) orderAdapter.getData().get(i)).getSubItems() == ((ReturnShop) orderAdapter.getData().get(position)).getSubItems()) {
+//                                ((ReturnShop) orderAdapter.getData().get(i)).setChecked(((ReturnShop) orderAdapter.getData().get(i)).isChecked());
+//                            }
+//                        }
+//                    }
+                    for (int i = 0; i < orderAdapter.getData().size(); i++) {
+                        if (orderAdapter.getData().get(i) instanceof ReturnShop) {
+                            List<ReturnOrder> ddd = ((ReturnShop) orderAdapter.getData().get(position)).getSubItems();
+                            for (int i1 = 0; i1 < ddd.size(); i1++) {
+                                Log.i(TAG, "type: " + (position + i1));
+//                                    ((ReturnOrder) orderAdapter.getData().get(position + i1)).setChecked(true);
+                                    ddd.get(i1).setChecked(true);
+//
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    view.setSelected(!view.isSelected());
 
-//                        if (object instanceof ReturnShop){
-////                            for (int i = 0; i <orderAdapter.getData().size(); i++) {
-////                                if(orderAdapter.getData()){
-////
-////                                }
-////                        }
-//////                    adapter.notifyDataSetChanged();
-////                    }
                 }
                 if (view == view.findViewById(R.id.checkbox_context)) {
                     view.setSelected(!view.isSelected());
+                    Log.i(TAG, "type: " + position);
                 }
             }
         });
-
         recycleView.setAdapter(orderAdapter);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -300,6 +314,19 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         });
 
     }
+
+//    private boolean Check(ReturnShop returnShop) {
+//
+//        boolean isall = true;
+//        for (Object subItem : returnShop.getSubItems()) {
+//            isall = ((ReturnOrder) subItem).isChecked();
+//            if (isall) {
+//            } else {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
     @Override
     protected void onUserVisible() {

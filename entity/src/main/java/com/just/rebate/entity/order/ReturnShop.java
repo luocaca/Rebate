@@ -17,6 +17,8 @@ import java.util.List;
 public class ReturnShop extends BaseEntity implements IExpandable , MultiItemEntity, Checkable
 {
 
+    private boolean mChecked;
+
     /**
      * 店铺名称
      * 米拉服饰
@@ -76,17 +78,20 @@ public class ReturnShop extends BaseEntity implements IExpandable , MultiItemEnt
     }
 
     @Override
-    public void setChecked(boolean b) {
+    public void setChecked(boolean checked) {
+
+            mChecked = checked;
 
     }
 
     @Override
     public boolean isChecked() {
-        return true;
+        return mChecked;
     }
 
     @Override
     public void toggle() {
+        setChecked(!mChecked);
 
     }
 }

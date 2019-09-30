@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, MultiItemEntity {
 
+    private boolean mChecked;
+
 
     /**
      * 封面 图片地址
@@ -94,18 +96,19 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, M
     }
 
     @Override
-    public void setChecked(boolean b) {
-
+    public void setChecked(boolean checked) {
+        if(mChecked != checked){
+            mChecked = checked;
+        }
     }
-
     @Override
     public boolean isChecked() {
-        return true;
+        return mChecked;
     }
 
     @Override
     public void toggle() {
-
+        setChecked(!mChecked);
     }
 
     @Override
