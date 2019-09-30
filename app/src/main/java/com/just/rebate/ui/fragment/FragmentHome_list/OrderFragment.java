@@ -3,6 +3,7 @@ package com.just.rebate.ui.fragment.FragmentHome_list;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.text.Transliterator;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -157,7 +159,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
                 helper.getView(R.id.topline).setVisibility(View.GONE);
             }
 
-
             helper.getView(R.id.checkbox_head).setSelected(((ReturnShop) item).isChecked());
 
         } else if (item instanceof ReturnOrder) {
@@ -199,7 +200,9 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
-//            helper.setText(R.id.count,acount+"");
+            //商品数量的增加减少
+            helper.setText(R.id.count,""+acount);
+
 
 
 
@@ -331,7 +334,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
                             index--;
                         }
                     }
-
                     ReturnShop sho = ((ReturnShop) orderAdapter.getData().get(index));
 
 
@@ -382,12 +384,13 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
                 if (view.getId()==R.id.add_count){
                     acount++;
+
+
                 }
                 if(view.getId()==R.id.delete_count){
-                    if(acount>1){
-                        acount--;
-                    }
-
+                        if(acount>1){
+                            acount--;
+                        }
                 }
             }
         });
@@ -398,7 +401,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
                 swipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        requestData();
+                        onFirstUserVisible();
                     }
                 }, 3000);
                 swipeRefreshLayout.setRefreshing(false);

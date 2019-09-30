@@ -17,19 +17,20 @@
         android:layout_height="wrap_content"
 
         android:orientation="horizontal"
-       >
+        >
 
 
         <!--<RadioButton-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content" />-->
-        <com.just.rebate.wedget.MyCheckBox
-            android:id="@+id/head_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:paddingTop="@dimen/padding_default"
-            android:paddingBottom="@dimen/padding_default" />
+        <ImageView
+            android:id="@+id/payment_checkbox_head"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:padding="5dp"
+            android:src="@drawable/check_selector" />
 
         <TextView
             android:id="@+id/payment_tv"
