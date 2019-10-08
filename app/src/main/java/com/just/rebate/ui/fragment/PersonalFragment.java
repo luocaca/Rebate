@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -25,6 +26,7 @@ import com.just.rebate.ui.activity.ArrivalDetailsActivity;
 import com.just.rebate.ui.activity.BalaceActivity;
 import com.just.rebate.ui.activity.BankCardActivity;
 import com.just.rebate.ui.activity.ChatActivity;
+import com.just.rebate.ui.activity.HelpActivity;
 import com.just.rebate.ui.activity.IntegralActivity;
 import com.just.rebate.ui.activity.RechargeActivity;
 import com.just.rebate.ui.activity.SetUpActivity;
@@ -74,9 +76,8 @@ public class PersonalFragment extends BaseFragment {
     @BindView(R.id.headImage)
     ImageView mIv_head;
 
-
-
-
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout mRefresh;
 
     @BindView(R.id.set_up)
     ImageView imageView;
@@ -104,6 +105,18 @@ public class PersonalFragment extends BaseFragment {
             public void onClick(View view) {
                 Intent intent =new Intent(getActivity(), IntegralActivity.class);
                 startActivity(intent);
+            }
+        });
+        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRefresh.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        requestDataOnline();
+                    }
+                },3000);
+                mRefresh.setRefreshing(false);
             }
         });
 
@@ -138,7 +151,7 @@ public class PersonalFragment extends BaseFragment {
         Personal_local_Item p6 = new Personal_local_Item();
         p6.ItemNameid = Image[5];
         p6.ItemName = "帮助";
-        //p6.activityClass = RuleActivity.class;
+        p6.activityClass = HelpActivity.class;
         list.add(p6);
 
 
@@ -152,7 +165,7 @@ public class PersonalFragment extends BaseFragment {
 
 
         });
-        requestDataOnline();
+
 
 
 //        personalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -180,21 +193,14 @@ public class PersonalFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response, int id) {
                         //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
-
-
                         Personal personal = GsonUtil.getGson().fromJson(response, Personal.class);
-
                         mTv_account.setText(personal.account + "");
                         mTv_integral.setText(personal.integral + "");
                         mTv_invitat.setText(personal.invitationCode + "");
 
                         totalRebate.setText(personal.totalRebate);
                         preRebate.setText(personal.preRebate);
-
-
                         Glide.with(getActivity()).load(personal.headImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mIv_head);
-
-
                     }
                 });
     }

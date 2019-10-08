@@ -1,20 +1,21 @@
 package com.just.rebate.ui.activity;
 
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.just.rebate.R;
 import com.rebate.base.activity.BaseActivity;
 
 import butterknife.BindView;
 
-/**
- * title 订单详情
- */
+public class HelpActivity extends BaseActivity {
 
-public class OrderDetailsActivity extends BaseActivity {
+    @BindView(R.id.Btn_help)
+    Button mBtn_Help;
 
-    @BindView(R.id.copy)
-    TextView mCopy;
+
+    protected int bindTitleViewId() {
+        return R.id.title;
+    }
 
     @Override
     protected void requestData() {
@@ -25,13 +26,9 @@ public class OrderDetailsActivity extends BaseActivity {
     protected void initView() {
 
     }
-    @Override
-    protected int bindTitleViewId() {
-        return R.id.title;
-    }
 
     @Override
     public int bindLayoutId() {
-        return R.layout.activity_order_details;
+        return R.layout.activity_help;
     }
 }

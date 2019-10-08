@@ -74,7 +74,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="15dp"
             android:text="最近返利：手机尾号1587的用户近期返利1.29元"
-            android:textColor="@color/text_color_Pink"
+            android:textColor="@color/TheMeColor"
             android:textSize="12sp" />
 
     </LinearLayout>

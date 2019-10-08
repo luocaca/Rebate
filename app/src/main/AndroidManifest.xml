@@ -29,6 +29,7 @@
         <activity android:name=".ui.activity.PaymentActivity" />
         <activity android:name=".ui.activity.SuccessActivity" />
         <activity android:name=".ui.activity.SetUpActivity" />
+        <activity android:name=".ui.activity.HelpActivity" />
         <activity android:name=".ui.activity.OrderDetailsActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SignActivity" />

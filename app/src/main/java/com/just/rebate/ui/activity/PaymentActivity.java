@@ -2,6 +2,7 @@ package com.just.rebate.ui.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.just.rebate.entity.OrderItem;
 import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
+import com.just.rebate.ui.fragment.PayFragment;
 import com.rebate.base.activity.BaseActivity;
 import com.rebate.commom.util.GsonUtil;
 import com.rebate.commom.util.bitmap.GlideRoundTransform;
@@ -238,7 +240,10 @@ public class PaymentActivity extends BaseActivity {
         mBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(PaymentActivity.this, "付款布局", Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                PayFragment fragment = new PayFragment();
+                fragment.setArguments(bundle);
+                fragment.show(getSupportFragmentManager(), "Pay");
             }
         });
         mBtn2.setOnClickListener(new View.OnClickListener() {

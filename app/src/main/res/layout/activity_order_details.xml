@@ -229,6 +229,7 @@
                 android:textSize="@dimen/text_size_content_s" />
 
             <TextView
+                android:id="@+id/copy"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"

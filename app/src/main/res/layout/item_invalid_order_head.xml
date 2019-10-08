@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:gravity="right|center"
             android:paddingRight="@dimen/padding_right"
-            android:text="预估返利2.62元"
+            android:text="订单无效"
             android:textColor="@color/color_red"
             android:textSize="@dimen/text_size_content" />
 

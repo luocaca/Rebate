@@ -29,6 +29,11 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, M
      */
     private String orderName;
 
+    /**
+     * 商品数量
+     */
+    private String ShopNumber="1";
+
 
     /**
      * 商品简介
@@ -70,6 +75,13 @@ public class ReturnOrder extends BaseEntity implements IExpandable, Checkable, M
 
     public void setCommodityPrice(String commodityPrice) {
         this.commodityPrice = commodityPrice;
+    }
+    public String getShopNumber() {
+        return ShopNumber;
+    }
+
+    public void setShopNumber(String shopNumber) {
+        ShopNumber = shopNumber;
     }
 
 

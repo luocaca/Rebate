@@ -88,17 +88,7 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
         });
 
         //实现点击复制功能
-        mTv_copy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "复制成功", Toast.LENGTH_SHORT).show();
-                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                clipboardManager.setPrimaryClip(ClipData.newPlainText(null, "你好你好"));
-                if (clipboardManager.hasPrimaryClip()) {
-                    clipboardManager.getPrimaryClip().getItemAt(0).getText();
-                }
-            }
-        });
+
     }
 
     @Override
@@ -165,7 +155,17 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                         fans.setText(response.getData().numberOfFans);
                         code.setText(response.getData().inviteCode);
                         invitation.setText(string1);
-
+                        mTv_copy.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(getActivity(), "复制成功", Toast.LENGTH_SHORT).show();
+                                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                                clipboardManager.setPrimaryClip(ClipData.newPlainText(null, ""+response.getData().inviteCode));
+                                if (clipboardManager.hasPrimaryClip()) {
+                                    clipboardManager.getPrimaryClip().getItemAt(0).getText();
+                                }
+                            }
+                        });
                     }
 
                     @Override

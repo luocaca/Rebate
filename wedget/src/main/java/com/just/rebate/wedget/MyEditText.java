@@ -1,72 +1,98 @@
 package com.just.rebate.wedget;
 
 import android.content.Context;
-import android.graphics.Canvas;
+import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.EditText;
-import androidx.appcompat.widget.AppCompatTextView;
 
-public class MyEditText extends AppCompatTextView {
-    private String text;
-    private View.OnClickListener mListener;
-    private int leftPadding;
+import androidx.appcompat.widget.AppCompatEditText;
+
+public class MyEditText extends AppCompatEditText {
+
+
+    private static final String TAG = "MoneyEditText";
+    private boolean textChange;
+
+    public MyEditText(Context context) {
+        this(context, null);
+    }
 
     public MyEditText(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public MyEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        //设置可以输入小数
+        setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        //监听文字变化
+        addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!textChange) {
+                    restrictText();
+                }
+                textChange = false;
+            }
+        });
     }
 
 
-    public void setFixedText(String text) {
-        text = text;
-        leftPadding = getPaddingLeft();
-        int left = (int) getPaint().measureText(text) + leftPadding;
-        setPadding(left, getPaddingTop(), getPaddingBottom(), getPaddingRight());
-        invalidate();
-    }
-
-    public void setDrawableClick(View.OnClickListener listener) {
-        mListener = listener;
-    }
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        if (!TextUtils.isEmpty(text)) {
-            canvas.drawText(text, leftPadding, getBaseline(), getPaint());
-//            通过下面的代码，可以查看出文字的基线，以及view的中线
-//            Paint p = new Paint();
-//            p.setStrokeWidth(1);
-//            p.setColor(Color.parseColor("#ff0000"));
-//            canvas.drawLine(0, getBaseline(), getMeasuredWidth(), getBaseline(), p);
-//            canvas.drawLine(0, getMeasuredHeight() / 2, getMeasuredWidth(), getMeasuredHeight() / 2, p);
+    /**
+     * 将小数限制为2位
+     */
+    private void restrictText() {
+        String input = getText().toString();
+        if (TextUtils.isEmpty(input)) {
+            return;
         }
-    }
-
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (mListener != null && getCompoundDrawables()[2] != null) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    int i = getMeasuredWidth() - getCompoundDrawables()[2].getIntrinsicWidth();
-                    if (event.getX() > i) {
-                        mListener.onClick(this);
-                        return true;
-                    }
-                    break;
-                case MotionEvent.ACTION_UP:
-                    break;
-                default:
-                    break;
+        if (input.contains(".")) {
+            int pointIndex = input.indexOf(".");
+            int totalLenth = input.length();
+            int len = (totalLenth - 1) - pointIndex;
+            if (len > 2) {
+                input = input.substring(0, totalLenth - 1);
+                textChange = true;
+                setText(input);
+                setSelection(input.length());
             }
         }
-        return super.onTouchEvent(event);
+
+        if (input.toString().trim().substring(0).equals(".")) {
+            input = "0" + input;
+            setText(input);
+            setSelection(2);
+        }
+
     }
 
+    /**
+     * 获取金额
+     */
+    public String getMoneyText() {
+        String money = getText().toString();
+        //如果最后一位是小数点
+        if (money.endsWith(".")) {
+            return money.substring(0, money.length() - 1);
+        }
+        return money;
+    }
 
 
 }

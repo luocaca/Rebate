@@ -49,8 +49,6 @@ import okhttp3.Call;
  * 订单  fragment
  */
 public class OrderFragment extends BaseLazyFragment implements View.OnClickListener {
-    private List<ReturnShop> mdata;
-    private List<ReturnOrder> mdataorderl;
     private static int acount=1;
 
     @BindView(R.id.rv_list4)
@@ -199,9 +197,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
-//            helper.setText(R.id.count,acount+"");
-
-
+            helper.setText(R.id.count,((ReturnOrder) item).getShopNumber());
 
 //            helper.getView(R.id.checkbox).setSelected(helper.getAdapterPosition() % 3 == 0);
 
@@ -213,8 +209,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         }
 
     }
-
-
     private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
         try {
             Object obj = data.get(helper.getAdapterPosition() + 1);
@@ -380,14 +374,16 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 //                    Log.i(TAG, "type: " + position);
 //                }
 
+
                 if (view.getId()==R.id.add_count){
                     acount++;
+                    ((ReturnOrder) orderAdapter.getData().get(position)).setShopNumber(acount+"");
                 }
                 if(view.getId()==R.id.delete_count){
                     if(acount>1){
                         acount--;
+                        ((ReturnOrder) orderAdapter.getData().get(position)).setShopNumber(acount+"");
                     }
-
                 }
             }
         });
@@ -398,13 +394,12 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
                 swipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        requestData();
+                        onFirstUserVisible();
                     }
                 }, 3000);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
     }
 
 //    private boolean Check(ReturnShop returnShop) {
