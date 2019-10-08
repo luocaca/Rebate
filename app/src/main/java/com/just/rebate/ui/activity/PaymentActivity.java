@@ -117,12 +117,62 @@ public class PaymentActivity extends BaseActivity {
 
             @Override
             protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
-                if (item.getItemType() == 1) {
-                } else {
-                    doConvert(mActivity, helper, item, getData());
-                }
+                Log.i(TAG, "convert: " + item);
+                doConvert(mActivity, helper, item, getData());
             }
         };
+        paymentAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                if (paymentAdapter.getData().get(position) instanceof ReturnShop) {
+
+                    ReturnShop shop = ((ReturnShop) paymentAdapter.getData().get(position));
+
+
+                    //选中时  被点击
+                    //子项全部 取消选中
+
+                    List<ReturnOrder> ddd = shop.getSubItems();
+                    for (ReturnOrder returnOrder : ddd) {
+                        returnOrder.setChecked(!shop.isChecked());
+                    }
+                    shop.toggle();
+                    adapter.notifyDataSetChanged();
+                } else if (paymentAdapter.getData().get(position) instanceof ReturnOrder) {
+
+                    //商品点击
+                    ReturnOrder order = ((ReturnOrder) paymentAdapter.getData().get(position));
+                    //find  parent poision
+                    order.toggle();
+                    adapter.notifyDataSetChanged();
+
+                    boolean isFind = false;
+                    int index = position;
+                    while (!isFind) {
+                        if (paymentAdapter.getData().get(index) instanceof ReturnShop) {
+                            isFind = true;
+                        } else {
+                            index--;
+                        }
+                    }
+                    ReturnShop sho = ((ReturnShop) paymentAdapter.getData().get(index));
+
+
+                    boolean isAllCheck = true;
+                    for (Object subItem : sho.getSubItems()) {
+                        if (((ReturnOrder) subItem).isChecked()) {
+
+                        } else {
+                            isAllCheck = false;
+                        }
+                    }
+
+                    sho.setChecked(isAllCheck);
+
+
+                }
+            }
+        });
         recyclerView.setAdapter(paymentAdapter);
 
     }
@@ -133,13 +183,15 @@ public class PaymentActivity extends BaseActivity {
             helper.setText(R.id.order_header, ((ReturnPlatform) item).getPlatformName());
             helper.setText(R.id.order_time, ((ReturnPlatform) item).getOrderTime());
             helper.setText(R.id.rich, ((ReturnPlatform) item).getEstimatedRebate());
+
+
         } else if (item instanceof ReturnShop) {
             //do conevert 1
             helper.setText(R.id.payment_tv, ((ReturnShop) item).getShopName());
-
-            boolean isFirstShop = isFirstShop(mActivity, helper, item, helper, data);
-//            helper.setVisible(R.id.topline, isFirstShop);
-//            helper.getView(R.id.topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
+            helper.addOnClickListener(R.id.payment_checkbox_head);
+            boolean isFirstShop = isFirstShop(mActivity, helper, item, data);
+//            helper.setVisible(R.id.payment_topline, isFirstShop);
+//            helper.getView(R.id.payment_topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
 
             if (isFirstShop) {
                 helper.getView(R.id.payment_topline).setVisibility(View.VISIBLE);
@@ -147,7 +199,7 @@ public class PaymentActivity extends BaseActivity {
             } else {
                 helper.getView(R.id.payment_topline).setVisibility(View.GONE);
             }
-
+            helper.getView(R.id.payment_checkbox_head).setSelected(((ReturnShop) item).isChecked());
 
         } else if (item instanceof ReturnOrder) {
 
@@ -179,12 +231,14 @@ public class PaymentActivity extends BaseActivity {
 //              Glide.with(helper.itemView.getContext()).load("https://pic1.zhuanstatic.com/zhuanzh/" + item.getPics()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into((ImageView) helper.getView(R.id.logo));
 
 
+            helper.addOnClickListener(R.id.payment_checkbox_context);
 
+            helper.getView(R.id.payment_checkbox_context).setSelected(((ReturnOrder) item).isChecked());
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
 
 
-            boolean islast = isLastOrder(mActivity, helper, item, helper, data);
+            boolean islast = isLastOrder(mActivity, helper, item, data);
             if (islast) {
                 helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
             }
@@ -193,7 +247,7 @@ public class PaymentActivity extends BaseActivity {
     }
 
 
-    private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
+    private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
         try {
             Object obj = data.get(helper.getAdapterPosition() + 1);
             if (obj instanceof ReturnPlatform) {
@@ -207,7 +261,7 @@ public class PaymentActivity extends BaseActivity {
     }
 
 
-    private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
+    private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
         try {
             Object obj1;
             obj1 = data.get(helper.getAdapterPosition() - 1);

@@ -5,12 +5,14 @@
     android:background="@android:color/white"
     android:orientation="horizontal">
 
-    <com.just.rebate.wedget.MyCheckBox
-        android:id="@+id/content_checnbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/payment_checkbox_context"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="8dp"/>
+        android:layout_marginLeft="@dimen/default_margin"
+        android:padding="5dp"
+        android:src="@drawable/check_selector" />
 
     <include layout="@layout/order_content_includ" />
 
