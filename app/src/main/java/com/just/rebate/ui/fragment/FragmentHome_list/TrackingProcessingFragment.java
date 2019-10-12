@@ -179,7 +179,7 @@ public class TrackingProcessingFragment extends BaseLazyFragment implements View
         initRecyclerview();
         OkHttpUtils
                 .get()
-                .url("http://192.168.1.171:8080/download/rebate/api/trac.txt")//跟踪信息
+                .url("https://www.luocaca.cn/download/rebate/api/trac.txt")//跟踪信息
                 .build()
                 .execute(new StringCallback() {
                     @Override

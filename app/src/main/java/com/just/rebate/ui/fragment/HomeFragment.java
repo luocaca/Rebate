@@ -192,7 +192,7 @@ public class HomeFragment extends BaseFragment {
 
         OkHttpUtils
                 .get()
-                .url("http://192.168.1.171:8080/download/homejson.txt")
+                .url("https://www.luocaca.cn/download/homejson.txt")
                 .build()
                 .execute(new StringCallback() {
                     @Override

@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.SparseArray;
-import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
@@ -20,13 +18,11 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 
 import com.just.rebate.R;
 import com.just.rebate.ui.activity.web.listener.OnWebViewFinishListener;
@@ -94,22 +90,27 @@ public class MyClient extends WebViewClient {
             return;
         LogUtil.e("web______初始化", rUrl);
         boolean wrrThread = new WebUtil().getWrrThread(handlerHolder, rUrl);
+        if (!rUrl.startsWith("http://") && !rUrl.startsWith("https://"))
+            return;
+
         if (wrrThread)
             return;
+
         if (!TextUtils.isEmpty(cookie)) {
             CookieHelper cookieHelper = new CookieHelper();
             cookieHelper.syncCookie(context, rUrl, cookie);
-
+//            cookieHelper.syncCookie(context, "https://pages.tmall.com", cookie);
+//            cookieHelper.syncCookie(context, "https://www.tmall.hk", cookie);
             String old = CookieManager.getInstance().getCookie(rUrl);
-
         }
         if (httpHeaders != null && !httpHeaders.isEmpty()) {
-            loadUrl(rUrl, httpHeaders);
+            loadUrl(rUrl,cookie);
+//            LogUtil.i("urls",rUrl);
+            LogUtil.i("cookiesss", CookieManager.getInstance().getCookie(rUrl));
         } else {
             loadUrl(rUrl);
+            LogUtil.i("cookiess", cookie);
         }
-
-
     }
 
     /**
@@ -119,10 +120,13 @@ public class MyClient extends WebViewClient {
     public void loadUrl(String url, String headers) {
         Map<String, String> extraHeaders = new HashMap<String, String>();
         extraHeaders.put(ConstantPool.KEY_URL_REFERER, headers);//固定请求头 来源头
+        extraHeaders.put("Cookie",headers);
         //        extraHeaders.put("test1", test1);//自定义属性
         //        extraHeaders.put("test2", test2);
         loadUrl(url, extraHeaders);
+        LogUtil.i("cookiesss", headers);
     }
+
 
     private void loadUrl(String url, Map<String, String> httpHeaders) {
         if (!TextUtils.isEmpty(httpHeaders.get("User-Agent"))) {
@@ -131,6 +135,7 @@ public class MyClient extends WebViewClient {
         webView.loadUrl(url, httpHeaders);
     }
 
+
     /**
      * 加载网址Url 或者本地文件FileUrl
      */
@@ -138,6 +143,7 @@ public class MyClient extends WebViewClient {
     private void loadUrl(String url) {
         if (TextUtils.isEmpty(url))
             return;
+
         webView.loadUrl(url);
     }
 
@@ -208,15 +214,17 @@ public class MyClient extends WebViewClient {
         //        webView.addJavascriptInterface(new AndroidJavaScript(context), "AndroidJs");
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
+
+            //加载进度刷新
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {
 //                    pb.setVisibility(View.GONE);
                     pb.setRefreshing(false);
-                } else {
-//                    pb.setVisibility(View.VISIBLE);
-                    pb.setRefreshing(true);
-
-//                    pb.setProgress(newProgress);
+//                } else {
+////                    pb.setVisibility(View.VISIBLE);
+//                    pb.setRefreshing(true);
+//
+////                    pb.setProgress(newProgress);
                 }
                 super.onProgressChanged(view, newProgress);
             }
@@ -351,6 +359,11 @@ public class MyClient extends WebViewClient {
 //        }
 
         //拦截过滤网址
+
+        if (!url.startsWith("http://"))
+            return false;
+        if (!url.startsWith("https://"))
+            return false;
         if (new WebUtil().getWrrThread(handlerHolder, url))
             return true;
 
@@ -388,6 +401,11 @@ public class MyClient extends WebViewClient {
         boolean wrrThread = new WebUtil().getWrrThread(handlerHolder, url);
         if (wrrThread)
             return;
+
+
+//        if(url.startsWith("tbopen://")){
+//            return ;
+//        }
         LogUtil.e("onPageStarted______开始加载", url);
 
         if (onWebViewFinishListener != null) {
@@ -408,21 +426,13 @@ public class MyClient extends WebViewClient {
         //    获取Cookies
         CookieManager cookieManager = CookieManager.getInstance();
         String cookie = cookieManager.getCookie(url);
+        cookieManager.setCookie(url,cookie);
         LogUtil.d("onPageFinished\n" + "url ：\n " + url + "\ncookies ：\n " + cookie + "\n");
-
-
-
-
-
-
-//        cookieManager.setCookie(url,);
-        printHead(view, url);
-
-
+//        CookieHelper cookieHelper = new CookieHelper();
+//        cookieHelper.syncCookie(context, url, cookie);
         super.onPageFinished(view, url);
 
     }
-
 
     public Map<String, Headers> headCaches = new HashMap<>();
 
@@ -473,6 +483,7 @@ public class MyClient extends WebViewClient {
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         super.onReceivedError(view, errorCode, description, failingUrl);
+
         //        webView.loadUrl("file:///android_asset/test.html");//加载返回错误时，重新加载错误页面
         handlerHolder.sendEmptyMessage(ConstantPool.WEB_HOME);
     }

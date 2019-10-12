@@ -1,4 +1,4 @@
-package uitl;
+package com.just.rebate.ui.activity.web.web_util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

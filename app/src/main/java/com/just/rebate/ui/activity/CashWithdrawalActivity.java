@@ -28,7 +28,6 @@ public class CashWithdrawalActivity extends BaseActivity implements View.OnClick
         }
     }
 
-
     @Override
     protected int bindTitleViewId() {
         return R.id.title;
@@ -49,7 +48,6 @@ public class CashWithdrawalActivity extends BaseActivity implements View.OnClick
     protected void initView() {
 
     }
-
 
     @Override
     public int bindLayoutId() {

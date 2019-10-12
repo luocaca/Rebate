@@ -181,7 +181,7 @@ public class PersonalFragment extends BaseFragment {
 
         OkHttpUtils
                 .get()
-                .url("http://192.168.1.171:8080/download/personaljson.txt")
+                .url("https://www.luocaca.cn/download/personaljson.txt")
                 .build()
                 .execute(new StringCallback() {
                     @Override

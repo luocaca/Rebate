@@ -34,6 +34,9 @@ public class CookieHelper {
         } catch (Exception e) {
             LogUtil.i(e.toString());
         }
+
+
+
     }
 
     /**
@@ -59,6 +62,7 @@ public class CookieHelper {
             String[] strs = cookies.split("; ");
             for (String str : strs) {
                 cookieManager.setCookie(url, str);
+
             }
             return cookieManager;
         } catch (Exception e) {
@@ -72,6 +76,8 @@ public class CookieHelper {
      * 同步cookie
      */
     public void syncCookie(CookieManager cookieManager) {
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             cookieManager.flush();
         } else {

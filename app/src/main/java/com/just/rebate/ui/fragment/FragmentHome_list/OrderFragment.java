@@ -255,7 +255,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
     protected void onFirstUserVisible() {
         OkHttpUtils
                 .get()
-                .url("http://192.168.1.171:8080/download/platform.txt")//平台数据列表
+                .url("https://www.luocaca.cn/download/platform.txt")//平台数据列表
                 .build()
                 .execute(new StringCallback() {
                     @Override

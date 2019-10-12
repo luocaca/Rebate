@@ -118,7 +118,7 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
 
         OkHttpUtils
                 .get()
-                .url("http://192.168.1.171:8080/download/rebate/api/invite.txt")//邀请 信息
+                .url("https://www.luocaca.cn/download/invite.txt")//邀请 信息
                 .build()
                 .execute(new Callback<BaseResponse<InviteInfo>>() {
 

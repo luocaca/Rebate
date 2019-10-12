@@ -1,5 +1,6 @@
 package com.just.rebate.ui.activity.web.web_util;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Message;
 import android.webkit.WebResourceRequest;
@@ -18,6 +19,9 @@ import java.util.Map;
 
 public class WebUtil {
 
+
+    private  Context context;
+
     /**
      * 获取 Headers 参数
      */
@@ -34,6 +38,9 @@ public class WebUtil {
         }
         return null;
     }
+
+
+
 
     /**
      * 获取URL的基本域名

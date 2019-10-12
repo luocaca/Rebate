@@ -3,31 +3,26 @@ package com.just.rebate.ui.activity.web;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.just.rebate.R;
 import com.just.rebate.ui.activity.web.web_util.HandlerUtil;
+import com.just.rebate.ui.activity.web.web_util.LogUtil;
 import com.just.rebate.ui.activity.web.web_util.MyClient;
 import com.just.rebate.wedget.MyTitleBar;
 import com.rebate.base.activity.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /***
  * web 浏览器
@@ -40,7 +35,6 @@ public class WebViewActivity extends BaseActivity {
 
     @BindView(R.id.web)
     WebView web;
-
 
     @BindView(R.id.title)
     MyTitleBar myTitleBar;
@@ -62,6 +56,7 @@ public class WebViewActivity extends BaseActivity {
         swipe.setColorSchemeColors(Color.GREEN);
 
 
+        //这个在MyClient已经调用，使用这个会导致调用cookie的时候跳出淘宝登录
 //        initWebView();
 
 
@@ -75,15 +70,22 @@ public class WebViewActivity extends BaseActivity {
         MyClient myClient = new MyClient(this, web, swipe, myTitleBar.title_tv, new HandlerUtil.HandlerHolder(new HandlerUtil.OnReceiveMessageListener() {
             @Override
             public void handlerMessage(Message msg) {
-//                web.loadUrl("https://h5.m.taobao.com");
+                web.loadUrl("https://h5.m.taobao.com");
             }
         }));
 
 
         // .addHeader("cookie", "")
-        String cookie ="_m_h5_tk_enc=e3f7d58860b22cace169e93099afba43, ockeqeudmj=uC2m2qk%3D, munb=652569484, unb=652569484, uc3=id2=VWojfHWaPLQP&lg2=U%2BGCWk%2F75gdr5Q%3D%3D&vt3=F8dByuK3QCO2SogCkuU%3D&nk2=D9ZMJf0xxB5b5t5x, uc1=cookie15=URm48syIIVrSKA%3D%3D&cookie14=UoTaEC%2BTitGYAg%3D%3D&cookie21=Vq8l%2BKCLjA%2Bl, csg=15d38b91, lgc=luochaojunaa, ntm=0, cookie17=VWojfHWaPLQP, dnk=luochaojunaa, skt=c1802f1fe6d4bf10, tracknick=luochaojunaa, _cc_=WqG3DMC9EA%3D%3D, _l_g_=Ug%3D%3D, sg=a49, _nk_=luochaojunaa, cookie1=UIHxSZwF3e96OEm4e2lF4I5B%2BkbjfNbtkPzv2gz4sL4%3D, isg=BKSkEhzopZNTCdElm04vuboFfqBWlcnNCoVvhb7FMG8yaUQz5k2YN9rHLIco3gD_";
+        //       String cookies = "_m_h5_tk_enc=e3f7d58860b22cace169e93099afba43; ockeqeudmj=uC2m2qk%3D; munb=652569484/unb=652569484; uc3=id2=VWojfHWaPLQP&lg2=U%2BGCWk%2F75gdr5Q%3D%3D&vt3=F8dByuK3QCO2SogCkuU%3D&nk2=D9ZMJf0xxB5b5t5x; uc1=cookie15=URm48syIIVrSKA%3D%3D&cookie14=UoTaEC%2BTitGYAg%3D%3D&cookie21=Vq8l%2BKCLjA%2Bl; csg=15d38b91; lgc=luochaojunaa; ntm=0; cookie17=VWojfHWaPLQP; dnk=luochaojunaa; skt=c1802f1fe6d4bf10; tracknick=luochaojunaa; _cc_=WqG3DMC9EA%3D%3D; _l_g_=Ug%3D%3D; sg=a49; _nk_=luochaojunaa; cookie1=UIHxSZwF3e96OEm4e2lF4I5B%2BkbjfNbtkPzv2gz4sL4%3D; isg=BKSkEhzopZNTCdElm04vuboFfqBWlcnNCoVvhb7FMG8yaUQz5k2YN9rHLIco3gD_";
 
-        myClient.loadUrl("https://h5.m.taobao.com", null,cookie);
+//      myClient.loadUrl("https://h5.m.taobao.com",cookies);
+//      myClient.loadUrl("https://h5.m.taobao.com",null,CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
+        myClient.loadUrl("https://h5.m.taobao.com",CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
+        LogUtil.i("cookiesssss", CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
+//        myClient.loadUrl("https://list.tmall.com",cookies);
+//        myClient.loadUrl("https://www.tmall.hk",cookies);
+
+
 
 //        web.getSettings().setJavaScriptEnabled(true);
 //        web.getSettings().setAppCacheEnabled(true);
@@ -115,12 +117,11 @@ public class WebViewActivity extends BaseActivity {
         web.reload();
     }
 
-
     @Override
     public void onBackPressed() {
         if (web.canGoBack()) {
             web.goBack();
-        } else {
+        }else {
             super.onBackPressed();
         }
     }
@@ -205,7 +206,19 @@ public class WebViewActivity extends BaseActivity {
 
                 myTitleBar.title_tv.setText(title);
             }
+
+
+
+
         });
+
+//        web.setWebViewClient(new WebViewClient(){
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                web.loadUrl(url);
+//                return true;
+//            }
+//        });
 
 
         web.loadUrl("https://h5.m.taobao.com");
