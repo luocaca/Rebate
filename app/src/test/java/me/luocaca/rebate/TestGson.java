@@ -1,7 +1,10 @@
 package me.luocaca.rebate;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.base.BaseResponse;
@@ -14,6 +17,8 @@ import com.just.rebate.entity.order.跟踪处理.TrackingProcessOrder;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.OkHttpRequestBuilder;
+import com.zhy.http.okhttp.callback.BitmapCallback;
+import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
@@ -101,6 +106,41 @@ public class TestGson {
 
 
         淘宝接口模拟();
+//        模拟图片下载保存后上传转转(new OnUploadAndDownLoadListener() {
+//
+//
+//            @Override
+//            public void onSuccess(List<String> uploadUrls) {
+//
+//                System.out.println(uploadUrls);
+//
+//            }
+//
+//            @Override
+//            public void onFauiled() {
+//                System.out.println(uploadUrls);
+//
+//            }
+//
+//            @Override
+//            public void onCancle() {
+//                System.out.println("onCancle");
+//
+//            }
+//
+//            @Override
+//            public void onProgress(int uploadSize, int downloadSize) {
+//                System.out.println("onProgress  " + uploadSize + " " + downloadSize);
+//
+//            }
+//        });
+
+
+//        模拟城市读取();
+
+
+//        模拟上传图片();
+
 //        OkHttpUtils.get().url("http://192.168.1.171:8081/getCookies").build().execute(new StringCallback() {
 //            @Override
 //            public void onError(Call call, Exception e, int id) {
@@ -177,6 +217,217 @@ public class TestGson {
 
     }
 
+    private static void 模拟城市读取() {
+
+        try {
+            String json =
+                    FileTextReader.getFileText("C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\cityjsonv22.json");
+
+
+            System.out.println(json);
+
+
+            zzcity city = new Gson().fromJson(json, zzcity.class);
+
+            List<JsonElement> province = city.getRespData().getProvince();
+            int size = province.size();
+            System.out.println("一共省份多少个 " + size);
+
+            for (int i = 0; i < province.size(); i++) {
+
+                for (Map.Entry<String, JsonElement> stringJsonElementEntry : province.get(i).getAsJsonObject().entrySet()) {
+
+                    System.out.println("----" + stringJsonElementEntry.getKey());
+                    System.out.println("----" + stringJsonElementEntry.getValue());
+
+
+                    if (stringJsonElementEntry.getKey().equals("c")) {
+
+                        for (JsonElement jsonElement : stringJsonElementEntry.getValue().getAsJsonArray()) {
+
+                            for (Map.Entry<String, JsonElement> jsonElementEntry : jsonElement.getAsJsonObject().entrySet()) {
+                                if (jsonElementEntry.getKey().equals("c")) {
+//                                    jsonElementEntry.setValue(null);
+
+
+                                    for (JsonElement jsonElement1 : jsonElementEntry.getValue().getAsJsonArray()) {
+
+                                        for (Map.Entry<String, JsonElement> jsonElementEntryQu : jsonElement1.getAsJsonObject().entrySet()) {
+                                            if (jsonElementEntryQu.getKey().equals("c")) {
+                                                jsonElementEntryQu.setValue(null);
+                                            }
+                                        }
+
+
+                                    }
+
+                                }
+                            }
+                        }
+
+
+//                        for (Map.Entry<String, JsonElement> jsonElementEntry : stringJsonElementEntry.getValue().getAsJsonArray().get(1).getAsJsonObject().entrySet()) {
+//
+//
+//                            if (jsonElementEntry.getKey().equals("c")) {
+//                                stringJsonElementEntry.getValue().getAsJsonArray().get(1).getAsJsonObject().remove("c");
+//                            }
+//
+//
+//                        }
+                    }
+
+                }
+            }
+
+
+            System.out.println(city);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static int downloadSize = 0;
+    public static int downloadErrorSize = 0;
+    public static int uploadSize = 0;
+    public static int uploadErrorSize = 0;
+
+
+    public static interface OnUploadAndDownLoadListener {
+
+        void onSuccess(List<String> uploadUrls);
+
+        void onFauiled();
+
+        void onCancle();
+
+        void onProgress(int uploadSize, int downloadSize);
+
+
+    }
+
+
+    public static List<String> uploadUrls = new ArrayList<>();
+
+    /**
+     *
+     */
+    private static void 模拟图片下载保存后上传转转(OnUploadAndDownLoadListener onUploadAndDownLoadListener) {
+
+
+        String tii = System.currentTimeMillis() + "";
+        downloadSize = 0;
+        List list = new ArrayList();
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570623836752&di=d37c854eec6ca3b468fcb6fe8983f05a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F03%2F20170603213152_sKuLT.jpeg");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570623836752&di=dc6754107efa9cbdc474d0ee11b43823&imgtype=0&src=http%3A%2F%2Fimg1.efu.com.cn%2Fupfile%2Fnews%2Fcommonly%2F2012%2F2012-08-03%2F9a226980-da0a-42b1-bf7d-ba2385507a95.jpg");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570623836752&di=05a46b3655d67da5b8bcaefe1246e2ff&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F76f787083c7c58b932451f8e23a9d86abc04f88c36cf8-T9IAyf_fw658");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570623836751&di=00ac9e24caf8fa43f4271a06f650363d&imgtype=0&src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fblog%2F201404%2F22%2F20140422142715_8GtUk.thumb.600_0.jpeg");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570623836751&di=489cb2b5283d063c5a3d5699b5fdbdac&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20120524%2FImg343986028.jpg");
+        list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570623836751&di=8da9dda5232da65fd608778f6a3b4366&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20130604%2FImg377959944.jpg");
+
+
+        uploadUrls.clear();
+        System.out.println("size=" + list);
+
+        for (Object o : list) {
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            OkHttpUtils.get().url(o.toString()).build()
+                    .execute(new FileCallBack("C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\dolocache", "temp" + System.currentTimeMillis() + ".jpg") {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            System.out.println("onError: " + e.getMessage());
+                            System.out.println("downloadErrorSize: " + (++downloadErrorSize));
+                            onUploadAndDownLoadListener.onFauiled();
+
+                        }
+
+                        @Override
+                        public void onResponse(File response, int id) {
+
+
+                            模拟上传图片(response, onUploadAndDownLoadListener);
+                            System.out.println("downloadSize=" + (++downloadSize));
+
+
+                        }
+
+
+                    });
+        }
+
+
+    }
+
+    private static void 模拟上传图片(File file, OnUploadAndDownLoadListener onUploadAndDownLoadListener) {
+
+//        Bitmap bitmap = BitmapFactory.decodeFile("C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\ssl\\upload.jpg");
+
+//        File file = new File("D:\\java\\apache-tomcat-9.0.22-windows-x64\\apache-tomcat-9.0.22\\webapps\\download\\000下载二维码.png");
+        setMyClinet(OkHttpUtils.getInstance());
+
+
+//        Log.i(TAG, "模拟上传图片: " + bitmap + file);
+
+        OkHttpUtils.postFile()
+                .file(file)
+//                .addFile("file", "image.jpg", file)
+                .url("https://upload.58cdn.com.cn/")
+                .addHeader("Pic-Flash", "1")
+                .addHeader("Charset", "utf-8")
+                .addHeader("connection", "keep-alive")
+                .addHeader("Content-Type", "multipart/form-data;boundary=e93a69b0-ee72-4019-9221-705476ab2ded")
+                .addHeader("Pic-Path", "/zhuanzh/")
+                .addHeader("Pic-Size", "0*0")
+                .addHeader("Pic-Bulk", "0")
+                .addHeader("Pic-dpi", "0")
+                .addHeader("Pic-Cut", "0*0*0*0")
+                .addHeader("Pic-IsAddWaterPic", "false")
+                .addHeader("File-Extensions", "jpg")
+                .addHeader("User-Agent", "Dalvik/2.1.0 (Linux; U; Android 9; MI CC 9 MIUI/V10.3.12.0.PFCCNXM)")
+                .addHeader("Host", "upload.58cdn.com.cn")
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        System.out.println(e.getMessage());
+                        System.out.println("uploadErrorSize: " + (++uploadErrorSize));
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        System.out.println("https://pic2.zhuanstatic.com/zhuanzh/" + response);
+                        System.out.println("uploadSize" + (++uploadSize));
+
+                        onUploadAndDownLoadListener.onProgress(uploadSize, downloadSize);
+
+                        uploadUrls.add("https://pic2.zhuanstatic.com/zhuanzh/" + response);
+
+
+                        if (uploadSize == downloadSize) {
+                            onUploadAndDownLoadListener.onSuccess(uploadUrls);
+                        }
+
+                    }
+                });
+
+
+        if (true) {
+            return;
+        }
+
+
+    }
+
     private static void 模拟文本写入(String string) throws Exception {
 
         File file = new File("D:\\java\\apache-tomcat-9.0.22-windows-x64\\apache-tomcat-9.0.22\\webapps\\download\\转转测试\\ppu.txt");
@@ -233,6 +484,10 @@ public class TestGson {
 //        OkHttpClient client = new OkHttpClient();
 
 
+        ;
+//                .mediaType(MediaType.parse("multipart/form-data"));
+        ;
+
 //        String decod = "/h5/mtop.order.queryboughtlist/4.0/?jsv=2.5.1&appKey=12574478&t=1569410448225&sign=6cc9042b8718ac7c318612b187df6dcb&api=mtop.order.queryboughtlist&v=4.0&ttid=%23%23h5&isSec=0&ecode=1&AntiFlood=true&AntiCreep=true&LoginRequest=true&needLogin=true&H5Request=true&type=jsonp&dataType=jsonp&callback=mtopjsonp1&data=%7B%22spm%22%3A%22a215s.7406091.toolbar.i2%22%2C%22page%22%3A1%2C%22tabCode%22%3A%22all%22%2C%22appVersion%22%3A%221.0%22%2C%22appName%22%3A%22tborder%22%7D";
 
         setMyClinet(OkHttpUtils.getInstance());
@@ -242,6 +497,7 @@ public class TestGson {
         setScheme(map)
 //                .url("https://h5api.m.taobao.com/h5/mtop.order.queryboughtlist/4.0/?jsv=2.5.1&appKey=12574478&t=1569410448225&sign=6cc9042b8718ac7c318612b187df6dcb&api=mtop.order.queryboughtlist&v=4.0&ttid=##h5&isSec=0&ecode=1&AntiFlood=true&AntiCreep=true&LoginRequest=true&needLogin=true&H5Request=true&type=jsonp&dataType=jsonp&callback=mtopjsonp1&data={\"spm\":\"a215s.7406091.toolbar.i2\",\"page\":1,\"tabCode\":\"all\",\"appVersion\":\"1.0\",\"appName\":\"tborder\"}")
                 .url(getUrlByMap(map))
+
 
 //                .addHeader("User-Agent", getCookiesString().get("user-agent"))
 //                .addHeader("Accept", getCookiesString().get("accept"))

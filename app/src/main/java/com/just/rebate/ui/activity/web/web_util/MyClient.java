@@ -104,7 +104,7 @@ public class MyClient extends WebViewClient {
             String old = CookieManager.getInstance().getCookie(rUrl);
         }
         if (httpHeaders != null && !httpHeaders.isEmpty()) {
-            loadUrl(rUrl,cookie);
+            loadUrl(rUrl, cookie);
 //            LogUtil.i("urls",rUrl);
             LogUtil.i("cookiesss", CookieManager.getInstance().getCookie(rUrl));
         } else {
@@ -120,7 +120,7 @@ public class MyClient extends WebViewClient {
     public void loadUrl(String url, String headers) {
         Map<String, String> extraHeaders = new HashMap<String, String>();
         extraHeaders.put(ConstantPool.KEY_URL_REFERER, headers);//固定请求头 来源头
-        extraHeaders.put("Cookie",headers);
+        extraHeaders.put("Cookie", headers);
         //        extraHeaders.put("test1", test1);//自定义属性
         //        extraHeaders.put("test2", test2);
         loadUrl(url, extraHeaders);
@@ -426,10 +426,48 @@ public class MyClient extends WebViewClient {
         //    获取Cookies
         CookieManager cookieManager = CookieManager.getInstance();
         String cookie = cookieManager.getCookie(url);
-        cookieManager.setCookie(url,cookie);
+        cookieManager.setCookie(url, cookie);
         LogUtil.d("onPageFinished\n" + "url ：\n " + url + "\ncookies ：\n " + cookie + "\n");
 //        CookieHelper cookieHelper = new CookieHelper();
 //        cookieHelper.syncCookie(context, url, cookie);
+
+
+        if (url.startsWith("https://shenghuo.alipay.com/peerpaycore/applyWapPeerPay")) {
+            view.loadUrl("javascript:document.getElementsByName(peerPayerEmail)[0].value='13030809100';");
+
+
+//           view.loadUrl("javascript:window.java_obj.getSource('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+
+
+            String js = "javascript:{" +
+                    "document.getElementsByName('peerPayerEmail')[0].value = '13030809100';" + "}";
+            view.loadUrl(js);
+//
+
+
+            Toast.makeText(context, "finish", Toast.LENGTH_SHORT).show();
+
+
+        }
+
+
+        /**
+         *
+         // alert(document.getElementsByTagName("peerPayerEmail").placeholder)
+
+         document.getElementsByName("peerPayerEmail")[0].value="13030809100";
+
+         // document.getElementById("input666").value="13030809100";
+
+
+         //dUrl("javascript:document.getElementsByTagName(\"img\")[0].click();");
+
+
+         document.getElementsByClassName("btn btn-ok")[0].click();
+
+         */
+
+
         super.onPageFinished(view, url);
 
     }

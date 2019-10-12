@@ -67,10 +67,13 @@ public class WebViewActivity extends BaseActivity {
 
     private void initWebClient() {
 
+
+        String url = "http://auth.alipay.com/w/applyPeerPay.do?tcode=eyJiaXpPcmRlcklkcyI6IjU2MTA4Njg4NjU3NzczNTA5NiIsImJ1eWVySWQiOiIzMTg5NzM5NjUwIiwidHlwZSI6IjMifQ%3D%3D&alipay_trade_no=2019101222001170540598592116&s_id=5c3df21b48a7562f9e008f6da355b145&return_url=https%253A%252F%252Fmarket.m.taobao.com%252Fapps%252Fmarket%252Ftrade%252Findex.html%253Fwh_weex%253Dtrue%2526wx_navbar_transparent%253Dtrue%2526orderIds%253D561086886577735096%2526degrade%253D0%2526act%253Dfalse%3Fspm%3Da220l.7770993.0.i0&pay_order_id=561086886577735096";
+
         MyClient myClient = new MyClient(this, web, swipe, myTitleBar.title_tv, new HandlerUtil.HandlerHolder(new HandlerUtil.OnReceiveMessageListener() {
             @Override
             public void handlerMessage(Message msg) {
-                web.loadUrl("https://h5.m.taobao.com");
+                web.loadUrl(url);
             }
         }));
 
@@ -80,11 +83,11 @@ public class WebViewActivity extends BaseActivity {
 
 //      myClient.loadUrl("https://h5.m.taobao.com",cookies);
 //      myClient.loadUrl("https://h5.m.taobao.com",null,CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
-        myClient.loadUrl("https://h5.m.taobao.com",CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
+//        myClient.loadUrl("https://h5.m.taobao.com",CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
+        myClient.loadUrl(url, CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
         LogUtil.i("cookiesssss", CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
 //        myClient.loadUrl("https://list.tmall.com",cookies);
 //        myClient.loadUrl("https://www.tmall.hk",cookies);
-
 
 
 //        web.getSettings().setJavaScriptEnabled(true);
@@ -121,7 +124,7 @@ public class WebViewActivity extends BaseActivity {
     public void onBackPressed() {
         if (web.canGoBack()) {
             web.goBack();
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -206,8 +209,6 @@ public class WebViewActivity extends BaseActivity {
 
                 myTitleBar.title_tv.setText(title);
             }
-
-
 
 
         });
