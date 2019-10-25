@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                 LoginVo loginVo = GsonUtil.getGson().fromJson(response, LoginVo.class);
 
 
-                                上传数据到后台(loginVo);
+//                                上传数据到后台(loginVo);
 
 
                             }
@@ -117,12 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                Log.i("hello", "" + response);
 
+                                Log.i("hello", "" + response);
                                 Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                                 orderQuery.setText(response);
-
-
                             }
                         }
                 );
