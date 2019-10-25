@@ -149,9 +149,10 @@ public class MainActivity extends AppCompatActivity {
 
         Map map = new HashMap<String, String>();
         map.put("Phone", loginVo.getObj().getMerchantId());
-        map.put("Account", loginVo.getObj().getUserId());
+        map.put("Account", count.getText().toString());
         map.put("Cookie", loginVo.getObj().getToken());
         map.put("AppType", "10");
+        map.put("Username", loginVo.getObj().getUserId());
         OkHttpUtils
                 .postString()
                 .mediaType(MediaType.parse("application/json"))
