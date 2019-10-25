@@ -7,7 +7,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
@@ -37,6 +42,8 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Headers;
 import okhttp3.Response;
+
+import static android.view.KeyEvent.ACTION_DOWN;
 
 public class MyClient extends WebViewClient {
     private Context context;
@@ -74,6 +81,8 @@ public class MyClient extends WebViewClient {
         this.tv = tv;
         this.handlerHolder = handlerHolder;
         initWebView();
+        whiteRetry(null);
+
 
     }
 
@@ -135,7 +144,6 @@ public class MyClient extends WebViewClient {
         webView.loadUrl(url, httpHeaders);
     }
 
-
     /**
      * 加载网址Url 或者本地文件FileUrl
      */
@@ -146,6 +154,8 @@ public class MyClient extends WebViewClient {
 
         webView.loadUrl(url);
     }
+
+
 
 
     /**
@@ -430,25 +440,45 @@ public class MyClient extends WebViewClient {
         LogUtil.d("onPageFinished\n" + "url ：\n " + url + "\ncookies ：\n " + cookie + "\n");
 //        CookieHelper cookieHelper = new CookieHelper();
 //        cookieHelper.syncCookie(context, url, cookie);
+//        h5/mtop.taobao.mclaren.index.data.get.h5/1.0/?
+//        https:h5api.m.taobao.com
+//        设置自动登录淘宝
+//        if(url.startsWith("https://h5.m.taobao.com/")){
+//            String username="18584802545";
+//            String password="1184113471wc.";
+//            String js1 = "javascript:document.getElementsByName('TPL_username').value = '" + username + "'" +
+//                    ":document.getElementsByName('TPL_username').value = '" + password + "'" +
+//                    ";document.getElementsById('btn-submit').click();";
+//            view.loadUrl(js1);
+//            /**
+//             * 淘宝设置手势点击提交订单
+//             */
+//            for(float i=450;i<=900;i=i+80){
+//                analogUserClick(webView, 300f,i );
+//            }
+//            LogUtil.i("调用js",username);
+//        }
 
 
         if (url.startsWith("https://shenghuo.alipay.com/peerpaycore/applyWapPeerPay")) {
-            view.loadUrl("javascript:document.getElementsByName(peerPayerEmail)[0].value='13030809100';");
-
-
-//           view.loadUrl("javascript:window.java_obj.getSource('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
-
-
-            String js = "javascript:{" +
-                    "document.getElementsByName('peerPayerEmail')[0].value = '13030809100';" + "}";
+            String number ="13030809100";
+            String js = "javascript:document.getElementsByName('peerPayerEmail')[0].value = '" + number + "';document.getElementsByName('11peerpay')[0].submit();";
             view.loadUrl(js);
-//
-
-
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+//            淘宝设置手势点击提交订单
+            for(float i=450;i<=900;i=i+80){
+                analogUserClick(webView, 300f,i );
+            }
             Toast.makeText(context, "finish", Toast.LENGTH_SHORT).show();
-
-
         }
+
+
+
+
 
 
         /**
@@ -471,6 +501,56 @@ public class MyClient extends WebViewClient {
         super.onPageFinished(view, url);
 
     }
+
+    /**
+     * 延时
+     * @param v
+     */
+
+    public void whiteRetry(View.OnClickListener v) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                whiteRetry(v);
+                webView.reload();
+                for(int i=1;i<=5;i++){
+                    LogUtil.i("刷新","第"+i+"次");
+                }
+
+            }
+        }, 300000);
+    }
+    /**
+     * 模拟用户点击
+     *
+     * @param view 要触发操作的view
+     * @param x    相对于要操作view的左上角x轴偏移量
+     * @param y    相对于要操作view的左上角y轴偏移量
+     */
+    private static void analogUserClick(View view, float x, float y) {
+        if (view == null) {
+            return;
+        }
+        Log.e("222", "正：p->" + x + "," + y);
+        long downTime = SystemClock.uptimeMillis();//模拟按下去的时间
+
+        long eventTime = downTime;//事件发生时间
+
+        MotionEvent downEvent = MotionEvent.obtain(downTime, eventTime,
+                ACTION_DOWN, x, y, 0);
+        view.onTouchEvent(downEvent);
+
+        eventTime = eventTime + 90;//离开屏幕时间
+
+        MotionEvent upEvent = MotionEvent.obtain(downTime, eventTime,
+                MotionEvent.ACTION_UP, x, y, 0);
+        view.onTouchEvent(upEvent);
+
+        //回收事件
+        downEvent.recycle();
+        upEvent.recycle();
+    }
+
 
     public Map<String, Headers> headCaches = new HashMap<>();
 

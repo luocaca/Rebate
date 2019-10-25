@@ -23,7 +23,6 @@
     <dimen name="text_size_content_ss">10sp</dimen>
     <dimen name="default_radius">6dp</dimen>
     <dimen name="default_toolbar_height">75dp</dimen>
-
     <!-- 字体大小 -->
     <dimen name="font_larger">20sp</dimen>
     <dimen name="font_large">18sp</dimen>

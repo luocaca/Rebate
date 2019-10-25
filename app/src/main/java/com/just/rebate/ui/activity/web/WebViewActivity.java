@@ -55,7 +55,6 @@ public class WebViewActivity extends BaseActivity {
         swipe.setProgressBackgroundColorSchemeColor(Color.RED);
         swipe.setColorSchemeColors(Color.GREEN);
 
-
         //这个在MyClient已经调用，使用这个会导致调用cookie的时候跳出淘宝登录
 //        initWebView();
 
@@ -63,13 +62,19 @@ public class WebViewActivity extends BaseActivity {
         initWebClient();
 
 
+
     }
+
+
+
+
 
     private void initWebClient() {
 
 
-        String url = "http://auth.alipay.com/w/applyPeerPay.do?tcode=eyJiaXpPcmRlcklkcyI6IjU2MTA4Njg4NjU3NzczNTA5NiIsImJ1eWVySWQiOiIzMTg5NzM5NjUwIiwidHlwZSI6IjMifQ%3D%3D&alipay_trade_no=2019101222001170540598592116&s_id=5c3df21b48a7562f9e008f6da355b145&return_url=https%253A%252F%252Fmarket.m.taobao.com%252Fapps%252Fmarket%252Ftrade%252Findex.html%253Fwh_weex%253Dtrue%2526wx_navbar_transparent%253Dtrue%2526orderIds%253D561086886577735096%2526degrade%253D0%2526act%253Dfalse%3Fspm%3Da220l.7770993.0.i0&pay_order_id=561086886577735096";
-
+//        String url = "http://auth.alipay.com/w/applyPeerPay.do?tcode=eyJiaXpPcmRlcklkcyI6IjU2MTA4Njg4NjU3NzczNTA5NiIsImJ1eWVySWQiOiIzMTg5NzM5NjUwIiwidHlwZSI6IjMifQ%3D%3D&alipay_trade_no=2019101222001170540598592116&s_id=5c3df21b48a7562f9e008f6da355b145&return_url=https%253A%252F%252Fmarket.m.taobao.com%252Fapps%252Fmarket%252Ftrade%252Findex.html%253Fwh_weex%253Dtrue%2526wx_navbar_transparent%253Dtrue%2526orderIds%253D561086886577735096%2526degrade%253D0%2526act%253Dfalse%3Fspm%3Da220l.7770993.0.i0&pay_order_id=561086886577735096";
+        String url ="https://h5.m.taobao.com";
+//        String url="https://auth.alipay.com/w/applyPeerPay.do?tcode=eyJiaXpPcmRlcklkcyI6IjU2MTA2NzQ2MzYwODczNTA5NiIsImJ1eWVySWQiOiIzMTg5NzM5NjUwIiwidHlwZSI6IjMifQ%3D%3D&alipay_trade_no=2019101222001170540500764605&s_id=1bc64c2622e327d888fa82b1fc6a358b&return_url=https%253A%252F%252Fmarket.m.taobao.com%252Fapps%252Fmarket%252Ftrade%252Findex.html%253Fwh_weex%253Dtrue%2526wx_navbar_transparent%253Dtrue%2526orderIds%253D561067463608735096%2526degrade%253D0%2526act%253Dfalse&pay_order_id=561067463608735096";
         MyClient myClient = new MyClient(this, web, swipe, myTitleBar.title_tv, new HandlerUtil.HandlerHolder(new HandlerUtil.OnReceiveMessageListener() {
             @Override
             public void handlerMessage(Message msg) {
@@ -198,7 +203,6 @@ public class WebViewActivity extends BaseActivity {
 //                    pb.setVisibility(View.VISIBLE);
 //                    pb.setProgress(newProgress);
                     swipe.setRefreshing(true);
-
                 }
                 super.onProgressChanged(view, newProgress);
             }

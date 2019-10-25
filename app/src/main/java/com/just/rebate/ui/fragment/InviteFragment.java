@@ -121,7 +121,6 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                 .url("https://www.luocaca.cn/download/invite.txt")//邀请 信息
                 .build()
                 .execute(new Callback<BaseResponse<InviteInfo>>() {
-
                     @Override
                     public BaseResponse<InviteInfo> parseNetworkResponse(Response response, int id) throws Exception {
                         String json = response.body().string();
@@ -166,6 +165,7 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                                 }
                             }
                         });
+                        ;
                     }
 
                     @Override

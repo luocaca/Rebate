@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.just.rebate.R;
-import com.just.rebate.data.DataServer;
 import com.just.rebate.data.detailed_DataServer;
 
 import java.util.List;
@@ -22,11 +21,6 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
         this.mDataServer=mDataServer;
 
     }
-
-
-
-
-
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

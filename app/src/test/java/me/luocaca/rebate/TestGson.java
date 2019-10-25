@@ -1,10 +1,6 @@
 package me.luocaca.rebate;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -19,7 +15,6 @@ import com.just.rebate.entity.order.跟踪处理.TrackingProcessOrder;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.OkHttpRequestBuilder;
-import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -27,12 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -43,11 +35,8 @@ import java.net.URLDecoder;
 import java.security.GeneralSecurityException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +47,6 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
-import me.luocaca.rebate.name.RandomValueUtil;
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -110,34 +98,6 @@ public class TestGson {
 //            }
 //        });
 
-
-        String price = "100.15";
-
-
-        String content = "【转转】您的短信验证码为：5102，用于手机登录注册。验证码提供给他人可能导致账号被盗，请勿泄露，谨防被骗。";
-
-
-        double re = Double.parseDouble(price);
-
-        System.out.println((int) Double.parseDouble(price) * 100);
-
-
-        long last = System.currentTimeMillis() / 1000 - 1571378452;
-
-        //15分钟失效
-        System.out.println(last);
-
-
-        System.out.println(RandomValueUtil.getChineseName());
-
-
-        System.out.println(content.substring(content.indexOf("：") + 1, content.indexOf("，")));
-
-
-        String succellUrl = "http://app.zhuanzhuan.com/zz/redirect/inforurlredirect?infoId=1186511681503395849&metric=JhtklRH0sExCVx703OU18A71022bn9";
-        String string = "https://m.zhuanzhuan.com/Mzhuanzhuan/zzapp/detail/index.html?webview=zzn&repeatrequest=true&zzsharetype=goodsdetail&zzpage=goodsDetail&zzfrom=LinkCopy&";
-
-        System.out.println(string + succellUrl.substring(succellUrl.indexOf("?") + 1));
 
         淘宝接口模拟();
 //        模拟图片下载保存后上传转转(new OnUploadAndDownLoadListener() {
@@ -250,6 +210,10 @@ public class TestGson {
 //        getPlatformJson();
 
     }
+
+
+
+
 
     private static void 模拟城市读取() {
 
@@ -401,6 +365,7 @@ public class TestGson {
 
 
     }
+
 
     private static void 模拟上传图片(File file, OnUploadAndDownLoadListener onUploadAndDownLoadListener) {
 
@@ -622,11 +587,10 @@ public class TestGson {
         try {
 
 
-            File file = new File("C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\cookies.txt");
+            File file = new File("C:\\Users\\chenmingzhi\\Desktop\\cookies.txt");
 
 
             System.out.println(file.exists());
-
 
             FileInputStream fileInputStream = new FileInputStream(file);
 

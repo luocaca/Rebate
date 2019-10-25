@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body><script type="text/javascript">
+with(document)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("exparams","req_url=http%3a%2f%2flogin%2em%2etaobao%2ecom%2flogin%2ehtm%3f%5finput%5fcharset%3dutf%2d8%26sdkInterceptType%3d%26ttid%3dh5%2540iframe&amp;category=&amp;userid=&amp;b2c_orid=&amp;b2c_auction=&amp;at_isb=&amp;atp_isdpp=&amp;at_ssid=&amp;bbid=&amp;aplus&amp;at_cart=&amp;at_udid=&7775610b47613&asid=AQAAAAD+Z6VdHFSONQAAAADN50gctvdtaQ==",id="tb-beacon-aplus",src=(location>"https"?"//s":"//a")+".tbcdn.cn/s/aplus_wap.js")
+</script>
+
+
+
+
+
+<div class="logo tb-logo"></div>
+
+<form id="loginForm" class="mlogin" action="https://login.m.taobao.com/login.htm?_input_charset=utf-8&amp;ttid=h5%40iframe" method="post">
+    <input name='_tb_token_' type='hidden' value='7775610b47613'>
+    <input name="ttid" type="hidden" value="h5@iframe"/>    <input type="hidden" id="J_Mparam" name="action" value="LoginAction"/>
+    <input type="hidden" name="event_submit_do_login" value="1"/>
+    <input type="hidden" name="TPL_redirect_url" value="https://h5.m.taobao.com/other/loginend.html?origin=https%3A%2F%2Fmain.m.taobao.com"/>
+    <input type="hidden" name="loginFrom" value="WAP_TAOBAO"/>
+    <input type="hidden" name="style" value=""/>
+    <input type="hidden" name="bind_token" value=""/>
+    <input type="hidden" name="sdkInterceptType" value=""/>
+    <input type="hidden" name="assets_css" value=""/>
+    <input type="hidden" name="assets_js" value=""/>
+    <input type="hidden" name="ssottid" value=""/>
+    <input type="hidden" name="nv" value="false"/>
+    <input type="hidden" name="otherLoginUrl" value="https://login.m.taobao.com/msg_login.htm?ttid=h5%40iframe&amp;redirectURL=https%3A%2F%2Fh5.m.taobao.com%2Fother%2Floginend.html%3Forigin%3Dhttps%253A%252F%252Fmain.m.taobao.com"/>
+
+    <input type="hidden" id="J_Exponent" value="10001"/>
+    <input type="hidden" id="J_Module" value="98639b48645bdaadc930c1e2316b9d07223f3808e9192788a1e2183ff5a33f393ff51f9a6f65050600f4e77890c333c18ff2d5ca9e2259a1696aa4398c7ca809034911671ef06e760a12da4aa285fcd028edaa5e8e3a70d1fed92649ee7189ef0bec70ffa8e26ce57ede52d5593bc36c48abe16c50cc1fd7c1479e53cb0cde99"/>
+    <input type="hidden" name="TPL_timestamp" id="J_Timestamp" value=""/>
+    <input type="hidden" name="TPL_password2" id="password2"/>
+    <input type="hidden" name="page" id="page" value="loginV3"/>
+
+    <input type="hidden" id="J_NcoSig" name="ncoSig"/>
+    <input type="hidden" id="J_NcoSessionid" name="ncoSessionid"/>
+    <input type="hidden" id="J_NcoToken" name="ncoToken" value=""/>
+
+    <div id="loginError" style="display: none">请输入会员名</div>
+
+    <div class="am-list">
+        <div class="am-list-item">
+            <div class="am-list-control">
+                <input type="text" class="am-input-required" name="TPL_username" placeholder="手机号/邮箱/会员名"
+                       value=""
+                       id="username">
+            </div>
+            <div class="am-list-action"><i class="am-icon-clear"></i></div>
+        </div>
+        <div class="am-list-item">
+            <div class="am-list-control">
+                <input type="password" class="am-input-required am-input-required-password" name="TPL_password"
+                       placeholder="请输入密码" value="" id="password">
+            </div>
+            <div class="am-list-action am-list-action-password"><i class="am-icon-clear"></i></div>
+            <div class="pwd-show iconfont" id="show-pwd"></div>
+        </div>
+    </div>
+
+    <div class="checkcode-wrap">
+        <div id="checkcode"></div>
+    </div>
+
+    <div class="other-link">
+        <div class="am-field am-footer">
+            <a href="https://login.m.taobao.com/msg_login.htm?ttid=h5%40iframe&redirectURL=https%3A%2F%2Fh5.m.taobao.com%2Fother%2Floginend.html%3Forigin%3Dhttps%253A%252F%252Fmain.m.taobao.com" class="f-left">短信验证码登录</a>
+            <a href="//reg.taobao.com/member/new_register.jhtml?TPL_redirect_url=https://h5.m.taobao.com/other/loginend.html?origin=https%3A%2F%2Fmain.m.taobao.com"
+               class="f-right">免费注册</a>
+
+        </div>
+    </div>
+    <div class="am-field am-fieldBottom">
+        <button type="submit" class="am-button am-button-submit" id="btn-submit" disabled="disabled">登 录</button>
+    </div>
+
+</form>
+
+<script src="//g.alicdn.com/vip/mlogin/1.1.7/vendor.js"></script>
+<script src="//g.alicdn.com/vip/mlogin/1.1.7/login/index.js"></script>
+<script>
+    (function () {
+        var S = $;
+        $('#taobaoAppQuickLogin').click(function () {
+            window.location.href = '';
+        });
+    })();
+</script>
+<style>
+    .shield {
+        top: -10px
+    }
+</style>
+<script type="text/javascript">
+    var UA_Opt = {};
+    UA_Opt.ExTarget = ['password'];
+    UA_Opt.FormId = "loginForm";
+    window.NVC_Opt = {
+        appkey: 'CF_APP_IC_WAPLogin_H5',
+        scene: 'nvc_register_h5',
+        renderTo: '#captcha',
+        trans: {"key1": "code0", "nvcCode": 200},
+        elements: [
+            '//img.alicdn.com/tfs/TB17cwllsLJ8KJjy0FnXXcFDpXa-50-74.png',
+            '//img.alicdn.com/tfs/TB17cwllsLJ8KJjy0FnXXcFDpXa-50-74.png'
+        ],
+        bg_back_prepared: '//img.alicdn.com/tps/TB1skE5SFXXXXb3XXXXXXXXXXXX-100-80.png',
+        bg_front: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABQCAMAAADY1yDdAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAADUExURefk5w+ruswAAAAfSURBVFjD7cExAQAAAMKg9U9tCU+gAAAAAAAAAIC3AR+QAAFPlUGoAAAAAElFTkSuQmCC',
+        obj_ok: '//img.alicdn.com/tfs/TB1rmyTltfJ8KJjy0FeXXXKEXXa-50-74.png',
+        bg_back_pass: '//img.alicdn.com/tfs/TB1KDxCSVXXXXasXFXXXXXXXXXX-100-80.png',
+        obj_error: '//img.alicdn.com/tfs/TB1q9yTltfJ8KJjy0FeXXXKEXXa-50-74.png',
+        bg_back_fail: '//img.alicdn.com/tfs/TB1w2oOSFXXXXb4XpXXXXXXXXXX-100-80.png',
+        upLang: {
+            "cn": {
+                _ggk_guide: "请在屏幕上滑动，刮出两面盾牌",
+                _ggk_success: "恭喜您成功刮出盾牌<br/>继续下一步操作吧",
+                _ggk_loading: "加载中",
+                _ggk_fail: ['呀，盾牌不见了<br/>请', "javascript:noCaptcha.reset()", '再来一次', '或', "http://survey.taobao.com/survey/QgzQDdDd?token=%TOKEN", '反馈问题'],
+                _ggk_action_timeout: ['我等得太久啦<br/>请', "javascript:noCaptcha.reset()", '再来一次', '或', "http://survey.taobao.com/survey/QgzQDdDd?token=%TOKEN", '反馈问题'],
+                _ggk_net_err: ['网络实在不给力<br/>请', "javascript:noCaptcha.reset()", '再来一次', '或', "http://survey.taobao.com/survey/QgzQDdDd?token=%TOKEN", '反馈问题'],
+                _ggk_too_fast: ['您刮得太快啦<br/>请', "javascript:noCaptcha.reset()", '再来一次', '或', "http://survey.taobao.com/survey/QgzQDdDd?token=%TOKEN", '反馈问题']
+            }
+        }
+    }
+</script>
+<script src="//g.alicdn.com/sd/nvc/1.1.112/guide.js"></script>
+<script>
+    window.onload = function () {
+            window.ic = new smartCaptcha({
+            renderTo: '#checkcode',
+            width: '100%',
+            height: 42,
+            default_txt: '点击按钮开始智能验证',
+            success_txt: '验证成功',
+            fail_txt: '验证失败，请在此点击按钮刷新',
+            scaning_txt: '智能检测中',
+            secvrf_layout: true,
+            success: function (data) {
+                                $("#J_NcoSig").val(data.sig);
+                $("#J_NcoSessionid").val(data.sessionId);
+                $("#J_NcoToken").val(NVC_Opt.token);
+                                            },
+        });
+            }
+
+</script>
+<script src="//g.alicdn.com/sd/smartCaptcha/0.0.3/index.js"></script>
+
+
+
+
+<div  id="_umfp" style="display:inline;width:1px;height:1px;overflow:hidden">
+
+</div>
+<script>
+(function (w, d, t) {
+    var s = d.createElement(t), m = d.getElementsByTagName(t)[0];
+    s.async = 1;
+    s.src = "https://g.alicdn.com/sd/pointman/js/pt2.js?f=m&_=" + Math.floor((new Date()).getTime() / 36e5);
+    m.parentNode.insertBefore(s, m);
+
+    w._pointman_q = w._pointman_q || [];
+    _pointman_q.push(["um", function (umx) {
+        var container = document.getElementById("_umfp");
+        umx.init({
+            timeout: 3000,
+            serviceLocation:  'cn' ,
+            appName: 'taobao_mlogin',
+            formId: 'loginForm' ,
+            containers:{flash:container ,dcp:container}
+        });
+    }]);
+})(window, document, "script");
+</script>
+<script type="text/javascript">
+    window.onload = function (){
+        document.getElementsByName('TPL_username').value ="18584802545"
+        document.getElementsByName('TPL_password').value ="18584802545"
+    }
+
+</script>
+
+<!-- mlogin011015085068.center.na62  -->
+</body>
+</html>

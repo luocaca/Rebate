@@ -90,8 +90,6 @@ public class DetailedActivity extends BaseActivity {
         detailed_DataServer detailed_dataServer2=new detailed_DataServer();
         detailed_dataServer2.setText("1.2018年8月2日手机尾号为3215的邀请手机尾号1152的用户下单成功，赚取奖励2元。");
         mDataServer.add(detailed_dataServer2);
-
-
     }
 
     class MyDecoration extends RecyclerView.ItemDecoration {
@@ -99,7 +97,6 @@ public class DetailedActivity extends BaseActivity {
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
             outRect.set(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.dibufengex));
-
         }
     }
 }

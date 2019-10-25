@@ -36,11 +36,9 @@ import com.rebate.commom.util.GsonUtil;
 import com.rebate.commom.util.bitmap.GlideRoundTransform;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Call;
@@ -118,7 +116,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
     @Override
     protected void initViewsAndEvents(View view) {
-
 
     }
 
@@ -288,7 +285,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
             protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
                 Log.i(TAG, "convert: " + item);
                 doConvert(mActivity, helper, item, getData());
-
             }
         };
         orderAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

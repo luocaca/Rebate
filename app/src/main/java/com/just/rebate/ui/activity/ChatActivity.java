@@ -41,6 +41,7 @@ public class ChatActivity extends BaseActivity {
         initonClick();
 
     }
+
     @Override
     protected int bindTitleViewId() {
         return R.id.title;
@@ -62,8 +63,8 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void initRecyclerview() {
-        ChatAdapter chatAdapter=new ChatAdapter(msg);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        ChatAdapter chatAdapter = new ChatAdapter(msg);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(linearLayoutManager);
         //键盘不遮挡EditText
@@ -73,56 +74,61 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void initData() {
-        Chat_Msg_DataServer chat_msg_dataServer=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer = new Chat_Msg_DataServer();
         chat_msg_dataServer.setType(0);
         chat_msg_dataServer.setContent("你好");
         chat_msg_dataServer.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer);
-        Chat_Msg_DataServer chat_msg_dataServer1=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer1 = new Chat_Msg_DataServer();
         chat_msg_dataServer1.setType(1);
         chat_msg_dataServer1.setContent("你好");
         chat_msg_dataServer1.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer1);
-        Chat_Msg_DataServer chat_msg_dataServer2=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer2 = new Chat_Msg_DataServer();
         chat_msg_dataServer2.setType(1);
         chat_msg_dataServer2.setContent("哪位？");
         chat_msg_dataServer2.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer2);
-        Chat_Msg_DataServer chat_msg_dataServer3=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer3 = new Chat_Msg_DataServer();
         chat_msg_dataServer3.setType(0);
         chat_msg_dataServer3.setContent("我是你爸爸");
         chat_msg_dataServer3.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer3);
-        Chat_Msg_DataServer chat_msg_dataServer4=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer4 = new Chat_Msg_DataServer();
         chat_msg_dataServer4.setType(1);
         chat_msg_dataServer4.setContent("狗屎");
         chat_msg_dataServer4.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer4);
-        Chat_Msg_DataServer chat_msg_dataServer5=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer5 = new Chat_Msg_DataServer();
         chat_msg_dataServer5.setType(0);
         chat_msg_dataServer5.setContent("你才是");
         chat_msg_dataServer5.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer5);
-        Chat_Msg_DataServer chat_msg_dataServer6=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer6 = new Chat_Msg_DataServer();
         chat_msg_dataServer6.setType(1);
         chat_msg_dataServer6.setContent("你才是");
         chat_msg_dataServer6.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer6);
-        Chat_Msg_DataServer chat_msg_dataServer7=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer7 = new Chat_Msg_DataServer();
         chat_msg_dataServer7.setType(1);
         chat_msg_dataServer7.setContent("狗屎");
         chat_msg_dataServer7.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer7);
-        Chat_Msg_DataServer chat_msg_dataServer8=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer8 = new Chat_Msg_DataServer();
         chat_msg_dataServer8.setType(0);
         chat_msg_dataServer8.setContent("狗屎");
         chat_msg_dataServer8.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer8);
-        Chat_Msg_DataServer chat_msg_dataServer9=new Chat_Msg_DataServer();
+        Chat_Msg_DataServer chat_msg_dataServer9 = new Chat_Msg_DataServer();
         chat_msg_dataServer9.setType(1);
         chat_msg_dataServer9.setContent("狗屎");
         chat_msg_dataServer9.setImage(R.mipmap.toux);
         msg.add(chat_msg_dataServer9);
+        Chat_Msg_DataServer chat_msg_dataServer10 = new Chat_Msg_DataServer();
+        chat_msg_dataServer10.setType(1);
+        chat_msg_dataServer10.setImage(R.mipmap.toux);
+        chat_msg_dataServer10.setContent("滚，打车滚");
+        msg.add(chat_msg_dataServer10);
 
     }
 }
