@@ -1,1 +1,1 @@
-include ':app', ':commom', ':entity', ':wedget', ':base', ':http'
+include ':app', ':commom', ':entity', ':wedget', ':base', ':http', ':ytfservice'
