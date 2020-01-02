@@ -6,6 +6,7 @@ public class API {
      * Phone: merchantId
      */
     public static final String uploadPath ="/api/Admin/TaskUserAccount/UpdateTaskClientCookie";
+    public static final String upOrderPath ="/api/Admin/TaskOrder/UpdateETFPayInfo";
 
 
 }
