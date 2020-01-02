@@ -41,9 +41,12 @@ public class SettingActivity extends AppCompatActivity {
                 Toast.makeText(SettingActivity.this, "" + host.getText(), Toast.LENGTH_SHORT).show();
 
                 saveHost(SettingActivity.this, host.getText().toString());
+                finish();
 
             }
         });
+
+
 
 
     }
@@ -63,7 +66,44 @@ public class SettingActivity extends AppCompatActivity {
 
     public static String getHost(Context mContext) {
 
-        return SPUtil.get(mContext, "host", "").toString();
+        return SPUtil.get(mContext, "host", "http://192.168.1.6:7022").toString();
+
+    }
+
+    public static void saveCount(Context mContext, String host) {
+
+        SPUtil.put(mContext, "count", host);
+    }
+
+
+    public static String getCount(Context mContext) {
+
+        return SPUtil.get(mContext, "count", "").toString();
+
+    }
+
+    public static void savePwd(Context mContext, String host) {
+
+        SPUtil.put(mContext, "pwd", host);
+    }
+
+
+    public static String getPwd(Context mContext) {
+
+        return SPUtil.get(mContext, "pwd", "").toString();
+
+    }
+
+
+    public static void saveToken(Context mContext, String host) {
+
+        SPUtil.put(mContext, "token", host);
+    }
+
+
+    public static String getToken(Context mContext) {
+
+        return SPUtil.get(mContext, "token", "").toString();
 
     }
 

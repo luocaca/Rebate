@@ -1,1 +1,1 @@
-include ':app', ':commom', ':entity', ':wedget', ':base', ':http', ':ytfservice'
+include ':app', ':commom', ':entity', ':wedget', ':base', ':http', ':ytfservice', ':nongshangmock'

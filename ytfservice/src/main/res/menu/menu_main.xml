@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="me.luocaca.ytfservice.MainActivity">
     <item
+        android:id="@+id/Edit_Delete"
+        android:orderInCategory="100"
+        android:title="@string/Edit_Delete"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"

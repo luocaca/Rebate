@@ -1,6 +1,11 @@
 package me.luocaca.rebate;
 
 
+import android.content.Context;
+import android.os.Environment;
+import android.os.FileUtils;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -23,16 +28,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -48,6 +60,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
+import jxl.Sheet;
+import jxl.Workbook;
 import me.luocaca.rebate.name.RandomValueUtil;
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -60,11 +74,29 @@ public class TestGson {
 
 
     private static final String TAG = "TestGson";
+    private static boolean aBoolean;
+
+
+    /**
+     * @param ppu 根据ppu 提取出uid
+     * @return
+     */
+    private static String exturctUidByPPU(String ppu) {
+
+
+        String uid = ppu.substring(ppu.indexOf("UID="), ppu.indexOf("&SF"));
+
+
+        System.out.println(uid);
+        return null;
+    }
 
     public static void main(String... args) throws Exception {
 
 //        getCookiesString();
 
+
+        exturctUidByPPU("\"TT=f280b81e1bdf84c1710705f64d7c64f4c7576e80&UID=233409451405749760&SF=ZHUANZHUAN&SCT=1572854915014&V=1&ET=1575443315014\"");
 
 //        OkHttpUtils.get().url("http://192.168.1.171:8080/download/recomcate.json").build().execute(new StringCallback() {
 //            @Override
@@ -112,7 +144,7 @@ public class TestGson {
         System.out.println((int) Double.parseDouble(price) * 100);
 
 
-        long last = System.currentTimeMillis() / 1000 - 1571378452;
+        long last = System.currentTimeMillis() - 1572845583;
 
         //15分钟失效
         System.out.println(last);
@@ -128,6 +160,10 @@ public class TestGson {
         String string = "https://m.zhuanzhuan.com/Mzhuanzhuan/zzapp/detail/index.html?webview=zzn&repeatrequest=true&zzsharetype=goodsdetail&zzpage=goodsDetail&zzfrom=LinkCopy&";
 
         System.out.println(string + succellUrl.substring(succellUrl.indexOf("?") + 1));
+
+
+//        读取excel();
+
 
         淘宝接口模拟();
 //        模拟图片下载保存后上传转转(new OnUploadAndDownLoadListener() {
@@ -241,8 +277,61 @@ public class TestGson {
 
     }
 
+    private static void 读取excel(File online) {
+        try {
+            final String path = "C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\filedesc\\name.xls";
+
+            //1、得到数据文件
+            File file = new File(path);
+            readExcel(file);
+
+            //2、建立数据通道
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] buf = new byte[1024];
+            int length = 0;
+            //循环读取文件内容，输入流中将最多buf.length个字节的数据读入一个buf数组中,返回类型是读取到的字节数。
+            //当文件读取到结尾时返回 -1,循环结束。
+            while ((length = fileInputStream.read(buf)) != -1) {
+                System.out.print(new String(buf, 0, length));
+            }
+            //最后记得，关闭流
+            fileInputStream.close();
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    public static void readExcel(File file) {
+        try {
+            InputStream is = new FileInputStream(file);
+            Workbook book = Workbook.getWorkbook(is);
+            book.getNumberOfSheets();
+            Sheet sheet = book.getSheet(0);
+            int Rows = sheet.getRows();
+
+            for (int i = 1; i < Rows; ++i) {
+                String name = (sheet.getCell(0, i)).getContents();
+                String department = (sheet.getCell(1, i)).getContents();
+                String company = (sheet.getCell(2, i)).getContents();
+                String phone = (sheet.getCell(3, i)).getContents();
+                String phone1 = (sheet.getCell(4, i)).getContents();
+
+                System.out.println("第" + i + "行数据=" + name + "," + department + "," + company + "," + phone);
+                System.out.println(phone1);
+
+            }
+            book.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 
     private static void 模拟城市读取() {
@@ -542,36 +631,104 @@ public class TestGson {
 //                .addHeader(":scheme", getCookiesString().get(":scheme"))
 //                .addHeader("referer", getCookiesString().get("referer"))
                 .headers(saveRemove(map, "body"))
-//                .addHeader("Content-Type", "json")
+//               .addHeader("Content-Type", "json")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
-                        System.out.println("----------------" + e.getMessage());
+                        System.out.println("" + e.getMessage());
+                        e.printStackTrace();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-
-                        try {
-                            System.out.println("----------------" + GsonUtil.toPrettyFormat(response));
-                        } catch (Exception e) {
-                            System.out.println("----------------\n" + response);
-                        }
+                        System.out.println(response);
 
 
-//                        JdEntity jdEntity = GsonUtil.getGson().fromJson(response, JdEntity.class);
+//                        try {
+//                            Thread.sleep( 5000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        淘宝接口模拟();
 
-
-//                        System.out.println(jdEntity.toString());
 
 
                     }
                 });
+//                .execute(new FileCallBack("C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\filedesc", "name") {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        System.out.println("");
+//
+//                    }
+//
+//                    @Override
+//                    public void onResponse(File response, int id) {
+//                        System.out.println("");
+//                        readExcel(response);
+//                    }
+//                });
         ;
 
 //        Response response = client.newCall(request).execute();
+    }
+
+    private static void entryCheckperText(String response) {
+        // <input type="hidden" name="cipherText"
+        //           value="JK00I/UpS91JOf8mADwEQlp8dOf7fNT9azGUeqTJkWLnGCzKR6XIbLWJhsVXysfH+XiM3JrVD0vNiUaXlSfm4NQr+
+        //           VPCFJz2Sdb/bsTWI7sh9PxoSCOoOT3se5iv9EfwczT2FW7m04R+icNZxV63y7+3Ok0mJLFjnJCZgpL7ESvhZnZ0Hxp5G+gD
+        //           5txqc/XmqWVrl9oil2xOFRxx3iSP0V0GpQDMS8dIr3Uk2cGbxz15Ps2fQ7YOHgduPBj7GFvROZaAUzfAyL3y2FRGGDPkoLyg6YRMS
+        //           h59I4WuI3Lfqx14XhUsUROZlmGh5N68e56PoZb749Se7gfuR7mU7JZmrE0/zvPOOF/4ztbuKOpl5oZNSidstjau6aNNp8qeGYIUVK4UJ9QpkS3hhli3Ev
+        //           aZlgrMJpI6NiIcGQdma7YsqDryP34lUnxs0y5uueRxNYjxaq8AWlPWfCx31+4zCn+JtMgSxLDMnlO8oqzudyiVuoS/1cKAvAtjPCSSkTQ8eDqu138MJEaTMuYCra/kV
+        //           Icd5EasqjIEMYewvyy66VOqUE+St/rov7AiKNuBvs+2q5DCJl9Q58F/Gaz2KZIjy60wYQDC8cIxOJcecoNI3Jejvm3XbhDCAuN6x0Y6YGdO2zUURBYbYTe8Zzpe0/vuvy9FJZso8K
+        //           c5//wCFexiS0WKr6Pa0Gi8wH92WDstz3EVhNVDmFf4isITnAOSLwuYjWI0WaONwK6TMdCtqIwxuLsCIKKqSFIgVYf0uOziLPBB4uarnDxJOpYkmDGWUcY+XuIgiu7D578PQrCy4TvGg3ogEYfNg
+        //           dY4Rz8WsqvpZAB6p9QY6lvpbAH3TyeBPrYeWzdCWbT32Ti+O9NsWji2zesZU9WLHFTQq6wPRfV55IsM4exZHMNAX7AR54LTClzDUpUUnx+4+BcuzXjzZGX0rsJ8kjy1IgYdbKOGT+iL7aswgr7qyMZPQXV28
+        //           vFYkPkgZX/viCoTEmFxi5wJzdt51HpfwqkKF55hmLNa9bGH6Pq1WCkeCJy1uSTbyUx0OD8S9yAhAfl3RUPCpbwtuOMtaxE06qZ3o0KXXGJcBsuWrYHMmtp49m5AynqSwbPRoWlQ4ee9rT52quqA460v/OVzbNPNyWh0b15Uz
+        //           NtaP0nagkTiVd4i0xYpjaxpjYAzvNWuJZIh3EJV1KwPnO8BOCqqdV0UhTNtnotRP4K5k2hEENIArZ/pGnDF1piePyRP/3wS0wvM/JyObeDNLMrTihWwhJc/DidGkI35CoGaXbmvI4AeFYgY9nV+Rqrjf5POkn9CJE27J/E4EMyX/W
+        //           +aaIzt9VxaZP5G8KLuPbZaaBUS9xuVXhc764zeewyfnqFM/9KkFoGxBmqDYZXPK5XYZArOkuaonTdarleBqzLdskWMlohcUsl9hPXFAI1dGIsXQ1RuMigBt2WMMWTpM7puiC6bIRjVIIRewrFj+zvilgXUKzH8ZXECV95MQ/SwLUG4YZK
+        //           CUyMfOXcgJpUHLfsDaR3vYeblCo/PTauE1W4MVGfUS8NUoBAV4la29w0KZHM3iGcQVlGki4W0wz2RjifkI2ZSeYhzI62QPkku7iGH0TJtFSG3tO9qgMGsPhpai8O81XtDqD1IZ1PglYewCd5Mvyf2uG+2QIfYZHWz+pfLYt7LKHPHkh7mb+C1bKHK
+        //           L1Xyii5N/M+XAiHkOJRsJrdv6izXxkw50QozKALH0HbJUcINQQ3fwlBmgpxH7s252Cxb3fL+L5WMlzs+zNLgQ1K2q+IZGYdGKeT5WeAYLe3CQtwnog4DQ7wZb+SXtnOXS1q6dEWQWnZwKgwXh/zdiosJ+E8KqVnS5Vtk6fyhX3GioWMAq1X7lQR3hG7Yi
+        //           FLi5Y9oZCsBQ7HZ/YsPzARUeYRIADQNFi5t4pq9ulj8fnunyvwODhAnWr/00G6P+cukypNLuUOc5VEZ5FfA9Lxxzap5GoC7mVCkQ9osd02iT0NXYijXJHplnpZu1Muh4dKFDdDgIz5z+vt9unGDMU2EpVYnaYKJUqKkxReykMHrOQonWW+yaIcurjk0HL2eM
+        //           eCHLU+XvnVbpvIgELyMqNhI4S6oi0VGjsRrtXNqJa6Hu13Rmg=="/>
+
+
+        if (response.contains("cipherText")) {
+            System.out.println("--------------------分割线----------------------------------------");
+            System.out.println("--------------------分割线----------------------------------------");
+            System.out.println("--------------------分割线----------------------------------------");
+            System.out.println("--------------------分割线----------------------------------------");
+
+            String lable = response.substring(response.indexOf("cipherText"));
+
+            String checkper = lable.substring(lable.indexOf("value=\"", lable.indexOf("\"/>")));
+
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(lable.getBytes(Charset.forName("utf8"))), Charset.forName("utf8")));
+
+
+            try {
+                String line = br.readLine();
+
+                String readStr = "";
+                while ((readStr = br.readLine()) != null) {
+                    System.out.println("line ->l    " + readStr.substring(18, readStr.length() - 3));
+                    return;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+//            byte[] bytes = checkper.getBytes();
+//            StringReader stringReader = new linestrinStringReader(checkper);
+//
+//            InputStreamReader inputStreamReader = new InputStreamReader();
+
+
+        }
+
+
     }
 
 
@@ -622,6 +779,11 @@ public class TestGson {
 
             System.out.println(file.exists());
 
+            if (!file.exists()) {
+                file = new File("C:\\Users\\Administrator.DESKTOP-259D8ER\\Desktop\\cookies.txt");
+            }
+
+
             FileInputStream fileInputStream = new FileInputStream(file);
 
             byte[] b = string.getBytes();
@@ -661,13 +823,20 @@ public class TestGson {
                 if (lineString.equals("")) {
                     System.out.println("next line is body");
                     isBody = true;
+                    if (map.get("body") == null) {
+                        map.put("body", "");
+//                        map.put("body", "\n");
+                    }
+                    if (lineString != null && !lineString.trim().equals("")) {
+                        map.put("body", map.get("body") + "\n" + lineString.trim());
+                    }
                     continue;
 
                 }
 
 
                 if (isBody) {
-                    map.put("body", lineString.trim());
+                    map.put("body", map.get("body") + lineString.trim() + "\n");
                     continue;
                 }
                 if (!lineString.contains(":")) {
@@ -753,6 +922,26 @@ public class TestGson {
 
 
             System.out.println(result);
+            if (map.get("body") != null) {
+
+                String bodystring = map.get("body");
+                String newstring = "";
+
+                if (bodystring.contains("\n")) {
+                    String[] spl = bodystring.split("\n");
+                    for (int i = 0; i < spl.length; i++) {
+                        if (newstring.equals("")) {
+                            newstring = spl[i];
+                        } else {
+                            newstring = "\n" + spl[i];
+                        }
+                    }
+                }
+                map.put("body", newstring);
+
+
+            }
+
 
             return map;
         } catch (Exception e) {

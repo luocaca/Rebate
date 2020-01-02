@@ -49,4 +49,8 @@ dependencies {
     implementation project(':http')
 
 
+
+    api 'net.sourceforge.jexcelapi:jxl:2.6.12'
+
+
 }

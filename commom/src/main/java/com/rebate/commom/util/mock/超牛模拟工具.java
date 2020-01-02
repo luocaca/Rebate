@@ -12,6 +12,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.security.GeneralSecurityException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -134,8 +136,9 @@ public class 超牛模拟工具 {
 //                            return cookies;
 //                        }
 //                    })
+//                    .proxy(Proxy.NO_PROXY)
                     .sslSocketFactory(sslSocketFactory, trustManager)
-//                    .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)))
+//                    .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.171", 8888)))
                     .build();
 //            client.sslSocketFactory(sslSocketFactory, trustManager);
 //            OkHttpClient OkHttpClient = (okhttp3.OkHttpClient) field.get(instance);
