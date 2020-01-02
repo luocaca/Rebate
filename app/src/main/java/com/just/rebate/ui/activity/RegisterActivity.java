@@ -1,11 +1,13 @@
 package com.just.rebate.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,7 @@ import com.just.rebate.R;
  *title 用户注册
  */
 public class RegisterActivity extends AppCompatActivity {
+    private Button mBtn_PassWordRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +35,13 @@ public class RegisterActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
             window.setNavigationBarColor(Color.TRANSPARENT);
         }
+        mBtn_PassWordRegister=findViewById(R.id.btn_password_register);
+        mBtn_PassWordRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(RegisterActivity.this,PassWordRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

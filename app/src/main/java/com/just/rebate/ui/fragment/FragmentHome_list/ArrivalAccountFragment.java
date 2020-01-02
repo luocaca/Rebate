@@ -189,7 +189,7 @@ public class ArrivalAccountFragment extends BaseLazyFragment {
                         Type t = new TypeToken<BaseResponse<List<TrackingProcess>>>() {
                         }.getType();
 
-                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGson().fromJson(response, t);
+                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGsonLower().fromJson(response, t);
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) mRecyclerview.getAdapter();
 

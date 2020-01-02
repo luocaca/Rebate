@@ -2,8 +2,6 @@ package com.just.rebate.adapter.recycle;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.just.rebate.R;
-import com.just.rebate.entity.HomeItem;
 import com.just.rebate.entity.PersonalItem;
 
 import java.util.List;
@@ -35,49 +33,4 @@ public abstract class PersonalAdapter extends BaseQuickAdapter<PersonalItem, Bas
     }
 
 
-    protected void conver( BaseViewHolder helper, HomeItem item) {
-        PersonalItem personalItem = (PersonalItem) item.t;
-        switch (helper.getLayoutPosition() % 12) {
-            case 1:
-                helper.setImageResource(R.id.iv, R.mipmap.taobao);
-                break;
-            case 2:
-                helper.setImageResource(R.id.iv, R.mipmap.jingdong);
-                break;
-            case 3:
-                helper.setImageResource(R.id.iv, R.mipmap.suning);
-                break;
-            case 4:
-                helper.setImageResource(R.id.iv, R.mipmap.pinduod);
-                break;
-            case 5:
-                helper.setImageResource(R.id.iv, R.mipmap.weipinh);
-                break;
-            case 6:
-                helper.setImageResource(R.id.iv, R.mipmap.gengduo);
-                break;
-            case 7:
-                helper.setImageResource(R.id.iv, R.mipmap.meituan);
-                break;
-            case 8:
-                helper.setImageResource(R.id.iv, R.mipmap.eleme);
-                break;
-            case 9:
-                helper.setImageResource(R.id.iv, R.mipmap.gengduo);
-                break;
-            case 10:
-                helper.setImageResource(R.id.iv, R.mipmap.didi);
-                break;
-            case 11:
-                helper.setImageResource(R.id.iv, R.mipmap.chongzhi);
-                break;
-            case 0:
-                helper.setImageResource(R.id.iv, R.mipmap.gengduo);
-                break;
-            default:
-                break;
-
-        }
-
-    }
 }

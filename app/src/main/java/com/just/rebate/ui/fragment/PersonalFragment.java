@@ -2,6 +2,7 @@ package com.just.rebate.ui.fragment;
 
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -193,8 +194,9 @@ public class PersonalFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response, int id) {
                         //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
-                        Personal personal = GsonUtil.getGson().fromJson(response, Personal.class);
+                        Personal personal = GsonUtil.getGsonLower().fromJson(response, Personal.class);
                         mTv_account.setText(personal.account + "");
+                        Log.i("personal", "onResponse: "+personal.account);
                         mTv_integral.setText(personal.integral + "");
                         mTv_invitat.setText(personal.invitationCode + "");
 

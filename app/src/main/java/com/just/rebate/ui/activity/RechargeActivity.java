@@ -142,7 +142,11 @@ public class RechargeActivity extends BaseActivity {
                                 public void onClick(View v) {
 //                                        ToastUtils.showToastLong("被点击了");
                                     currentSelectPosition = position;
-                                    tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
+                                    try {
+                                        tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                     et.setBackground(getResources().getDrawable(R.drawable.tv_un_nomarl));
                                     et.setTextColor(Color.WHITE);
                                     et.setHintTextColor(Color.WHITE);
@@ -157,7 +161,11 @@ public class RechargeActivity extends BaseActivity {
                                         try {
                                             currentSelectPosition = position;
                                             et.setBackground(getResources().getDrawable(R.drawable.tv_un_nomarl));
-                                            tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
+                                            try {
+                                                tagAdapter.unSelected(currentSelectPosition, (TagView) currentSelectView.getParent());
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
 
                                             et.setTextColor(Color.WHITE);
                                             et.setHintTextColor(Color.WHITE);
@@ -226,6 +234,7 @@ public class RechargeActivity extends BaseActivity {
                     }
 
                 };
+                tagAdapter.setSelectedList(0);
                 tagFlowLayout.setAdapter(tagAdapter);
                 tagAdapter.notifyDataChanged();
             }

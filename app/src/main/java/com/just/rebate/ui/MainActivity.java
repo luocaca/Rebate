@@ -9,9 +9,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.just.rebate.R;
 import com.just.rebate.adapter.viewpager.VpAdapter;
-import com.just.rebate.ui.fragment.OrderFragmentHome;
+import com.just.rebate.entity.GetRuleData;
 import com.just.rebate.ui.fragment.HomeFragment;
 import com.just.rebate.ui.fragment.InviteFragment;
+import com.just.rebate.ui.fragment.OrderFragmentHome;
 import com.just.rebate.ui.fragment.PersonalFragment;
 import com.rebate.base.fragment.BaseFragment;
 
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    private List<GetRuleData>getRuleData=new ArrayList<>();
 
     @BindView(R.id.view_pager)
     public ViewPager mViewPager;
@@ -90,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-
         initViewPager();
 
 
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
 
     /**

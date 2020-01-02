@@ -132,7 +132,7 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
                         }.getType();
 
 
-                        BaseResponse<InviteInfo> baseResponse = GsonUtil.getGson().fromJson(json, t);
+                        BaseResponse<InviteInfo> baseResponse = GsonUtil.getGsonLower().fromJson(json, t);
 
                         return baseResponse;
                     }
@@ -144,11 +144,13 @@ public class InviteFragment extends BaseLazyFragment implements SwipeRefreshLayo
 
                     @Override
                     public void onResponse(BaseResponse<InviteInfo> response, int id) {
-                        Log.i(TAG, "onResponse: ");
+                        profit.setText(response.getData().totalProfit);
+                        Log.i(TAG, "onResponse: "+response.getData().totalProfit);
                         String string1, string2;
                         string1 = "分享给好友，赚" + response.getData().shareEarn + "元";
+                        Log.i(TAG, "onResponse: "+string1);
                         string2 = "(" + response.getData().timelyProfit + "元即将到账)";
-                        profit.setText(response.getData().totalProfit);
+
                         money.setText(string2);
                         partner.setText(response.getData().numberOfPartners);
                         fans.setText(response.getData().numberOfFans);

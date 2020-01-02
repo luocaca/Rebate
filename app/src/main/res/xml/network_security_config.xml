@@ -9,9 +9,6 @@
                 overridePins="true"
                 src="user" />
         </trust-anchors>
-
-
-
     </base-config>
 
 

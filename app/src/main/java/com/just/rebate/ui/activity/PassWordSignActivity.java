@@ -16,6 +16,7 @@ import com.just.rebate.R;
 import com.just.rebate.app.MyApplication;
 import com.just.rebate.entity.GetRouteData;
 import com.just.rebate.entity.LoginingDataBean;
+import com.just.rebate.ui.MainActivity;
 import com.just.rebate.ui.activity.Socket_Utils.CatMessageOuterClass;
 import com.just.rebate.ui.activity.Socket_Utils.WebSocketsConnection;
 import com.just.rebate.ui.activity.web.web_util.SPUtil;
@@ -116,20 +117,21 @@ public class PassWordSignActivity extends AppCompatActivity {
 
 
     private final class EchoWebSocketListener extends WebSocketListener {
+
         @Override
         public void onOpen(WebSocket webSocket, Response response) {
             try {
                 CatMessageOuterClass.CatMessage.Builder builder =CatMessageOuterClass.CatMessage.newBuilder();
                 builder.setBody(Authorization);
-                builder.setType("login");
+                builder.setType("Login");
                 CatMessageOuterClass.CatMessage info=builder.build();
-                byte[] bytes =info.toByteArray();
+                byte[] bytes=info.toByteArray();
+                webSocket.send(ByteString.of(bytes));
                 Log.i("onOpen", "onOpen: "+response);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
@@ -247,8 +249,8 @@ public class PassWordSignActivity extends AppCompatActivity {
                             }
                             saveAccount(PassWordSignActivity.this,mTv_AccountNumber.getText().toString());
                             savepassword(PassWordSignActivity.this,mTv_PassWordNumber.getText().toString());
-//                            Intent intent=new Intent(PassWordSignActivity.this, MainActivity.class);
-//                            startActivity(intent);
+                            Intent intent=new Intent(PassWordSignActivity.this, MainActivity.class);
+                            startActivity(intent);
 
                         }
                     }

@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'com.neenbedankt.android-apt'
+
+
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -11,6 +14,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -36,6 +41,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.smartarmenia:dotnetcoresignalrclientjava:1.14'
 
     implementation project(':commom')
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
@@ -45,5 +51,8 @@ dependencies {
     implementation project(':wedget')
     implementation project(':http')
     implementation 'com.fang:dashview:v1.0.0'
+    implementation 'org.jetbrains:annotations:15.0'
+    implementation 'com.google.protobuf:protobuf-java:3.6.1'
+    implementation 'com.google.protobuf:protoc:3.6.1'
 
 }

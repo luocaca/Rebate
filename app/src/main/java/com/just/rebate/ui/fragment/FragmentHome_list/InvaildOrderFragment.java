@@ -169,7 +169,7 @@ public class InvaildOrderFragment extends BaseFragment implements View.OnClickLi
                         Type t = new TypeToken<BaseResponse<List<TrackingProcess>>>() {
                         }.getType();
 
-                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGson().fromJson(response, t);
+                        BaseResponse<List<TrackingProcess>> list = GsonUtil.getGsonLower().fromJson(response, t);
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) mRecyclerView.getAdapter();
 

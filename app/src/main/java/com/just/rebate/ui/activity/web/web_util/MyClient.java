@@ -52,6 +52,7 @@ public class MyClient extends WebViewClient {
     //    private ProgressBar pb;
     private TextView tv;
     private HandlerUtil.HandlerHolder handlerHolder;
+    private String Url;
 
 
     private OnWebViewFinishListener onWebViewFinishListener;
@@ -153,9 +154,9 @@ public class MyClient extends WebViewClient {
             return;
 
         webView.loadUrl(url);
+        Url = url;
+        Log.i("LogUrl", "loadUrl: " + Url);
     }
-
-
 
 
     /**
@@ -205,20 +206,23 @@ public class MyClient extends WebViewClient {
 
         webView.setVerticalScrollBarEnabled(false);//不能垂直滑动
         webView.setHorizontalScrollBarEnabled(false);//不能水平滑动
+
         webView.setDownloadListener(new DownloadListener() {
             @Override
             public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                LogUtil.e("url", url);
-                LogUtil.e("userAgent", userAgent);
-                LogUtil.e("contentDisposition", contentDisposition);
-                LogUtil.e("mimeType", mimeType);
-                LogUtil.e("contentLength", String.valueOf(contentLength));
+                LogUtil.e("LogUrl", url);
+                LogUtil.e("LogUrl", userAgent);
+                LogUtil.e("LogUrl", contentDisposition);
+                LogUtil.e("LogUrl", mimeType);
+                LogUtil.e("LogUrl", String.valueOf(contentLength));
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 intent.setData(Uri.parse(url));
                 context.startActivity(intent);
             }
         });
+
+
         // 将Android里面定义的类对象AndroidJs暴露给javascript
         webView.setWebViewClient(this);
         //        webView.addJavascriptInterface(new AndroidJavaScript(context), "AndroidJs");
@@ -298,6 +302,7 @@ public class MyClient extends WebViewClient {
 
             if (webResourceResponse != null) {
                 return webResourceResponse;
+
             } else {
                 return super.shouldInterceptRequest(view, request);
             }
@@ -328,7 +333,7 @@ public class MyClient extends WebViewClient {
         if (url.equals("https://m.zhuanzhuan.58.com/wechat/m-pay.html?payid=1164397587963390845&mchid=1001&webview=zzn&pageid=1610678272&tt=B5D9942D2C565B235F2F8F61D74D1B161566448994094&zzv=6.11.1")) {
             try {
 //                InputStream in_nocode = new ByteArrayInputStream("abc".getBytes());
-                InputStream in_withcode = new ByteArrayInputStream("abc".getBytes("UTF-8"));
+                InputStream in_withcode = new ByteArrayInputStream("abc" .getBytes("UTF-8"));
                 response = new WebResourceResponse("text/html", "UTF-8", in_withcode);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -443,9 +448,9 @@ public class MyClient extends WebViewClient {
 //        h5/mtop.taobao.mclaren.index.data.get.h5/1.0/?
 //        https:h5api.m.taobao.com
 //        设置自动登录淘宝
-//        if(url.startsWith("https://h5.m.taobao.com/")){
-//            String username="18584802545";
-//            String password="1184113471wc.";
+//        if (url.startsWith("https://h5/mtop.taobao.mclaren.index.data")) {
+//            String username = "18584802545";
+//            String password = "1184113471wc.";
 //            String js1 = "javascript:document.getElementsByName('TPL_username').value = '" + username + "'" +
 //                    ":document.getElementsByName('TPL_username').value = '" + password + "'" +
 //                    ";document.getElementsById('btn-submit').click();";
@@ -453,15 +458,15 @@ public class MyClient extends WebViewClient {
 //            /**
 //             * 淘宝设置手势点击提交订单
 //             */
-//            for(float i=450;i<=900;i=i+80){
-//                analogUserClick(webView, 300f,i );
+//            for (float i = 450; i <= 900; i = i + 80) {
+//                analogUserClick(webView, 300f, i);
 //            }
-//            LogUtil.i("调用js",username);
+//            LogUtil.i("调用js", username);
 //        }
 
 
         if (url.startsWith("https://shenghuo.alipay.com/peerpaycore/applyWapPeerPay")) {
-            String number ="13030809100";
+            String number = "13030809100";
             String js = "javascript:document.getElementsByName('peerPayerEmail')[0].value = '" + number + "';document.getElementsByName('11peerpay')[0].submit();";
             view.loadUrl(js);
             try {
@@ -470,15 +475,14 @@ public class MyClient extends WebViewClient {
                 e.printStackTrace();
             }
 //            淘宝设置手势点击提交订单
-            for(float i=450;i<=900;i=i+80){
-                analogUserClick(webView, 300f,i );
+            for (float i = 450; i <= 900; i = i + 80) {
+                analogUserClick(webView, 300f, i);
             }
             Toast.makeText(context, "finish", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
+//        String js1="javascript:window.document.body.innerHTML";
+//        view.loadUrl(js1);
 
 
         /**
@@ -504,6 +508,7 @@ public class MyClient extends WebViewClient {
 
     /**
      * 延时
+     *
      * @param v
      */
 
@@ -513,13 +518,14 @@ public class MyClient extends WebViewClient {
             public void run() {
                 whiteRetry(v);
                 webView.reload();
-                for(int i=1;i<=5;i++){
-                    LogUtil.i("刷新","第"+i+"次");
+                for (int i = 1; i <= 5; i++) {
+                    LogUtil.i("刷新", "第" + i + "次");
                 }
 
             }
         }, 300000);
     }
+
     /**
      * 模拟用户点击
      *

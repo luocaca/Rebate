@@ -1,7 +1,5 @@
 package com.just.rebate.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,9 +9,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.just.rebate.R;
+import com.just.rebate.ui.activity.PassWordSignActivity;
 import com.just.rebate.ui.activity.RegisterActivity;
-import com.just.rebate.ui.activity.SignActivity;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this, SignActivity.class);
+                Intent intent=new Intent(LoginActivity.this, PassWordSignActivity.class);
                 startActivity(intent);
             }
         });

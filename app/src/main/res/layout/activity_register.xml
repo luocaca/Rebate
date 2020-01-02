@@ -11,8 +11,8 @@
         android:orientation="horizontal"
         android:background="@android:color/white">
         <ImageView
-            android:layout_width="9dp"
-            android:layout_height="17dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_gravity="center"
             android:src="@mipmap/leftarrow"/>
@@ -20,9 +20,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="-21dp"
+            android:layout_marginLeft="-42dp"
             android:gravity="center"
-            android:text="用户登录"
+            android:text="用户注册"
             android:textColor="@color/text333"
             android:textSize="@dimen/text_size_title_xl" />
 
@@ -102,12 +102,25 @@
 
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_password_register"
         android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:text="确定"
+        android:text="账号注册"
+        android:textSize="@dimen/text_size_title_xl"
+        android:textColor="@android:color/white"
+        android:background="@drawable/shape_corner_xl"
+        android:layout_height="50dp" />
+
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:text="注册"
         android:textSize="@dimen/text_size_title_xl"
         android:textColor="@android:color/white"
         android:background="@drawable/shape_corner_xl"

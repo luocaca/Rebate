@@ -7,6 +7,8 @@ import android.content.Context;
  * 全局app
  */
 public class MyApplication extends Application {
+    public static  final String Host="";
+    private String host;
 
 
     @Override
@@ -20,8 +22,8 @@ public class MyApplication extends Application {
         super.onCreate();
 
 
-//        System.setProperty("http.proxyHost", "192.168.1.171");
-//        System.setProperty("http.proxyPort", "8888");
+        System.setProperty("http.proxyHost", "192.168.1.171");
+        System.setProperty("http.proxyPort", "8888");
 
 
     }
@@ -30,7 +32,15 @@ public class MyApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        setHost(Host);
     }
 
 
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
 }

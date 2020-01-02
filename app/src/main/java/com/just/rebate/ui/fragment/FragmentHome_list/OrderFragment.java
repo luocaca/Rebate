@@ -266,7 +266,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
                         Type t = new TypeToken<List<ReturnPlatform>>() {
                         }.getType();
 
-                        List<ReturnPlatform> list = GsonUtil.getGson().fromJson(response, t);
+                        List<ReturnPlatform> list = GsonUtil.getGsonLower().fromJson(response, t);
 
                         BaseQuickAdapter adapter = (BaseQuickAdapter) recycleView.getAdapter();
 
