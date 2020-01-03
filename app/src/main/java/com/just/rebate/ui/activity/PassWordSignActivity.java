@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -39,28 +41,29 @@ import okhttp3.WebSocketListener;
 import okio.ByteString;
 
 public class PassWordSignActivity extends AppCompatActivity {
-    private EditText mTv_AccountNumber,mTv_PassWordNumber;
-    private Button mBtn_YZMlogin,mBtn_sign;
-    private String Authorization="";
-    private String Route="";
+    private EditText mTv_AccountNumber, mTv_PassWordNumber;
+    private Button mBtn_YZMlogin, mBtn_sign;
+    private String Authorization = "";
+    private String Route = "";
+    private TimerTask task;
     private MyApplication application;
     private WebSocketsConnection webSocketsConnection;
-    private List<LoginingDataBean> loginingDataBeans=new ArrayList<>();
-    private List<GetRouteData> getRouteDatas=new ArrayList<>();
+    private List<LoginingDataBean> loginingDataBeans = new ArrayList<>();
+    private List<GetRouteData> getRouteDatas = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
-        mTv_AccountNumber=findViewById(R.id.Account_Number);
-        mTv_PassWordNumber=findViewById(R.id.PassWord_Number);
-        mBtn_YZMlogin=findViewById(R.id.btn_YZM_login);
-        mBtn_sign=findViewById(R.id.btn_sign);
-        application= (MyApplication) getApplication();
+        mTv_AccountNumber = findViewById(R.id.Account_Number);
+        mTv_PassWordNumber = findViewById(R.id.PassWord_Number);
+        mBtn_YZMlogin = findViewById(R.id.btn_YZM_login);
+        mBtn_sign = findViewById(R.id.btn_sign);
+        application = (MyApplication) getApplication();
         mBtn_YZMlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(PassWordSignActivity.this,SignActivity.class);
+                Intent intent = new Intent(PassWordSignActivity.this, SignActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +82,6 @@ public class PassWordSignActivity extends AppCompatActivity {
     }
 
 
-
     private void initGetRouteData() {
         OkHttpUtils.get()
                 .url("http://192.168.1.137:7001/api/Identity/GetRoute")
@@ -88,21 +90,21 @@ public class PassWordSignActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: "+e);
-                        Toast.makeText(PassWordSignActivity.this, ""+e, Toast.LENGTH_SHORT).show();
+                        Log.i("onError", "onError: " + e);
+                        Toast.makeText(PassWordSignActivity.this, "" + e, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i("onResponse", "onResponse: "+response);
-                        GetRouteData getRouteData=GsonUtil.getGsonLower().fromJson(response,GetRouteData.class);
+                        Log.i("onResponse", "onResponse: " + response);
+                        GetRouteData getRouteData = GsonUtil.getGsonLower().fromJson(response, GetRouteData.class);
                         getRouteDatas.clear();
                         getRouteDatas.add(getRouteData);
-                        if(getRouteDatas.get(0).Type==200){
-                            Route=getRouteDatas.get(0).Data.Scheme+"://"+getRouteDatas.get(0).Data.Host+getRouteDatas.get(0).Data.Path;
-                            saveHost(PassWordSignActivity.this,Route);
+                        if (getRouteDatas.get(0).Type == 200) {
+                            Route = getRouteDatas.get(0).Data.Scheme + "://" + getRouteDatas.get(0).Data.Host + getRouteDatas.get(0).Data.Path;
+                            saveHost(PassWordSignActivity.this, Route);
                             application.setHost(Route);
-                            connect();
+//                            connect();
 //                            webSocketsConnection=new WebSocketsConnection.Builder(getBaseContext()).client(new OkHttpClient().newBuilder()
 //                            .pingInterval(15,TimeUnit.SECONDS).retryOnConnectionFailure(true).build())
 //                                    .needReconnect(true)
@@ -115,49 +117,101 @@ public class PassWordSignActivity extends AppCompatActivity {
     }
 
 
-
     private final class EchoWebSocketListener extends WebSocketListener {
 
         @Override
         public void onOpen(WebSocket webSocket, Response response) {
+            super.onOpen(webSocket, response);
             try {
-                CatMessageOuterClass.CatMessage.Builder builder =CatMessageOuterClass.CatMessage.newBuilder();
+                CatMessageOuterClass.CatMessage.Builder builder = CatMessageOuterClass.CatMessage.newBuilder();
                 builder.setBody(Authorization);
                 builder.setType("Login");
-                CatMessageOuterClass.CatMessage info=builder.build();
-                byte[] bytes=info.toByteArray();
+                CatMessageOuterClass.CatMessage info = builder.build();
+                byte[] bytes = info.toByteArray();
                 webSocket.send(ByteString.of(bytes));
-                Log.i("onOpen", "onOpen: "+response);
+                Log.i("onOpen", "onOpen: " + response);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+
+
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Timer timer=new Timer();
+                    TimerTask task = null;
+                    if(timer==null) {
+                    }
+                    if(task==null){
+                        CatMessageOuterClass.CatMessage.Builder builder = CatMessageOuterClass.CatMessage.newBuilder();
+                        builder.setType("Ping");
+                        CatMessageOuterClass.CatMessage info = builder.build();
+                        byte[] bytes = info.toByteArray();
+                        try {
+                            webSocket.send(ByteString.of(bytes));
+                            Log.i("发送心跳包", "run: 成功");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            connect();
+                            Log.i("发送心跳包", "run: 失败,重连");
+                        }
+                    }
+                    timer.schedule(task, 0, 2000);
+                }
+            }).start();
+
+
         }
 
         @Override
         public void onMessage(WebSocket webSocket, String text) {
+            super.onMessage(webSocket, text);
             output("onMessage: " + text);
         }
 
         @Override
         public void onMessage(WebSocket webSocket, ByteString bytes) {
+            super.onMessage(webSocket, bytes);
             output("onMessage byteString: " + bytes);
+            byte[] bytes1 = bytes.toByteArray();
+            String StringBody = "";
+            CatMessageOuterClass.CatMessage ByteStringBody = null;
+            try {
+                ByteStringBody = CatMessageOuterClass.CatMessage.parseFrom(bytes1);
+                StringBody = ByteStringBody.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.i("onMessage", "onMessage: "+StringBody);
+            initBodyData(StringBody);
         }
 
         @Override
         public void onClosing(WebSocket webSocket, int code, String reason) {
+            super.onClosing(webSocket,code, reason);
             output("onClosing: " + code + "/" + reason);
         }
 
         @Override
         public void onClosed(WebSocket webSocket, int code, String reason) {
+            super.onClosed(webSocket,code, reason);
             output("onClosed: " + code + "/" + reason);
         }
 
         @Override
-        public void onFailure(WebSocket webSocket, Throwable t,Response response) {
+        public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+            super.onFailure(webSocket,t, response);
             output("onFailure: " + t.getMessage());
         }
     }
+
+    private void initBodyData(String stringBody) {
+
+    }
+
+
     private void connect() {
         EchoWebSocketListener listener = new EchoWebSocketListener();
         Request request = new Request.Builder()
@@ -221,7 +275,7 @@ public class PassWordSignActivity extends AppCompatActivity {
 
     private void initData() {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("Account", ""+mTv_AccountNumber.getText().toString());
+        params.put("Account", "" + mTv_AccountNumber.getText().toString());
         params.put("Password", "" + mTv_PassWordNumber.getText().toString());
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
@@ -231,25 +285,26 @@ public class PassWordSignActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: "+e);
+                        Log.i("onError", "onError: " + e);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i("onResponse", "onResponse: "+response);
-                        LoginingDataBean loginingDataBean=GsonUtil.getGsonLower().fromJson(response,LoginingDataBean.class);
+                        Log.i("onResponse", "onResponse: " + response);
+                        LoginingDataBean loginingDataBean = GsonUtil.getGsonLower().fromJson(response, LoginingDataBean.class);
                         loginingDataBeans.clear();
                         loginingDataBeans.add(loginingDataBean);
-                        if(loginingDataBeans.get(0).Data!=null){
-                            Authorization=loginingDataBeans.get(0).Data;
+                        if (loginingDataBeans.get(0).Data != null) {
+                            Authorization = loginingDataBeans.get(0).Data;
+                            application.setAuthorization(Authorization);
                             try {
                                 initGetRouteData();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            saveAccount(PassWordSignActivity.this,mTv_AccountNumber.getText().toString());
-                            savepassword(PassWordSignActivity.this,mTv_PassWordNumber.getText().toString());
-                            Intent intent=new Intent(PassWordSignActivity.this, MainActivity.class);
+                            saveAccount(PassWordSignActivity.this, mTv_AccountNumber.getText().toString());
+                            savepassword(PassWordSignActivity.this, mTv_PassWordNumber.getText().toString());
+                            Intent intent = new Intent(PassWordSignActivity.this, MainActivity.class);
                             startActivity(intent);
 
                         }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/padding_default"
+        android:layout_marginTop="@dimen/default_margin"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_size_content"
+        android:textColor="@color/text666"
+        android:text="尽可能多的收徒。收徒可以获得20%，而徒孙只有10%"/>
+
+</LinearLayout>

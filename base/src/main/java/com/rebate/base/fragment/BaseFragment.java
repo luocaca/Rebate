@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.just.rebate.wedget.MyTitleBar;
-
 import butterknife.ButterKnife;
 
 /**
@@ -54,8 +52,9 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         mView = view;
-        initViewsAndEvents(view);
         initData();
+        initViewsAndEvents(view);
+
 
 //         View titleView =  bindTitleView();
 //

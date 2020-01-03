@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">IntegralManagement</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">赚钱</string>
+    <string name="title_query">收徒</string>
+    <string name="title_notifications">排名</string>
+    <string name="Apprentice">收徒排行榜</string>
+    <string name="Receipt">接单排行榜</string>
+    <string name="Host">"192.168.1.190:7002"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

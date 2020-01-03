@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="Fragment_list.MyFragment">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/rank_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9">
+    </androidx.viewpager.widget.ViewPager>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="#93938E"
+        app:tabIndicatorColor="@color/touming"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="#EEE4E4">
+
+        <!-- app:tabTextColor="#B36F6F"-->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昨日排行榜" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周排行榜" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+
+</LinearLayout>

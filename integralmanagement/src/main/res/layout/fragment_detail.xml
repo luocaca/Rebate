@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="Fragment_list.HomeFragment">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/Swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:background="@color/bule">
+
+                <TextView
+                    android:id="@+id/User"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_toStartOf="@+id/Btn_Recharge"
+                    android:drawableLeft="@mipmap/wode"
+                    android:drawablePadding="@dimen/padding_default"
+                    android:drawableTint="@color/yellowx"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:text="U10010"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_title" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/User"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toStartOf="@+id/Btn_Recharge"
+                    android:text="积分"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_title" />
+
+                <TextView
+                    android:id="@+id/Integral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toStartOf="@+id/Btn_Recharge"
+                    android:text="0"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_title_Xxs" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Integral"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toStartOf="@+id/Btn_Recharge"
+                    android:text="如何获得积分"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_title" />
+
+                <Button
+                    android:id="@+id/Btn_Recharge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="85dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginBottom="85dp"
+                    android:background="@android:color/white"
+                    android:text="充值"
+                    android:textColor="@color/bule" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="-50dp"
+                android:background="@color/bulex"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="今日兑换:"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_content" />
+
+                    <TextView
+                        android:id="@+id/today_exchange"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="0 积分"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_content" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:background="@android:color/white"></View>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="累计兑换:"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_content" />
+
+                    <TextView
+                        android:id="@+id/history_exchange"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="0 积分"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@android:color/white">
+
+                <ViewFlipper
+                    android:id="@+id/Notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoStart="true"
+                    android:flipInterval="3000"
+                    android:inAnimation="@anim/anim_in"
+                    android:outAnimation="@anim/anim_out">
+
+                </ViewFlipper>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@android:color/white"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/save_moeny"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_corner_r">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="开店赚钱"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title_xl" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="@dimen/default_margin"
+                            android:layout_marginBottom="20dp"
+                            android:alpha="0.3"
+                            android:src="@mipmap/redbag"
+                            android:tint="@android:color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/Integral_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_corner_y">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="积分明细"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title_xl" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="@dimen/default_margin"
+                            android:layout_marginBottom="20dp"
+                            android:alpha="0.3"
+                            android:src="@mipmap/integramingxi"
+                            android:tint="@android:color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/Integral_Rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_corner_g">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="0dp"
+                            android:text="积分排名"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title_xl" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/textView5"
+                            android:layout_alignEnd="@+id/textView5"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="47dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginEnd="69dp"
+                            android:gravity="center_vertical|right"
+                            android:text="赠送积分"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="@dimen/default_margin"
+                            android:layout_marginBottom="20dp"
+                            android:alpha="0.3"
+                            android:src="@mipmap/paihangbang"
+                            android:tint="@android:color/white" />
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/Apprentice"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/shape_corner_b">
+
+                        <TextView
+                            android:id="@+id/textview_paren"
+                            android:layout_width="175dp"
+                            android:layout_height="306dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="18dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginBottom="2dp"
+                            android:text="收徒赚钱"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title_xl" />
+
+                        <TextView
+                            android:id="@+id/erzi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/textview_paren"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="12dp"
+                            android:gravity="center_vertical|right"
+                            android:text="马上收徒，躺着赚钱"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title" />
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginEnd="@dimen/default_margin"
+                            android:layout_marginBottom="20dp"
+                            android:alpha="0.3"
+                            android:src="@mipmap/bin_user"
+                            android:tint="@android:color/white" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/join_activity"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_corner_p">
+
+                        <TextView
+                            android:id="@+id/textview7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:text="参加活动"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title_xl" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/textview7"
+                            android:layout_alignEnd="@+id/textview7"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="47dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginEnd="69dp"
+                            android:gravity="center_vertical|right"
+                            android:text="奖励积分"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/text_size_title" />
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="@dimen/default_margin"
+                            android:layout_marginBottom="20dp"
+                            android:alpha="0.3"
+                            android:src="@mipmap/activity"
+                            android:tint="@android:color/white" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

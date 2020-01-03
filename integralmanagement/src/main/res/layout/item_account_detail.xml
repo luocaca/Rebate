@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/default_margin"
+    android:layout_marginRight="@dimen/default_margin"
+    android:background="@drawable/shape_corner_x"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="135dp">
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="账号" />
+
+        <TextView
+            android:id="@+id/Account_Number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView21"
+            android:text="808025454" />
+
+        <TextView
+            android:id="@+id/BuySynTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textColor="@color/green"
+            android:layout_toEndOf="@+id/Account_Number"
+            android:text="(上线中)" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView21"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="密钥" />
+
+        <TextView
+            android:id="@+id/Secret_Key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Account_Number"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView24"
+            android:text="88888222546454826" />
+
+        <TextView
+            android:id="@+id/Copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Account_Number"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textColor="@color/bule"
+            android:layout_toEndOf="@+id/Secret_Key"
+            android:text="复制Key" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView24"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="手机" />
+
+        <TextView
+            android:id="@+id/phone_Number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Secret_Key"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView27"
+            android:text="1115545454" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView27"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="类型" />
+
+        <TextView
+            android:id="@+id/Server_Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_Number"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView29"
+            android:text="转转" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_Number"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/Server_Type"
+            android:text="状态" />
+
+        <TextView
+            android:id="@+id/Use_Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/red"
+            android:layout_alignTop="@+id/textView31"
+            android:layout_toEndOf="@+id/textView31"
+            android:text="停止" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/Use_Type"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/Use_Type"
+            android:text="功能" />
+
+        <TextView
+            android:id="@+id/Jurisdiction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView33"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/red"
+            android:layout_toEndOf="@+id/textView33"
+            android:text="买" />
+
+        <ImageView
+            android:id="@+id/modify_information"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:src="@mipmap/xiugai" />
+
+        <ImageView
+            android:id="@+id/delete_information"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/modify_information"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="25dp"
+            android:src="@mipmap/shanchu" />
+
+        <TextView
+            android:id="@+id/SellSynTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/BuySynTime"
+            android:textColor="@color/red"
+            android:text="卖家上线中" />
+    </RelativeLayout>
+
+
+</LinearLayout>

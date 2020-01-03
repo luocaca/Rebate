@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="135dp">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="20dp"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="编号:" />
+
+        <TextView
+            android:id="@+id/User_Number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/textView18"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="020882088220" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/User_Number"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="时间:" />
+
+        <TextView
+            android:id="@+id/Closing_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/textView20"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="2019-11-11" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_below="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="账号:" />
+
+        <TextView
+            android:id="@+id/Account_and_Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/User_Number"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView36"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="100103021@qq.com" />
+
+
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_below="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="类型:" />
+
+        <TextView
+            android:id="@+id/Type_Recharge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Account_and_Email"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView40"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="充值" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Account_and_Email"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/Type_Recharge"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="积分:" />
+
+        <TextView
+            android:id="@+id/Recharge_Integral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Account_and_Email"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_toEndOf="@+id/textView42"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/red"
+            android:text="+1000" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView40"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:text="使用前:" />
+
+        <TextView
+            android:id="@+id/HisIntegral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Type_Recharge"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textColor="@color/text666"
+            android:layout_toEndOf="@+id/textView14"
+            android:textSize="@dimen/text_size_content"
+            android:text="1000" />
+
+        <TextView
+            android:id="@+id/Remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Account_and_Email"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textSize="@dimen/text_size_content"
+            android:textColor="@color/text666"
+            android:layout_toEndOf="@+id/Recharge_Integral"
+            android:text="(充值)" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Recharge_Integral"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_toEndOf="@+id/HisIntegral"
+            android:text="使用后:"
+            android:textColor="@color/text666"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/NowIntegral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Remark"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textColor="@color/text666"
+            android:layout_toEndOf="@+id/textView22"
+            android:textSize="@dimen/text_size_content"
+            android:text="2000" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/text333"/>
+
+</LinearLayout>

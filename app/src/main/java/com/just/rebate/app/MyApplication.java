@@ -8,7 +8,19 @@ import android.content.Context;
  */
 public class MyApplication extends Application {
     public static  final String Host="";
+    public static final String authorization="";
+
+
+    public String getAuthorization() {
+        return Authorization;
+    }
+
+    public void setAuthorization(String authorization) {
+        Authorization = authorization;
+    }
+
     private String host;
+    private String Authorization;
 
 
     @Override
@@ -33,6 +45,7 @@ public class MyApplication extends Application {
     public void onLowMemory() {
         super.onLowMemory();
         setHost(Host);
+        setAuthorization(authorization);
     }
 
 

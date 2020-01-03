@@ -1,0 +1,393 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/SwipereFresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<TextView-->
+            <!--android:id="@+id/Gone"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center"-->
+            <!--android:text="该功能暂未开放，敬请期待!" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/bule">
+
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView8"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="累计收益:"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/CumulativeIntegral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/TodayProfit"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/textView6"
+                    android:gravity="center"
+                    android:text="1000"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_title_Xxs" />
+
+                <Button
+                    android:id="@+id/CheckDetail"
+                    android:layout_width="78dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="167dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/CumulativeIntegral"
+                    android:background="@drawable/shape_corner_r"
+                    android:text="查看明细"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/textView10"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="今日收益:"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/TodayProfit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/TodayApprenticeNumber"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/textView8"
+                    android:gravity="center"
+                    android:text="10.00"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="今日收徒:"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/TodayApprenticeNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/textView10"
+                    android:gravity="center"
+                    android:text="1人"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/TodayApprenticeNumber"
+                    android:gravity="center"
+                    android:text="累计收徒:"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/CumulativeApprenticeNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/textView12"
+                    android:gravity="center"
+                    android:text="10人"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:id="@+id/InvitationCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:text="20198892"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_title_Xxs" />
+
+                <TextView
+                    android:id="@+id/Copy_InvitationCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_toEndOf="@+id/InvitationCode"
+                    android:text="复制邀请码"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/text_size_title" />
+
+                <Button
+                    android:id="@+id/immediatelyApprentice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/InvitationCode"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/shape_corner_x_r"
+                    android:text="立即收徒"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/immediatelyApprentice"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="你能永久获得徒弟。徒孙的分成"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_content" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView16"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+
+                    android:layout_marginBottom="@dimen/default_margin"
+                    android:text="获得徒弟的20%，徒孙的10%"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_content" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="#CCC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:src="@mipmap/shoutu"
+                    android:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/ApprenticeRecord"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/rightarrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:paddingRight="@dimen/padding_default"
+                    android:text="收徒记录"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_title" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="#CCC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:src="@mipmap/zhuanqian"
+                    android:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/ApprenticeDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/rightarrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:paddingRight="@dimen/padding_default"
+                    android:text="奖励记录"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_title" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="#CCC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:src="@mipmap/wenhao"
+                    android:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/Good_For_Apprentice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/rightarrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:paddingRight="@dimen/padding_default"
+                    android:text="收徒的好处"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_title" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="#CCC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:src="@mipmap/gonglue"
+                    android:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/Apprentice_Strategy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/rightarrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:paddingRight="@dimen/padding_default"
+                    android:text="收徒攻略"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_title" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="#CCC" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:src="@mipmap/zhifeij"
+                    android:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/Apprentice_Propaganda"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableRight="@mipmap/rightarrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_default"
+                    android:paddingRight="@dimen/padding_default"
+                    android:text="收徒推广宣传语"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/text_size_title" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="#CCC" />
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

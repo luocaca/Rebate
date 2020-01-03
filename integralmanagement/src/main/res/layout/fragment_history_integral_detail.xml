@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="IntegralDeatail_List.HistoryIntegralDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/beginTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="请选择起始时间"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:minWidth="80dp"/>
+
+        <TextView
+            android:id="@+id/ChooseTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="请选择结束时间" />
+        <TextView
+            android:id="@+id/Check"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="查询"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@color/green"
+            android:minWidth="80dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_HisDetail"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

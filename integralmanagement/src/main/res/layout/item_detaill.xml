@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@drawable/underline_textview"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/User_linear"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/use_device"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size_content"
+                android:paddingLeft="@dimen/padding_default"
+                android:text="设备ID" />
+
+            <TextView
+                android:id="@+id/use_aacount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_default"
+                android:text="账号ID"
+                android:textSize="@dimen/text_size_content"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/purpose"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content"
+            android:paddingBottom="2dp"
+            android:text="积分充值" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingBottom="2dp"
+            android:textSize="@dimen/text_size_content"
+            android:text="2019/8/31 " />
+
+        <TextView
+            android:id="@+id/moeny"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingTop="2dp"
+            android:textSize="@dimen/text_size_title"
+            android:textColor="@color/red"
+            android:text="+10"
+            android:paddingRight="@dimen/padding_default" />
+    </LinearLayout>
+</LinearLayout>

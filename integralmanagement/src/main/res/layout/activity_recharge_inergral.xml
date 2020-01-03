@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="用户ID:" />
+
+        <EditText
+            android:id="@+id/User_ID"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_marginRight="@dimen/default_margin"
+        android:background="@drawable/shape_corner"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="充值积分:" />
+
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/Tagflowlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:paddingTop="7dp"
+            android:paddingBottom="20dp"
+            app:max_select="1"
+            app:tag_gravity="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_top"
+            android:layout_marginBottom="@dimen/padding_left"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:text="请选择支付方式"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/text_size_content_s" />
+
+                <ImageView
+                    android:id="@+id/jiantou"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/bottomerrow" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_top">
+
+                <RadioGroup
+                    android:id="@+id/radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radio1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:drawableLeft="@mipmap/yhkzhifu"
+                        android:drawablePadding="8dp"
+                        android:text="银行卡支付"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                    <RadioButton
+                        android:id="@+id/radio2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin_top"
+                        android:drawableLeft="@mipmap/zfbzhifu"
+                        android:drawablePadding="8dp"
+                        android:text="支付宝支付"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                    <RadioButton
+                        android:id="@+id/radio3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin_top"
+                        android:drawableLeft="@mipmap/vxzhifu"
+                        android:drawablePadding="8dp"
+                        android:text="微信支付"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/rechargeIntegral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="充值"
+        android:textColor="@android:color/white" />
+
+
+</LinearLayout>

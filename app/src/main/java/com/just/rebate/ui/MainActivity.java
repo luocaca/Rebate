@@ -1,6 +1,10 @@
 package com.just.rebate.ui;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.just.rebate.R;
 import com.just.rebate.adapter.viewpager.VpAdapter;
 import com.just.rebate.entity.GetRuleData;
+import com.just.rebate.ui.activity.Service.WebSocketService;
 import com.just.rebate.ui.fragment.HomeFragment;
 import com.just.rebate.ui.fragment.InviteFragment;
 import com.just.rebate.ui.fragment.OrderFragmentHome;
@@ -25,6 +30,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     private List<GetRuleData>getRuleData=new ArrayList<>();
+    private ServiceConnection serviceConnection;
+    private WebSocketService webSocketService;
 
     @BindView(R.id.view_pager)
     public ViewPager mViewPager;
@@ -91,8 +98,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bindWebSocketService();
         ButterKnife.bind(this);
         initViewPager();
+
 
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -102,13 +111,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void bindWebSocketService() {
+        serviceConnection=new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                WebSocketService.SocketBinder binder= (WebSocketService.SocketBinder) iBinder;
+                webSocketService=binder.getService();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        };
+        Intent intent=new Intent(this,WebSocketService.class);
+        bindService(intent,serviceConnection,BIND_AUTO_CREATE);
+    }
 
 
     /**
      * 初始化view pager
      */
     private void initViewPager() {
-
         mViewPager.setAdapter(new VpAdapter(getSupportFragmentManager(), getInitFragment(), navView));
         mViewPager.setOffscreenPageLimit(8);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -153,4 +177,11 @@ public class MainActivity extends AppCompatActivity {
         return baseFragments;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(serviceConnection);
+        Intent intent=new Intent(getApplicationContext(),WebSocketService.class);
+        stopService(intent);
+    }
 }

@@ -1,5 +1,6 @@
 package com.rebate.commom.util;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -9,6 +10,7 @@ public class GsonUtil {
 
 
     private static Gson gson;
+    private static Gson gsonUp;
 
 
     /**
@@ -19,7 +21,8 @@ public class GsonUtil {
     public static Gson getGson() {
 
 
-        if (gson == null) {
+//        if (gson == null) {
+        if (gsonUp == null) {
 //            Type t = new TypeToken<SignalRMessageT<BaseResponseT<AccountData>>>() {
 //            }.getType();
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -27,13 +30,13 @@ public class GsonUtil {
             gsonBuilder.setPrettyPrinting();
 
             //全局大写序列号
-//            gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE);
-            gson = gsonBuilder.create();
+            gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE);
+            gsonUp = gsonBuilder.create();
 
         }
 
 
-        return gson;
+        return gsonUp;
 
     }
 
@@ -45,4 +48,19 @@ public class GsonUtil {
         return gson.toJson(jsonObject);
     }
 
+    public static Gson getGsonLower() {
+        if (gson == null) {
+//            Type t = new TypeToken<SignalRMessageT<BaseResponseT<AccountData>>>() {
+//            }.getType();
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setLenient();
+            gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.IDENTITY);
+            //全局大写序列号
+            gson = gsonBuilder.create();
+
+        }
+
+
+        return gson;
+    }
 }

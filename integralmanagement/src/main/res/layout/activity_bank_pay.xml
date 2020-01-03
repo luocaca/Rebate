@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="收款银行"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/ReceivingBank"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="选择收款银行"
+            android:drawableRight="@mipmap/rightarrow"
+            android:paddingRight="@dimen/default_margin"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="收款账号"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/ReceivingAccount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="收款账号"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/CopyAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="80dp"
+            android:text="复制"
+            android:gravity="center"
+            android:textColor="@color/green"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="开户支行"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/BankBranch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="开户支行"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="收款人"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/DisPlayName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="收款人"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/CopyDisPlayName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="80dp"
+            android:text="复制"
+            android:gravity="center"
+            android:textColor="@color/green"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="充值金额"
+            android:textSize="@dimen/text_size_content" />
+
+        <TextView
+            android:id="@+id/RechargeMoeny"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="充值金额"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="付款人姓名"
+            android:textSize="@dimen/text_size_content" />
+
+        <EditText
+            android:id="@+id/PayName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="付款人姓名"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="80dp"
+            android:text="备注"
+            android:textSize="@dimen/text_size_content" />
+
+        <EditText
+            android:id="@+id/Remarks"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="备注"
+            android:paddingLeft="@dimen/padding_default"
+            android:textSize="@dimen/text_size_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ConfirmRecharge"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:background="@drawable/shape_corner_g_line"
+        android:text="确认充值"
+        android:textColor="@color/green"
+        android:layout_height="50dp" />
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/Ranking_Receipt"
+        android:icon="@mipmap/home"
+        android:title="@string/Receipt" />
+
+    <item
+        android:id="@+id/Ranking_Apprentice"
+        android:icon="@mipmap/zhuanqian"
+        android:title="@string/Apprentice" />
+</menu>

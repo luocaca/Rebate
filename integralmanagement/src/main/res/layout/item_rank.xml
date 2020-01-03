@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/Ranking"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minWidth="80dp"
+                android:text="1"
+                android:textSize="@dimen/text_size_title" />
+
+            <TextView
+                android:id="@+id/user_account"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="U1592254848"
+                android:textSize="@dimen/text_size_title" />
+
+
+        <TextView
+            android:id="@+id/Order"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="40dp"
+            android:text="-1100"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_title">
+        </TextView>
+
+        <TextView
+            android:id="@+id/reward"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center_vertical"
+            android:paddingRight="40dp"
+            android:text="+80"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_title">
+        </TextView>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text999"/>
+
+</LinearLayout>

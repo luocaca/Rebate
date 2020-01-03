@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorAccent">#3F51B510</color>
+    <color name="touming">#00000000</color>
+    <color name="text666">#666666</color>
+    <color name="black">#666666</color>
+    <color name="text333">#333333</color>
+    <color name="text999">#999999</color>
+    <color name="xuanzhong">#CFF3A6</color>
+    <color name="yellowx">#FF9800</color>
+    <color name="red">#E51C23</color>
+    <color name="green">#259B24</color>
+    <color name="brown">#BD5555</color>
+    <color name="pink">#FF40A9</color>
+    <color name="activitycolor">#F8316A</color>
+    <color name="yellow">#FF9800</color>
+    <color name="bule">#3F51B5</color>
+    <color name="bulex">#152D6F</color>
+    <color name="default_bg">#F4F4F4</color>
+</resources>
