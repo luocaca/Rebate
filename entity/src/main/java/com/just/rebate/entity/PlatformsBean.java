@@ -4,7 +4,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
 
-public class PlatformsBean extends AbstractExpandableItem implements MultiItemEntity {
+public class PlatformsBean implements MultiItemEntity {
 
     /**
      * Logo : upload-files/jinkela-122616183144.jpg
@@ -27,19 +27,10 @@ public class PlatformsBean extends AbstractExpandableItem implements MultiItemEn
     public String CreatedTime;
 
 
-
-    @Override
-    public List getSubItems() {
-        return null;
-    }
-
-    @Override
-    public int getLevel() {
-        return 1;
-    }
+    public int itemType = 1 ;
 
     @Override
     public int getItemType() {
-        return 1;
+        return itemType;
     }
 }

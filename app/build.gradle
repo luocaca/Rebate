@@ -41,7 +41,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.smartarmenia:dotnetcoresignalrclientjava:1.14'
+//    implementation 'com.smartarmenia:dotnetcoresignalrclientjava:1.14'
+//    api 'com.smartarmenia:dotnetcoresignalrclientjava:1.14'
+
 
     implementation project(':commom')
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'

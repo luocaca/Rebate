@@ -1,15 +1,16 @@
 package com.just.rebate.entity;
 
 
-import com.chad.library.adapter.base.entity.SectionEntity;
+import com.chad.library.adapter.base.entity.IExpandable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 
 import java.util.List;
 
 /**
  * 首页数据结构
  */
-public class HomeItem extends  SectionEntity {
-
+public class HomeItem implements IExpandable<PlatformsBean>, MultiItemEntity {
+//AbstractExpandableItem
 
     /**
      * Name : 购物返利
@@ -23,33 +24,38 @@ public class HomeItem extends  SectionEntity {
     public String CreatedTime;
     public List<PlatformsBean> Platforms;
 
-    public HomeItem(boolean isHeader, String header) {
-        super(isHeader, header);
+
+    public int level =0;
+    public int itemType = 0;
+
+    public boolean isExpanded;
+
+
+    @Override
+    public boolean isExpanded() {
+        return isExpanded;
     }
 
-    public HomeItem(Object o) {
-        super(o);
+    @Override
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 
-    public static class PlatformsBean {
-        /**
-         * Logo : http://192.168.1.137:7001/upload-files/07461d655b88115a08e528d0c1d0e0f1-123114220253.jpg
-         * Name : 京东
-         * Url : m.jd.com
-         * PlatformGroupId : 1
-         * PlatformGroupName : 购物返利
-         * Priority : 1
-         * Id : 3
-         * CreatedTime : 2019-12-31T14:22:12.9175911
-         */
-
-        public String Logo;
-        public String Name;
-        public String Url;
-        public int PlatformGroupId;
-        public String PlatformGroupName;
-        public int Priority;
-        public int Id;
-        public String CreatedTime;
+    @Override
+    public List<PlatformsBean> getSubItems() {
+        return Platforms;
     }
+
+
+    @Override
+    public int getLevel() {
+        return level;
+    }
+
+    @Override
+    public int getItemType() {
+        return itemType;
+    }
+
+
 }

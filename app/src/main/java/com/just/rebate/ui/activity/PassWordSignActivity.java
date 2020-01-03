@@ -56,7 +56,9 @@ public class PassWordSignActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
         mTv_AccountNumber = findViewById(R.id.Account_Number);
+        mTv_AccountNumber.setText(getAccount(PassWordSignActivity.this));
         mTv_PassWordNumber = findViewById(R.id.PassWord_Number);
+        mTv_PassWordNumber.setText(getpassword(PassWordSignActivity.this));
         mBtn_YZMlogin = findViewById(R.id.btn_YZM_login);
         mBtn_sign = findViewById(R.id.btn_sign);
         application = (MyApplication) getApplication();

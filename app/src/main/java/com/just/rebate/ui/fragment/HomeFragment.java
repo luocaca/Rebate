@@ -2,24 +2,21 @@ package com.just.rebate.ui.fragment;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.entity.IExpandable;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
-import com.just.rebate.adapter.recycle.SectionAdapter;
+import com.just.rebate.adapter.recycle.HomeExpandableItemAdapter;
 import com.just.rebate.entity.GetRuleData;
 import com.just.rebate.entity.HomeItem;
-import com.just.rebate.ui.activity.web.WebViewActivity;
+import com.just.rebate.entity.PlatformsBean;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -36,7 +33,7 @@ import okhttp3.Call;
  * title 首页
  */
 public class HomeFragment extends BaseFragment {
-    private List<HomeItem> mData = new ArrayList<>();
+    private List<MultiItemEntity> mData = new ArrayList<>();
     private String Adress = "";
     private List<GetRuleData> getRuleData = new ArrayList<>();
 
@@ -46,6 +43,7 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.rv_SwipeRefresh)
     SwipeRefreshLayout swipeRefreshLayout;
+    private HomeExpandableItemAdapter baseViewHolder;
 
     @Override
     protected int bindFragmentLayoutId() {
@@ -55,27 +53,67 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initViewsAndEvents(View view) {
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-        SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content, R.layout.def_section_head, mData) {
-            @Override
-            protected void convert(@NonNull BaseViewHolder helper, HomeItem item) {
-                if (item.Id == 1) {
 
-                } else {
-                    helper.setText(R.id.tv, item.Platforms.get(0).Name);
-                    Glide.with(getActivity()).load(item.Platforms.get(0).Logo).apply(RequestOptions.bitmapTransform(new CircleCrop())).into((ImageView) helper.getView(R.id.iv));
-                }
-                helper.itemView.setOnClickListener(v -> {
-                    WebViewActivity.start(mContext);
-                });
-            }
 
+//            SectionAdapter sectionAdapter = new SectionAdapter(R.layout.item_section_content, R.layout.def_section_head, mData) {
+//            @Override
+//            protected void convert(@NonNull BaseViewHolder helper, HomeItem item) {
+//
+//                System.out.println("--head--");
+//                System.out.println("--no head--");
+//
+////                helper.setText(R.id.tv, item.Platforms.get(0).Name);
+////                Glide.with(getActivity()).load(item.Platforms.get(0).Logo).apply(RequestOptions.bitmapTransform(new CircleCrop())).into((ImageView) helper.getView(R.id.iv));
+////                helper.itemView.setOnClickListener(v -> {
+////                    WebViewActivity.start(mContext);
+////                });
+//            }
+
+
+//            @Override
+//            protected void convertHead(BaseViewHolder helper, HomeItem item) {
+//                helper.setText(R.id.header, item.Name);
+//            }
+//        };
+//        HomeItem homeItem = new HomeItem();
+
+//        homeItem.setExpanded(true);
+//        ArrayList<PlatformsBean> objects = new ArrayList<>();
+//        objects.add(new PlatformsBean() {
+//            @Override
+//            public int getItemType() {
+//                return 1;
+//            }
+//
+//
+//        });
+//        objects.add(new PlatformsBean());
+//        homeItem.Platforms = objects;
+//        mData.add(homeItem);
+        baseViewHolder = new HomeExpandableItemAdapter(mData);
+//
+
+
+        recycleView.setAdapter(baseViewHolder);
+
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 3);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
-            protected void convertHead(BaseViewHolder helper, HomeItem item) {
-                helper.setText(R.id.tv,item.Name);
+            public int getSpanSize(int position) {
+
+
+                MultiItemEntity multiItemEntity = baseViewHolder.getData().get(position);
+                System.out.println(position);
+                System.out.println(position + multiItemEntity.getItemType());
+                return (multiItemEntity).getItemType() == 1 ? 1 : manager.getSpanCount();
             }
-        };
-        recycleView.setLayoutManager(new GridLayoutManager(mActivity, 3));
-        recycleView.setAdapter(sectionAdapter);
+        });
+        recycleView.setLayoutManager(manager);
+
+        baseViewHolder.expandAll();
+        baseViewHolder.notifyDataSetChanged();
+
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -84,7 +122,7 @@ public class HomeFragment extends BaseFragment {
                     public void run() {
                         requestDataOnline();
                     }
-                }, 3000);
+                }, 0);
                 swipeRefreshLayout.setRefreshing(false);
             }
 
@@ -128,15 +166,17 @@ public class HomeFragment extends BaseFragment {
 
                         List<HomeItem> list = GsonUtil.getGsonLower().fromJson(response, t);
 
-                        if (mData == null) {
-                            mData = new ArrayList<>();
-                        }
+
 //                        setDataBg(list);
-                        mData.clear();
-                        mData.addAll(list);
+                        baseViewHolder.getData().clear();
+//                        mData.addAll(list);
+                        baseViewHolder.getData().addAll(list);
+
+
                         Log.i("onResponse", "onResponse: " + mData.size());
                         recycleView.getAdapter().notifyDataSetChanged();
-                        ((SectionAdapter) recycleView.getAdapter()).expandAll();
+
+                        baseViewHolder.expandAll();
 
                     }
                 });
