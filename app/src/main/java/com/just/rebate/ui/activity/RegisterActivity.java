@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,7 @@ import com.just.rebate.R;
  */
 public class RegisterActivity extends AppCompatActivity {
     private Button mBtn_PassWordRegister;
+    private ImageView mIv_Bakc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,13 @@ public class RegisterActivity extends AppCompatActivity {
             window.setNavigationBarColor(Color.TRANSPARENT);
         }
         mBtn_PassWordRegister=findViewById(R.id.btn_password_register);
+        mIv_Bakc=findViewById(R.id.onback);
+        mIv_Bakc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         mBtn_PassWordRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

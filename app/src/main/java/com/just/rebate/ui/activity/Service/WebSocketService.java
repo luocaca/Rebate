@@ -29,11 +29,12 @@ public class WebSocketService extends Service {
     private boolean isReConnect = true;
     private SocketBinder sockerBinder = new SocketBinder();
     private Handler handler = new Handler(Looper.getMainLooper());
-    WebSocketService 反反复复;
+    private WebSocketService webSocketService;
+
     @Override
     public void onCreate() {
         application = (MyApplication) getApplication();
-        反反复复=this;
+        webSocketService = this;
         super.onCreate();
     }
 
@@ -46,7 +47,7 @@ public class WebSocketService extends Service {
 
         /*返回SocketService 在需要的地方可以通过ServiceConnection获取到SocketService  */
         public WebSocketService getService() {
-            return 反反复复;
+            return webSocketService;
         }
     }
 
@@ -85,15 +86,15 @@ public class WebSocketService extends Service {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    webSocketService = new WebSocketService();
                     if (timer == null) {
 
                     }
-                    if(task==null){
-                        task=new TimerTask() {
+                    if (task == null) {
+                        task = new TimerTask() {
                             @Override
                             public void run() {
                                 CatMessageOuterClass.CatMessage.Builder builder = CatMessageOuterClass.CatMessage.newBuilder();
@@ -111,7 +112,7 @@ public class WebSocketService extends Service {
                             }
                         };
                     }
-                    timer.schedule(task,0,8000);
+                    timer.schedule(task, 0, 8000);
                 }
             }).start();
         }
@@ -165,7 +166,7 @@ public class WebSocketService extends Service {
 
     }
 
-    public boolean onUnbind(Intent intent){
+    public boolean onUnbind(Intent intent) {
         return super.onUnbind(intent);
     }
 

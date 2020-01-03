@@ -45,21 +45,11 @@ public class PassWordRegisterActivity extends AppCompatActivity {
         mEt_PassWord = findViewById(R.id.PassWord_Register);
         mEt_PassWordF = findViewById(R.id.PassWordF_Register);
         mEt_Email = findViewById(R.id.Email_Register);
-
         mBtn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     initData();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        mTv_RefershYZM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -76,7 +66,7 @@ public class PassWordRegisterActivity extends AppCompatActivity {
         params.put("ConfirmPassword", mEt_PassWordF.getText().toString());
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
-                .url("http://192.168.1.137:7001/api/Identity/Register")
+                .url("http://192.168.1.137:7001/api/Identity/RegisterNoVerifyCode")
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
                 .execute(new StringCallback() {
@@ -102,7 +92,6 @@ public class PassWordRegisterActivity extends AppCompatActivity {
                             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    mEt_YZM.setText("");
                                 }
                             });
                             builder.create();

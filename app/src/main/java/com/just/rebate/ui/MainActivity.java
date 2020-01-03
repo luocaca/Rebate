@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<GetRuleData>getRuleData=new ArrayList<>();
+    private List<GetRuleData> getRuleData = new ArrayList<>();
     private ServiceConnection serviceConnection;
     private WebSocketService webSocketService;
 
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
 
-
     public void refreshItemIcon() {
         MenuItem item0 = navView.getMenu().findItem(R.id.navigation_home);
         item0.setIcon(R.mipmap.home);
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
         initViewPager();
 
 
-
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 //        navView.setItemIconTintList(null);
         navView.setSelectedItemId(R.id.navigation_home);
@@ -112,20 +110,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void bindWebSocketService() {
-        serviceConnection=new ServiceConnection() {
+        serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                WebSocketService.SocketBinder binder= (WebSocketService.SocketBinder) iBinder;
-                webSocketService=binder.getService();
+                WebSocketService.SocketBinder binder = (WebSocketService.SocketBinder) iBinder;
+                webSocketService = binder.getService();
             }
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
-
+               webSocketService=null;
             }
         };
-        Intent intent=new Intent(this,WebSocketService.class);
-        bindService(intent,serviceConnection,BIND_AUTO_CREATE);
+        Intent intent = new Intent(this, WebSocketService.class);
+        bindService(intent, serviceConnection, BIND_AUTO_CREATE);
     }
 
 
@@ -181,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
-        Intent intent=new Intent(getApplicationContext(),WebSocketService.class);
+        Intent intent = new Intent(getApplicationContext(), WebSocketService.class);
         stopService(intent);
     }
 }
