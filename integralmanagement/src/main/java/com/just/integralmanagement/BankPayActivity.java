@@ -114,7 +114,6 @@ public class BankPayActivity extends AppCompatActivity {
         params.put("IntegralNum", "" + mTv_RechargeMoeny.getText().toString());
         params.put("TaskPayModeId", "" + paymentDatas.get(0).Data.get(0).Id);
         params.put("IsState", "" + 0);
-        //传递参数有问题，需要整改
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
                 .addHeader("Authorization", "Bearer " + Authorization)

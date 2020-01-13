@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
-        Intent intent = new Intent(getApplicationContext(), WebSocketService.class);
-        stopService(intent);
+//        Intent intent = new Intent(getApplicationContext(), WebSocketService.class);
+//        stopService(intent);
     }
 }

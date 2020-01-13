@@ -56,7 +56,6 @@ public class PayFragment extends DialogFragment implements View.OnClickListener 
         PwdInputMethodView inputMethodView = dialog.findViewById(R.id.inputMethodView);
         psw_input.setInputMethodView(inputMethodView);
         psw_input.setInputCallBack(inputCallBack);
-
         dialog.findViewById(R.id.iv_close).setOnClickListener(this);
     }
 

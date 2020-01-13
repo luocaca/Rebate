@@ -14,17 +14,9 @@ public class WebSocketClientBean {
     public String Content;
 
     public static class HeadersBean {
-        @SerializedName("Host")
-        public String Host; // FIXME check this code
-        public String Connection;
-        @SerializedName("User-Agent")
-        public String UserAgent;
+        public String Host;
         public String Accept;
         public String Referer;
-        @SerializedName("Accept-Encoding")
-        public String AcceptEncoding;
-        @SerializedName("Accept-Language")
-        public String AcceptLanguage;
         public String Cookie;
     }
 }

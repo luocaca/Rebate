@@ -235,7 +235,7 @@ public class PaymentActivity extends BaseActivity {
 
             helper.getView(R.id.payment_checkbox_context).setSelected(((ReturnOrder) item).isChecked());
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
-            helper.setText(R.id.order_price, ((ReturnOrder) item).getCommodityPrice());
+            helper.setText(R.id.Amount, ((ReturnOrder) item).getCommodityPrice());
 
 
             boolean islast = isLastOrder(mActivity, helper, item, data);

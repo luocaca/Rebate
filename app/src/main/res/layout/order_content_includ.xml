@@ -35,6 +35,7 @@
             android:textSize="@dimen/text_size_content_s" />
 
         <TextView
+            android:id="@+id/SpecName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -58,7 +59,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/order_price"
+                android:id="@+id/Amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

@@ -5,18 +5,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.chad.library.adapter.base.entity.IExpandable;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.HomeExpandableItemAdapter;
 import com.just.rebate.entity.GetRuleData;
 import com.just.rebate.entity.HomeItem;
-import com.just.rebate.entity.PlatformsBean;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -90,7 +87,7 @@ public class HomeFragment extends BaseFragment {
 //        objects.add(new PlatformsBean());
 //        homeItem.Platforms = objects;
 //        mData.add(homeItem);
-        baseViewHolder = new HomeExpandableItemAdapter(mData);
+        baseViewHolder = new HomeExpandableItemAdapter(mData,getActivity());
 //
 
 

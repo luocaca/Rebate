@@ -136,7 +136,7 @@ public class WebSocketService extends Service {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.i("onMessage", "onMessage: " + StringBody);
+            Log.i("onMessage", "onMessage: Service" + StringBody);
             initBodyData(StringBody);
         }
 
@@ -160,6 +160,7 @@ public class WebSocketService extends Service {
     }
 
     private void output(String s) {
+        Log.i("output", "output: Service" + s);
     }
 
     private void initBodyData(String stringBody) {

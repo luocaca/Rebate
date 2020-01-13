@@ -59,6 +59,9 @@
         <activity android:name=".ui.activity.InvalidOrderActivity" />
         <activity android:name=".ui.activity.PassWordSignActivity" />
         <activity android:name=".ui.activity.PassWordRegisterActivity" />
+        <activity android:name=".ui.activity.BankPayActivity" />
+        <activity android:name=".ui.activity.VxOrZfbPayActivity" />
+        <activity android:name=".ui.activity.AddBankCardActivity" />
 
 
         <provider

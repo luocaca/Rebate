@@ -141,7 +141,7 @@ public class WebViewActivity extends BaseActivity {
 
     private void initReceiveData() {
         Intent intent = getIntent();
-        string2 = intent.getStringExtra("Url");
+        string2 = intent.getStringExtra("url");
         Log.i("UrlUrl", "initReceiveData: " + string2);
     }
 
@@ -153,7 +153,7 @@ public class WebViewActivity extends BaseActivity {
         MyClient myClient = new MyClient(this, web, swipe, myTitleBar.title_tv, new HandlerUtil.HandlerHolder(new HandlerUtil.OnReceiveMessageListener() {
             @Override
             public void handlerMessage(Message msg) {
-                web.loadUrl(url);
+                web.loadUrl(string2);
             }
         }));
 
@@ -167,7 +167,7 @@ public class WebViewActivity extends BaseActivity {
         // .addHeader("cookie", "")
         //       String cookies = "_m_h5_tk_enc=e3f7d58860b22cace169e93099afba43; ockeqeudmj=uC2m2qk%3D; munb=652569484/unb=652569484; uc3=id2=VWojfHWaPLQP&lg2=U%2BGCWk%2F75gdr5Q%3D%3D&vt3=F8dByuK3QCO2SogCkuU%3D&nk2=D9ZMJf0xxB5b5t5x; uc1=cookie15=URm48syIIVrSKA%3D%3D&cookie14=UoTaEC%2BTitGYAg%3D%3D&cookie21=Vq8l%2BKCLjA%2Bl; csg=15d38b91; lgc=luochaojunaa; ntm=0; cookie17=VWojfHWaPLQP; dnk=luochaojunaa; skt=c1802f1fe6d4bf10; tracknick=luochaojunaa; _cc_=WqG3DMC9EA%3D%3D; _l_g_=Ug%3D%3D; sg=a49; _nk_=luochaojunaa; cookie1=UIHxSZwF3e96OEm4e2lF4I5B%2BkbjfNbtkPzv2gz4sL4%3D; isg=BKSkEhzopZNTCdElm04vuboFfqBWlcnNCoVvhb7FMG8yaUQz5k2YN9rHLIco3gD_";
 
-//      myClient.loadUrl("https://h5.m.taobao.com",cookies);
+//      myClient.loadUrl(x,cookies);
 //      myClient.loadUrl("https://h5.m.taobao.com",null,CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
 //      myClient.loadUrl("https://h5.m.taobao.com",CookieManager.getInstance().getCookie("https://h5.m.taobao.com"));
         myClient.loadUrl(string2, CookieManager.getInstance().getCookie(string2));
@@ -191,6 +191,7 @@ public class WebViewActivity extends BaseActivity {
         web.getSettings().setDomStorageEnabled(true);//开启DOM缓存，关闭的话H5自身的一些操作是无效的
         web.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         web.setWebViewClient(new WebViewClient() {
+
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -218,7 +219,13 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
                 rUrl = request.getUrl().toString();
-                Log.i("rUrl", "shouldInterceptRequest: " + rUrl);
+                Log.i("rUrl", "找到ResQuest信息: " + rUrl);
+                Log.i("找到ResQuest信息", "找到ResQuest信息: "+request.getMethod());
+                Log.i("找到ResQuest信息", "找到ResQuest信息: "+request.getRequestHeaders());
+                if(rUrl.contains("/h5/mtop.trade.order.create.h5")){
+                    Log.i("找到ResQuest信息", "找到ResQuest信息: ");
+                }
+
                 URL url = null;
                 String referen = "";
                 String BoolSTR = "";
@@ -233,7 +240,6 @@ public class WebViewActivity extends BaseActivity {
 
 
                 if (BoolSTRs.equals("JD")) {
-
                     CookieManager cookieManager = CookieManager.getInstance();
                     String cookie = cookieManager.getCookie(rUrl);
                     referen = request.getRequestHeaders().get("Referer");
@@ -248,21 +254,21 @@ public class WebViewActivity extends BaseActivity {
                         connection.setRequestProperty("Content-type",
                                 "Application/x-www-form-urlencoded");
                         //淘宝是post 京东是 get
-                        Response referer = OkHttpUtils.post()
+                        Response referer = OkHttpUtils.get()
                                 .url(rUrl)
                                 .addHeader("Referer", referen)
                                 .addHeader("cookie", cookie)
-                                .addHeader("Content-type","Application/x-www-form-urlencoded")
+                                .addHeader("Content-type", "Application/x-www-form-urlencoded")
                                 .build()
                                 .execute();
                         WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
-                        BufferedReader bufferedReader =new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                         String line;
-                        line=bufferedReader.readLine();
-                        Log.i("matches", "shouldInterceptRequest: " + referer.headers() + "\n" + referer.body().string()+"/n"+line+"/n"+connection.getContent());
+                        line = bufferedReader.readLine();
+                        Log.i("matches", "shouldInterceptRequest: " + referer.headers() + "\n" + referer.body().string() + "\n" + line + "\n" + connection.getContent());
                         RequestPacket = referen + cookie;
                         ResponsePacket = referer.headers() + referer.body().string();
-                        SendOrderData();
+                        SendOrderData(RequestPacket,ResponsePacket);
                         return webResourceResponse;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -290,8 +296,8 @@ public class WebViewActivity extends BaseActivity {
                         } else if (Rule.contains("taobao")) {
                             BoolSTR = "TB";
                             return BoolSTR;
-                        }else if(Rule.contains("yangkeduo")){
-                            BoolSTR="PDD";
+                        } else if (Rule.contains("yangkeduo")) {
+                            BoolSTR = "PDD";
                             return BoolSTR;
                         } else {
                             BoolSTR = "未知";
@@ -304,11 +310,10 @@ public class WebViewActivity extends BaseActivity {
                 return BoolSTR;
             }
 
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-
+                Log.i("onPageFinished", "onPageFinished: 加载完成" + url);
                 //自动提交代付订单
                 if (url.startsWith("https://shenghuo.alipay.com/peerpaycore/applyWapPeerPay")) {
                     String number = "13030809100";
@@ -337,13 +342,12 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
-
-    private void SendOrderData() {
+    private void SendOrderData(String requestPacket, String responsePacket) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("UserName", "王某");
         params.put("Url", "" + rUrl);
-        params.put("RequestPacket", RequestPacket);
-        params.put("ResponsePacket", ResponsePacket);
+        params.put("RequestPacket", requestPacket);
+        params.put("ResponsePacket", responsePacket);
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
                 .url("http://192.168.1.137:7001/api/Admin/Order/Collect")
