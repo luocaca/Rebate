@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.app.MyApplication;
+import com.just.rebate.data.Bank_Card_DataServer;
 import com.just.rebate.entity.PaymentData;
 import com.just.rebate.entity.RechargeIntegralData1;
 import com.just.rebate.entity.ResponseData;
@@ -73,6 +74,7 @@ public class BankPayActivity extends BaseActivity {
 
     private int ReceivingType;
     private List<RechargeIntegralData1> rechargeIntegralData1s = new ArrayList<>();
+    private List<Bank_Card_DataServer.DataBean> dataBeans = new ArrayList<>();
     private MyApplication application;
     private String IntegralNum = "";
     private String Authorization = "";
@@ -90,8 +92,45 @@ public class BankPayActivity extends BaseActivity {
     protected void initView() {
         application = (MyApplication) getApplication();
         initRecevierData();
-        RecevierCardData();
+        try {
+            initPayCardData();
+            RecevierCardData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         initOnClick();
+    }
+
+    private void initPayCardData() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("ReceivingType", "" + ReceivingType);
+        params.put("PayModeType", "" + 1);
+        OkHttpUtils.postString()
+                .content(GsonUtil.getGson().toJson(params))
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeListByApp?receivingType=1")
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Bank_Card_DataServer bankcard = GsonUtil.getGsonLower().fromJson(response, Bank_Card_DataServer.class);
+                        dataBeans.clear();
+                        dataBeans.addAll(bankcard.Data);
+                        for (int i = 0; i <= dataBeans.size() - 1; i++) {
+                            if (dataBeans.get(i).IsDefault == 1) {
+                                PayMode = dataBeans.get(i).Id;
+                                mTv_ReceivingBank.setText(dataBeans.get(i).ReceivingAccount);
+                            }
+                        }
+                    }
+                });
     }
 
     private void RecevierCardData() {
@@ -119,7 +158,6 @@ public class BankPayActivity extends BaseActivity {
                             paymentDatas.clear();
                             paymentDatas.addAll(paymentData.Data);
                             if (paymentData.ResultType == 3) {
-                                mTv_ReceivingBank.setText(paymentDatas.get(0).ReceivingBankName);
                                 mTv_ReceivingAccount.setText(paymentDatas.get(0).ReceivingAccount);
                                 mTv_DisPlayName.setText(paymentDatas.get(0).ReceivingName);
                                 mTv_BankBranch.setText(paymentDatas.get(0).BankBranch);
@@ -218,7 +256,11 @@ public class BankPayActivity extends BaseActivity {
                 } else if (mEt_PayName.getText().toString().isEmpty() && mEt_Remarks.getText().toString().isEmpty()) {
                     Toast.makeText(application, "您还有一些信息未填写", Toast.LENGTH_SHORT).show();
                 } else {
-                    initData();
+                    try {
+                        initData();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

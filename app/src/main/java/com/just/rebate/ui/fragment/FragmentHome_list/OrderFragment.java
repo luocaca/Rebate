@@ -49,9 +49,9 @@ import okhttp3.MediaType;
  * 订单  fragment
  */
 public class OrderFragment extends BaseLazyFragment implements View.OnClickListener {
-    private static int acount=1;
+    private static int acount = 1;
     private MyApplication application;
-    private List<OrderListData.RowsBean> orderListDatas=new ArrayList<>();
+    private List<OrderListData.RowsBean> orderListDatas = new ArrayList<>();
 
     @BindView(R.id.rv_list4)
     RecyclerView recycleView;
@@ -63,7 +63,6 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
     TextView mTextOrder_to_Payment;
     @BindView(R.id.checkbox_all)
     CheckBox checkbox_all;
-
 
 
     boolean isCheckAll = false;
@@ -119,12 +118,45 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
     @Override
     protected void initViewsAndEvents(View view) {
+        application = (MyApplication) getActivity().getApplication();
+        initRecyclerviewData();
         initRecyclerview();
+    }
+
+    private void initRecyclerviewData() {
+        Map<String, String> params = new HashMap<>();
+        params.put("PageIndex", 1 + "");
+        params.put("PageSize", 30 + "");
+        OkHttpUtils
+                .postString()
+                .content(GsonUtil.getGson().toJson(params))
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Read")//平台数据列表
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+
+                        Log.i("onResponse", "onResponse: 订单列表" + response);
+                        OrderListData orderListData = GsonUtil.getGsonLower().fromJson(response, OrderListData.class);
+                        orderListDatas.clear();
+                        if (orderListData.Rows.size() != 0) {
+                            orderListDatas.addAll(orderListData.Rows);
+                        }
+                    }
+                });
+
     }
 
     private void initRecyclerview() {
         recycleView.setLayoutManager(new LinearLayoutManager(mActivity));
-        FragmentOrderAdapter fragmentOrderAdapter=new FragmentOrderAdapter(orderListDatas,mActivity);
+        FragmentOrderAdapter fragmentOrderAdapter = new FragmentOrderAdapter(orderListDatas, mActivity);
         recycleView.setAdapter(fragmentOrderAdapter);
     }
 
@@ -203,7 +235,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
             helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
             helper.setText(R.id.Amount, ((ReturnOrder) item).getCommodityPrice());
-            helper.setText(R.id.count,((ReturnOrder) item).getShopNumber());
+            helper.setText(R.id.count, ((ReturnOrder) item).getShopNumber());
 
 //            helper.getView(R.id.checkbox).setSelected(helper.getAdapterPosition() % 3 == 0);
 
@@ -215,6 +247,7 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
         }
 
     }
+
     private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, BaseViewHolder helper1, List<MultiItemEntity> data) {
         try {
             Object obj = data.get(helper.getAdapterPosition() + 1);
@@ -247,61 +280,24 @@ public class OrderFragment extends BaseLazyFragment implements View.OnClickListe
 
     @Override
     protected void initData() {
-        requestData();
-    }
-
-
-    public void requestData() {
-
 
     }
 
 
     @Override
     protected void onFirstUserVisible() {
-        application= (MyApplication) getActivity().getApplication();
-        Map<String,String> params=new HashMap<>();
-        params.put("PageIndex",1+"");
-        params.put("PageSize",30+"");
-        OkHttpUtils
-                .postString()
-                .content(GsonUtil.getGson().toJson(params))
-                .addHeader("Authorization", "Bearer " + application.getAuthorization())
-                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Read")//平台数据列表
-                .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-
-                        Log.i("onResponse", "onResponse: 订单列表"+response);
-                        OrderListData orderListData=GsonUtil.getGsonLower().fromJson(response,OrderListData.class);
-                        orderListDatas.clear();
-                        orderListDatas.addAll(orderListData.Rows);
-                        if(orderListDatas!=null){
-
-                        }
-
-//                        Type t = new TypeToken<List<ReturnPlatform>>() {
-//                        }.getType();
-//
-//                        List<ReturnPlatform> list = GsonUtil.getGsonLower().fromJson(response, t);
-//
-//                        BaseQuickAdapter adapter = (BaseQuickAdapter) recycleView.getAdapter();
-//
-//                        adapter.getData().clear();
-//                        adapter.addData(list);
-//                        adapter.expandAll();
-//                        adapter.notifyDataSetChanged();
-//                        Log.i("result", "onResponse: " + list);
-
-                    }
-                });
+        //                        Type t = new TypeToken<List<ReturnPlatform>>() {
+        //                        }.getType();
+        //
+        //                        List<ReturnPlatform> list = GsonUtil.getGsonLower().fromJson(response, t);
+        //
+        //                        BaseQuickAdapter adapter = (BaseQuickAdapter) recycleView.getAdapter();
+        //
+        //                        adapter.getData().clear();
+        //                        adapter.addData(list);
+        //                        adapter.expandAll();
+        //                        adapter.notifyDataSetChanged();
+        //                        Log.i("result", "onResponse: " + list);
 
 
 //        OrderAdapter orderAdapter = new OrderAdapter(new ArrayList()) {

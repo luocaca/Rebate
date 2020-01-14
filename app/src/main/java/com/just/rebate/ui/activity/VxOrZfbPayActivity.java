@@ -14,21 +14,27 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
-import com.just.integralmanagement.entity.ErrorDataBean;
-import com.just.integralmanagement.entity.PaymentData;
-import com.just.integralmanagement.entity.RechargeIntegralData1;
 import com.just.rebate.R;
 import com.just.rebate.app.MyApplication;
+import com.just.rebate.data.Bank_Card_DataServer;
+import com.just.rebate.entity.PaymentData;
+import com.just.rebate.entity.ResponseData;
 import com.rebate.base.activity.BaseActivity;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,24 +62,24 @@ public class VxOrZfbPayActivity extends BaseActivity {
     Button mBtn_Payed;
 
     private int ReceivingType;
+    private int PayMode;
     private String IntegralNum = "";
     private String Authorization = "";
     private MyApplication applicationClass;
-    private List<PaymentData> paymentDatas = new ArrayList<>();
-    private List<RechargeIntegralData1> rechargeIntegralData1s = new ArrayList<>();
+    private List<ResponseData> responseDatas = new ArrayList<>();
+    private List<PaymentData.DataBean> paymentDatas = new ArrayList<>();
+    private List<Bank_Card_DataServer.DataBean> dataBeans = new ArrayList<>();
 
     @Override
     protected void requestData() {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("AppType", "" + 0);
-        params.put("IntegralNum", "" + IntegralNum);
-        params.put("TaskPayModeId", "" + paymentDatas.get(0).Data.get(0).Id);
-        params.put("IsState", "" + 0);
+        params.put("PayModeType", "" + 2);
+        params.put("ReceivingType", "" + ReceivingType);
         //传递参数有问题，需要整改
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
                 .addHeader("Authorization", "Bearer " + Authorization)
-                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeByApp?receivingType"+"="+ReceivingType)
+                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeByApp")
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
                 .execute(new StringCallback() {
@@ -84,64 +90,132 @@ public class VxOrZfbPayActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        ErrorDataBean errorDataBean = GsonUtil.getGsonLower().fromJson(response, ErrorDataBean.class);
-                        if (errorDataBean.getType() == 403) {
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(VxOrZfbPayActivity.this);
-                            builder1.setMessage("" + errorDataBean.getContent());
-                            builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.i("积分信息日志", "onResponse: " + response);
+                        Type t = new TypeToken<PaymentData>() {
+                        }.getType();
+                        PaymentData paymentData = GsonUtil.getGsonLower().fromJson(response, t);
+                        paymentDatas.clear();
+                        paymentDatas.addAll(paymentData.Data);
+                        Glide.with(VxOrZfbPayActivity.this).load(paymentDatas.get(0).ImageServerUrl + "/" + paymentDatas.get(0).ReceivingImg).into(mIv_QR_Code);
+//                        if (rechargeIntegralData1s.get(0).getResultType() == 3) {
+//                            AlertDialog.Builder builder = new AlertDialog.Builder(VxOrZfbPayActivity.this);
+//                            builder.setTitle("提交成功,充值结果请咨询上级");
+//                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                    setResult(150);
+//                                    finish();
+//                                }
+//                            });
+//                            builder.create();
+//                            builder.show();
+//                        } else {
+//                            AlertDialog.Builder builder1 = new AlertDialog.Builder(VxOrZfbPayActivity.this);
+//                            builder1.setMessage("提交失败,请稍后重试");
+//                            builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                                }
+//                            });
+//                            builder1.create();
+//                            builder1.show();
+//                        }
+                    }
 
-                                }
-                            });
-                            builder1.create();
-                            builder1.show();
-                        } else {
-                            Log.i("积分信息日志", "onResponse: " + response);
-                            Type t = new TypeToken<RechargeIntegralData1>() {
-                            }.getType();
-                            RechargeIntegralData1 rechargeIntegralData1 = GsonUtil.getGsonLower().fromJson(response, t);
-                            rechargeIntegralData1s.clear();
-                            rechargeIntegralData1s.add(rechargeIntegralData1);
-                            if (rechargeIntegralData1s.get(0).getResultType() == 3) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(VxOrZfbPayActivity.this);
-                                builder.setTitle("提交成功,充值结果请咨询上级");
-                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        setResult(150);
-                                        finish();
-                                    }
-                                });
-                                builder.create();
-                                builder.show();
-                            } else {
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(VxOrZfbPayActivity.this);
-                                builder1.setMessage("提交失败,请稍后重试");
-                                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
+                });
+    }
 
-                                    }
-                                });
-                                builder1.create();
-                                builder1.show();
+    @Override
+    protected void initView() {
+        applicationClass = (MyApplication) getApplication();
+        initRecevierData();
+        try {
+            initPayCardData();
+            RecevierCardData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        initOnClick();
+    }
+
+    private void initPayCardData() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("ReceivingType", "" + ReceivingType);
+        params.put("PayModeType", "" + 1);
+
+        OkHttpUtils.postString()
+                .content(GsonUtil.getGson().toJson(params))
+                .addHeader("Authorization", "Bearer " + applicationClass.getAuthorization())
+                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeListByApp?receivingType=1")
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Bank_Card_DataServer bankcard = GsonUtil.getGsonLower().fromJson(response, Bank_Card_DataServer.class);
+                        dataBeans.clear();
+                        dataBeans.addAll(bankcard.Data);
+                        for (int i = 0; i <= dataBeans.size() - 1; i++) {
+                            if (dataBeans.get(i).IsDefault == 1) {
+                                PayMode = dataBeans.get(i).Id;
+
                             }
                         }
                     }
                 });
     }
 
-    @Override
-    protected void initView() {
-        initRecevierData();
-        initOnClick();
+    private void RecevierCardData() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("ReceivingType", "" + ReceivingType);
+        params.put("PayModeType", "" + 2);
+        OkHttpUtils.postString()
+                .content(GsonUtil.getGson().toJson(params))
+                .addHeader("Authorization", "Bearer " + Authorization)
+                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeByApp?receivingType" + "=" + ReceivingType)
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.i("onError", "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i("onResponse", "onResponse: 收款方银行卡信息" + response);
+
+                        PaymentData paymentData = GsonUtil.getGsonLower().fromJson(response, PaymentData.class);
+                        if (paymentData != null) {
+                            paymentDatas.clear();
+                            paymentDatas.addAll(paymentData.Data);
+                            if (paymentData.ResultType == 3) {
+
+                            } else {
+                                Toast.makeText(applicationClass, "数据加载错误", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(applicationClass, "数据请求错误", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
+
 
     private void initRecevierData() {
         Intent intent = getIntent();
         ReceivingType = intent.getIntExtra("ReceivingType", 1);
+        Log.i("initRecevierData", "initRecevierData: 充值接口" + ReceivingType);
         Authorization = intent.getStringExtra("Authorization");
+        PayMode = intent.getIntExtra("PayMode", 0);
         IntegralNum = intent.getStringExtra("IntegralNum");
     }
 
@@ -184,9 +258,69 @@ public class VxOrZfbPayActivity extends BaseActivity {
         mBtn_Payed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestData();
+                initSendVxOrZFB();
             }
         });
+    }
+
+    private void initSendVxOrZFB() {
+        try {
+            JSONObject jsonObject = new JSONObject();
+            JSONArray jsonArray = new JSONArray();
+            jsonObject.put("OrderType", "" + 1);
+            jsonObject.put("Amount", "" + IntegralNum);
+            jsonObject.put("RealAmount", "" + IntegralNum);
+            jsonObject.put("PayModeId", "" + PayMode);
+            jsonObject.put("ReceivePayModeId", "" + paymentDatas.get(0).Id);
+            jsonArray.put(jsonObject);
+            OkHttpUtils.postString()
+                    .content(jsonArray.toString())
+                    .addHeader("Authorization", "Bearer " + applicationClass.getAuthorization())
+                    .url("http://192.168.1.190:12004/api/Admin/OrderRechargePay/Create")
+                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.i("积分信息错误日志", "onError: " + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.i("积分信息日志", "onResponse: " + response);
+                            Type t = new TypeToken<ResponseData>() {
+                            }.getType();
+                            ResponseData responseData = GsonUtil.getGsonLower().fromJson(response, t);
+                            responseDatas.clear();
+                            responseDatas.add(responseData);
+                            if (responseData.Type == 200) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(VxOrZfbPayActivity.this);
+                                builder.setTitle(responseData.Content);
+                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        finish();
+                                    }
+                                });
+                                builder.create();
+                                builder.show();
+                            } else {
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(VxOrZfbPayActivity.this);
+                                builder1.setMessage(responseData.Content);
+                                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+                                builder1.create();
+                                builder1.show();
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void SaveBitmapFromView(View view) {

@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -62,75 +63,7 @@ public class AddBankCardActivity extends BaseActivity {
 
     @Override
     protected void requestData() {
-        if (mEt_Receiving_Bank.getText().toString().equals("工商银行")) {
-            ReceivingBank = 1;
-        } else if (mEt_Receiving_Bank.getText().toString().equals("农业银行")) {
-            ReceivingBank = 2;
-        } else if (mEt_Receiving_Bank.getText().toString().equals("招商银行")) {
-            ReceivingBank = 3;
-        } else if (mEt_Receiving_Bank.getText().toString().equals("建设银行")) {
-            ReceivingBank = 4;
-        }
 
-        try {
-            JSONArray jsonArray = new JSONArray();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("ReceivingType", 1);
-            jsonObject.put("ReceivingBank", "" + ReceivingBank);
-            jsonObject.put("IsDefault", "" + IsDefault);
-            jsonObject.put("PayModeType",1);
-            jsonObject.put("BankBranch", mEt_Bank_Branch.getText().toString());
-            jsonObject.put("ReceivingAccount", mEt_Receiviing_Account.getText().toString());
-            jsonObject.put("ReceivingName", mEt_Receiviing_Name.getText().toString());
-            jsonObject.put("ReceivingImg", "");
-            jsonArray.put(jsonObject);
-            OkHttpUtils.postString()
-                    .content(jsonArray.toString())
-                    .addHeader("Authorization", "Bearer " + application.getAuthorization())
-                    .url("http://192.168.1.190:12004/api/Admin/PayMode/Create")
-                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                    .build()
-                    .execute(new StringCallback() {
-                        @Override
-                        public void onError(Call call, Exception e, int id) {
-                            Log.i("onError", "onError: 添加银行卡" + e);
-                        }
-
-                        @Override
-                        public void onResponse(String response, int id) {
-                            Log.i("onResponse", "onResponse: 添加银行卡" + response);
-                            ResponseData responseData = GsonUtil.getGsonLower().fromJson(response, ResponseData.class);
-                            responseDatas.clear();
-                            responseDatas.add(responseData);
-                            if (responseData.Type == 200) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(AddBankCardActivity.this);
-                                builder.setMessage(responseData.Content);
-                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        setResult(100);
-                                        finish();
-                                    }
-                                });
-                                builder.create();
-                                builder.show();
-                            } else {
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(AddBankCardActivity.this);
-                                builder1.setMessage(responseData.Content);
-                                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-                                builder1.create();
-                                builder1.show();
-                            }
-                        }
-                    });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -200,9 +133,91 @@ public class AddBankCardActivity extends BaseActivity {
         mBtn_Send_Add_Card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestData();
+                if(mEt_Receiviing_Account.getText().toString().isEmpty()){
+                    Toast.makeText(application, "不能为空", Toast.LENGTH_SHORT).show();
+                }else if(mEt_Receiviing_Name.getText().toString().isEmpty()){
+                    Toast.makeText(application, "不能为空", Toast.LENGTH_SHORT).show();
+                }else if(mEt_Bank_Branch.getText().toString().isEmpty()){
+                    Toast.makeText(application, "不能为空", Toast.LENGTH_SHORT).show();
+                }else if(mEt_Receiving_Bank.getText().toString().isEmpty()){
+                    Toast.makeText(application, "不能为空", Toast.LENGTH_SHORT).show();
+                }else {
+                    SendBankCardData();
+                }
             }
         });
+    }
+
+    private void SendBankCardData() {
+        if (mEt_Receiving_Bank.getText().toString().equals("工商银行")) {
+            ReceivingBank = 1;
+        } else if (mEt_Receiving_Bank.getText().toString().equals("农业银行")) {
+            ReceivingBank = 2;
+        } else if (mEt_Receiving_Bank.getText().toString().equals("招商银行")) {
+            ReceivingBank = 3;
+        } else if (mEt_Receiving_Bank.getText().toString().equals("建设银行")) {
+            ReceivingBank = 4;
+        }
+
+        try {
+            JSONArray jsonArray = new JSONArray();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("ReceivingType", 1);
+            jsonObject.put("ReceivingBank", "" + ReceivingBank);
+            jsonObject.put("IsDefault", "" + IsDefault);
+            jsonObject.put("PayModeType", 1);
+            jsonObject.put("BankBranch", mEt_Bank_Branch.getText().toString());
+            jsonObject.put("ReceivingAccount", mEt_Receiviing_Account.getText().toString());
+            jsonObject.put("ReceivingName", mEt_Receiviing_Name.getText().toString());
+            jsonObject.put("ReceivingImg", "");
+            jsonArray.put(jsonObject);
+            OkHttpUtils.postString()
+                    .content(jsonArray.toString())
+                    .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                    .url("http://192.168.1.190:12004/api/Admin/PayMode/Create")
+                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .build()
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.i("onError", "onError: 添加银行卡" + e);
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.i("onResponse", "onResponse: 添加银行卡" + response);
+                            ResponseData responseData = GsonUtil.getGsonLower().fromJson(response, ResponseData.class);
+                            responseDatas.clear();
+                            responseDatas.add(responseData);
+                            if (responseData.Type == 200) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AddBankCardActivity.this);
+                                builder.setMessage(responseData.Content);
+                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        setResult(100);
+                                        finish();
+                                    }
+                                });
+                                builder.create();
+                                builder.show();
+                            } else {
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(AddBankCardActivity.this);
+                                builder1.setMessage(responseData.Content);
+                                builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+                                builder1.create();
+                                builder1.show();
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
