@@ -135,7 +135,7 @@
         android:background="@android:color/white"
         android:orientation="horizontal">
 
-        <com.just.rebate.wedget.MyCheckBox
+        <TextView
             android:id="@+id/checkbox_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_weight="1"
             android:text="全选"
-            android:textColor="@color/text333"
+            android:textColor="@color/color_red"
             android:textSize="@dimen/text_size_content" />
 
         <TextView

@@ -88,13 +88,13 @@
                 android:textSize="22sp" />
 
             <TextView
-                android:id="@+id/moeny_integral"
+                android:id="@+id/VipLevel"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="12dp"
                 android:gravity="right"
-                android:text="个人积分 >"
+                android:text="会员等级:1"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/text_size_content_s" />
 
@@ -163,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:gravity="center|top"
-                android:text="待返利（元）"
+                android:text="剩余返利（元）"
                 android:textColor="@color/text666"
                 android:textSize="@dimen/text_size_content" />
 

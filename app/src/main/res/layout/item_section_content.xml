@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/shape_corner_left_bottom"
+        android:background="@android:color/white"
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingTop="20dp"

@@ -20,6 +20,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.just.rebate.R;
+import com.just.rebate.app.MyApplication;
+import com.just.rebate.entity.PersonalDataBean;
 import com.just.rebate.entity.Personal_local_Item;
 import com.just.rebate.entity.personal.Personal;
 import com.just.rebate.ui.MainActivity;
@@ -30,6 +32,7 @@ import com.just.rebate.ui.activity.ChatActivity;
 import com.just.rebate.ui.activity.HelpActivity;
 import com.just.rebate.ui.activity.IntegralActivity;
 import com.just.rebate.ui.activity.RechargeActivity;
+import com.just.rebate.ui.activity.RechargeListActivity;
 import com.just.rebate.ui.activity.SetUpActivity;
 import com.rebate.base.fragment.BaseFragment;
 import com.rebate.commom.util.GsonUtil;
@@ -49,8 +52,10 @@ import okhttp3.Call;
  */
 public class PersonalFragment extends BaseFragment {
     private List<Personal_local_Item> mData;
+    private List<PersonalDataBean>dataBeans=new ArrayList<>();
+    private MyApplication application;
     private int[] Image = {
-            R.mipmap.chat3, R.mipmap.wallet2, R.mipmap.chongzhi1, R.mipmap.mingxi, R.mipmap.bankcard, R.mipmap.info2
+            R.mipmap.chat3, R.mipmap.wallet2, R.mipmap.chongzhi1, R.mipmap.mingxi, R.mipmap.bankcard, R.mipmap.info2,R.mipmap.rechargelist
     };
 
     @BindView(R.id.rv_list2)
@@ -62,7 +67,7 @@ public class PersonalFragment extends BaseFragment {
     @BindView(R.id.integral)
     TextView mTv_integral;
 
-    @BindView(R.id.moeny_integral)
+    @BindView(R.id.VipLevel)
     TextView mTv_moeny_integral;
 
     @BindView(R.id.invaitat)
@@ -91,9 +96,9 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
+        application = (MyApplication) getActivity().getApplication();
+        initPerSonalData();
         recyclerView.setLayoutManager(new GridLayoutManager(mActivity, 4));
-
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,10 +106,13 @@ public class PersonalFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        mTv_moeny_integral.setOnClickListener(new View.OnClickListener() {
+        mTv_integral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(getActivity(), IntegralActivity.class);
+                Intent intent = new Intent(getActivity(), IntegralActivity.class);
+                intent.putExtra("AllIntegral",mTv_integral.getText().toString());
+                intent.putExtra("RebateIntegral",totalRebate.getText().toString());
+                intent.putExtra("RechargeIntegral",mTv_integral.getText().toString());
                 startActivity(intent);
             }
         });
@@ -114,9 +122,9 @@ public class PersonalFragment extends BaseFragment {
                 mRefresh.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        requestDataOnline();
+                        initData();
                     }
-                },3000);
+                }, 3000);
                 mRefresh.setRefreshing(false);
             }
         });
@@ -128,32 +136,42 @@ public class PersonalFragment extends BaseFragment {
         p1.ItemName = "客服";
         p1.activityClass = ChatActivity.class;
         list.add(p1);
+
         Personal_local_Item p2 = new Personal_local_Item();
         p2.ItemNameid = Image[1];
         p2.ItemName = "提现";
         p2.activityClass = BalaceActivity.class;
         list.add(p2);
+
         Personal_local_Item p3 = new Personal_local_Item();
         p3.ItemNameid = Image[2];
         p3.ItemName = "充值";
-        p3.activityClass= RechargeActivity.class;
+        p3.activityClass = RechargeActivity.class;
         list.add(p3);
+
         Personal_local_Item p4 = new Personal_local_Item();
         p4.ItemNameid = Image[3];
         p4.ItemName = "到账明细";
         p4.activityClass = ArrivalDetailsActivity.class;
         list.add(p4);
+
         Personal_local_Item p5 = new Personal_local_Item();
         p5.ItemNameid = Image[4];
         p5.ItemName = "银行卡";
         p5.activityClass = BankCardActivity.class;
-
         list.add(p5);
+
         Personal_local_Item p6 = new Personal_local_Item();
         p6.ItemNameid = Image[5];
         p6.ItemName = "帮助";
         p6.activityClass = HelpActivity.class;
         list.add(p6);
+
+        Personal_local_Item p7=new Personal_local_Item();
+        p7.ItemNameid=Image[6];
+        p7.ItemName="消费记录";
+        p7.activityClass= RechargeListActivity.class;
+        list.add(p7);
 
 
         recyclerView.setAdapter(new BaseQuickAdapter<Personal_local_Item, BaseViewHolder>(R.layout.item_personal_content, list) {
@@ -163,10 +181,7 @@ public class PersonalFragment extends BaseFragment {
                 helper.setText(R.id.tv, item.ItemName);
                 helper.itemView.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), item.activityClass == null ? MainActivity.class : item.activityClass)));
             }
-
-
         });
-
 
 
 //        personalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
@@ -178,34 +193,37 @@ public class PersonalFragment extends BaseFragment {
 
     }
 
-    private void requestDataOnline() {
-
-        OkHttpUtils
-                .get()
-                .url("https://www.luocaca.cn/download/personaljson.txt")
+    private void initPerSonalData() {
+        OkHttpUtils.post()
+                .url("http://192.168.1.190:12004/api/Admin/User/GetUserByApp")
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        ///Log.e("TAG", "日志");
-                        Toast.makeText(mActivity, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("onError", "onError: 个人信息"+e);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        //Toast.makeText(mActivity, "succeed" + response, Toast.LENGTH_SHORT).show();
-                        Personal personal = GsonUtil.getGsonLower().fromJson(response, Personal.class);
-                        mTv_account.setText(personal.account + "");
-                        Log.i("personal", "onResponse: "+personal.account);
-                        mTv_integral.setText(personal.integral + "");
-                        mTv_invitat.setText(personal.invitationCode + "");
-
-                        totalRebate.setText(personal.totalRebate);
-                        preRebate.setText(personal.preRebate);
-                        Glide.with(getActivity()).load(personal.headImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(mIv_head);
+                        Log.i("onResponse", "onResponse: 个人信息"+response);
+                        PersonalDataBean dataBean=GsonUtil.getGsonLower().fromJson(response,PersonalDataBean.class);
+                        dataBeans.clear();
+                        dataBeans.add(dataBean);
+                        mTv_account.setText(dataBean.getData().getUserName());
+                        mTv_integral.setText("积分:"+dataBean.getData().getTotalIntegral());
+                        mTv_invitat.setText(dataBean.getData().getInvitationCode()+"");
+                        if(dataBean.getData().getMemberLevel()==0){
+                            mTv_moeny_integral.setText("会员等级："+"小白");
+                        }else {
+                            mTv_moeny_integral.setText("会员等级："+dataBean.getData().getMemberLevel()+"级");
+                        }
+                        totalRebate.setText(dataBean.getData().getTotalRebateAmount()+"");
+                        preRebate.setText(dataBean.getData().getTotalAmount()+"");
                     }
                 });
     }
+
 
     @Override
     protected void initData() {

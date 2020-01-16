@@ -23,7 +23,7 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_corner_left_top_right_top"
+            android:background="@android:color/white"
             android:gravity="left|center"
             android:padding="10dp"
             android:text="生活返利"

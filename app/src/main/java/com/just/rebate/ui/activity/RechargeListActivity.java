@@ -1,52 +1,43 @@
 package com.just.rebate.ui.activity;
 
-
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.just.rebate.R;
-import com.just.rebate.adapter.recycle.ArrivalDetailsAdapter;
+import com.just.rebate.adapter.recycle.RechargeListAdapter;
 import com.just.rebate.app.MyApplication;
-import com.just.rebate.data.DataServer;
+import com.just.rebate.entity.RechargeListData;
 import com.rebate.base.activity.BaseActivity;
 import com.rebate.commom.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import okhttp3.Call;
+import okhttp3.MediaType;
 
-/**
- * title 到账明细
- */
+public class RechargeListActivity extends BaseActivity {
 
-
-public class ArrivalDetailsActivity extends BaseActivity {
-
-    @BindView(R.id.rv_list3)
-    RecyclerView mrecyclerView;
-
-    @BindView(R.id.RefreshLayout)
-    SwipeRefreshLayout mRefresh;
-
-    private List<DataServer.DataBean> mDataServers = new ArrayList<>();
+    private List<RechargeListData.DataBean> rechargeListDatas = new ArrayList<>();
     private MyApplication application;
 
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @BindView(R.id.RechargeList)
+    RecyclerView mRv_RechargeList;
 
-    }
+    @BindView(R.id.Refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void requestData() {
@@ -65,7 +56,7 @@ public class ArrivalDetailsActivity extends BaseActivity {
     }
 
     private void initOnClick() {
-        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 try {
@@ -73,33 +64,44 @@ public class ArrivalDetailsActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                mRefresh.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
     private void initData() {
-        OkHttpUtils.post()
-                .url("http://192.168.1.190:12004/api/Admin/DividendRebate/GetDividendRebateListByApp ")
+        Map<String, String> parems = new HashMap<>();
+        parems.put("orderType", "" + 0);
+        OkHttpUtils.postString()
+                .content(GsonUtil.getGson().toJson(parems))
+                .url("http://192.168.1.190:12004/api/Admin/OrderRechargePay/GetOrderRechargePayByApp")
                 .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: 到账明细" + e);
+                        Log.i("onError", "onError: 消费记录" + e);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i("response", "response: 到账明细" + response);
-                        DataServer dataServer= GsonUtil.getGsonLower().fromJson(response,DataServer.class);
-                        mDataServers.clear();
-                        mDataServers.addAll(dataServer.getData());
-                        initRecyclerview();
+                        Log.i("onResponse", "onResponse: 消费记录" + response);
+                        RechargeListData rechargeListData=GsonUtil.getGsonLower().fromJson(response,RechargeListData.class);
+                        rechargeListDatas.clear();
+                        rechargeListDatas.addAll(rechargeListData.getData());
+                        initRecyclerviwe();
                     }
                 });
     }
 
+    private void initRecyclerviwe() {
+        mRv_RechargeList.setLayoutManager(new LinearLayoutManager(this));
+        RechargeListAdapter rechargeListAdapter = new RechargeListAdapter(rechargeListDatas);
+        mRv_RechargeList.addItemDecoration(new MyDecoration());
+        mRv_RechargeList.setAdapter(rechargeListAdapter);
+        mRv_RechargeList.getAdapter().notifyDataSetChanged();
+    }
 
     protected int bindTitleViewId() {
         return R.id.title;
@@ -107,19 +109,8 @@ public class ArrivalDetailsActivity extends BaseActivity {
 
     @Override
     public int bindLayoutId() {
-        return R.layout.fragment_arrival_details;
+        return R.layout.activity_recharge_list;
     }
-
-
-    private void initRecyclerview() {
-        mrecyclerView = findViewById(R.id.rv_list3);
-        mrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrivalDetailsAdapter mArrivalDetailsAdapter = new ArrivalDetailsAdapter(mDataServers);
-        mrecyclerView.addItemDecoration(new MyDecoration());
-        mrecyclerView.setAdapter(mArrivalDetailsAdapter);
-        mrecyclerView.getAdapter().notifyDataSetChanged();
-    }
-
 
     class MyDecoration extends RecyclerView.ItemDecoration {
         @Override

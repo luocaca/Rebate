@@ -97,8 +97,6 @@ public class HomeFragment extends BaseFragment {
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-
-
                 MultiItemEntity multiItemEntity = baseViewHolder.getData().get(position);
                 System.out.println(position);
                 System.out.println(position + multiItemEntity.getItemType());

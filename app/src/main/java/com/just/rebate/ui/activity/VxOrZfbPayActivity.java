@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -61,6 +62,9 @@ public class VxOrZfbPayActivity extends BaseActivity {
     @BindView(R.id.btn_Payed)
     Button mBtn_Payed;
 
+    @BindView(R.id.PaymentMoeny)
+    TextView mTv_PaymentMotny;
+
     private int ReceivingType;
     private int PayMode;
     private String IntegralNum = "";
@@ -72,58 +76,7 @@ public class VxOrZfbPayActivity extends BaseActivity {
 
     @Override
     protected void requestData() {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("PayModeType", "" + 2);
-        params.put("ReceivingType", "" + ReceivingType);
-        //传递参数有问题，需要整改
-        OkHttpUtils.postString()
-                .content(GsonUtil.getGson().toJson(params))
-                .addHeader("Authorization", "Bearer " + Authorization)
-                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeByApp")
-                .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.i("积分信息错误日志", "onError: " + e);
-                    }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.i("积分信息日志", "onResponse: " + response);
-                        Type t = new TypeToken<PaymentData>() {
-                        }.getType();
-                        PaymentData paymentData = GsonUtil.getGsonLower().fromJson(response, t);
-                        paymentDatas.clear();
-                        paymentDatas.addAll(paymentData.Data);
-                        Glide.with(VxOrZfbPayActivity.this).load(paymentDatas.get(0).ImageServerUrl + "/" + paymentDatas.get(0).ReceivingImg).into(mIv_QR_Code);
-//                        if (rechargeIntegralData1s.get(0).getResultType() == 3) {
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(VxOrZfbPayActivity.this);
-//                            builder.setTitle("提交成功,充值结果请咨询上级");
-//                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                    setResult(150);
-//                                    finish();
-//                                }
-//                            });
-//                            builder.create();
-//                            builder.show();
-//                        } else {
-//                            AlertDialog.Builder builder1 = new AlertDialog.Builder(VxOrZfbPayActivity.this);
-//                            builder1.setMessage("提交失败,请稍后重试");
-//                            builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                                }
-//                            });
-//                            builder1.create();
-//                            builder1.show();
-//                        }
-                    }
-
-                });
     }
 
     @Override
@@ -136,7 +89,6 @@ public class VxOrZfbPayActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         initOnClick();
     }
 
@@ -144,7 +96,6 @@ public class VxOrZfbPayActivity extends BaseActivity {
         Map<String, String> params = new HashMap<String, String>();
         params.put("ReceivingType", "" + ReceivingType);
         params.put("PayModeType", "" + 1);
-
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
                 .addHeader("Authorization", "Bearer " + applicationClass.getAuthorization())
@@ -178,8 +129,8 @@ public class VxOrZfbPayActivity extends BaseActivity {
         params.put("PayModeType", "" + 2);
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
-                .addHeader("Authorization", "Bearer " + Authorization)
-                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeByApp?receivingType" + "=" + ReceivingType)
+                .addHeader("Authorization", "Bearer " + applicationClass.getAuthorization())
+                .url("http://192.168.1.190:12004/api/Admin/PayMode/GetPayModeByApp")
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
                 .execute(new StringCallback() {
@@ -191,18 +142,13 @@ public class VxOrZfbPayActivity extends BaseActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.i("onResponse", "onResponse: 收款方银行卡信息" + response);
-
                         PaymentData paymentData = GsonUtil.getGsonLower().fromJson(response, PaymentData.class);
-                        if (paymentData != null) {
+                        if(paymentData.Data!=null){
                             paymentDatas.clear();
                             paymentDatas.addAll(paymentData.Data);
-                            if (paymentData.ResultType == 3) {
-
-                            } else {
-                                Toast.makeText(applicationClass, "数据加载错误", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(applicationClass, "数据请求错误", Toast.LENGTH_SHORT).show();
+                            Glide.with(VxOrZfbPayActivity.this).load(paymentDatas.get(0).ImageServerUrl + "/" + paymentDatas.get(0).ReceivingImg).into(mIv_QR_Code);
+                        }else {
+                            Toast.makeText(applicationClass, "获取收款方账户出现错误,请重试", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -214,9 +160,9 @@ public class VxOrZfbPayActivity extends BaseActivity {
         Intent intent = getIntent();
         ReceivingType = intent.getIntExtra("ReceivingType", 1);
         Log.i("initRecevierData", "initRecevierData: 充值接口" + ReceivingType);
-        Authorization = intent.getStringExtra("Authorization");
         PayMode = intent.getIntExtra("PayMode", 0);
         IntegralNum = intent.getStringExtra("IntegralNum");
+        mTv_PaymentMotny.setText("￥"+intent.getStringExtra("IntegralNum"));
     }
 
     private void initOnClick() {
@@ -258,7 +204,16 @@ public class VxOrZfbPayActivity extends BaseActivity {
         mBtn_Payed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initSendVxOrZFB();
+                if(paymentDatas.size()==0){
+                    if(ReceivingType==0){
+                        Toast.makeText(applicationClass, "您未设置默认微信，无法提交", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(applicationClass, "您未设置默认支付宝，无法提交", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    initSendVxOrZFB();
+                }
+
             }
         });
     }

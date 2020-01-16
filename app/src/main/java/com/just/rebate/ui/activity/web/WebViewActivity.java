@@ -24,10 +24,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.RequiresApi;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
+import com.just.rebate.app.MyApplication;
 import com.just.rebate.entity.GetRuleData;
 import com.just.rebate.ui.activity.web.web_util.HandlerUtil;
 import com.just.rebate.ui.activity.web.web_util.LogUtil;
@@ -42,11 +44,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,6 +72,7 @@ public class WebViewActivity extends BaseActivity {
     private List<GetRuleData> getRuleData = new ArrayList<>();
     private String RequestPacket = "";
     private String ResponsePacket = "";
+    private MyApplication application;
 
 
     @BindView(R.id.swipe)
@@ -91,6 +96,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        application = (MyApplication) getApplication();
         swipe.setOnRefreshListener(this::onRefresh);
         swipe.setProgressBackgroundColorSchemeColor(Color.RED);
         swipe.setColorSchemeColors(Color.GREEN);
@@ -219,67 +225,140 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
                 rUrl = request.getUrl().toString();
-                Log.i("rUrl", "找到ResQuest信息: " + rUrl);
-                Log.i("找到ResQuest信息", "找到ResQuest信息: "+request.getMethod());
-                Log.i("找到ResQuest信息", "找到ResQuest信息: "+request.getRequestHeaders());
-                if(rUrl.contains("/h5/mtop.trade.order.create.h5")){
-                    Log.i("找到ResQuest信息", "找到ResQuest信息: ");
-                }
-
-                URL url = null;
-                String referen = "";
-                String BoolSTR = "";
-                String BoolSTRs = "";
-                try {
-                    BoolSTRs = PatternUrl(BoolSTR, rUrl);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Log.i("matches", "shouldInterceptRequest: " + rUrl);
-                Log.i("matches", "shouldInterceptRequest: " + BoolSTRs);
-
-
-                if (BoolSTRs.equals("JD")) {
-                    CookieManager cookieManager = CookieManager.getInstance();
-                    String cookie = cookieManager.getCookie(rUrl);
-                    referen = request.getRequestHeaders().get("Referer");
-                    Log.i("matches", "shouldInterceptRequest: " + referen);
-                    Log.i("matches", "onPageFinished: " + cookie);
-                    Log.i("matches", "shouldInterceptRequest: " + request.getRequestHeaders() + "333");
+                if (rUrl.startsWith("http") || rUrl.startsWith("https")) {
+                    URL url = null;
+                    String referen = "";
+                    String BoolSTR = "";
+                    String BoolSTRs = "";
                     try {
-                        url = new URL(rUrl);
-                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                        connection.setDoInput(true);
-                        connection.setDoOutput(true);
-                        connection.setRequestProperty("Content-type",
-                                "Application/x-www-form-urlencoded");
-                        //淘宝是post 京东是 get
-                        Response referer = OkHttpUtils.get()
-                                .url(rUrl)
-                                .addHeader("Referer", referen)
-                                .addHeader("cookie", cookie)
-                                .addHeader("Content-type", "Application/x-www-form-urlencoded")
-                                .build()
-                                .execute();
-                        WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                        String line;
-                        line = bufferedReader.readLine();
-                        Log.i("matches", "shouldInterceptRequest: " + referer.headers() + "\n" + referer.body().string() + "\n" + line + "\n" + connection.getContent());
-                        RequestPacket = referen + cookie;
-                        ResponsePacket = referer.headers() + referer.body().string();
-                        SendOrderData(RequestPacket,ResponsePacket);
-                        return webResourceResponse;
+                        BoolSTRs = PatternUrl(BoolSTR, rUrl, request);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    Log.i("matches", "shouldInterceptRequest: " + rUrl);
+                    Log.i("matches", "shouldInterceptRequest: " + BoolSTRs);
+
+
+                    if (BoolSTRs.equals("GET")) {
+                        //GET请求使用
+                        Log.i("shouldInterceptRequest", "shouldInterceptRequest: 走了get");
+                        try {
+                            url = new URL(rUrl);
+                            CookieManager cookieManager = CookieManager.getInstance();
+                            String cookie = cookieManager.getCookie(rUrl);
+                            referen = request.getRequestHeaders().get("Referer");
+                            Log.i("matches", "shouldInterceptRequest: " + referen);
+                            Log.i("matches", "onPageFinished: " + cookie);
+                            Log.i("matches", "shouldInterceptRequest: " + request.getRequestHeaders() + "333");
+                            try {
+                                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                                connection.setDoInput(true);
+                                connection.setDoOutput(true);
+                                connection.setRequestProperty("Content-type",
+                                        "Application/x-www-form-urlencoded");
+                                Response referer = OkHttpUtils.get()
+                                        .url(rUrl)
+                                        .headers(request.getRequestHeaders())
+                                        .addHeader("cookie", cookie)
+                                        .build()
+                                        .execute();
+                                Set<String> headers = request.getRequestHeaders().keySet();
+                                Uri s = Uri.parse(rUrl);
+                                s.getHost();
+                                s.getPath();
+                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
+                                StringBuffer stringBuffer = new StringBuffer();
+                                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(referer.body().byteStream()));
+                                String line;
+                                while ((line = bufferedReader.readLine()) != null) {
+                                    stringBuffer.append(line + "\n");
+                                }
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 自己提交的数据到响应" + stringBuffer);
+                                RequestPacket = request.getMethod() + " "
+                                        + s.getPath() + "\r" + "\n"
+                                        + "Host: " + s.getHost() + "\r" + "\n"
+                                        + "Accept: " + request.getRequestHeaders().get("Accept") + "\r" + "\n"
+                                        + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
+                                        + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
+                                ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + referer.headers() + "\r" + "\n" + referer.body().string();
+                                try {
+                                    SendOrderData(RequestPacket, ResponsePacket);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                Log.i("matches", "shouldInterceptRequest: 我已经将数据发送给后台了");
+                                return null;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (BoolSTRs.equals("POST")) {
+                        //POST请求使用
+                        Log.i("shouldInterceptRequest", "shouldInterceptRequest: 同时我也走了post");
+                        try {
+                            url = new URL(rUrl);
+                            CookieManager cookieManager = CookieManager.getInstance();
+                            String cookie = cookieManager.getCookie(rUrl);
+                            referen = request.getRequestHeaders().get("Referer");
+                            Log.i("matches", "shouldInterceptRequest: " + referen);
+                            Log.i("matches", "onPageFinished: " + cookie);
+                            Log.i("matches", "shouldInterceptRequest: " + request.getRequestHeaders() + "333");
+                            try {
+                                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                                connection.setDoInput(true);
+                                connection.setDoOutput(true);
+                                connection.setRequestProperty("Content-type",
+                                        "Application/x-www-form-urlencoded");
+                                //淘宝是post 京东是 get
+                                Response referer = OkHttpUtils.post()
+                                        .url(rUrl)
+                                        .headers(request.getRequestHeaders())
+                                        .addHeader("cookie", cookie)
+                                        .build()
+                                        .execute();
+                                Set<String> headers = request.getRequestHeaders().keySet();
+                                Uri s = Uri.parse(rUrl);
+                                ;
+                                s.getHost();
+                                s.getPath();
+                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
+                                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(referer.body().byteStream()));
+                                String line;
+                                line = bufferedReader.readLine();
+                                RequestPacket = request.getMethod() + " "
+                                        + s.getPath() + "\r" + "\n"
+                                        + "Host: " + s.getHost() + "\r" + "\n"
+                                        + "Accept: " + request.getRequestHeaders().get("Accept") + "\r" + "\n"
+                                        + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
+                                        + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
+                                ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + referer.headers() + "\r" + "\n" + referer.body().string();
+                                try {
+                                    SendOrderData(RequestPacket, ResponsePacket);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                Log.i("matches", "shouldInterceptRequest: 我已经将数据发送给后台了");
+                                return webResourceResponse;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 } else {
-                    Log.i("matches", "shouldInterceptRequest: 什么也没匹配到");
+                    return new WebResourceResponse(null, null, null);
                 }
                 return super.shouldInterceptRequest(view, request);
             }
 
-            private String PatternUrl(String BoolSTR, String rUrl) {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            private String PatternUrl(String BoolSTR, String rUrl, WebResourceRequest request) {
                 String Rule = "";
                 for (int i = 0; i <= getRuleData.size(); i++) {
                     Rule = getRuleData.get(i).Url;
@@ -290,17 +369,14 @@ public class WebViewActivity extends BaseActivity {
                     if (matches == true) {
                         Log.i("matches", "PatternUrl: " + rUrl + "\n");
                         Log.i("matches", "PatternUrl: " + Rule);
-                        if (Rule.contains("jd")) {
-                            BoolSTR = "JD";
-                            return BoolSTR;
-                        } else if (Rule.contains("taobao")) {
-                            BoolSTR = "TB";
-                            return BoolSTR;
-                        } else if (Rule.contains("yangkeduo")) {
-                            BoolSTR = "PDD";
+                        Uri s = Uri.parse(rUrl);
+                        String Ur = s.getHost();
+                        if (request.getMethod().equals("GET")) {
+                            BoolSTR = "GET";
                             return BoolSTR;
                         } else {
-                            BoolSTR = "未知";
+                            BoolSTR = "POST";
+                            return BoolSTR;
                         }
                     } else {
                         BoolSTR = "我什么都没拿到";
@@ -333,7 +409,8 @@ public class WebViewActivity extends BaseActivity {
             }
 
             @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            public void onReceivedError(WebView view, WebResourceRequest
+                    request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
 
             }
@@ -342,26 +419,28 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
-    private void SendOrderData(String requestPacket, String responsePacket) {
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void SendOrderData(String RequestPacket, String responsePacket) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("UserName", "王某");
         params.put("Url", "" + rUrl);
-        params.put("RequestPacket", requestPacket);
+        params.put("RequestPacket", RequestPacket);
         params.put("ResponsePacket", responsePacket);
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
-                .url("http://192.168.1.137:7001/api/Admin/Order/Collect")
+                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Collect")
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: " + e);
+                        Log.i("onError", "onError: 提交订单给后台" + e);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i("onResponse", "onResponse: " + response);
+                        Log.i("onResponse", "onResponse: 提交订单给后台" + response);
                     }
                 });
     }

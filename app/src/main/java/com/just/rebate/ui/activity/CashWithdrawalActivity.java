@@ -246,7 +246,7 @@ public class CashWithdrawalActivity extends BaseActivity implements View.OnClick
                         Log.i("onResponse", "onResponse: 收款方银行卡信息" + response);
 
                         PaymentData paymentData = GsonUtil.getGsonLower().fromJson(response, PaymentData.class);
-                        if (paymentData != null) {
+                        if (paymentData.Data != null) {
                             paymentDatas.clear();
                             paymentDatas.addAll(paymentData.Data);
                             if (paymentData.ResultType == 3) {
@@ -256,7 +256,7 @@ public class CashWithdrawalActivity extends BaseActivity implements View.OnClick
                                 Toast.makeText(application, "数据加载错误", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(application, "数据请求错误", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(application, "未设置默认银行卡， 请设置", Toast.LENGTH_SHORT).show();
                         }
 
                     }

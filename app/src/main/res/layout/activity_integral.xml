@@ -4,139 +4,155 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/beijing"
+    android:orientation="vertical"
     tools:context=".ui.activity.IntegralActivity">
 
     <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="75dp"-->
-        <!--android:background="@drawable/shape_color"-->
-        <!--android:orientation="horizontal">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="75dp"-->
+    <!--android:background="@drawable/shape_color"-->
+    <!--android:orientation="horizontal">-->
 
-        <!--<ImageView-->
-            <!--android:id="@+id/back_Integral"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="@dimen/default_margin"-->
-            <!--android:layout_marginTop="15dp"-->
-            <!--android:tint="@android:color/white"-->
-            <!--android:src="@mipmap/leftarrow" />-->
+    <!--<ImageView-->
+    <!--android:id="@+id/back_Integral"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginLeft="@dimen/default_margin"-->
+    <!--android:layout_marginTop="15dp"-->
+    <!--android:tint="@android:color/white"-->
+    <!--android:src="@mipmap/leftarrow" />-->
 
-        <!--<TextView-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginLeft="@dimen/default_margin"-->
-            <!--android:gravity="center"-->
-            <!--android:text="可用积分"-->
-            <!--android:textColor="@color/text_color_white"-->
-            <!--android:textSize="@dimen/text_size_title_xl" />-->
+    <!--<TextView-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginLeft="@dimen/default_margin"-->
+    <!--android:gravity="center"-->
+    <!--android:text="可用积分"-->
+    <!--android:textColor="@color/text_color_white"-->
+    <!--android:textSize="@dimen/text_size_title_xl" />-->
     <!--</LinearLayout>-->
 
     <com.just.rebate.wedget.MyTitleBar
         android:id="@+id/title"
         style="@style/TitleBar"
-        app:titleText="可用积分"/>
+        app:titleText="可用积分" />
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/SwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin"
-        android:layout_marginRight="@dimen/default_margin"
-        android:background="@drawable/shape_corner"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="1000"
-            android:textColor="@color/text_color_Pink"
-            android:textSize="@dimen/text_size_title_xxl" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="可用积分(1元=10积分)"
-            android:textColor="@color/text666"
-            android:textSize="@dimen/default_margin_top" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginLeft="@dimen/default_margin"
-        android:layout_marginTop="@dimen/default_margin_top"
-        android:layout_marginRight="@dimen/default_margin"
-        android:background="@drawable/shape_corner"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:gravity="center|bottom"
-                android:text="0.00"
-                android:textColor="@color/text333"
-                android:textSize="@dimen/text_size_content" />
+                android:layout_height="100dp"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginRight="@dimen/default_margin"
+                android:background="@drawable/shape_corner"
+                android:orientation="vertical">
 
-            <TextView
+                <TextView
+                    android:id="@+id/AllIntegral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="1000"
+                    android:textColor="@color/text_color_Pink"
+                    android:textSize="@dimen/text_size_title_xxl" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:gravity="center"
+                    android:text="可用积分(1元=1积分)"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/default_margin_top" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:gravity="center|top"
-                android:text="返利"
-                android:textColor="@color/text666"
-                android:textSize="@dimen/text_size_content_s" />
+                android:layout_height="70dp"
+                android:layout_marginLeft="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin_top"
+                android:layout_marginRight="@dimen/default_margin"
+                android:background="@drawable/shape_corner"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/RebateIntegaral"
+                        android:layout_width="match_parent"
+                        android:layout_height="29dp"
+                        android:gravity="center|bottom"
+                        android:text="0.00"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/text_size_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center|top"
+                        android:text="返利"
+                        android:textColor="@color/text666"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#E5E5E5"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/RechargeIntegral"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center|bottom"
+                        android:text="100积分"
+                        android:textColor="@color/text666"
+                        android:textSize="@dimen/text_size_content" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center|top"
+                        android:text="账户充值"
+                        android:textColor="@color/text666"
+                        android:textSize="@dimen/text_size_content_s" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:background="#E5E5E5"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:gravity="center|bottom"
-                android:text="100积分"
-                android:textColor="@color/text666"
-                android:textSize="@dimen/text_size_content" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:gravity="center|top"
-                android:text="账户充值"
-                android:textColor="@color/text666"
-                android:textSize="@dimen/text_size_content_s" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

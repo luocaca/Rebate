@@ -19,15 +19,12 @@ import java.util.List;
 
 public class ArrivalDetailsAdapter extends RecyclerView.Adapter<ArrivalDetailsAdapter.ViewHolder> {
     private Context context;
-    private List<DataServer> mDataServer;
-    public ArrivalDetailsAdapter(List<DataServer> mDataServer){
-        this.mDataServer=mDataServer;
+    private List<DataServer.DataBean> mDataServer;
+
+    public ArrivalDetailsAdapter(List<DataServer.DataBean> mDataServer) {
+        this.mDataServer = mDataServer;
 
     }
-
-
-
-
 
 
     @Override
@@ -40,16 +37,30 @@ public class ArrivalDetailsAdapter extends RecyclerView.Adapter<ArrivalDetailsAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.mtv_name.setText(mDataServer.get(position).getName());
-        holder.mtv_time.setText(mDataServer.get(position).getTime());
-        holder.mtv_rebate.setText(mDataServer.get(position).getRebate());
-        holder.mtv_detailed.setText(mDataServer.get(position).getDetailed());
+        if (mDataServer.get(position).getRebateLevel() == 0) {
+            holder.mtv_name.setText("类型：   提现");
+        } else {
+            holder.mtv_name.setText("类型：   返利");
+        }
+        String Times = mDataServer.get(position).getCreatedTime();
+        String[] Time = Times.split("T");
+        holder.mtv_time.setText("时间：   " + Time[0]);
+        holder.mtv_rebate.setText("订单：" + mDataServer.get(position).getOrderNo());
+        if (mDataServer.get(position).getRebateAmount() > 0) {
+            holder.mtv_detailed.setText("+" + mDataServer.get(position).getRebateAmount());
+        } else if (mDataServer.get(position).getRebateAmount() < 0) {
+            holder.mtv_detailed.setText(mDataServer.get(position).getRebateAmount() + "");
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return mDataServer==null ? 0:mDataServer.size();
+        if (mDataServer.size() != 0) {
+            return mDataServer.size();
+        } else {
+            return 0;
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

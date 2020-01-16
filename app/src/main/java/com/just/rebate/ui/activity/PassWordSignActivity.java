@@ -3,6 +3,7 @@ package com.just.rebate.ui.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -152,9 +153,10 @@ public class PassWordSignActivity extends AppCompatActivity {
                 public void onResponse(String response, int id) {
                     Log.i("onResponse", "onResponse: 这就是请求过来的" + response);
                     Url = json.Url;
+                    Uri s=Uri.parse(json.Url);
                     String[] url = json.Url.split("https://wqdeal.jd.com");
                     RequestPacket = json.Mothed + " "
-                            + url[1] + "\r" + "\n"
+                            + s.getPath() + "\r" + "\n"
                             + "Host:" + json.Headers.get("Host") + "\r" + "\n"
                             + "Accept:" + json.Headers.get("Accept") + "\r" + "\n"
                             + "Referer:" + json.Headers.get("Referer") + "\r" + "\n"
@@ -177,7 +179,7 @@ public class PassWordSignActivity extends AppCompatActivity {
         params.put("ResponsePacket", ResponsePacket);
         OkHttpUtils.postString()
                 .content(GsonUtil.getGson().toJson(params))
-                .url("http://192.168.1.137:7001/api/Admin/Order/Collect")
+                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Collect")
                 .addHeader("Authorization", "Bearer " + Authorization)
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
@@ -255,6 +257,7 @@ public class PassWordSignActivity extends AppCompatActivity {
                         try {
                             webSocket.send(ByteString.of(bytes1));
                             Log.i("发送心跳包", "run: 连接正常");
+
                         } catch (Exception e) {
                             connect();
                             Log.i("发送心跳包", "run: 失败,重连");
@@ -286,23 +289,36 @@ public class PassWordSignActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(!StringBody.equals("Pong")){
-                if (task1 == null) {
-                    task1 = new TimerTask() {
-                        @Override
-                        public void run() {
-                            connect();
-                        }
-                    };
-                }
-                timer.schedule(task, 0, 15000);
-            }
+//            if(StringBody.equals("Pong")){
+//                if (task1 == null) {
+//                    task1 = new TimerTask() {
+//                        @Override
+//                        public void run() {
+//                            connect();
+//                            Log.i("run", "run: 重新链接");
+//                        }
+//                    };
+//                    timer.schedule(task, 0, 15000);
+//                }
+//
+//            }
             output("onMessage byteString: " + StringBody);
             if (ByteStringBoydy.getType().equals("OrderPayment")) {
+                //响应后台的支付
                 StringBody = ByteStringBoydy.getBody();
-                initWebDataParen(StringBody);
-            } else {
-                initWebData(StringBody);
+                try {
+                    initWebDataParen(StringBody);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if(ByteStringBoydy.getType().equals("OrderDetail")){
+                //响应订单详情
+                String bodys=ByteStringBoydy.getBody();
+                try {
+                    initWebData(bodys);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 

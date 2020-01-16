@@ -33,11 +33,11 @@
             android:background="@android:color/white" />
 
         <TextView
+            android:id="@+id/PaymentMoeny"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="若已支付，请点击我已支付"
             android:textColor="@color/TheMeColor"
             android:textSize="@dimen/text_size_title" />
 

@@ -9,13 +9,13 @@
 
 
     <LinearLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:id="@+id/ly_main_actionbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_toolbar_height"
         android:background="@drawable/shape_color"
         android:contentInsetStart="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal">
 
 
@@ -94,6 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white_text_color" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

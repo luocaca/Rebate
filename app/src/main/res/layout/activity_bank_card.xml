@@ -38,7 +38,7 @@
     <com.just.rebate.wedget.MyTitleBar
         android:id="@+id/title"
         style="@style/TitleBar"
-        app:titleText="提现" />
+        app:titleText="银行卡" />
 
 
 

@@ -79,6 +79,13 @@ public class BankCardActivity extends BaseActivity {
                 startActivityForResult(intent, 100);
             }
         });
+        rv_SwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+                rv_SwipeRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override
