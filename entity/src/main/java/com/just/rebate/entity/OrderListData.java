@@ -1,5 +1,10 @@
 package com.just.rebate.entity;
 
+import android.widget.Checkable;
+
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderListData {
@@ -12,7 +17,8 @@ public class OrderListData {
     public int Total;
     public List<RowsBean> Rows;
 
-    public static class RowsBean {
+
+    public static class RowsBean implements MultiItemEntity, Checkable {
         /**
          * OrderNo : 107646720867
          * OrderPlatform : 0
@@ -39,6 +45,7 @@ public class OrderListData {
         public String OrderPlatformName;
         public double Amount;
         public int Count;
+        private boolean mChecked;
         public int OrderStatus;
         public String OrderStatusName;
         public Object PaymentTime;
@@ -52,6 +59,27 @@ public class OrderListData {
         public int Id;
         public String CreatedTime;
         public List<OrderItemsBean> OrderItems;
+
+        @Override
+        public int getItemType() {
+            return 0;
+        }
+
+        @Override
+        public void setChecked(boolean checked) {
+            if(mChecked != checked){
+                mChecked = checked;
+            }
+        }
+        @Override
+        public boolean isChecked() {
+            return mChecked;
+        }
+
+        @Override
+        public void toggle() {
+            setChecked(!mChecked);
+        }
 
         public static class OrderItemsBean {
             /**
