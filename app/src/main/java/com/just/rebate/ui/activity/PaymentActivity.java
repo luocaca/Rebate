@@ -2,6 +2,7 @@ package com.just.rebate.ui.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -24,10 +26,14 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.PaymentAdapter;
+import com.just.rebate.app.MyApplication;
 import com.just.rebate.entity.OrderItem;
+import com.just.rebate.entity.OrderListData;
+import com.just.rebate.entity.PaymentBean;
 import com.just.rebate.entity.order.ReturnOrder;
 import com.just.rebate.entity.order.ReturnPlatform;
 import com.just.rebate.entity.order.ReturnShop;
@@ -38,12 +44,20 @@ import com.rebate.commom.util.bitmap.GlideRoundTransform;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import okhttp3.Call;
+import okhttp3.MediaType;
 
 
 /**
@@ -52,267 +66,61 @@ import okhttp3.Call;
 
 public class PaymentActivity extends BaseActivity {
     private List<OrderItem> mDatas;
+    private MyApplication application;
+    private List<OrderListData.RowsBean> rowsBeans = new ArrayList<>();
+    private double count;
+    private JSONObject jsonObject = new JSONObject();
+    private JSONArray jsonArray = new JSONArray();
 
 
     @BindView(R.id.rv_list4)
-    RecyclerView recyclerView;
+    RecyclerView recycleView;
 
-    @BindView(R.id.AlertDiglog)
-    TextView mAlertDiglog;
-
-    @BindView(R.id.back_order)
-    ImageView mIv_back;
-
-    @BindView(R.id.payment_refresh)
+    @BindView(R.id.order_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @BindView(R.id.Order_to_Payment)
+    TextView mTextOrder_to_Payment;
+
+    @BindView(R.id.checkbox_all)
+    TextView checkbox_all;
 
 
-
-
-    @Override
-    protected void initView() {
-        initRecyclerView();
-        initData();
-        initOnClick();
-
-    }
-
-    private void initOnClick() {
-        mAlertDiglog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDiglog();
-            }
-        });
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                onBackPressed();
-            }
-        });
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        requestData();
-                    }
-                }, 3000);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-
-    }
-
-    private void initData() {
-
-    }
-
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new GridLayoutManager(PaymentActivity.this, 1));
-        PaymentAdapter paymentAdapter = new PaymentAdapter(new ArrayList()) {
-
-            @Override
-            protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
-                Log.i(TAG, "convert: " + item);
-                doConvert(mActivity, helper, item, getData());
-            }
-        };
-        paymentAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if (paymentAdapter.getData().get(position) instanceof ReturnShop) {
-
-                    ReturnShop shop = ((ReturnShop) paymentAdapter.getData().get(position));
-
-
-                    //选中时  被点击
-                    //子项全部 取消选中
-
-                    List<ReturnOrder> ddd = shop.getSubItems();
-                    for (ReturnOrder returnOrder : ddd) {
-                        returnOrder.setChecked(!shop.isChecked());
-                    }
-                    shop.toggle();
-                    adapter.notifyDataSetChanged();
-                } else if (paymentAdapter.getData().get(position) instanceof ReturnOrder) {
-
-                    //商品点击
-                    ReturnOrder order = ((ReturnOrder) paymentAdapter.getData().get(position));
-                    //find  parent poision
-                    order.toggle();
-                    adapter.notifyDataSetChanged();
-
-                    boolean isFind = false;
-                    int index = position;
-                    while (!isFind) {
-                        if (paymentAdapter.getData().get(index) instanceof ReturnShop) {
-                            isFind = true;
-                        } else {
-                            index--;
-                        }
-                    }
-                    ReturnShop sho = ((ReturnShop) paymentAdapter.getData().get(index));
-
-
-                    boolean isAllCheck = true;
-                    for (Object subItem : sho.getSubItems()) {
-                        if (((ReturnOrder) subItem).isChecked()) {
-
-                        } else {
-                            isAllCheck = false;
-                        }
-                    }
-
-                    sho.setChecked(isAllCheck);
-
-
-                }
-            }
-        });
-        recyclerView.setAdapter(paymentAdapter);
-
-    }
-    public static void doConvert(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
-
-        if (item instanceof ReturnPlatform) {
-            //do conevrt 0
-            helper.setText(R.id.order_header, ((ReturnPlatform) item).getPlatformName());
-            helper.setText(R.id.order_time, ((ReturnPlatform) item).getOrderTime());
-            helper.setText(R.id.rich, ((ReturnPlatform) item).getEstimatedRebate());
-
-
-        } else if (item instanceof ReturnShop) {
-            //do conevert 1
-            helper.setText(R.id.payment_tv, ((ReturnShop) item).getShopName());
-            helper.addOnClickListener(R.id.payment_checkbox_head);
-            boolean isFirstShop = isFirstShop(mActivity, helper, item, data);
-//            helper.setVisible(R.id.payment_topline, isFirstShop);
-//            helper.getView(R.id.payment_topline).setVisibility(isFirstShop ? View.GONE : View.VISIBLE);
-
-            if (isFirstShop) {
-                helper.getView(R.id.payment_topline).setVisibility(View.VISIBLE);
-                helper.getView(R.id.payment_topline).setBackgroundResource(R.drawable.shape_corner_left_top_right_top);
-            } else {
-                helper.getView(R.id.payment_topline).setVisibility(View.GONE);
-            }
-            helper.getView(R.id.payment_checkbox_head).setSelected(((ReturnShop) item).isChecked());
-
-        } else if (item instanceof ReturnOrder) {
-
-
-//            RequestOptions options = RequestOptions.circleCropTransform();//圆形图片  好多的图片形式都是这么设置的
-//设置图片圆角角度
-            RoundedCorners roundedCorners = new RoundedCorners(6);
-//通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).centerCrop();
-
-            //do conevert 2
-//            Glide.with(mActivity).load(((ReturnOrder) item).getCoverUrl())
-//                    .apply(options).into((ImageView) helper.getView(R.id.order_iv));
-//            Glide.with(context).load(historys.get(position).getHeadImg()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into(holder.logo);
-
-            RequestOptions myOptions = new RequestOptions()
-//                        .transform(DrawableTransitionOptions.with(drawableCrossFadeFactory))
-                    .transform(new GlideRoundTransform(helper.itemView.getContext(), 6))
-//                      .centerCrop()
-                    ;
-
-            DrawableCrossFadeFactory drawableCrossFadeFactory = new DrawableCrossFadeFactory.Builder(100).setCrossFadeEnabled(true).build();
-//                Glide.with(ZZSearch2UpActivity.this)
-//                        .load("")
-//                        .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
-//                ;
-
-            Glide.with(helper.itemView.getContext()).load(((ReturnOrder) item).getCoverUrl()).transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into((ImageView) helper.getView(R.id.order_iv));
-//              Glide.with(helper.itemView.getContext()).load("https://pic1.zhuanstatic.com/zhuanzh/" + item.getPics()).apply(RequestOptions.bitmapTransform(new RoundedCorners(22))).into((ImageView) helper.getView(R.id.logo));
-
-
-            helper.addOnClickListener(R.id.payment_checkbox_context);
-
-            helper.getView(R.id.payment_checkbox_context).setSelected(((ReturnOrder) item).isChecked());
-            helper.setText(R.id.order_name, ((ReturnOrder) item).getOrderName());
-            helper.setText(R.id.Amount, ((ReturnOrder) item).getCommodityPrice());
-
-
-            boolean islast = isLastOrder(mActivity, helper, item, data);
-            if (islast) {
-                helper.itemView.setBackgroundResource(R.drawable.shape_corner_left_bottom_right_bottom);
-            }
-        }
-
-    }
-
-
-    private static boolean isLastOrder(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
-        try {
-            Object obj = data.get(helper.getAdapterPosition() + 1);
-            if (obj instanceof ReturnPlatform) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return true;
-        }
-    }
-
-
-    private static boolean isFirstShop(Activity mActivity, BaseViewHolder helper, MultiItemEntity item, List<MultiItemEntity> data) {
-        try {
-            Object obj1;
-            obj1 = data.get(helper.getAdapterPosition() - 1);
-
-            if (obj1 instanceof ReturnOrder) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return true;
-        }
-    }
-
-
-    @Override
-    public int bindLayoutId() {
-        return R.layout.activity_payment;
-    }
-
-    private void AlertDiglog(){
-        AlertDialog.Builder builder=new AlertDialog.Builder(PaymentActivity.this);
-        LayoutInflater inflater=LayoutInflater.from(PaymentActivity.this);
-        View view=inflater.inflate(R.layout.alert_diglog_layout,null);
-        Button mBtn1=view.findViewById(R.id.button1);
-        Button mBtn2=view.findViewById(R.id.button2);
-        final AlertDialog dialog=builder.create();
-        dialog.show();
-        dialog.getWindow().setContentView(view);
-        mBtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                PayFragment fragment = new PayFragment();
-                fragment.setArguments(bundle);
-                fragment.show(getSupportFragmentManager(), "Pay");
-            }
-        });
-        mBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-    }
     @Override
     protected void requestData() {
+        Map<String, String> params = new HashMap<>();
+        JSONObject jsonObject1 = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        JSONObject jsonObject3 = new JSONObject();
+        JSONObject jsonObject4 = new JSONObject();
+        JSONArray jsonArray1 = new JSONArray();
+        try {
+            jsonObject2.put("PageIndex", 1);
+            jsonObject2.put("PageSize", 30);
+
+
+            jsonObject3.put("Field", "OrderStatus");
+            jsonObject3.put("Value", 1);
+            jsonObject3.put("Operate", 3);
+
+            jsonArray1.put(jsonObject3);
+
+            jsonObject4.put("Rules", jsonArray1);
+
+            jsonObject1.put("PageCondition", jsonObject2);
+            jsonObject1.put("FilterGroup", jsonObject4);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        params.put("PageIndex", 1 + "");
+        params.put("PageSize", 30 + "");
         OkHttpUtils
-                .get()
-                .url("http://192.168.1.171:8080/download/platform.txt")//平台数据列表
+                .postString()
+                .content(jsonObject1.toString())
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Read")//平台数据列表
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -322,22 +130,247 @@ public class PaymentActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-
-                        Type t = new TypeToken<List<ReturnPlatform>>() {
-                        }.getType();
-
-                        List<ReturnPlatform> list = GsonUtil.getGson().fromJson(response, t);
-
-                        BaseQuickAdapter adapter = (BaseQuickAdapter) recyclerView.getAdapter();
-
-                        adapter.getData().clear();
-                        adapter.addData(list);
-                        adapter.expandAll();
-                        adapter.notifyDataSetChanged();
-                        Log.i("result", "onResponse: " + list);
-
+                        Log.i("onResponse", "onResponse: 订单列表" + response);
+                        OrderListData orderListData = GsonUtil.getGsonLower().fromJson(response, OrderListData.class);
+                        rowsBeans.clear();
+                        if (orderListData.Rows.size() != 0) {
+                            rowsBeans.addAll(orderListData.Rows);
+                            BaseQuickAdapter adapter = (BaseQuickAdapter) recycleView.getAdapter();
+                            adapter.getData().clear();
+                            adapter.addData(rowsBeans);
+                            adapter.notifyDataSetChanged();
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
                     }
                 });
     }
 
+    @Override
+    protected void initView() {
+        application = (MyApplication) getApplication();
+        try {
+            initRecyclerview();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        initOnClick();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestData();
+                count = 0;
+                jsonArray = new JSONArray();
+                jsonObject = new JSONObject();
+                checkbox_all.setText("总价：" + count);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void initOnClick() {
+        mTextOrder_to_Payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendPayData();
+            }
+        });
+
+    }
+
+    private void SendPayData() {
+        OkHttpUtils.get()
+                .url("http://192.168.1.137:7001/api/Open/OpenSetting/IsInterceptGoPay")
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.i("onError", "onError: 支付请求" + e);
+
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i("onResponse", "onResponse: 支付请求" + response);
+                        if (response.equals("false")) {
+
+                        } else if (response.equals("true")) {
+                            AlertDiglog();
+                        }
+                    }
+                });
+    }
+
+    private void AlertDiglog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        LayoutInflater inflater = LayoutInflater.from(mActivity);
+        View view = inflater.inflate(R.layout.alert_diglog_layout, null);
+        Button mBtn1 = view.findViewById(R.id.button1);
+        Button mBtn2 = view.findViewById(R.id.button2);
+        TextView mTv_consume = view.findViewById(R.id.consumeIntegral);
+        mTv_consume.setText("预计消耗" + checkbox_all.getText().toString() + "点积分");
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(view);
+        mBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //调用 支付密码键盘
+//                Bundle bundle = new Bundle();
+//                PayFragment fragment = new PayFragment();
+//                fragment.setArguments(bundle);
+//                fragment.show(getSupportFragmentManager(), "Pay");
+                try {
+                    initSendPaymentData(dialog);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        mBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+
+        });
+    }
+
+    private void initSendPaymentData(AlertDialog dialog) throws JSONException {
+//                JSONObject jsonObject = (JSONObject) jsonObjects.remove("Amount");
+//        JSONObject jsonObject = new JSONObject();
+//        JSONArray jsonArray = new JSONArray();
+//        jsonArray.put(rowsBeans.get(9).OrderNo);
+//        jsonObject.put("OrderNos", jsonArray);
+        Log.i("onClick", "onClick: 选中返回的值" + jsonObject.toString());
+        OkHttpUtils.postString()
+                .content(jsonObject.toString())
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Payment")//平台数据列表
+                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.i("onError", "onError: 发起支付" + e);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i("onResponse", "onResponse: 发起支付" + response);
+                        PaymentBean paymentBean = GsonUtil.getGsonLower().fromJson(response, PaymentBean.class);
+                        if (paymentBean.getType() == 200) {
+                            dialog.dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+                            builder.setMessage(paymentBean.getContent());
+                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            builder.create();
+                            builder.show();
+                        } else {
+                            dialog.dismiss();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+                            builder.setMessage(paymentBean.getContent());
+                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            builder.create();
+                            builder.show();
+                        }
+                    }
+                });
+    }
+
+    private void initRecyclerviewData() {
+
+    }
+
+    private void initRecyclerview() {
+        recycleView.setLayoutManager(new LinearLayoutManager(PaymentActivity.this));
+        PaymentAdapter paymentAdapter = new PaymentAdapter(new ArrayList()) {
+            @Override
+            protected void convert(@NonNull BaseViewHolder helper, MultiItemEntity item) {
+                super.convert(helper, item);
+                if (item instanceof OrderListData.RowsBean) {
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    if (((OrderListData.RowsBean) item).OrderItems.size() == 0) {
+                        helper.setText(R.id.OrderPlatformName, "");
+                        helper.setText(R.id.PaymentExpried, "");
+                        helper.setText(R.id.order_name, "");
+                        helper.setText(R.id.SpecName, "");
+                        helper.setText(R.id.Amount, "");
+                        helper.setText(R.id.count, "");
+                        Glide.with(helper.itemView.getContext()).load("").into((ImageView) helper.getView(R.id.order_iv));
+                    } else {
+                        String time = ((OrderListData.RowsBean) item).PaymentExpried.replaceAll("T", " ");
+                        String timeers = time.replaceAll("T", " ");
+                        String[] times = timeers.split("\\.", 2);
+                        helper.setText(R.id.OrderPlatformName, ((OrderListData.RowsBean) item).OrderPlatformName);
+                        helper.setText(R.id.PaymentExpried, times[0]);
+                        helper.setText(R.id.order_name, ((OrderListData.RowsBean) item).OrderItems.get(0).ProductName);
+                        helper.setText(R.id.SpecName, ((OrderListData.RowsBean) item).OrderItems.get(0).SpecName);
+                        helper.setText(R.id.Amount, df.format(((OrderListData.RowsBean) item).Amount) + "");
+                        helper.setText(R.id.count, ((OrderListData.RowsBean) item).OrderItems.get(0).Count + "");
+                        Glide.with(helper.itemView.getContext()).load(((OrderListData.RowsBean) item).OrderItems.get(0).Image).into((ImageView) helper.getView(R.id.order_iv));
+                        helper.setChecked(R.id.CheckBtn, ((OrderListData.RowsBean) item).isChecked());
+                        helper.addOnClickListener(R.id.CheckBtn);
+                    }
+                }
+
+            }
+        };
+        paymentAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                DecimalFormat df = new DecimalFormat("0.00");
+                if (paymentAdapter.getData().get(position) instanceof OrderListData.RowsBean) {
+                    OrderListData.RowsBean rowsBean = (OrderListData.RowsBean) paymentAdapter.getData().get(position);
+                    rowsBean.toggle();
+                    if (rowsBean.isChecked()) {
+                        rowsBean.setChecked(true);
+                        count += rowsBean.Amount;
+                        jsonArray.put(rowsBean.OrderNo);
+                        try {
+                            jsonObject.put("OrderNos", jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        checkbox_all.setText("总价：" + df.format(count));
+                    } else {
+                        rowsBean.setChecked(false);
+                        for (int s = 0; s < jsonArray.length(); s++) {
+                            try {
+                                String OrderNo = jsonArray.getString(s);
+                                if (OrderNo.contains(rowsBean.OrderNo)) {
+                                    jsonArray.remove(s);
+                                    jsonObject.put("OrderNos", jsonArray);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        count -= rowsBean.Amount;
+                        checkbox_all.setText("总价：" + df.format(count));
+                    }
+
+                } else {
+
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+        recycleView.setAdapter(paymentAdapter);
+    }
+
+    @Override
+    public int bindLayoutId() {
+        return R.layout.fragment_order;
+    }
 }

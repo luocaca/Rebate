@@ -30,14 +30,15 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.PrimitiveIterator;
+import java.util.Set;
 
 public class FragmentOrderAdapter extends RecyclerView.Adapter<FragmentOrderAdapter.ViewHolder> {
     private List<OrderListData.RowsBean> rowsBeans;
     private List<OrderListData.RowsBean.OrderItemsBean> orderItemsBeans;
     private Context mContext;
-    public JSONObject jsonObject;
     private JSONArray jsonArray;
     public int amount;
+    public JSONObject JSONObject;
 
     public FragmentOrderAdapter(List<OrderListData.RowsBean> rowsBean, Context context) {
         this.rowsBeans = rowsBean;
@@ -54,16 +55,41 @@ public class FragmentOrderAdapter extends RecyclerView.Adapter<FragmentOrderAdap
     @Override
     public void onBindViewHolder(@NonNull FragmentOrderAdapter.ViewHolder holder, int position) {
         if (rowsBeans.get(position).OrderItems.size() != 0) {
-            holder.mTv_PlatformName.setText(rowsBeans.get(position).OrderPlatformName);
+            if (rowsBeans.get(position).OrderPlatformName == null) {
+                holder.mTv_PlatformName.setText("");
+            } else {
+                holder.mTv_PlatformName.setText(rowsBeans.get(position).OrderPlatformName);
+            }
+
             DecimalFormat df = new DecimalFormat("######0.00");
             String time = rowsBeans.get(position).PaymentExpried.replace("T", " ");
             String timeers = time.replaceAll("T", " ");
             String[] times = timeers.split("\\.", 2);
-            holder.mTv_PaymentExpried.setText(times[0]);
-            holder.mTv_Count.setText(rowsBeans.get(position).OrderItems.get(0).Count + "");
-            holder.mTv_Amount.setText(df.format(rowsBeans.get(position).Amount) + "");
-            holder.mTv_order_name.setText(rowsBeans.get(position).OrderItems.get(0).ProductName);
-            holder.mTv_SpecName.setText(rowsBeans.get(position).OrderItems.get(0).SpecName);
+            if (rowsBeans.get(position).PaymentExpried == null) {
+                holder.mTv_PaymentExpried.setText("");
+            } else {
+                holder.mTv_PaymentExpried.setText(times[0]);
+            }
+            if (rowsBeans.get(position).OrderItems.get(0).Count == 0) {
+                holder.mTv_Count.setText(0);
+            } else {
+                holder.mTv_Count.setText(rowsBeans.get(position).OrderItems.get(0).Count + "");
+            }
+            if (rowsBeans.get(position).OrderItems.get(0).ProductName == null) {
+                holder.mTv_order_name.setText("");
+            } else {
+                holder.mTv_order_name.setText(rowsBeans.get(position).OrderItems.get(0).ProductName);
+            }
+            if ((rowsBeans.get(position).Amount == 0)) {
+                holder.mTv_Amount.setText("");
+            } else {
+                holder.mTv_Amount.setText(df.format(rowsBeans.get(position).Amount) + "");
+            }
+            if (rowsBeans.get(position).OrderItems.get(0).SpecName == null) {
+                holder.mTv_SpecName.setText("");
+            } else {
+                holder.mTv_SpecName.setText(rowsBeans.get(position).OrderItems.get(0).SpecName);
+            }
 //        holder.mTv_rich_moeny
             RequestOptions myOptions = new RequestOptions()
 //                        .transform(DrawableTransitionOptions.with(drawableCrossFadeFactory))
@@ -71,7 +97,23 @@ public class FragmentOrderAdapter extends RecyclerView.Adapter<FragmentOrderAdap
 //                      .centerCrop()
 
             DrawableCrossFadeFactory drawableCrossFadeFactory = new DrawableCrossFadeFactory.Builder(100).setCrossFadeEnabled(true).build();
-            Glide.with(holder.itemView.getContext()).load(rowsBeans.get(position).OrderItems.get(0).Image).transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into(holder.mIv_order);
+            if (rowsBeans.get(position).OrderItems.get(0).Image == null) {
+                Glide.with(holder.itemView.getContext()).load("").transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into(holder.mIv_order);
+            } else {
+                Glide.with(holder.itemView.getContext()).load(rowsBeans.get(position).OrderItems.get(0).Image).transition(DrawableTransitionOptions.with(drawableCrossFadeFactory)).apply(myOptions).into(holder.mIv_order);
+            }
+            holder.mRb_CheckBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        JSONObject = initChooseData(holder, position);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
             //判断所有item是否都被选中
 //            holder.itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -79,19 +121,24 @@ public class FragmentOrderAdapter extends RecyclerView.Adapter<FragmentOrderAdap
 //
 //                }
 //            });
-//            if (holder.mRb_CheckBtn.isChecked()) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject();
-//                    JSONArray jsonArray = new JSONArray();
-//                    jsonArray.put(rowsBeans.get(position).OrderNo);
-//                    jsonObject.put("OrderNos", jsonArray);
-//                    amount += rowsBeans.get(position).OrderItems.get(0).Price;
-//                    Log.i("onBindViewHolder", "onBindViewHolder: 查询支付的内容" + jsonObject.toString() + "\n" + amount);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+//
         }
+
+    }
+
+    public JSONObject initChooseData(ViewHolder holder, int position) throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < rowsBeans.size(); i++) {
+            if (holder.mRb_CheckBtn.isChecked()) {
+                jsonArray.put(rowsBeans.get(i).OrderNo);
+                amount += rowsBeans.get(i).OrderItems.get(0).Price;
+                Log.i("onBindViewHolder", "onBindViewHolder: 查询支付的内容" + jsonObject.toString() + "\n" + amount);
+            }
+        }
+        jsonObject.put("OrderNos", jsonArray);
+        jsonObject.put("Amount", amount);
+        return jsonObject;
     }
 
 //            holder.mRb_CheckBtn.setOnClickListener(new View.OnClickListener() {

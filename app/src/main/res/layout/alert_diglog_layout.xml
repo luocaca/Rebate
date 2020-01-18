@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/consumeIntegral"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,13 +27,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="8dp"
-        android:text="(10积分=1元)"
+        android:text="(1积分=1元)"
         android:textColor="@color/text999"
         android:textSize="@dimen/text_size_content_s"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/consumeIntegral" />
 
     <Button
         android:id="@+id/button1"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/consumeIntegral" />
 
     <Button
         android:id="@+id/button2"
@@ -66,6 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button1"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/consumeIntegral" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

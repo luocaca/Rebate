@@ -52,10 +52,10 @@ import okhttp3.Call;
  */
 public class PersonalFragment extends BaseFragment {
     private List<Personal_local_Item> mData;
-    private List<PersonalDataBean>dataBeans=new ArrayList<>();
+    private List<PersonalDataBean> dataBeans = new ArrayList<>();
     private MyApplication application;
     private int[] Image = {
-            R.mipmap.chat3, R.mipmap.wallet2, R.mipmap.chongzhi1, R.mipmap.mingxi, R.mipmap.bankcard, R.mipmap.info2,R.mipmap.rechargelist
+            R.mipmap.chat3, R.mipmap.wallet2, R.mipmap.chongzhi1, R.mipmap.mingxi, R.mipmap.bankcard, R.mipmap.info2, R.mipmap.rechargelist
     };
 
     @BindView(R.id.rv_list2)
@@ -96,6 +96,49 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents(View view) {
+//        personalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+//            @Override
+//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+//                Toast.makeText(mActivity, "onItemChildClick", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+    }
+
+    private void initPerSonalData() {
+        OkHttpUtils.post()
+                .url("http://192.168.1.190:12004/api/Admin/User/GetUserByApp")
+                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.i("onError", "onError: 个人信息" + e);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i("onResponse", "onResponse: 个人信息" + response);
+                        PersonalDataBean dataBean = GsonUtil.getGsonLower().fromJson(response, PersonalDataBean.class);
+                        dataBeans.clear();
+                        dataBeans.add(dataBean);
+                        mTv_account.setText(dataBean.getData().getUserName());
+                        mTv_integral.setText("积分:" + dataBean.getData().getTotalIntegral());
+                        mTv_invitat.setText(dataBean.getData().getInvitationCode() + "");
+                        if (dataBean.getData().getMemberLevel() == 0) {
+                            mTv_moeny_integral.setText("会员等级：" + "小白");
+                        } else {
+                            mTv_moeny_integral.setText("会员等级：" + dataBean.getData().getMemberLevel() + "级");
+                        }
+                        totalRebate.setText(dataBean.getData().getTotalRebateAmount() + "");
+                        preRebate.setText(dataBean.getData().getTotalAmount() + "");
+                    }
+                });
+    }
+
+
+    @Override
+    protected void initData() {
         application = (MyApplication) getActivity().getApplication();
         initPerSonalData();
         recyclerView.setLayoutManager(new GridLayoutManager(mActivity, 4));
@@ -110,9 +153,9 @@ public class PersonalFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), IntegralActivity.class);
-                intent.putExtra("AllIntegral",mTv_integral.getText().toString());
-                intent.putExtra("RebateIntegral",totalRebate.getText().toString());
-                intent.putExtra("RechargeIntegral",mTv_integral.getText().toString());
+                intent.putExtra("AllIntegral", mTv_integral.getText().toString());
+                intent.putExtra("RebateIntegral", totalRebate.getText().toString());
+                intent.putExtra("RechargeIntegral", mTv_integral.getText().toString());
                 startActivity(intent);
             }
         });
@@ -122,7 +165,7 @@ public class PersonalFragment extends BaseFragment {
                 mRefresh.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        initData();
+                        initPerSonalData();
                     }
                 }, 3000);
                 mRefresh.setRefreshing(false);
@@ -167,10 +210,10 @@ public class PersonalFragment extends BaseFragment {
         p6.activityClass = HelpActivity.class;
         list.add(p6);
 
-        Personal_local_Item p7=new Personal_local_Item();
-        p7.ItemNameid=Image[6];
-        p7.ItemName="消费记录";
-        p7.activityClass= RechargeListActivity.class;
+        Personal_local_Item p7 = new Personal_local_Item();
+        p7.ItemNameid = Image[6];
+        p7.ItemName = "消费记录";
+        p7.activityClass = RechargeListActivity.class;
         list.add(p7);
 
 
@@ -182,51 +225,6 @@ public class PersonalFragment extends BaseFragment {
                 helper.itemView.setOnClickListener(view1 -> startActivity(new Intent(getActivity(), item.activityClass == null ? MainActivity.class : item.activityClass)));
             }
         });
-
-
-//        personalAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-//            @Override
-//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-//                Toast.makeText(mActivity, "onItemChildClick", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-    }
-
-    private void initPerSonalData() {
-        OkHttpUtils.post()
-                .url("http://192.168.1.190:12004/api/Admin/User/GetUserByApp")
-                .addHeader("Authorization", "Bearer " + application.getAuthorization())
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: 个人信息"+e);
-                    }
-
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.i("onResponse", "onResponse: 个人信息"+response);
-                        PersonalDataBean dataBean=GsonUtil.getGsonLower().fromJson(response,PersonalDataBean.class);
-                        dataBeans.clear();
-                        dataBeans.add(dataBean);
-                        mTv_account.setText(dataBean.getData().getUserName());
-                        mTv_integral.setText("积分:"+dataBean.getData().getTotalIntegral());
-                        mTv_invitat.setText(dataBean.getData().getInvitationCode()+"");
-                        if(dataBean.getData().getMemberLevel()==0){
-                            mTv_moeny_integral.setText("会员等级："+"小白");
-                        }else {
-                            mTv_moeny_integral.setText("会员等级："+dataBean.getData().getMemberLevel()+"级");
-                        }
-                        totalRebate.setText(dataBean.getData().getTotalRebateAmount()+"");
-                        preRebate.setText(dataBean.getData().getTotalAmount()+"");
-                    }
-                });
-    }
-
-
-    @Override
-    protected void initData() {
 
     }
 

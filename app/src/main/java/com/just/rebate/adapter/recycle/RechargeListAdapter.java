@@ -37,14 +37,14 @@ public class RechargeListAdapter extends RecyclerView.Adapter<RechargeListAdapte
         holder.mTv_OrderNumber.setText(rechargeListData.get(position).getOrderNo());
 
         String Times = rechargeListData.get(position).getCreatedTime();
-        String timeers =Times.replaceAll("T"," ");
-        String[]  Time =timeers.split("\\.",2);
+        String timeers = Times.replaceAll("T", " ");
+        String[] Time = timeers.split("\\.", 2);
         holder.mTv_CreatedTime.setText(Time[0]);
 
         if (rechargeListData.get(position).getOrderType() == 1) {
             holder.mTv_OrderType.setText("充值");
             holder.mTv_OrderMoeny.setText(rechargeListData.get(position).getIntegralNum() + "");
-            holder.mTv_OrderMoeny.setTextColor(Color.rgb(37,155,36));
+            holder.mTv_OrderMoeny.setTextColor(Color.rgb(37, 155, 36));
         } else if (rechargeListData.get(position).getOrderType() == 2) {
             holder.mTv_OrderType.setText("消费");
             holder.mTv_OrderMoeny.setText(rechargeListData.get(position).getIntegralNum() + "");
@@ -59,7 +59,7 @@ public class RechargeListAdapter extends RecyclerView.Adapter<RechargeListAdapte
         } else if (rechargeListData.get(position).getIsState() == 0) {
             holder.mTv_examineType.setText("未审核");
         }
-        holder.mTv_PaymentAccount.setText(rechargeListData.get(position).getPayMode().getReceivingAccount());
+        holder.mTv_PaymentAccount.setText(rechargeListData.get(position).getReceivingAccount());
         holder.mTv_RecevieAccount.setText(rechargeListData.get(position).getRReceivingAccount());
 
     }

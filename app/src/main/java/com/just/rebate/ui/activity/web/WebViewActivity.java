@@ -27,21 +27,31 @@ import android.webkit.WebViewClient;
 import androidx.annotation.RequiresApi;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.app.MyApplication;
 import com.just.rebate.entity.GetRuleData;
+import com.just.rebate.ui.activity.PostInterceptJavascriptInterface;
 import com.just.rebate.ui.activity.web.web_util.HandlerUtil;
 import com.just.rebate.ui.activity.web.web_util.LogUtil;
 import com.just.rebate.ui.activity.web.web_util.MyClient;
 import com.just.rebate.wedget.MyTitleBar;
 import com.rebate.base.activity.BaseActivity;
 import com.rebate.commom.util.GsonUtil;
+import com.squareup.mimecraft.FormEncoding;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -57,6 +67,7 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import okhttp3.Call;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 import static android.view.KeyEvent.ACTION_DOWN;
@@ -72,8 +83,10 @@ public class WebViewActivity extends BaseActivity {
     private List<GetRuleData> getRuleData = new ArrayList<>();
     private String RequestPacket = "";
     private String ResponsePacket = "";
+    private String Requests = "";
     private MyApplication application;
-
+    private PostInterceptJavascriptInterface mJSSubmitIntercept = null;
+    private OkHttpClient client = new OkHttpClient();
 
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
@@ -201,17 +214,14 @@ public class WebViewActivity extends BaseActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    view.loadUrl(url);
-//                }
                 if (url.startsWith("http") || url.startsWith("https")) {
                     rUrl = url;
                     view.loadUrl(url);
                     return true;
                 } else {
-                    return false;
+                    rUrl = "http://" + url;
+                    return true;
                 }
-
             }
 
 
@@ -237,8 +247,6 @@ public class WebViewActivity extends BaseActivity {
                     }
                     Log.i("matches", "shouldInterceptRequest: " + rUrl);
                     Log.i("matches", "shouldInterceptRequest: " + BoolSTRs);
-
-
                     if (BoolSTRs.equals("GET")) {
                         //GET请求使用
                         Log.i("shouldInterceptRequest", "shouldInterceptRequest: 走了get");
@@ -256,39 +264,61 @@ public class WebViewActivity extends BaseActivity {
                                 connection.setDoOutput(true);
                                 connection.setRequestProperty("Content-type",
                                         "Application/x-www-form-urlencoded");
+                                Uri s = Uri.parse(rUrl);
+                                s.getHost();
+                                s.getPath();
                                 Response referer = OkHttpUtils.get()
                                         .url(rUrl)
                                         .headers(request.getRequestHeaders())
                                         .addHeader("cookie", cookie)
                                         .build()
                                         .execute();
-                                Set<String> headers = request.getRequestHeaders().keySet();
-                                Uri s = Uri.parse(rUrl);
-                                s.getHost();
-                                s.getPath();
-                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
-                                StringBuffer stringBuffer = new StringBuffer();
+                                //这是原请求
+                                StringBuilder stringBuffer = new StringBuilder();
                                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(referer.body().byteStream()));
                                 String line;
                                 while ((line = bufferedReader.readLine()) != null) {
                                     stringBuffer.append(line + "\n");
                                 }
-                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 自己提交的数据到响应" + stringBuffer);
-                                RequestPacket = request.getMethod() + " "
+                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), new ByteArrayInputStream(stringBuffer.toString().getBytes()));
+//                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 自己提交的数据到响应" + referer.body().string());
+                                Set<String> header = request.getRequestHeaders().keySet();
+                                for (String key : header) {
+                                    //Cookie有BUG
+                                    String value = request.getRequestHeaders().get(key);
+                                    if (key.equals("Cookie")) {
+                                        value = cookie;
+                                    } else if (key.equals("cookie")) {
+                                        key = "Cookie";
+                                        value = cookie;
+                                    }
+                                    RequestPacket += key + ": " + value + "\r" + "\n";
+//                                    if (RequestPacket.contains("Cookie")) {
+//
+//                                    } else {
+//                                        RequestPacket += "Cookie: " + cookie + "\r" + "\n";
+//                                    }
+                                }
+                                Requests = request.getMethod() + " "
                                         + s.getPath() + "\r" + "\n"
-                                        + "Host: " + s.getHost() + "\r" + "\n"
-                                        + "Accept: " + request.getRequestHeaders().get("Accept") + "\r" + "\n"
-                                        + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
-                                        + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
-                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
-                                ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + referer.headers() + "\r" + "\n" + referer.body().string();
+                                        + RequestPacket + "\r" + "\n";
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: +实验写法" + RequestPacket + "\n" + cookie);
+//                                RequestPacket = request.getMethod() + " "
+//                                        + s.getPath() + "\r" + "\n"
+//                                        + "Host: " + s.getHost() + "\r" + "\n"
+//                                        + "Accept: " + request.getRequestHeaders().get("Accept") + "\r" + "\n"
+//                                        + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
+//                                        + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
+//                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
+                                String responseStrng = referer.headers().toString().replaceAll("\n", "\r" + "\n");
+                                ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + responseStrng + "\r" + "\n" + referer.body().string();
                                 try {
-                                    SendOrderData(RequestPacket, ResponsePacket);
+                                    SendOrderData(Requests, ResponsePacket);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 Log.i("matches", "shouldInterceptRequest: 我已经将数据发送给后台了");
-                                return null;
+                                return webResourceResponse;
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -299,6 +329,24 @@ public class WebViewActivity extends BaseActivity {
                     } else if (BoolSTRs.equals("POST")) {
                         //POST请求使用
                         Log.i("shouldInterceptRequest", "shouldInterceptRequest: 同时我也走了post");
+                        //LXR的方法
+//                        String requestBody =null;
+//                        Uri uri = request.getUrl();
+//                        // 判断是否为Ajax请求（只要链接中包含AJAXINTERCEPT即是）
+//                        if (isAjaxRequest(request)) {
+//                            // 获取post请求参数
+//                            requestBody = getRequestBody(request);
+//                            // 获取原链接
+//                            uri = getOriginalRequestUri(request, MARKER);
+//                        }
+//                        // 重新构造请求，并获取response
+//                        WebResourceResponse webResourceResponse = shouldInterceptRequest(view, new WriteHandlingWebResourceRequest(request, requestBody, uri));
+//                        if (webResourceResponse == null) {
+//                            return webResourceResponse;
+//                        } else {
+//                            return injectIntercept(webResourceResponse, view.getContext());
+//                        }
+
                         try {
                             url = new URL(rUrl);
                             CookieManager cookieManager = CookieManager.getInstance();
@@ -327,8 +375,11 @@ public class WebViewActivity extends BaseActivity {
                                 s.getPath();
                                 WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
                                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(referer.body().byteStream()));
+                                StringBuffer stringBuffer = new StringBuffer();
                                 String line;
-                                line = bufferedReader.readLine();
+                                while ((line = bufferedReader.readLine()) != null) {
+                                    stringBuffer.append(line + "\n");
+                                }
                                 RequestPacket = request.getMethod() + " "
                                         + s.getPath() + "\r" + "\n"
                                         + "Host: " + s.getHost() + "\r" + "\n"
@@ -336,14 +387,15 @@ public class WebViewActivity extends BaseActivity {
                                         + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
                                         + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
                                 Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
-                                ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + referer.headers() + "\r" + "\n" + referer.body().string();
+                                String responseStrng = referer.headers().toString().replaceAll("\n", "\r" + "\n");
+                                ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + responseStrng + "\r" + "\n" + stringBuffer;
                                 try {
                                     SendOrderData(RequestPacket, ResponsePacket);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 Log.i("matches", "shouldInterceptRequest: 我已经将数据发送给后台了");
-                                return webResourceResponse;
+                                return null;
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -351,8 +403,6 @@ public class WebViewActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                     }
-                } else {
-                    return new WebResourceResponse(null, null, null);
                 }
                 return super.shouldInterceptRequest(view, request);
             }
@@ -418,6 +468,55 @@ public class WebViewActivity extends BaseActivity {
 
     }
 
+//    private WebResourceResponse injectIntercept(WebResourceResponse response, Context context) {
+//        String encoding = response.getEncoding();
+//        String mime = response.getMimeType();
+//        // WebResourceResponse的mime必须为"text/html",不能是"text/html; charset=utf-8"
+//        if (mime.contains("text/html")) {
+//            mime = "text/html";
+//        }
+//        InputStream responseData = response.getData();
+//        InputStream injectedResponseData = injectInterceptToStream(
+//                context,
+//                responseData,
+//                mime,
+//                encoding
+//        );
+//        return new WebResourceResponse(mime, encoding, injectedResponseData);
+//    }
+
+    private void writeBody(OutputStream out) {
+        try {
+            out.write(mNextAjaxRequestContents.body.getBytes("UTF-8"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private boolean isPOST() {
+        return (mNextFormRequestContents != null || mNextAjaxRequestContents != null);
+    }
+
+    protected void writeForm(OutputStream out) {
+        try {
+            JSONArray jsonPars = new JSONArray(mNextFormRequestContents.json);
+
+            // We assume to be dealing with a very simple form here, so no file uploads or anything
+            // are possible for reasons of clarity
+            FormEncoding.Builder m = new FormEncoding.Builder();
+            for (int i = 0; i < jsonPars.length(); i++) {
+                JSONObject jsonPar = jsonPars.getJSONObject(i);
+
+                m.add(jsonPar.getString("name"), jsonPar.getString("value"));
+                // jsonPar.getString("type");
+                // TODO TYPE?
+            }
+            m.build().writeBodyTo(out);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void SendOrderData(String RequestPacket, String responsePacket) {
@@ -447,6 +546,18 @@ public class WebViewActivity extends BaseActivity {
 
     private void initData(String url, String response) {
 
+    }
+
+    private PostInterceptJavascriptInterface.FormRequestContents mNextFormRequestContents = null;
+
+    public void nextMessageIsFormRequest(PostInterceptJavascriptInterface.FormRequestContents formRequestContents) {
+        mNextFormRequestContents = formRequestContents;
+    }
+
+    private PostInterceptJavascriptInterface.AjaxRequestContents mNextAjaxRequestContents = null;
+
+    public void nextMessageIsAjaxRequest(PostInterceptJavascriptInterface.AjaxRequestContents ajaxRequestContents) {
+        mNextAjaxRequestContents = ajaxRequestContents;
     }
 
 

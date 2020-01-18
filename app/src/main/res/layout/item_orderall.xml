@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:background="@android:color/white"
+    android:background="@drawable/shape_corner"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="@drawable/shape_corner_left_bottom_right_bottom"
         android:orientation="horizontal">
 
         <CheckBox

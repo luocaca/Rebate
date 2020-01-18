@@ -9,7 +9,7 @@ import com.just.rebate.R;
 
 import java.util.List;
 
-public class PaymentAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
+public abstract class PaymentAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
     /**
      * Same as QuickAdapter#QuickAdapter(Context,int) but with
      * some initialization data.
@@ -18,9 +18,7 @@ public class PaymentAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, B
      */
     public PaymentAdapter(List data) {
         super(data);
-        addItemType(0, R.layout.item_payment_head);
-        addItemType(1,R.layout.item_payment_header2);
-        addItemType(2,R.layout.item_payment_content);
+        addItemType(1, R.layout.item_orderall);
     }
 
     @Override

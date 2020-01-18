@@ -58,7 +58,7 @@ public class PassWordSignActivity extends AppCompatActivity {
     private String Authorization = "";
     private String Route = "";
     private Timer timer = new Timer();
-    private TimerTask task,task1;
+    private TimerTask task, task1;
     private ImageView mIv_Back;
     private boolean have;
     private String responseHeaders;
@@ -153,7 +153,7 @@ public class PassWordSignActivity extends AppCompatActivity {
                 public void onResponse(String response, int id) {
                     Log.i("onResponse", "onResponse: 这就是请求过来的" + response);
                     Url = json.Url;
-                    Uri s=Uri.parse(json.Url);
+                    Uri s = Uri.parse(json.Url);
                     String[] url = json.Url.split("https://wqdeal.jd.com");
                     RequestPacket = json.Mothed + " "
                             + s.getPath() + "\r" + "\n"
@@ -311,9 +311,9 @@ public class PassWordSignActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else if(ByteStringBoydy.getType().equals("OrderDetail")){
+            } else if (ByteStringBoydy.getType().equals("OrderDetail")) {
                 //响应订单详情
-                String bodys=ByteStringBoydy.getBody();
+                String bodys = ByteStringBoydy.getBody();
                 try {
                     initWebData(bodys);
                 } catch (Exception e) {
@@ -361,8 +361,10 @@ public class PassWordSignActivity extends AppCompatActivity {
                 FristMap.put(key, value);
             }
         }
+        String s = payBeans.get(0).Rules.get(0)._$RequestPacket15.Url.replaceAll("dealId=【OrderNo】&", "dealId=" + payBeans.get(0)._$Order311.OrderNo + "&");
+        Log.i("initWebDataParen", "initWebDataParen: " + s);
         OkHttpUtils.get()
-                .url(payBeans.get(0).Rules.get(0)._$RequestPacket15.Url)
+                .url(s)
                 .headers(FristMap)
                 .build()
                 .execute(new StringCallback() {
@@ -375,11 +377,18 @@ public class PassWordSignActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response, int id) {
                         Log.i("onResponse", "onResponse: 多步骤" + response);
-                        Pattern pattern = null;
+                        Log.i("onResponse", "onResponse: " + payBeans.get(0).Rules.get(0).Dics.get(0).Value);
                         try {
-                            pattern = Pattern.compile(payBeans.get(0).Rules.get(0).Dics.get(0).Value);
+                            String s1 = payBeans.get(0).Rules.get(0).Dics.get(0).Value;
+                            if (s1.equals("newPay-index.html\\?payId=(?<PayId>.*?)&")) {
+                                Log.i("onResponse", "onResponse: 匹配的没有什么毛病");
+                            } else {
+                                Log.i("onResponse", "onResponse: 匹配的有毛病" + s1);
+                            }
+                            Pattern pattern = Pattern.compile(payBeans.get(0).Rules.get(0).Dics.get(0).Value);
                             Matcher matcher = pattern.matcher(response);
-                            while (matcher.find()) {
+                            boolean matches = matcher.find();
+                            if (matches) {
                                 //正则有误
                                 payBeans.get(0).Rules.get(0).Dics.get(0).Key = matcher.group();
                                 String PayId = payBeans.get(0).Rules.get(0).Dics.get(0).Key;
@@ -387,6 +396,8 @@ public class PassWordSignActivity extends AppCompatActivity {
                                     Log.i("onResponse", "onResponse: 拿到了payId");
                                     TheSecondData(PayId);
                                 }
+                            } else {
+                                Log.i("onResponse", "onResponse: 订单可能已经过了支付时间了");
                             }
                         } catch (Exception e) {
                             Log.i("错误日志", "onResponse: 错误日志" + e);
@@ -400,9 +411,9 @@ public class PassWordSignActivity extends AppCompatActivity {
     }
 
     private void TheSecondData(String payId) {
-        Set<String> headers = payBeans.get(1).Rules.get(1)._$RequestPacket15.Headers.keySet();
+        Set<String> headers = payBeans.get(0).Rules.get(1)._$RequestPacket15.Headers.keySet();
         for (String key : headers) {
-            String value = payBeans.get(1).Rules.get(1)._$RequestPacket15.Headers.get(key);
+            String value = payBeans.get(0).Rules.get(1)._$RequestPacket15.Headers.get(key);
             if (key.equals("Accept-Encoding")) {
             } else if (key.equals("Cookie")) {
                 //替换Cookies
@@ -414,7 +425,7 @@ public class PassWordSignActivity extends AppCompatActivity {
                 map.put(key, value);
             }
         }
-        String Url = payBeans.get(1).Rules.get(1)._$RequestPacket15.Url.replace("【PayId】", payId);
+        String Url = payBeans.get(0).Rules.get(1)._$RequestPacket15.Url.replace("【PayId】", payId);
         OkHttpUtils.get()
                 .url(Url)
                 .headers(map)
@@ -434,7 +445,7 @@ public class PassWordSignActivity extends AppCompatActivity {
                             Matcher matcher = pattern.matcher(response);
                             while (matcher.find()) {
                                 payBeans.get(0).Rules.get(1).Dics.get(1).Key = matcher.group();
-                                String PaymentUrl = payBeans.get(0).Rules.get(0).Dics.get(0).Key;
+                                String PaymentUrl = payBeans.get(0).Rules.get(1).Dics.get(1).Key;
                                 String OrderNo = payBeans.get(0)._$Order311.OrderNo;
                                 if (PaymentUrl != null) {
                                     Log.i("onResponse", "onResponse: 拿到了PaymentUrl");
@@ -611,4 +622,33 @@ public class PassWordSignActivity extends AppCompatActivity {
         }
         super.onDestroy();
     }
+
+    public static void main(String[] args) {
+
+        String s1 = "newPay-index.html\\?payId=(?<PayId>.*?)&";
+        String s4 = "newPay-index.html?payId=(?<PayId>.*?)&";
+        String s2 = "jdappmpayCb({\"errno\":0, \"msg\":\"\", \"rurl\":\"\", \"data\":{\"jumpurl\":\"https://pay.m.jd.com/cpay/newPay-index.html?payId=f276995bf7ae4ee397dc3c22c9c797d3&appId=jd_m_pay\"}})";
+        String s3 = "啦啦啦啦啦啦啦";
+        Pattern pattern = Pattern.compile(s1);
+        Matcher matcher = pattern.matcher(s2);
+        boolean matchers = matcher.find();
+        if (matchers) {
+            System.out.println("匹配到了正则");
+        } else {
+            System.out.println("我没有匹配到正则");
+        }
+        if (s1.equals("newPay-index.html" + "\\?" + "payId=(?<PayId>.*?)&")) {
+            System.out.println("两者相同。");
+            Pattern pattern2 = Pattern.compile("newPay-index.html" + "\\?" + "payId=(?<PayId>.*?)&");
+            Matcher matcher2 = pattern2.matcher(s2);
+            boolean matchers2 = matcher2.find();
+            if (matchers2) {
+                System.out.println("两者相同，不知道为什么没匹配的上");
+            }
+        } else {
+            System.out.println("两个确实不太一样");
+        }
+    }
 }
+
+

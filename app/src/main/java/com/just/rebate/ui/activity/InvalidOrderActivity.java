@@ -103,8 +103,6 @@ public class InvalidOrderActivity extends BaseActivity {
                                 iterator.remove();
                             }
                         }
-
-
                         adapter.notifyDataSetChanged();
                         Log.i("result", "onResponse: " + list.getData());
 
