@@ -110,7 +110,11 @@ public class OrderFragment extends BaseFragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                initRecyclerViewData();
+                try {
+                    initRecyclerViewData();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 jsonArray = new JSONArray();
                 jsonObject = new JSONObject();
                 count = 0;
@@ -118,7 +122,11 @@ public class OrderFragment extends BaseFragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        initRecyclerViewData();
+        try {
+            initRecyclerViewData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -348,6 +356,7 @@ public class OrderFragment extends BaseFragment {
         }
         params.put("PageIndex", 1 + "");
         params.put("PageSize", 30 + "");
+        Log.i("initRecyclerViewData", "initRecyclerViewData: 看看登录信息是否有值" + application.getAuthorization());
         OkHttpUtils
                 .postString()
                 .content(jsonObject1.toString())

@@ -2,15 +2,20 @@ package com.just.rebate.ui.activity.web;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -23,15 +28,20 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.just.rebate.R;
 import com.just.rebate.app.MyApplication;
 import com.just.rebate.entity.GetRuleData;
+import com.just.rebate.entity.OrderListData;
+import com.just.rebate.entity.OrdersNosData;
+import com.just.rebate.entity.PaymentBean;
+import com.just.rebate.ui.MainActivity;
 import com.just.rebate.ui.activity.PostInterceptJavascriptInterface;
 import com.just.rebate.ui.activity.web.web_util.HandlerUtil;
 import com.just.rebate.ui.activity.web.web_util.LogUtil;
@@ -44,12 +54,12 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
@@ -87,6 +97,9 @@ public class WebViewActivity extends BaseActivity {
     private MyApplication application;
     private PostInterceptJavascriptInterface mJSSubmitIntercept = null;
     private OkHttpClient client = new OkHttpClient();
+    private List<OrderListData.RowsBean> rowsBeans = new ArrayList<>();
+    private String OrderNos = "";
+    private double Price;
 
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
@@ -133,7 +146,7 @@ public class WebViewActivity extends BaseActivity {
     private void initRequestData() {
         OkHttpUtils
                 .get()
-                .url("http://192.168.1.137:7001/api/Admin/Order/GetRule")
+                .url("http://192.168.1.137:7001/api/Open/OpenOrder/GetRule")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -267,8 +280,9 @@ public class WebViewActivity extends BaseActivity {
                                 Uri s = Uri.parse(rUrl);
                                 s.getHost();
                                 s.getPath();
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 查看rUrl是否一致1" + rUrl);
                                 Response referer = OkHttpUtils.get()
-                                        .url(rUrl)
+                                        .url(request.getUrl().toString())
                                         .headers(request.getRequestHeaders())
                                         .addHeader("cookie", cookie)
                                         .build()
@@ -280,7 +294,16 @@ public class WebViewActivity extends BaseActivity {
                                 while ((line = bufferedReader.readLine()) != null) {
                                     stringBuffer.append(line + "\n");
                                 }
-                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), new ByteArrayInputStream(stringBuffer.toString().getBytes()));
+                                //rUrl在此处发生变化，从而影响传递订单失败!!!!!
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 查看rUrl是否一致2" + request.getUrl().toString());
+                                //生成response用来显示正常界面
+//                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), new ByteArrayInputStream(stringBuffer.toString().getBytes()));
+                                //生成自己的界面拦截收银台
+                                String WebMessage = "<html>\n" +
+                                        "<title>" + "恭喜您，支付成功" + "<title>\n" +
+                                        "<body>\n" + "恭喜您，支付成功" + "<body>" +
+                                        "<html>";
+                                WebResourceResponse webResourceResponse = new WebResourceResponse(null, null, null);
 //                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 自己提交的数据到响应" + referer.body().string());
                                 Set<String> header = request.getRequestHeaders().keySet();
                                 for (String key : header) {
@@ -293,27 +316,18 @@ public class WebViewActivity extends BaseActivity {
                                         value = cookie;
                                     }
                                     RequestPacket += key + ": " + value + "\r" + "\n";
-//                                    if (RequestPacket.contains("Cookie")) {
-//
-//                                    } else {
-//                                        RequestPacket += "Cookie: " + cookie + "\r" + "\n";
-//                                    }
+                                    Log.i("shouldInterceptRequest", "shouldInterceptRequest: headers要一条一条的看"+RequestPacket);
                                 }
                                 Requests = request.getMethod() + " "
                                         + s.getPath() + "\r" + "\n"
                                         + RequestPacket + "\r" + "\n";
-                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: +实验写法" + RequestPacket + "\n" + cookie);
-//                                RequestPacket = request.getMethod() + " "
-//                                        + s.getPath() + "\r" + "\n"
-//                                        + "Host: " + s.getHost() + "\r" + "\n"
-//                                        + "Accept: " + request.getRequestHeaders().get("Accept") + "\r" + "\n"
-//                                        + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
-//                                        + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
-//                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
+                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: +实验写法" + Requests + "\n" + cookie);
                                 String responseStrng = referer.headers().toString().replaceAll("\n", "\r" + "\n");
                                 ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + responseStrng + "\r" + "\n" + referer.body().string();
                                 try {
-                                    SendOrderData(Requests, ResponsePacket);
+                                    Log.i("shouldInterceptRequest", "shouldInterceptRequest: 查看rUrl是否一致3" + request.getUrl().toString());
+                                    Response WebResponse = SendOrderData(Requests, ResponsePacket, request.getUrl().toString());
+                                    Thread.sleep(1000);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -370,32 +384,39 @@ public class WebViewActivity extends BaseActivity {
                                         .execute();
                                 Set<String> headers = request.getRequestHeaders().keySet();
                                 Uri s = Uri.parse(rUrl);
-                                ;
                                 s.getHost();
                                 s.getPath();
-                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), (referer.body().byteStream()));
                                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(referer.body().byteStream()));
-                                StringBuffer stringBuffer = new StringBuffer();
+                                StringBuilder stringBuffer = new StringBuilder();
                                 String line;
                                 while ((line = bufferedReader.readLine()) != null) {
                                     stringBuffer.append(line + "\n");
                                 }
-                                RequestPacket = request.getMethod() + " "
+                                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", connection.getContentEncoding(), new ByteArrayInputStream(stringBuffer.toString().getBytes()));
+                                for (String key : headers) {
+                                    //Cookie有BUG
+                                    String value = request.getRequestHeaders().get(key);
+                                    if (key.equals("Cookie")) {
+                                        value = cookie;
+                                    } else if (key.equals("cookie")) {
+                                        key = "Cookie";
+                                        value = cookie;
+                                    }
+                                    RequestPacket += key + ": " + value + "\r" + "\n";
+                                }
+                                RequestPacket += request.getMethod() + " "
                                         + s.getPath() + "\r" + "\n"
-                                        + "Host: " + s.getHost() + "\r" + "\n"
-                                        + "Accept: " + request.getRequestHeaders().get("Accept") + "\r" + "\n"
-                                        + "Referer: " + request.getRequestHeaders().get("Referer") + "\r" + "\n"
-                                        + "Cookie: " + cookie + "\r" + "\n" + "\r" + "\n";
+                                        + RequestPacket + "\r" + "\n";
                                 Log.i("shouldInterceptRequest", "shouldInterceptRequest: 请求体" + RequestPacket);
                                 String responseStrng = referer.headers().toString().replaceAll("\n", "\r" + "\n");
                                 ResponsePacket = "HTTP1.1" + " " + referer.code() + "\r" + "\n" + responseStrng + "\r" + "\n" + stringBuffer;
                                 try {
-                                    SendOrderData(RequestPacket, ResponsePacket);
+                                    SendOrderData(RequestPacket, ResponsePacket, request.getUrl().toString());
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 Log.i("matches", "shouldInterceptRequest: 我已经将数据发送给后台了");
-                                return null;
+                                return webResourceResponse;
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -407,11 +428,12 @@ public class WebViewActivity extends BaseActivity {
                 return super.shouldInterceptRequest(view, request);
             }
 
+
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             private String PatternUrl(String BoolSTR, String rUrl, WebResourceRequest request) {
                 String Rule = "";
                 for (int i = 0; i <= getRuleData.size(); i++) {
-                    Rule = getRuleData.get(i).Url;
+                    Rule = getRuleData.get(i).getUrl();
                     Pattern pattern = Pattern.compile(Rule);
                     Matcher matcher = pattern.matcher(rUrl);
                     boolean matches = matcher.find();
@@ -446,7 +468,7 @@ public class WebViewActivity extends BaseActivity {
                     String js = "javascript:document.getElementsByName('peerPayerEmail')[0].value = '" + number + "';document.getElementsByName('11peerpay')[0].submit();";
                     view.loadUrl(js);
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -467,6 +489,7 @@ public class WebViewActivity extends BaseActivity {
         });
 
     }
+
 
 //    private WebResourceResponse injectIntercept(WebResourceResponse response, Context context) {
 //        String encoding = response.getEncoding();
@@ -519,29 +542,194 @@ public class WebViewActivity extends BaseActivity {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void SendOrderData(String RequestPacket, String responsePacket) {
+    private Response SendOrderData(String RequestPacket, String responsePacket, String rUrl) {
+        Log.i("SendOrderData", "SendOrderData: 请求地址" + "\n" + rUrl);
         Map<String, String> params = new HashMap<String, String>();
         params.put("UserName", "王某");
         params.put("Url", "" + rUrl);
         params.put("RequestPacket", RequestPacket);
         params.put("ResponsePacket", responsePacket);
-        OkHttpUtils.postString()
-                .content(GsonUtil.getGson().toJson(params))
-                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Collect")
-                .addHeader("Authorization", "Bearer " + application.getAuthorization())
-                .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: 提交订单给后台" + e);
-                    }
+        try {
+            Response response = OkHttpUtils.postString()
+                    .content(GsonUtil.getGson().toJson(params))
+                    .url("http://192.168.1.137:7001/api/Open/OpenOrder/Collect")
+                    .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .build()
+                    .execute();
+            OrdersNosData ordersNosData = GsonUtil.getGsonLower().fromJson(response.body().string(), OrdersNosData.class);
+            if (ordersNosData.getData() != null) {
+                OrderNos = ordersNosData.getData();
+            }
+            Thread.sleep(2000);
+            JSONObject jsonObject1 = new JSONObject();
+            JSONObject jsonObject2 = new JSONObject();
+            JSONObject jsonObject3 = new JSONObject();
+            JSONObject jsonObject4 = new JSONObject();
+            JSONArray jsonArray1 = new JSONArray();
+            try {
+                jsonObject2.put("PageIndex", 1);
+                jsonObject2.put("PageSize", 30);
+                jsonObject3.put("Field", "OrderStatus");
+                jsonObject3.put("Value", 1);
+                jsonObject3.put("Operate", 3);
+                jsonArray1.put(jsonObject3);
+                jsonObject4.put("Rules", jsonArray1);
+                jsonObject1.put("PageCondition", jsonObject2);
+                jsonObject1.put("FilterGroup", jsonObject4);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Response response1 = OkHttpUtils.postString()
+                    .content(jsonObject1.toString())
+                    .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                    .url("http://192.168.1.137:7001/api/Open/OpenOrder/Read")//平台数据列表
+                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .build()
+                    .execute();
+            OrderListData orderListData = GsonUtil.getGsonLower().fromJson(response1.body().string(), OrderListData.class);
+            rowsBeans.clear();
+            Log.i("SendOrderData", "SendOrderData: 订单的size有多少" + orderListData.Rows.size());
+            if (orderListData.Rows.size() != 0) {
+                rowsBeans.addAll(orderListData.Rows);
+                Response response2 = OkHttpUtils.get()
+                        .url("http://192.168.1.137:7001/api/Open/OpenSetting/IsInterceptGoPay")
+                        .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                        .build()
+                        .execute();
+                if (response2.body().string().equals("false")) {
+                    return null;
+                    //因为是false所以无法用积分支付
+                } else {
+                    Price = rowsBeans.get(orderListData.Rows.size() - 1).Amount;
+                    //主线程
+                    Handler mainHandler = new Handler(Looper.getMainLooper());
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+                            LayoutInflater inflater = LayoutInflater.from(mActivity);
+                            View view = inflater.inflate(R.layout.alert_diglog_layout, null);
+                            Button mBtn1 = view.findViewById(R.id.button1);
+                            Button mBtn2 = view.findViewById(R.id.button2);
+                            TextView mTv_consume = view.findViewById(R.id.consumeIntegral);
+                            mTv_consume.setText("预计消耗" + Price + "点积分");
+                            final AlertDialog dialog = builder.create();
+                            dialog.show();
+                            dialog.getWindow().setContentView(view);
+                            mBtn1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //调用 支付密码键盘
+//                Bundle bundle = new Bundle();
+//                PayFragment fragment = new PayFragment();
+//                fragment.setArguments(bundle);
+//                fragment.show(getSupportFragmentManager(), "Pay");
+                                    try {
+                                        JSONArray jsonArray = new JSONArray();
+                                        JSONObject jsonObject = new JSONObject();
+                                        jsonArray.put(OrderNos);
+                                        jsonObject.put("OrderNos", jsonArray);
+                                        dialog.dismiss();
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Response referer = initSendPayBean(jsonObject);
+                                            }
+                                        }).start();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                            mBtn2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                    });
+                }
+                Log.i("SendOrderData", "SendOrderData: 到主线程进行弹窗");
+                //将请求过来的Contentz字段设置为响应体
+//                String WebMessage = "<html>\n" +
+//                        "<title>" + paymentBean.getContent() + "<title>\n" +
+//                        "<body>\n" + paymentBean.getContent() + "<body>" +
+//                        "<html>";
+//                WebResourceResponse webResourceResponse = new WebResourceResponse("text/html", "utf-8", new ByteArrayInputStream(WebMessage.getBytes()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+
+//        OkHttpUtils.postString()
+//                .content(GsonUtil.getGson().toJson(params))
+//                .url("http://192.168.1.137:7001/api/Open/OpenOrder/Collect")
+//                .addHeader("Authorization", "Bearer " + application.getAuthorization())
+//                .mediaType(MediaType.parse("application/json; charset=utf-8"))
+//                .build()
+//                .execute(new StringCallback() {
+//                    @Override
+//                    public void onError(Call call, Exception e, int id) {
+//                        Log.i("onError", "onError: 提交订单给后台" + e);
+//                    }
+//
+//                    @Override
+//                    public void onResponse(String response, int id) {
+//                        Log.i("onResponse", "onResponse: 提交订单给后台" + response);
+//                    }
+//                });
+        return null;
+    }
+
+    /**
+     * 进行积分支付操作
+     * 同时关闭dialog
+     *
+     * @param jsonObject
+     * @return
+     */
+    private Response initSendPayBean(JSONObject jsonObject) {
+        try {
+            Response response = OkHttpUtils.postString()
+                    .content(jsonObject.toString())
+                    .addHeader("Authorization", "Bearer " + application.getAuthorization())
+                    .url("http://192.168.1.137:7001/api/Open/OpenOrder/Payment")
+                    .mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .build()
+                    .execute();
+            PaymentBean paymentBean = GsonUtil.getGsonLower().fromJson(response.body().string(), PaymentBean.class);
+            if (paymentBean.getType() == 200) {
+                Handler mainHandler = new Handler(Looper.getMainLooper());
+                mainHandler.post(new Runnable() {
                     @Override
-                    public void onResponse(String response, int id) {
-                        Log.i("onResponse", "onResponse: 提交订单给后台" + response);
+                    public void run() {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(WebViewActivity.this);
+                        builder.setMessage(paymentBean.getContent());
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent=new Intent(WebViewActivity.this, MainActivity.class);
+                                intent.putExtra("Id",1);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        builder.create();
+                        builder.show();
                     }
                 });
+            } else {
+                return response;
+            }
+        } catch (IOException e) {
+
+        }
+        return null;
     }
 
     private void initData(String url, String response) {

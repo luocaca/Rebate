@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     };
+
     /*protected void onResume(){
         int id = getIntent().getIntExtra("id",1);
         if (id ==2){
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         bindWebSocketService();
         ButterKnife.bind(this);
         initViewPager();
+        initReceviceIntent();
 
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -107,6 +109,17 @@ public class MainActivity extends AppCompatActivity {
         navView.setSelectedItemId(R.id.navigation_home);
 
 
+    }
+
+    /**
+     * 当支付成功点击确定时，直接跳转到订单界面
+     */
+    private void initReceviceIntent() {
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("Id", 0);
+        if (id == 1) {
+            mViewPager.setCurrentItem(1);
+        }
     }
 
     private void bindWebSocketService() {
@@ -119,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
-               webSocketService=null;
+                webSocketService = null;
             }
         };
         Intent intent = new Intent(this, WebSocketService.class);

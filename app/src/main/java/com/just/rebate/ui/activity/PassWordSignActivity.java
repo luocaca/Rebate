@@ -353,8 +353,7 @@ public class PassWordSignActivity extends AppCompatActivity {
             if (key.equals("Accept-Encoding")) {
 
             } else if (key.equals("Cookie")) {
-                JsonObject j = (JsonObject) payBeans.get(0).Headers;
-                value = j.get(key).getAsString();
+                value = payBeans.get(0).Headers.get(key);
                 Log.i("initWebDataParen", "initWebDataParen: Cookies有值");
                 FristMap.put(key, value);
             } else {
@@ -388,15 +387,19 @@ public class PassWordSignActivity extends AppCompatActivity {
                             Pattern pattern = Pattern.compile(payBeans.get(0).Rules.get(0).Dics.get(0).Value);
                             Matcher matcher = pattern.matcher(response);
                             boolean matches = matcher.find();
+                            /**
+                             * 模拟器运行正则会出错,模拟器问题，暂未找到合适的适配方法
+                             * 还缺少字符串抓取规则未写
+                             * 还缺少Xpath规则未写
+                             */
                             if (matches) {
-                                //正则有误
-                                payBeans.get(0).Rules.get(0).Dics.get(0).Key = matcher.group();
+                                payBeans.get(0).Rules.get(0).Dics.get(0).Key = matcher.group(1);
+                                Log.i("onResponse", "onResponse: 看看正则匹配到的记过" + payBeans.get(0).Rules.get(0).Dics.get(0).Key);
                                 String PayId = payBeans.get(0).Rules.get(0).Dics.get(0).Key;
                                 if (PayId != null) {
-                                    Log.i("onResponse", "onResponse: 拿到了payId");
                                     TheSecondData(PayId);
                                 }
-                            } else {
+                            } else{
                                 Log.i("onResponse", "onResponse: 订单可能已经过了支付时间了");
                             }
                         } catch (Exception e) {
@@ -411,21 +414,75 @@ public class PassWordSignActivity extends AppCompatActivity {
     }
 
     private void TheSecondData(String payId) {
+        Map<String, String> parems = new HashMap<>();
         Set<String> headers = payBeans.get(0).Rules.get(1)._$RequestPacket15.Headers.keySet();
         for (String key : headers) {
             String value = payBeans.get(0).Rules.get(1)._$RequestPacket15.Headers.get(key);
-            if (key.equals("Accept-Encoding")) {
-            } else if (key.equals("Cookie")) {
+            if (key.equals("Cookie")) {
                 //替换Cookies
-                JsonObject j = (JsonObject) payBeans.get(0).Headers;
-                value = j.get(key).getAsString();
+//                JsonObject j = (JsonObject) payBeans.get(0).Headers;
+                value = payBeans.get(0).Headers.get(key);
+//                value = j.get(key).getAsString();
                 Log.i("TheSecondData", "TheSecondData: Cookies有值");
+                parems.put(key, value);
+            } else if (key.equals("Referer")) {
+                String s = payBeans.get(0).Headers.get(key);
+                String Referer = s.replace("【PayId】", payId);
+                value = Referer;
+                parems.put(key, value);
+            } else {
+                parems.put(key, value);
+            }
+        }
+        String Url = payBeans.get(0).Rules.get(1)._$RequestPacket15.Url.replaceAll("【PayId】", payId);
+        Log.i("TheSecondData", "TheSecondData: 请求第二步" + Url);
+        String content = payBeans.get(0).Rules.get(1)._$RequestPacket15.Content.replaceAll("【PayId】", payId);
+        Log.i("TheSecondData", "TheSecondData: 请求第二步" + content);
+        OkHttpUtils.postString()
+                .url(Url)
+                .content(content)
+                .headers(parems)
+                .mediaType(MediaType.parse("application/x-www-form-urlencoded"))
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.i("onError", "onError: 请求第二步" + e);
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Log.i("onResponse: ", "onResponse: 请求第二步" + response);
+                        TheThridData(payId);
+                    }
+                });
+
+
+    }
+
+    private void TheThridData(String payId) {
+        Set<String> headers = payBeans.get(0).Rules.get(2)._$RequestPacket15.Headers.keySet();
+        for (String key : headers) {
+            String value = payBeans.get(0).Rules.get(2)._$RequestPacket15.Headers.get(key);
+            if (key.equals("Cookie")) {
+                //替换Cookies
+//                JsonObject j = (JsonObject) payBeans.get(0).Headers;
+                value = payBeans.get(0).Headers.get("Cookie");
+//                value = j.get(key).getAsString();
+                Log.i("TheSecondData", "TheSecondData: Cookies有值");
+                map.put(key, value);
+            } else if (key.equals("Referer")) {
+                String s = payBeans.get(0).Headers.get("Referer");
+                String Referer = s.replace("【PayId】", payId);
+                value = Referer;
                 map.put(key, value);
             } else {
                 map.put(key, value);
             }
         }
-        String Url = payBeans.get(0).Rules.get(1)._$RequestPacket15.Url.replace("【PayId】", payId);
+
+        String Url = payBeans.get(0).Rules.get(2)._$RequestPacket15.Url.replaceAll("【PayId】", payId);
+        Log.i("TheSecondData", "TheSecondData: Url  " + Url);
         OkHttpUtils.get()
                 .url(Url)
                 .headers(map)
@@ -433,23 +490,26 @@ public class PassWordSignActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.i("onError", "onError: 多步骤第二次" + e);
+                        Log.i("onError", "onError: 多步骤第三次" + e);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.i("OnResponse", "OnResponse: 多步骤第二次" + response);
+                        Log.i("OnResponse", "OnResponse: 多步骤第三次" + response);
                         Pattern pattern = null;
                         try {
-                            pattern = Pattern.compile(payBeans.get(0).Rules.get(1).Dics.get(1).Value);
+                            pattern = Pattern.compile(payBeans.get(0).Rules.get(2).Dics.get(0).Value);
                             Matcher matcher = pattern.matcher(response);
                             while (matcher.find()) {
-                                payBeans.get(0).Rules.get(1).Dics.get(1).Key = matcher.group();
-                                String PaymentUrl = payBeans.get(0).Rules.get(1).Dics.get(1).Key;
+                                payBeans.get(0).Rules.get(2).Dics.get(0).Key = matcher.group(1);
+                                String PaymentUrl = payBeans.get(0).Rules.get(2).Dics.get(0).Key;
                                 String OrderNo = payBeans.get(0)._$Order311.OrderNo;
                                 if (PaymentUrl != null) {
                                     Log.i("onResponse", "onResponse: 拿到了PaymentUrl");
+
                                     CallBackData(OrderNo, PaymentUrl);
+                                } else {
+                                    Log.i("onResponse", "onResponse: 请求不正确或是没匹配到");
                                 }
                             }
                         } catch (Exception e) {
