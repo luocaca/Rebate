@@ -30,6 +30,8 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.just.integralmanagement.entity.DeviceBean;
 import com.just.rebate.R;
 import com.just.rebate.adapter.recycle.FragmentOrderAdapter;
@@ -118,6 +120,9 @@ public class OrderFragment extends BaseFragment {
                 jsonArray = new JSONArray();
                 jsonObject = new JSONObject();
                 count = 0;
+                /**
+                 *
+                 */
                 checkbox_all.setText("" + count);
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -334,17 +339,31 @@ public class OrderFragment extends BaseFragment {
         JSONObject jsonObject2 = new JSONObject();
         JSONObject jsonObject3 = new JSONObject();
         JSONObject jsonObject4 = new JSONObject();
+        JSONObject jsonObject5 = new JSONObject();
+        JSONObject jsonObject6 = new JSONObject();
         JSONArray jsonArray1 = new JSONArray();
+        JSONArray jsonArray2 = new JSONArray();
         try {
             jsonObject2.put("PageIndex", 1);
-            jsonObject2.put("PageSize", 30);
+            jsonObject2.put("PageSize", 1000);
 
+            jsonObject6.put("SortField", "CreatedTime");
+            jsonObject6.put("ListSortDirection", 2);
+
+            jsonArray2.put(jsonObject6);
+
+            jsonObject2.put("SortConditions", jsonArray2);
 
             jsonObject3.put("Field", "OrderStatus");
             jsonObject3.put("Value", 1);
             jsonObject3.put("Operate", 3);
 
+            jsonObject5.put("Field", "IsUserPayment");
+            jsonObject5.put("Value", "true");
+            jsonObject5.put("Operate", 3);
+
             jsonArray1.put(jsonObject3);
+            jsonArray1.put(jsonObject5);
 
             jsonObject4.put("Rules", jsonArray1);
 
@@ -354,8 +373,6 @@ public class OrderFragment extends BaseFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        params.put("PageIndex", 1 + "");
-        params.put("PageSize", 30 + "");
         Log.i("initRecyclerViewData", "initRecyclerViewData: 看看登录信息是否有值" + application.getAuthorization());
         OkHttpUtils
                 .postString()

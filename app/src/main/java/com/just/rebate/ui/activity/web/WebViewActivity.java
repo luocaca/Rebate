@@ -21,6 +21,8 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
+import android.webkit.JsPromptResult;
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -30,6 +32,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -306,6 +309,7 @@ public class WebViewActivity extends BaseActivity {
                                 WebResourceResponse webResourceResponse = new WebResourceResponse(null, null, null);
 //                                Log.i("shouldInterceptRequest", "shouldInterceptRequest: 自己提交的数据到响应" + referer.body().string());
                                 Set<String> header = request.getRequestHeaders().keySet();
+                                RequestPacket = "";
                                 for (String key : header) {
                                     //Cookie有BUG
                                     String value = request.getRequestHeaders().get(key);
@@ -316,7 +320,7 @@ public class WebViewActivity extends BaseActivity {
                                         value = cookie;
                                     }
                                     RequestPacket += key + ": " + value + "\r" + "\n";
-                                    Log.i("shouldInterceptRequest", "shouldInterceptRequest: headers要一条一条的看"+RequestPacket);
+                                    Log.i("shouldInterceptRequest", "shouldInterceptRequest: headers要一条一条的看" + RequestPacket);
                                 }
                                 Requests = request.getMethod() + " "
                                         + s.getPath() + "\r" + "\n"
@@ -327,11 +331,26 @@ public class WebViewActivity extends BaseActivity {
                                 try {
                                     Log.i("shouldInterceptRequest", "shouldInterceptRequest: 查看rUrl是否一致3" + request.getUrl().toString());
                                     Response WebResponse = SendOrderData(Requests, ResponsePacket, request.getUrl().toString());
+                                    Requests = "";
+                                    ResponsePacket = "";
                                     Thread.sleep(1000);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 Log.i("matches", "shouldInterceptRequest: 我已经将数据发送给后台了");
+                                /**
+                                 * 屏蔽弹窗
+                                 * 但此处不可用，否则无法屏蔽收银台
+                                 * 因此注释此段代码
+                                 */
+//                                web.setWebChromeClient(new WebChromeClient() {
+//                                    @Override
+//                                    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+//                                        Toast.makeText(WebViewActivity.this, "开始屏蔽", Toast.LENGTH_SHORT).show();
+//                                        result.cancel();
+//                                        return super.onJsAlert(view, url, message, result);
+//                                    }
+//                                });
                                 return webResourceResponse;
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -602,7 +621,7 @@ public class WebViewActivity extends BaseActivity {
                     //因为是false所以无法用积分支付
                 } else {
                     Price = rowsBeans.get(orderListData.Rows.size() - 1).Amount;
-                    //主线程
+                    //回到主线程
                     Handler mainHandler = new Handler(Looper.getMainLooper());
                     mainHandler.post(new Runnable() {
                         @Override
@@ -713,10 +732,16 @@ public class WebViewActivity extends BaseActivity {
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent=new Intent(WebViewActivity.this, MainActivity.class);
-                                intent.putExtra("Id",1);
-                                startActivity(intent);
-                                finish();
+                                Handler mainHandler = new Handler(Looper.getMainLooper());
+                                mainHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent = new Intent(WebViewActivity.this, MainActivity.class);
+                                        intent.putExtra("Id", 1);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
                             }
                         });
                         builder.create();
@@ -724,7 +749,21 @@ public class WebViewActivity extends BaseActivity {
                     }
                 });
             } else {
-                return response;
+                Handler mainHandler = new Handler(Looper.getMainLooper());
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(WebViewActivity.this);
+                        builder.setMessage(paymentBean.getContent());
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        builder.create();
+                        builder.show();
+                    }
+                });
             }
         } catch (IOException e) {
 
@@ -841,27 +880,38 @@ public class WebViewActivity extends BaseActivity {
 
         web.setVerticalScrollBarEnabled(false);//不能垂直滑动
         web.setHorizontalScrollBarEnabled(false);//不能水平滑动
-        if (string2.contains("jdpaygw")) {
-            web.setDownloadListener(new DownloadListener() {
-                @Override
-                public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                    LogUtil.e("LogUrl", url);
-                    LogUtil.e("LogUrl", userAgent);
-                    LogUtil.e("LogUrl", contentDisposition);
-                    LogUtil.e("LogUrl", mimeType);
-                    LogUtil.e("LogUrl", String.valueOf(contentLength));
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    intent.setData(Uri.parse(url));
-                    startActivity(intent);
-                }
-            });
-        }
+        /**
+         * 我也不知道这是干什么的，所以先注释掉
+         */
+//        if (string2.contains("jdpaygw")) {
+//            web.setDownloadListener(new DownloadListener() {
+//                @Override
+//                public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+//                    LogUtil.e("LogUrl", url);
+//                    LogUtil.e("LogUrl", userAgent);
+//                    LogUtil.e("LogUrl", contentDisposition);
+//                    LogUtil.e("LogUrl", mimeType);
+//                    LogUtil.e("LogUrl", String.valueOf(contentLength));
+//                    Intent intent = new Intent(Intent.ACTION_VIEW);
+//                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+//                    intent.setData(Uri.parse(url));
+//                    startActivity(intent);
+//                }
+//            });
+//        }
 
         // 将Android里面定义的类对象AndroidJs暴露给javascript
 //        web.setWebViewClient(this);
         //        webView.addJavascriptInterface(new AndroidJavaScript(context), "AndroidJs");
         web.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+                Toast.makeText(application, "正在发起支付...", Toast.LENGTH_SHORT).show();
+                result.confirm();
+                return true;
+//                return super.onJsAlert(view, url, message, result);
+            }
+
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {

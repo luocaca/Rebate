@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -117,8 +118,13 @@ public class MainActivity extends AppCompatActivity {
     private void initReceviceIntent() {
         Intent intent = getIntent();
         int id = intent.getIntExtra("Id", 0);
+        Log.i("initReceviceIntent", "initReceviceIntent: 跳转" + id);
         if (id == 1) {
             mViewPager.setCurrentItem(1);
+            Log.i("initReceviceIntent", "initReceviceIntent: 跳转了");
+        } else {
+            mViewPager.setCurrentItem(0);
+            Log.i("initReceviceIntent", "initReceviceIntent: 跳转了");
         }
     }
 
